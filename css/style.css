@@ -1,0 +1,371 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #e8f0f7;
+    font-family: consolas;
+    height: 118vh;
+    overflow-y: scroll;
+}
+
+/*------------------------------------------------------*/
+
+/* Animasi Tajuk */
+.container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin: auto 10%;
+    min-height: 120px;
+}
+
+.text {
+    font-size: 2.0em;
+    letter-spacing: 5px;
+    border-right: 3px solid black;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    animation:
+        typing 2s steps(53) 1s forwards,
+        cursor .5s steps(1) infinite;
+}
+
+@keyframes cursor {
+    from {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: black;
+    }
+
+    to {
+        border-color: transparent;
+    }
+}
+
+@keyframes typing {
+    to {
+        width: 69ch;
+    }
+}
+
+/*------------------------------------------------------*/
+
+/* Bar Navigasi */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+.header {
+    background-color: rgb(19, 22, 26);
+}
+
+.header__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 60px;
+    max-width: 1200px;
+    padding: 0 30px;
+    margin: 0 auto;
+}
+
+.nav__list {
+    display: flex;
+    column-gap: 30px;
+}
+
+.nav__link {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    transition: all 0.4s;
+    position: relative;
+}
+
+.nav__link:hover {
+    color: white;
+}
+
+.nav__link::after {
+    content: "";
+    height: 3px;
+    border-radius: 1000px;
+    width: 0;
+    background-color: rgb(0, 183, 255);
+    position: absolute;
+    left: 0;
+    bottom: -8px;
+    transition: width 0.3s;
+    pointer-events: none;
+}
+
+.nav__link:hover::after {
+    width: 100%;
+}
+
+.active {
+    color: white;
+}
+
+.active::after,
+.nav__link.active::after {
+    width: 100%;
+}
+
+/*------------------------------------------------------*/
+
+/* Borang Daftar Ahli Baru/ Daftar Masuk Ahli */
+.wrapper {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 420px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    padding: 30px 40px;
+}
+
+.wrapper h1 {
+    font-size: 36px;
+    text-align: center;
+}
+
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid #adadad;
+    border-radius: 40px;
+    font-size: 16px;
+    padding: 20px 45px 20px 20px;
+
+}
+
+.input-box input::placeholder {
+    color: #adadad;
+}
+
+.input-box i {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+}
+
+.wrapper .btn {
+    width: 50%;
+    height: 45px;
+    background: rgb(0, 183, 255);
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    font-weight: 600;
+    margin: auto 25%;
+}
+
+.wrapper .link-register {
+    font-size: 14.5px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.link-register a {
+    color: black;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.link-register a:hover {
+    text-decoration: underline;
+}
+
+.select-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    min-width: 250px;
+    height: 50px;
+}
+
+.select-box {
+    border: none;
+    border-radius: 40px;
+    appearance: none;
+    padding: 0 30px 0 15px;
+    width: 100%;
+    color: white;
+    background-color: rgb(0, 183, 255);
+    font-size: 20px;
+}
+
+.select-container .icon-container {
+    width: 50px;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 183, 255);
+    border-radius: 40px;
+    pointer-events: none;
+}
+
+.icon-container i {
+    font-size: 30px;
+    color: white;
+}
+
+/*------------------------------------------------------*/
+
+/* Carousel/Banner Iklan */
+
+.carousel-container {
+    width: 720px;
+    margin: 70px auto;
+    position: relative;
+}
+
+.carousel {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    overflow: hidden;
+    z-index: 5;
+}
+
+.slider {
+    display: flex;
+    height: 100%;
+    width: 200%;
+    flex-shrink: 0;
+    transition: all 0.3s ease-in;
+}
+
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slider section {
+    flex-basis: 50%;
+    width: 50%;
+}
+
+.slider a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.carousel-container i {
+    top: 50%;
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+    font-size: 1.25rem;
+    position: absolute;
+    text-align: center;
+    line-height: 50px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.23);
+    transform: translateY(-50%);
+    transition: transform 0.1s linear;
+    z-index: 10;
+}
+
+.carousel-container i:active {
+    transform: translateY(-50%) scale(0.85);
+}
+
+.carousel-container i:first-child {
+    left: -25px;
+}
+
+.carousel-container i:last-child {
+    right: -25px;
+}
+
+/*------------------------------------------------------*/
+
+/* Profil Page Styling */
+
+/* Container */
+.container-table {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+/* Rekod Kehadiran */
+.rekod-kehadiran {
+    flex: 70%;
+    padding: 20px;
+}
+
+.rekod-kehadiran table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.rekod-kehadiran th,
+.rekod-kehadiran td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.rekod-kehadiran th {
+    background-color: #ddd;
+}
+
+/* Imbas QR Code */
+.imbas-kod-qr {
+    flex: 30%;
+    padding: 20px;
+    text-align: center;
+}
+
+.user-details {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.qr-code img {
+    border: 1px solid #ddd;
+}

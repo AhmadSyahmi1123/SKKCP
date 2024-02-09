@@ -25,23 +25,18 @@ if (empty($_SESSION["nokp"])) {
 
 <div class="container-table">
     <tr>
-        <div class="rekod-kehadiran">
-            <h3>Rekod Kehadiran</h3>
 
-            <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
-            <table id='saiz'>
-                <caption>
-                    Pengesahan Kendiri hanya boleh dilakukan pada tarikh aktiviti dilaksanakan sahaja
-                </caption>
-
-                <thead>
-                    <tr>
-                        <th>Nama Aktiviti</th>
-                        <th>Tarikh | Masa</th>
-                        <th>Kehadiran</th>
-                    </tr>
-                </thead>
-
+        <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
+        <table id='saiz' class="table">
+            <thead>
+                <tr>
+                    <th>Nama Aktiviti</th>
+                    <th>Tarikh</th>
+                    <th>Masa</th>
+                    <th>Kehadiran</th>
+                </tr>
+            </thead>
+            <tbody>
                 <?php
                 # Arahan query untuk mencari senarai aktiviti
                 $arahan_papar = "select * from aktiviti";
@@ -53,7 +48,8 @@ if (empty($_SESSION["nokp"])) {
                     # Memaparkan senarai nama dalam jadual
                     echo "<tr>
                         <td>" . $m['nama_aktiviti'] . "</td>
-                        <td>" . $m['tarikh_aktiviti'] . " | " . $m['masa_mula'] . "</td>
+                        <td>" . $m['tarikh_aktiviti'] . "</td>
+                        <td>" . $m['masa_mula'] . "</td>
                         <td align='center'>";
 
                     # Arahan mendapatkan data kehadiran ahli bagi setiap aktiviti
@@ -69,16 +65,15 @@ if (empty($_SESSION["nokp"])) {
                         if (date("Y-m-d") == $m['tarikh_aktiviti']) {
                             # Pengesahan kehadiran kendiri
                             echo "<a href='profil-sahkendiri.php?IDaktiviti=" . $m['IDaktiviti'] . "'>
-                                [ PENGESAHAN KENDIRI ] </a>";
+                [ PENGESAHAN KENDIRI ] </a>";
                         }
                     }
 
                     echo "</td></tr>";
                 }
                 ?>
-
-            </table>
-        </div>
+            </tbody>
+        </table>
 
         <div class="carta-mata">
 

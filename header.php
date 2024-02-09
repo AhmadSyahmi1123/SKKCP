@@ -16,7 +16,7 @@
 
     <!-- Tajuk sistem -->
     <header class="title__banner">
-        <div class="container">
+        <div class="title-container">
             <p class="text">KELAB COMPETITIVE PROGRAMMING SMK BANDAR TASIK PUTERI</p>
         </div>
     </header>

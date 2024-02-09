@@ -14,7 +14,7 @@ body {
 /*------------------------------------------------------*/
 
 /* Animasi Tajuk */
-.container {
+.title-container {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -24,37 +24,27 @@ body {
 }
 
 .text {
+    color: transparent;
+    position: relative;
     font-size: 2.0em;
     letter-spacing: 5px;
-    border-right: 3px solid black;
-    width: 0;
     white-space: nowrap;
+}
+
+.text::before{
+    content: "KELAB COMPETITIVE PROGRAMMING SMK BANDAR TASIK PUTERI";
+    position: absolute;
+    width: 0%;
+    height: 100%;
     overflow: hidden;
-    animation:
-        typing 2s steps(53) 1s forwards,
-        cursor .5s steps(1) infinite;
+    color: black;
+    border-right: 3px solid black;
+    transition: 1s ease-in-out;
 }
 
-@keyframes cursor {
-    from {
-        border-color: transparent;
-    }
-
-    50% {
-        border-color: black;
-    }
-
-    to {
-        border-color: transparent;
-    }
+.text:hover::before{
+    width: 100%;
 }
-
-@keyframes typing {
-    to {
-        width: 69ch;
-    }
-}
-
 /*------------------------------------------------------*/
 
 /* Bar Navigasi */
@@ -330,33 +320,34 @@ ul {
     margin-bottom: 10px;
 }
 
-/* Container */
 .container-table {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
 }
 
-/* Rekod Kehadiran */
-.rekod-kehadiran {
+.table {
     flex: 70%;
     padding: 20px;
-}
-
-.rekod-kehadiran table {
     border-collapse: collapse;
-    width: 100%;
+    font-size: 20px;
+    width: 400px;
 }
 
-.rekod-kehadiran th,
-.rekod-kehadiran td {
-    border: 1px solid #ddd;
-    padding: 8px;
+.table th,
+.table td {
+    padding: 6px 8px;
+    font-weight: normal;
+}
+
+.table th {
+    background-color: #009578;
     text-align: left;
+    color: white;
 }
 
-.rekod-kehadiran th {
-    background-color: #ddd;
+.table tbody tr:nth-of-type(even){
+    background-color: #f3f3f3;
 }
 
 .carta-mata {

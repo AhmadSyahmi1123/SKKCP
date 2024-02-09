@@ -80,19 +80,12 @@ if (empty($_SESSION["nokp"])) {
             </table>
         </div>
 
-        <div class="imbas-kod-qr">
-            <h3>IMBAS KOD QR UNTUK SAH KEHADIRAN</h3>
+        <div class="carta-mata">
 
-            <div class="qr-code">
-                <?php
-                # Mengambil data untuk dijadilan kod QR
-                $data = $_SESSION['nokp'];
-                $saiz = "200x200";
-
-                # Set umpukkan data API untuk memaparkan kod QR
-                $qr_api = "https://chart.googleapis.com/chart?chs=$saiz&cht=qr&chl=" . $data;
-                echo "<div align='center'><img width='50%' src='" . $qr_api . "'></div>";
-                ?>
+            <div class="container">
+                <div class="view-mata">
+                    <div class="value-container">0</div>
+                </div>
             </div>
         </div>
     </tr>

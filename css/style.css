@@ -324,6 +324,12 @@ ul {
 
 /* Profil Page Styling */
 
+.user-details {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
 /* Container */
 .container-table {
     display: flex;
@@ -353,19 +359,37 @@ ul {
     background-color: #ddd;
 }
 
-/* Imbas QR Code */
-.imbas-kod-qr {
+.carta-mata {
+    display: flex;
     flex: 30%;
-    padding: 20px;
+}
+
+.carta-mata .container {
+    display: grid;
+    place-items: center;
+}
+
+.carta-mata .view-mata {
+    position: relative;
+    height: 300px;
+    width: 300px;
+    background-color: #cadcff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+}
+
+.view-mata:before {
+    content: "";
+    position: absolute;
+    height: 84%;
+    width: 84%;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+
+.value-container {
+    position: relative;
     text-align: center;
-}
-
-.user-details {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-.qr-code img {
-    border: 1px solid #ddd;
+    font-size: 40px;
 }

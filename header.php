@@ -9,6 +9,7 @@
 
     <script src="scripts\carousel_script.js" defer></script>
     <script src="scripts\navbar_script.js" defer></script>
+    <script src="scripts\circular_progress_bar.js" defer></script>
 </head>
 
 <body>

@@ -6,7 +6,7 @@
 
 body {
     background-color: #e8f0f7;
-    font-family: consolas;
+    font-family: monospace;
     height: 118vh;
     overflow-y: scroll;
 }
@@ -19,32 +19,35 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: auto 10%;
+    margin: auto 15%;
     min-height: 120px;
 }
 
 .text {
-    color: transparent;
     position: relative;
+    border-right: 5px solid;
     font-size: 2.0em;
     letter-spacing: 5px;
     white-space: nowrap;
-}
-
-.text::before{
-    content: "KELAB COMPETITIVE PROGRAMMING SMK BANDAR TASIK PUTERI";
-    position: absolute;
-    width: 0%;
-    height: 100%;
-    overflow: hidden;
-    color: black;
-    border-right: 3px solid black;
-    transition: 1s ease-in-out;
-}
-
-.text:hover::before{
     width: 100%;
+    overflow: hidden;
+    animation:
+        typing 2s ease-in-out,
+        cursor .4s step-end infinite alternate;
 }
+
+@keyframes cursor {
+    50% {
+        border-color: transparent;
+    }
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+}
+
 /*------------------------------------------------------*/
 
 /* Bar Navigasi */
@@ -64,7 +67,7 @@ ul {
 .header__content {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     min-height: 60px;
     max-width: 1200px;
     padding: 0 30px;
@@ -315,22 +318,22 @@ ul {
 /* Profil Page Styling */
 
 .user-details {
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
+    padding: 20px 10px;
+    font-size: 20px;
 }
 
 .container-table {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    padding: 10px;
 }
 
 .table {
     flex: 70%;
-    padding: 20px;
+    padding: auto;
     border-collapse: collapse;
-    font-size: 20px;
+    font-size: 18px;
     width: 400px;
 }
 
@@ -346,13 +349,14 @@ ul {
     color: white;
 }
 
-.table tbody tr:nth-of-type(even){
+.table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
 }
 
 .carta-mata {
     display: flex;
     flex: 30%;
+    justify-content: center;
 }
 
 .carta-mata .container {
@@ -360,27 +364,9 @@ ul {
     place-items: center;
 }
 
-.carta-mata .view-mata {
-    position: relative;
-    height: 300px;
-    width: 300px;
-    background-color: #cadcff;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-}
-
-.view-mata:before {
-    content: "";
-    position: absolute;
-    height: 84%;
-    width: 84%;
-    background-color: #ffffff;
-    border-radius: 50%;
-}
-
-.value-container {
-    position: relative;
+#view-mata {
+    margin: auto;
+    width: 350px;
+    height: 350px;
     text-align: center;
-    font-size: 40px;
 }

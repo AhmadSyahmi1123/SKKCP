@@ -24,3 +24,4 @@ include("header.php");
     </div>
     <i id="next" class="fa-solid fa-angle-right"></i>
 </div>
+<script src="scripts\carousel_script.js" defer></script>

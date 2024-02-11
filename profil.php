@@ -14,18 +14,16 @@ if (empty($_SESSION["nokp"])) {
 }
 ?>
 
-<div class="user-detail">
-    <p>
-        Nama:
-        <?= $_SESSION['nama'] ?> <br>
-        No. Kad Pengenalan:
-        <?= $_SESSION['nokp'] ?> <br>
-    </p>
+<div class="user-details">
+    Nama:
+    <?= $_SESSION['nama'] ?>
+    <br>
+    No. Kad Pengenalan:
+    <?= $_SESSION['nokp'] ?>
 </div>
 
 <div class="container-table">
     <tr>
-
         <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
         <table id='saiz' class="table">
             <thead>
@@ -78,10 +76,10 @@ if (empty($_SESSION["nokp"])) {
         <div class="carta-mata">
 
             <div class="container">
-                <div class="view-mata">
-                    <div class="value-container">0</div>
-                </div>
+                <div id="view-mata"></div>
             </div>
+            <script src="scripts\progressbar.min.js"></script>
+            <script src="scripts\point-progress.js" defer></script>
         </div>
     </tr>
 </div>

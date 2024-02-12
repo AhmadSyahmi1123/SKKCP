@@ -19,7 +19,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: auto 15%;
+    margin: auto 17%;
     min-height: 120px;
 }
 
@@ -32,7 +32,7 @@ body {
     width: 100%;
     overflow: hidden;
     animation:
-        typing 2s ease-in-out,
+        typing 1s ease-in-out,
         cursor .4s step-end infinite alternate;
 }
 
@@ -62,6 +62,8 @@ ul {
 
 .header {
     background-color: rgb(19, 22, 26);
+    position: sticky;
+    top: 0;
 }
 
 .header__content {
@@ -77,6 +79,7 @@ ul {
 .nav__list {
     display: flex;
     column-gap: 30px;
+    margin-bottom: 5px;
 }
 
 .nav__link {
@@ -86,8 +89,47 @@ ul {
     position: relative;
 }
 
-.nav__link:hover {
+.nav__item i {
+    transform: translateY(25%);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 25px;
+}
+
+.nav__item svg {
+    transform: translateY(25%);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 10px;
+}
+
+.nav__list .logout {
+    position: absolute;
+    margin-top: 5px;
+    margin-bottom: 3px;
+    right: 25px;
+}
+
+.nav__list .logout i {
+    font-size: 25px;
+    color: rgba(255, 255, 255, 0.75)
+}
+
+.nav__link.active svg path {
+    fill: #ffffff;
+}
+
+.nav__link.active i {
+    color: #ffffff;
+}
+
+.logout:hover i {
+    color: #ffffff;
+}
+
+.nav__link:hover,
+.nav__item:hover {
     color: white;
+    transform: translateY(-3px);
+    transition: all .2s ease-in-out;
 }
 
 .nav__link::after {
@@ -153,7 +195,6 @@ ul {
     border-radius: 40px;
     font-size: 16px;
     padding: 20px 45px 20px 20px;
-
 }
 
 .input-box input::placeholder {
@@ -166,6 +207,14 @@ ul {
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
 
 .wrapper .btn {
@@ -329,13 +378,17 @@ ul {
     padding: 10px;
 }
 
-.profil-table {
+.scrollable-profil-table {
     flex: 70%;
+    height: 450px;
+    overflow-y: auto;
+}
+
+.profil-table {
     padding: auto;
     border-collapse: collapse;
     font-size: 18px;
-    width: 400px;
-    height: 100%;
+    width: 100%;
 }
 
 .profil-table th,
@@ -386,7 +439,7 @@ ul {
     padding: 10px;
 }
 
-.scrollable-table{
+.scrollable-table {
     height: 100%;
     width: 100%;
     overflow-y: auto;

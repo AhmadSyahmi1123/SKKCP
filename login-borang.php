@@ -15,14 +15,14 @@ include("header.php");
         <!-- Tajuk Antaramuka Log Masuk -->
         <h1>Log Masuk</h1>
 
-        <div class="input-box">
+        <div class="input-box"z>
             <input type="text" name="nokp" placeholder="No. Kad Pengenalan" required>
             <i class='bx bx-hash'></i>
         </div>
 
         <div class="input-box">
             <input type="password" name='katalaluan' placeholder="Katalaluan" required>
-            <i class='bx bxs-lock-alt'></i>
+            <i class="fas fa-lock password-toggle"></i>
         </div>
 
         <input class="btn" type='submit' value='Log Masuk'>
@@ -33,3 +33,4 @@ include("header.php");
 
     </form>
 </div>
+<script src="scripts\password-visibility-toggle.js" defer></script>

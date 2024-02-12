@@ -16,7 +16,7 @@ function updateProgressBar(points) {
     var bar = new ProgressBar.Circle("#view-mata", {
         strokeWidth: 6,
         easing: 'easeInOut',
-        duration: 1400,
+        duration: 1000,
         color: '#009578',
         trailColor: '#ffffff',
         trailWidth: 1,

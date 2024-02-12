@@ -25,53 +25,68 @@ if (empty($_SESSION["nokp"])) {
 <div class="container-profil-table">
     <tr>
         <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
-        <table id='saiz' class="profil-table">
-            <thead>
-                <tr>
-                    <th>Nama Aktiviti</th>
-                    <th>Tarikh</th>
-                    <th>Masa</th>
-                    <th>Kehadiran</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                # Arahan query untuk mencari senarai aktiviti
-                $arahan_papar = "select * from aktiviti";
-                # Laksana arahan mencari data senarai aktiviti
-                $laksana = mysqli_query($condb, $arahan_papar);
+        <div class="scrollable-profil-table">
+            <table id='saiz' class="profil-table">
+                <thead>
+                    <tr>
+                        <th>Nama Aktiviti</th>
+                        <th>Tarikh</th>
+                        <th>Masa</th>
+                        <th>Kehadiran</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    # Arahan query untuk mencari senarai aktiviti
+                    $arahan_papar = "select * from aktiviti";
+                    # Laksana arahan mencari data senarai aktiviti
+                    $laksana = mysqli_query($condb, $arahan_papar);
 
-                # Mengambil data yang ditemui
-                while ($m = mysqli_fetch_array($laksana)) {
-                    # Memaparkan senarai nama dalam jadual
-                    echo "<tr>
+                    # Mengambil data yang ditemui
+                    while ($m = mysqli_fetch_array($laksana)) {
+                        # Memaparkan senarai nama dalam jadual
+                        echo "<tr>
                         <td>" . $m['nama_aktiviti'] . "</td>
                         <td>" . $m['tarikh_aktiviti'] . "</td>
                         <td>" . $m['masa_mula'] . "</td>
                         <td align='center'>";
 
-                    # Arahan mendapatkan data kehadiran ahli bagi setiap aktiviti
-                    $arahan_sql_hadir = "select * from kehadiran where nokp = '" . $_SESSION['nokp'] . "' and IDaktiviti = '" . $m['IDaktiviti'] . "'";
-                    # Melaksanakan arahan mendapatkan data kehadiran ahli
-                    $laksana_hadir = mysqli_query($condb, $arahan_sql_hadir);
+                        # Arahan mendapatkan data kehadiran ahli bagi setiap aktiviti
+                        $arahan_sql_hadir = "select * from kehadiran where nokp = '" . $_SESSION['nokp'] . "' and IDaktiviti = '" . $m['IDaktiviti'] . "'";
+                        # Melaksanakan arahan mendapatkan data kehadiran ahli
+                        $laksana_hadir = mysqli_query($condb, $arahan_sql_hadir);
 
-                    if (mysqli_num_rows($laksana_hadir) == 1) {
-                        echo "&#9989;";
-                    } else {
-                        echo "&#10060; <br>";
+                        $today = date("Y-m-d");
 
-                        if (date("Y-m-d") == $m['tarikh_aktiviti']) {
-                            # Pengesahan kehadiran kendiri
-                            echo "<a href='profil-sahkendiri.php?IDaktiviti=" . $m['IDaktiviti'] . "'>
-                [ PENGESAHAN KENDIRI ] </a>";
+                        if (mysqli_num_rows($laksana_hadir) == 1) {
+                            echo "&#9989;";
+                        } else {
+                            // Semak jika tarikh_aktiviti sudah lepas, jika ya, papar ikon 'X'
+                            if ($m['tarikh_aktiviti'] < $today) {
+                                echo "&#10060; <br>";
+                            } else {
+                                // Jika masih belum tarikh_aktiviti,
+                                // kira berapa hari lagi
+                                $now = new DateTime($today);
+                                $futureDate = new DateTime($m['tarikh_aktiviti']);
+
+                                $interval = $futureDate->diff($now);
+                                $daysLeft = $interval->days;
+
+                                echo $daysLeft . " hari lagi <br>";
+                            }
                         }
-                    }
+                        if ($today == $m['tarikh_aktiviti'] && mysqli_num_rows($laksana_hadir) != 1) {
+                            # Pengesahan kehadiran kendiri
+                            echo "<a href='profil-sahkendiri.php?IDaktiviti=" . $m['IDaktiviti'] . "'> [ PENGESAHAN KENDIRI ] </a>";
+                        }
 
-                    echo "</td></tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+                        echo "</td></tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+        </div>
 
         <div class="carta-mata">
 

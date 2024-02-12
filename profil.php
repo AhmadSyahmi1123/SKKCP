@@ -22,10 +22,10 @@ if (empty($_SESSION["nokp"])) {
     <?= $_SESSION['nokp'] ?>
 </div>
 
-<div class="container-table">
+<div class="container-profil-table">
     <tr>
         <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
-        <table id='saiz' class="table">
+        <table id='saiz' class="profil-table">
             <thead>
                 <tr>
                     <th>Nama Aktiviti</th>

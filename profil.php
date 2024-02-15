@@ -73,14 +73,15 @@ if (empty($_SESSION["nokp"])) {
                                 $interval = $futureDate->diff($now);
                                 $daysLeft = $interval->days;
 
-                                echo $daysLeft . " hari lagi <br>";
+                                // Jika hari yang tinggal = 0 (tarikh $today == tarikh_aktiviti), paparkan link pengesahan kehadiran kendiri
+                                if ($daysLeft == 0) {
+                                    // Pengesahan kehadiran kendiri
+                                    echo "<a href='profil-sahkendiri.php?IDaktiviti=" . $m['IDaktiviti'] . "'> [ PENGESAHAN KENDIRI ] </a>";
+                                } else {
+                                    echo $daysLeft . " hari lagi <br>";
+                                }
                             }
                         }
-                        if ($today == $m['tarikh_aktiviti'] && mysqli_num_rows($laksana_hadir) != 1) {
-                            # Pengesahan kehadiran kendiri
-                            echo "<a href='profil-sahkendiri.php?IDaktiviti=" . $m['IDaktiviti'] . "'> [ PENGESAHAN KENDIRI ] </a>";
-                        }
-
                         echo "</td></tr>";
                     }
                     ?>

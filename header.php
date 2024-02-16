@@ -33,12 +33,22 @@
                         <!-- Menu ADMIN : dipaparkan sekiranya admin telah log masuk -->
                         <li class="nav__item">
                             <a class="nav__link" href='index.php'>
-                                <i class='bx bx-home-alt-2'></i> Laman Utama
+                                <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                        <path fill="#ffffffbf"
+                                            d="M12.71 2.29a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42A1 1 0 0 0 3 13h1v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7h1a1 1 0 0 0 1-1 1 1 0 0 0-.29-.71zM6 20v-9.59l6-6 6 6V20z">
+                                        </path>
+                                    </svg></i> Laman Utama
                             </a>
                         </li>
                         <li class="nav__item">
                             <a class="nav__link" href='profil.php'>
-                                <i class='bx bx-user'></i> Profil
+                                <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                        <path fill="#ffffffbf"
+                                            d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z">
+                                        </path>
+                                    </svg></i> Profil
                             </a>
                         </li>
                         <li class="nav__item">
@@ -90,12 +100,22 @@
                             <!-- Menu BIASA : dipaparkan sekiranya ahli biasa telah log masuk -->
                             <li class="nav__item">
                                 <a class="nav__link" href='index.php'>
-                                    <i class='bx bx-home-alt-2'></i> Laman Utama
+                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                            <path fill="#ffffffbf"
+                                                d="M12.71 2.29a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42A1 1 0 0 0 3 13h1v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7h1a1 1 0 0 0 1-1 1 1 0 0 0-.29-.71zM6 20v-9.59l6-6 6 6V20z">
+                                            </path>
+                                        </svg></i> Laman Utama
                                 </a>
                             </li>
                             <li class="nav__item">
                                 <a class="nav__link" href='profil.php'>
-                                    <i class='bx bx-user'></i> Profil
+                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                            <path fill="#ffffffbf"
+                                                d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z">
+                                            </path>
+                                        </svg></i> Profil
                                 </a>
                             </li>
                             <li class="logout">
@@ -105,7 +125,12 @@
                             <!-- Menu Laman Utama : dipaparkan sekiranya admin/ahli biasa tidak log masuk -->
                             <li class="nav__item">
                                 <a class="nav__link" href='index.php'>
-                                    <i class='bx bx-home-alt-2'></i> Laman Utama
+                                    <i><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                            style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;">
+                                            <path fill="#ffffffbf"
+                                                d="M12.71 2.29a1 1 0 0 0-1.42 0l-9 9a1 1 0 0 0 0 1.42A1 1 0 0 0 3 13h1v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7h1a1 1 0 0 0 1-1 1 1 0 0 0-.29-.71zM6 20v-9.59l6-6 6 6V20z">
+                                            </path>
+                                        </svg></i> Laman Utama
                                 </a>
                             </li>
                             <li class="nav__item">

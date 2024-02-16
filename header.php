@@ -4,8 +4,13 @@
 <head>
     <title>SKKCP</title>
     <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css\nice-select2.css">
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script src="scripts\navbar_script.js" defer></script>
 </head>
@@ -28,7 +33,7 @@
                         <!-- Menu ADMIN : dipaparkan sekiranya admin telah log masuk -->
                         <li class="nav__item">
                             <a class="nav__link" href='index.php'>
-                                <i class='bx bxs-home'></i> Laman Utama
+                                <i class='bx bx-home-alt-2'></i> Laman Utama
                             </a>
                         </li>
                         <li class="nav__item">
@@ -85,7 +90,7 @@
                             <!-- Menu BIASA : dipaparkan sekiranya ahli biasa telah log masuk -->
                             <li class="nav__item">
                                 <a class="nav__link" href='index.php'>
-                                    <i class='bx bxs-home'></i> Laman Utama
+                                    <i class='bx bx-home-alt-2'></i> Laman Utama
                                 </a>
                             </li>
                             <li class="nav__item">
@@ -100,7 +105,7 @@
                             <!-- Menu Laman Utama : dipaparkan sekiranya admin/ahli biasa tidak log masuk -->
                             <li class="nav__item">
                                 <a class="nav__link" href='index.php'>
-                                    <i class='bx bxs-home'></i> Laman Utama
+                                    <i class='bx bx-home-alt-2'></i> Laman Utama
                                 </a>
                             </li>
                             <li class="nav__item">

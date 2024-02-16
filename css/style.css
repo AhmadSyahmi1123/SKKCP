@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: monospace;
 }
 
 body {
@@ -64,6 +65,7 @@ ul {
     background-color: rgb(19, 22, 26);
     position: sticky;
     top: 0;
+    z-index: 99;
 }
 
 .header__content {
@@ -72,7 +74,7 @@ ul {
     justify-content: space-between;
     min-height: 60px;
     max-width: 1200px;
-    padding: 0 30px;
+    padding: 0 91px;
     margin: 0 auto;
 }
 
@@ -125,6 +127,10 @@ ul {
     color: #ffffff;
 }
 
+.nav__item:hover svg path{
+    fill: #ffffff;
+}
+
 .nav__link:hover,
 .nav__item:hover {
     color: white;
@@ -136,17 +142,18 @@ ul {
     content: "";
     height: 3px;
     border-radius: 1000px;
-    width: 0;
+    width: 100%;
     background-color: rgb(0, 183, 255);
     position: absolute;
     left: 0;
     bottom: -8px;
-    transition: width 0.3s;
-    pointer-events: none;
+    transform-origin: center;
+    transform: scaleX(0);
+    transition: transform 0.3s;
 }
 
 .nav__link:hover::after {
-    width: 100%;
+    transform: scaleX(1);
 }
 
 .active {
@@ -155,7 +162,7 @@ ul {
 
 .active::after,
 .nav__link.active::after {
-    width: 100%;
+    transform: scaleX(1);
 }
 
 /*------------------------------------------------------*/
@@ -192,7 +199,7 @@ ul {
     border: none;
     outline: none;
     border: 2px solid #adadad;
-    border-radius: 40px;
+    border-radius: 7px;
     font-size: 16px;
     padding: 20px 45px 20px 20px;
 }
@@ -248,41 +255,8 @@ ul {
     text-decoration: underline;
 }
 
-.select-container {
-    display: flex;
-    justify-content: center;
-    position: relative;
-    min-width: 250px;
-    height: 50px;
-}
-
-.select-box {
-    border: none;
-    border-radius: 40px;
-    appearance: none;
-    padding: 0 30px 0 15px;
+.select-kelas{
     width: 100%;
-    color: white;
-    background-color: rgb(0, 183, 255);
-    font-size: 20px;
-}
-
-.select-container .icon-container {
-    width: 50px;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(0, 183, 255);
-    border-radius: 40px;
-    pointer-events: none;
-}
-
-.icon-container i {
-    font-size: 30px;
-    color: white;
 }
 
 /*------------------------------------------------------*/
@@ -429,7 +403,7 @@ ul {
 
 /*------------------------------------------------------*/
 
-/* Kaunter Kehadiran Page Styling */
+/* Default Table Styling */
 
 .table-container {
     display: flex;
@@ -468,4 +442,52 @@ ul {
 
 .table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
+}
+
+/*------------------------------------------------------*/
+
+.kaunter-info-container {
+    font-size: 18px;
+}
+
+.select-aktiviti{
+    width: 400px;
+}
+
+.rekod-container {
+    display: flex;
+    justify-content: center;
+}
+
+.input-rekod {
+    position: relative;
+    text-align: center;
+    width: 400px;
+    height: 50px;
+    margin: 30px 0;
+}
+
+.input-rekod input {
+    width: 250px;
+    height: 20px;
+    background: transparent;
+    outline: none;
+    border: 2px solid #adadad;
+    border-radius: 40px;
+    font-size: 16px;
+    padding: 20px 20px 20px 20px;
+}
+
+.input-rekod input::placeholder {
+    color: #adadad;
+}
+
+.rekod-container button {
+    margin: 0 142px;
+    border-radius: 40px;
+    width: 115px;
+    height: 30px;
+    background-color: #009578;
+    color: white;
+    border: none;
 }

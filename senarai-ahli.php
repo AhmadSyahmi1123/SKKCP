@@ -11,21 +11,33 @@ include("kawalan-admin.php");
 <!-- Header bagi jadual untuk memaparkan senarai ahli -->
 <h3 align='center'>Senarai Ahli</h3>
 
+<div class="searchNupload-container">
+    <td colspan='3'>
+        <div class="input-carian-container">
+            <form action='' method="POST">
+                <div class="input-carian">
+                    <input type='text' name='nama' placeholder='Carian Nama Ahli'>
+                </div>
+
+                <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i
+                        class='bx bx-search'></i></button>
+            </form>
+        </div>
+    </td>
+    <td colspan='3'>
+        <div class="upload-container">
+            <button class="uploadBtn" data-tooltip="Muat Naik Ahli">
+                <a href='upload.php'><i class='bx bx-upload'></i></a>
+            </button>
+        </div>
+    </td>
+</div>
+
 <div class="table-container">
     <div class="scrollable-table">
         <table class="table">
             <thead>
-                <tr>
-                    <td colspan='3'>
-                        <form action='' method="POST" style="margin:0; padding:0;">
-                            <input type='text' name='nama' placeholder='Carian Nama Ahli'>
-                            <input type='submit' value='Cari'>
-                        </form>
-                    </td>
-                    <td colspan='3' align='right'>
-                        | <a href='upload.php'>Muat Naik Ahli</a> |
-                    </td>
-                </tr>
+
                 <tr>
                     <th>Nama</th>
                     <th>No. Kad Pengenalan</th>

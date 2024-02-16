@@ -416,7 +416,7 @@ ul {
     flex-wrap: wrap;
     width: 100%;
     height: 500px;
-    padding: 10px;
+    padding: 0 10px;
 }
 
 .scrollable-table {
@@ -469,7 +469,7 @@ ul {
     width: 400px;
 }
 
-.select-aktiviti-container{
+.select-aktiviti-container {
     position: relative;
 }
 
@@ -490,8 +490,9 @@ ul {
     cursor: pointer;
 }
 
-.searchBtn i{
+.searchBtn i {
     color: #fff;
+    font-size: 18px;
 }
 
 .rekod-container {
@@ -530,4 +531,111 @@ ul {
     background-color: #009578;
     color: white;
     border: none;
+}
+
+/*------------------------------------------------------*/
+
+/* Senarai Ahli Styling */
+
+.searchNupload-container {
+    display: flex;
+    height: 45.2px;
+}
+
+.input-carian {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.input-carian-container {
+    position: relative;
+    flex: 50%;
+    align-items: center;
+}
+
+.input-carian input {
+    width: 300px;
+    height: 20px;
+    background: #fff;
+    outline: none;
+    border: 2px solid #adadad;
+    border-radius: 7px;
+    font-size: 16px;
+    padding: 15px 20px 15px 20px;
+}
+
+.input-carian-container .searchBtn {
+    margin: 0 10px;
+    position: absolute;
+    background: #009578;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    display: grid;
+    place-items: center;
+    right: 0;
+    top: 0;
+    left: 300px;
+    cursor: pointer;
+}
+
+.upload-container {
+    flex: 50%;
+    position: relative;
+}
+
+.upload-container .uploadBtn {
+    margin: 0 10px;
+    position: absolute;
+    background: #009578;
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    right: 0;
+}
+
+[data-tooltip] {
+    position: relative;
+    cursor: default;
+}
+
+[data-tooltip]::after {
+    position: absolute;
+    width: 140px;
+    left: 0;
+    bottom: 100%;
+    content: attr(data-tooltip);
+    text-align: center;
+    box-sizing: border-box;
+    color: white;
+    background: black;
+    padding: 8px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(0);
+    transition: opacity 0.3s, transform 0.2s;
+}
+
+[data-tooltip]:hover::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-100%);
+    z-index: 999;
+}
+
+.uploadBtn i {
+    color: #fff;
+    font-size: 18px;
 }

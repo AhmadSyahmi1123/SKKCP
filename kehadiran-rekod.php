@@ -74,7 +74,7 @@ if (!empty($_GET['IDaktiviti'])) {
                 }
                 ?>
             </select>
-            <button class="searchBtn" type='submit' value='Cari'><i class='bx bx-search'></i></button>
+            <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i class='bx bx-search'></i></button>
         </div>
     </form>
 
@@ -89,7 +89,7 @@ if (!empty($_GET['IDaktiviti'])) {
     </div>
 
     <div class="rekod-container">
-        <form action='' method='POST' align='center'>
+        <form action='' method='POST' align='centers'>
             <div class="input-rekod">
                 <input class="input-rekod" type='text' name='nokp' placeholder="No. Kad Pengenalan" autocomplete="off"
                     required onblur="this.focus()">

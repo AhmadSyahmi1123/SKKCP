@@ -10,6 +10,7 @@ body {
     font-family: monospace;
     height: 118vh;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 /*------------------------------------------------------*/
@@ -127,7 +128,7 @@ ul {
     color: #ffffff;
 }
 
-.nav__item:hover svg path{
+.nav__item:hover svg path {
     fill: #ffffff;
 }
 
@@ -255,7 +256,7 @@ ul {
     text-decoration: underline;
 }
 
-.select-kelas{
+.select-kelas {
     width: 100%;
 }
 
@@ -356,6 +357,7 @@ ul {
     flex: 70%;
     height: 450px;
     overflow-y: auto;
+    scroll-snap-type: y mandatory;
 }
 
 .profil-table {
@@ -381,6 +383,10 @@ ul {
 
 .profil-table tbody tr:nth-of-type(even) {
     background-color: #f3f3f3;
+}
+
+.profil-table tr {
+    scroll-snap-align: start;
 }
 
 .carta-mata {
@@ -417,6 +423,7 @@ ul {
     height: 100%;
     width: 100%;
     overflow-y: auto;
+    scroll-snap-type: y mandatory;
 }
 
 .table {
@@ -444,13 +451,17 @@ ul {
     background-color: #f3f3f3;
 }
 
+.table tr {
+    scroll-snap-align: start;
+}
+
 /*------------------------------------------------------*/
 
 .kaunter-info-container {
     font-size: 18px;
 }
 
-.select-aktiviti{
+.select-aktiviti {
     width: 400px;
 }
 

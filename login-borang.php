@@ -8,7 +8,6 @@ include("header.php");
 
 <!-- Ruang kotak yang mengandungi komponen untuk pengguna mendaftar -->
 <div class="wrapper">
-
     <!-- Borang Daftar Masuk -->
     <form action="login-proses.php" method="POST">
 

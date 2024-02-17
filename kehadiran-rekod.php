@@ -74,18 +74,21 @@ if (!empty($_GET['IDaktiviti'])) {
                 }
                 ?>
             </select>
-            <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i class='bx bx-search'></i></button>
+            <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i
+                    class='bx bx-search'></i></button>
         </div>
     </form>
 
     <?php if (!empty($_GET["IDaktiviti"])) { ?>
         <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
-        Aktiviti:
-        <?= $ma['nama_aktiviti'] ?><br>
-        Tarikh:
-        <?= $ma['tarikh_aktiviti'] ?> <br>
-        Masa:
-        <?= $ma['masa_mula'] ?> <br>
+        <div class="aktiviti-details">
+            Aktiviti:
+            <?= $ma['nama_aktiviti'] ?><br>
+            Tarikh:
+            <?= $ma['tarikh_aktiviti'] ?> <br>
+            Masa:
+            <?= $ma['masa_mula'] ?> <br>
+        </div>
     </div>
 
     <div class="rekod-container">

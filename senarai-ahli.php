@@ -12,25 +12,22 @@ include("kawalan-admin.php");
 <h3 align='center'>Senarai Ahli</h3>
 
 <div class="searchNupload-container">
-    <td colspan='3'>
-        <div class="input-carian-container">
-            <form action='' method="POST">
-                <div class="input-carian">
-                    <input type='text' name='nama' placeholder='Carian Nama Ahli'>
-                </div>
+    <div class="input-carian-container">
+        <form action='' method="POST">
+            <div class="input-carian">
+                <input type='text' name='nama' placeholder='Carian Nama Ahli'>
+            </div>
 
-                <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i
-                        class='bx bx-search'></i></button>
-            </form>
-        </div>
-    </td>
-    <td colspan='3'>
-        <div class="upload-container">
-            <button class="uploadBtn" data-tooltip="Muat Naik Ahli">
-                <a href='upload.php'><i class='bx bx-upload'></i></a>
+            <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
+                <i class='bx bx-search'></i>
             </button>
-        </div>
-    </td>
+        </form>
+    </div>
+    <div class="upload-container">
+        <button class="uploadBtn" data-tooltip="Muat Naik Ahli">
+            <a href='upload.php'><i class='bx bx-upload'></i></a>
+        </button>
+    </div>
 </div>
 
 <div class="table-container">

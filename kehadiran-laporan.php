@@ -10,23 +10,31 @@ include("kawalan-admin.php");
 
 <h3>Laporan Kehadiran Aktiviti</h3>
 <!-- Borang Carian Aktiviti -->
-<form action="" method="GET">
-    Aktiviti <select name="IDaktiviti">
-        <option selected disabled value>Sila Pilih Aktiviti</option>
+<div class="kaunter-info-container">
+    <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
+    <form action="" method="GET">
+        <div class="select-aktiviti-container">
+            <label class="label-aktiviti" for="select-aktiviti">Aktiviti: </label>
+            <select name='IDaktiviti' id="select-box" class="select-aktiviti">
+                <option selected disabled value>Sila Pilih Aktiviti</option>
 
-        <?php
-        # Proses memaparkan senarai aktiviti dalam bentuk dropdown list
-        $arahan_sql_pilih = "select * from aktiviti";
-        $laksana_arahan_pilih = mysqli_query($condb, $arahan_sql_pilih);
-        while ($n = mysqli_fetch_array($laksana_arahan_pilih)) {
-            echo "<option value='" . $n['IDaktiviti'] . "'>
+                <?php
+                # Proses memaparkan senarai aktiviti dalam bentuk dropdown list
+                $arahan_sql_pilih = "select * from aktiviti";
+                $laksana_arahan_pilih = mysqli_query($condb, $arahan_sql_pilih);
+                while ($n = mysqli_fetch_array($laksana_arahan_pilih)) {
+                    echo "<option value='" . $n['IDaktiviti'] . "'>
             " . $n['IDaktiviti'] . " | " . $n['nama_aktiviti'] . "
             </option>";
-        }
-        ?>
-    </select>
-    <input type="submit" value="Cari">
-</form>
+                }
+                ?>
+            </select>
+
+            <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i
+                    class='bx bx-search'></i></button>
+        </div>
+    </form>
+</div>
 
 <?php
 # Syarat tambahan yang akan dimasukkan dalam arahan SQL (query) senarai aktiviti
@@ -48,8 +56,7 @@ if (!empty($_GET["IDaktiviti"])) {
     $da = mysqli_fetch_array($laksana_SQL);
     ?>
 
-    <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
-    <h3>
+    <div class="laporan-details">
         <?= $ma['nama_aktiviti'] ?> <br>
         <?= $ma['tarikh_aktiviti'] ?> |
         <?= $ma['masa_mula'] ?> <br>
@@ -58,22 +65,24 @@ if (!empty($_GET["IDaktiviti"])) {
         Peratus :
         <?php echo number_format(($da['bil_hadir'] / $da['bil_ahli'] * 100), 2);
         ?>
-    </h3>
+    </div>
+
+    <div class="input-carian-container">
+        <form action="kehadiran-laporan.php?IDaktiviti=<?= $IDaktiviti ?>" method='POST'>
+            <div class="input-carian">
+                <input type="text" name="nama" placeholder="Carian Nama Ahli">
+            </div>
+
+            <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
+                <i class='bx bx-search'></i>
+            </button>
+        </form>
+    </div>
 
     <div class="table-container">
         <div class="scrollable-table">
             <table class="table">
                 <thead>
-                    <tr>
-                        <td colspan="3">
-                            <form action="kehadiran-laporan.php?IDaktiviti=<?= $IDaktiviti ?>" method="POST"
-                                style="margin:0; padding:0;">
-
-                                <input type="text" name="nama" placeholder="Carian Nama Ahli">
-                                <input type="submit" value="Cari">
-                            </form>
-                        </td>
-                    </tr>
                     <tr>
                         <th>Bil</th>
                         <th>Nama</th>
@@ -127,8 +136,11 @@ if (!empty($_GET["IDaktiviti"])) {
                         echo "</td></tr>";
                     }
                     echo "</table>";
-}
-?>
+} ?>
             </tbody>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="scripts\select-box-script.js" defer></script>

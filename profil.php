@@ -47,7 +47,7 @@ if (empty($_SESSION["nokp"])) {
                         # Memaparkan senarai nama dalam jadual
                         echo "<tr>
                         <td>" . $m['nama_aktiviti'] . "</td>
-                        <td>" . $m['tarikh_aktiviti'] . "</td>
+                        <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
                         <td>" . $m['masa_mula'] . "</td>
                         <td align='center'>";
 

@@ -58,7 +58,7 @@ if (!empty($_GET["IDaktiviti"])) {
 
     <div class="laporan-details">
         <?= $ma['nama_aktiviti'] ?> <br>
-        <?= $ma['tarikh_aktiviti'] ?> |
+        <?= date('d/m/Y', strtotime($ma['tarikh_aktiviti'])) ?> |
         <?= $ma['masa_mula'] ?> <br>
         Kehadiran :
         <?= $da['bil_hadir'] . "/" . $da['bil_ahli'] ?> <br>

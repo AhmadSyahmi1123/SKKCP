@@ -24,9 +24,41 @@ include("kawalan-admin.php");
     </div>
 
     <div class="upload-container">
-        <button class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
-            <a href='aktiviti-daftar-borang.php'><i class='bx bx-list-plus'></i></a>
+        <button id="open-dialog" class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
+            <i class='bx bx-list-plus'></i>
         </button>
+
+        <div class="modal-container" id="modal_container">
+            <div class="modal">
+                <!-- Borang Daftar Masuk -->
+                <form action='aktiviti-daftar-proses.php' method="POST">
+
+                    <!-- Tajuk Antaramuka Log Masuk -->
+                    <h1>Daftar Aktiviti Baru</h1>
+
+                    <label for="input-aktiviti">Nama Aktiviti*</label>
+                    <div class="input-box">
+                        <input id="input-aktiviti" type='text' name='nama_aktiviti' placeholder="Nama Aktiviti"
+                            required>
+                    </div>
+
+                    <label for="input-tarikh">Tarikh Aktiviti*</label>
+                    <div class="input-box">
+                        <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("d-m-Y") ?>'
+                            required>
+                    </div>
+
+                    <label for="input-masa">Masa Mula*</label>
+                    <div class="input-box">
+                        <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required>
+                    </div>
+
+                    <input class="addBtn" type='submit' value='Tambah'>
+                    <button id="close-dialog" class="closeBtn"><i class='bx bx-x'></i></button>
+
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -63,7 +95,7 @@ include("kawalan-admin.php");
                     # Memaparkan senarai aktiviti dalam jadual
                     echo "<tr>
                         <td>" . $m['nama_aktiviti'] . "</td>
-                        <td>" . $m['tarikh_aktiviti'] . "</td>
+                        <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
                         <td>" . $m['masa_mula'] . "</td>
         ";
 
@@ -97,3 +129,4 @@ include("kawalan-admin.php");
         </table>
     </div>
 </div>
+<script src="scripts\dialog-script.js" defer></script>

@@ -7,19 +7,30 @@ include("header.php");
 include("kawalan-admin.php");
 ?>
 
-<h3> Daftar Aktiviti Baru </h3>
 <!-- Borang untuk menerima data aktiviti baharu daripada pengguna -->
-<form action='aktiviti-daftar-proses.php' method='POST'>
+<div class="wrapper">
+    <!-- Borang Daftar Masuk -->
+    <form action='aktiviti-daftar-proses.php' method="POST">
 
-Nama Aktiviti
-<input type='text' name='nama_aktiviti' required><br>
+        <!-- Tajuk Antaramuka Log Masuk -->
+        <h1>Daftar Aktiviti Baru</h1>
 
-Tarikh Aktiviti
-<input type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>' required><br>
+        <label for="input-aktiviti">Nama Aktiviti*</label>
+        <div class="input-box">
+            <input id="input-aktiviti" type='text' name='nama_aktiviti' placeholder="Nama Aktiviti" required><br>
+        </div>
 
-Masa Mula
-<input type='text' name='masa_mula' required><br>
+        <label for="input-tarikh">Tarikh Aktiviti*</label>
+        <div class="input-box">
+            <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>' required><br>
+        </div>
 
-<input type='submit' value='Daftar'><br>
+        <label for="input-masa">Masa Mula*</label>
+        <div class="input-box">
+            <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required><br>
+        </div>
 
-</form>
+        <input class="btn" type='submit' value='Tambah'>
+
+    </form>
+</div>

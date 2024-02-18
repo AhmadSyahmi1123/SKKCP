@@ -60,7 +60,7 @@ if (!empty($_GET['IDaktiviti'])) {
     <form action='' method='GET'>
         <div class="select-aktiviti-container">
             <label for="select-aktiviti">Aktiviti: </label>
-            <select name='IDaktiviti' id="select-box" class="select-aktiviti">
+            <select name='IDaktiviti' id="select-box-aktiviti" class="select-aktiviti">
                 <option selected disabled value>Sila Pilih Aktiviti</option>
 
                 <?php
@@ -145,4 +145,4 @@ if (!empty($_GET['IDaktiviti'])) {
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="scripts\select-box-script.js" defer></script>
+<script src="scripts\select-box-aktiviti.js" defer></script>

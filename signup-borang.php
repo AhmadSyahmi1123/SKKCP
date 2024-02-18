@@ -25,7 +25,7 @@ include("connection.php");
         </div>
 
         <div class="select-container">
-            <select name="IDkelas" id="select-box" class="select-kelas">
+            <select name="IDkelas" id="select-box-kelas" class="select-kelas">
                 <option selected disabled value>Sila Pilih Kelas</option>
                 <?php
                 # Proses memaparkan senarai kelas dalam bentuk drodown list
@@ -49,4 +49,4 @@ include("connection.php");
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="scripts\select-box-script.js" defer></script>
+<script src="scripts\select-box-signup.js" defer></script>

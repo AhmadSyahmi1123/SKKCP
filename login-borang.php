@@ -14,7 +14,7 @@ include("header.php");
         <!-- Tajuk Antaramuka Log Masuk -->
         <h1>Log Masuk</h1>
 
-        <div class="input-box"z>
+        <div class="input-box">
             <input type="text" name="nokp" placeholder="No. Kad Pengenalan" required>
             <i class='bx bx-hash'></i>
         </div>

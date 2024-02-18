@@ -1,4 +1,4 @@
-$("#select-box").select2({
+$("#select-box-aktiviti").select2({
     placeholder: "Sila Pilih Aktiviti"
 });
 

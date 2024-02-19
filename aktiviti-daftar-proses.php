@@ -31,4 +31,3 @@ else{
     echo "<script>alert('Sila lengkapkan maklumat!');
     window.location.href='aktiviti-daftar-borang.php'; </script>";
 }
-?>

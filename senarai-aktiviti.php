@@ -28,10 +28,12 @@ include("kawalan-admin.php");
             <i class='bx bx-list-plus'></i>
         </button>
 
+        <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
+
         <div class="modal-container" id="modal_container">
             <div class="modal">
                 <!-- Borang Daftar Masuk -->
-                <form action='aktiviti-daftar-proses.php' method="POST">
+                <form action='aktiviti-daftar-proses.php' target="dummyframe" method="POST">
 
                     <!-- Tajuk Antaramuka Log Masuk -->
                     <h1>Daftar Aktiviti Baru</h1>
@@ -54,9 +56,11 @@ include("kawalan-admin.php");
                     </div>
 
                     <input class="addBtn" type='submit' value='Tambah'>
-                    <button id="close-dialog" class="closeBtn"><i class='bx bx-x'></i></button>
 
                 </form>
+
+                <button id="close-dialog" class="closeBtn"><i class='bx bx-x'></i></button>
+                
             </div>
         </div>
     </div>

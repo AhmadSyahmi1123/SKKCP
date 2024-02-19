@@ -8,7 +8,8 @@
 body {
     background-color: #e8f0f7;
     height: 118vh;
-    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
     overflow-y: scroll;
 }
 
@@ -74,8 +75,8 @@ ul {
     align-items: center;
     justify-content: space-between;
     min-height: 60px;
-    max-width: 1300px;
-    padding: 0 91px;
+    max-width: 1200px;
+    padding: 0 50px;
     margin: 0 auto;
 }
 
@@ -99,7 +100,7 @@ ul {
 }
 
 .nav__item svg {
-    transform: translateY(20%);
+    transform: translateX(5px) translateY(25%);
     color: rgba(255, 255, 255, 0.75);
     font-size: 10px;
 }
@@ -417,7 +418,7 @@ ul {
     flex-wrap: wrap;
     width: 100%;
     height: 500px;
-    padding: 10px 10px;
+    padding: 10px 20px;
 }
 
 .scrollable-table {
@@ -642,7 +643,7 @@ ul {
     text-align: center;
     box-sizing: border-box;
     color: white;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     padding: 8px;
     border-radius: 10px;
     font-size: 14px;
@@ -791,7 +792,7 @@ input[type="date"] {
     margin: auto 25%;
 }
 
-.closeBtn{
+.closeBtn {
     display: grid;
     place-items: center;
     position: absolute;
@@ -807,6 +808,42 @@ input[type="date"] {
     cursor: pointer;
 }
 
-.closeBtn i{
+.closeBtn:hover {
+    background: #cccccc;
+}
+    
+
+.closeBtn i {
     font-size: 30px;
+}
+
+/*------------------------------------------------------*/
+
+/* Upload Member Dialog Styling */
+
+.upload-box {
+    border-radius: 5px;
+    width: 100%;
+}
+
+.upload-box h2 {
+    margin-top: 0;
+}
+
+.upload-box .upload_fileBtn {
+    background: #007bff;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    padding: 10px 20px;
+    margin: 10px 25%;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+.upload-box .choose_fileBtn {
+    border: none;
+    border-radius: 7px;
+    padding: 10px 20px;
+    cursor: pointer;
 }

@@ -2,23 +2,6 @@
 #Memulakan fungsi session
 session_start();
 
-# Memanggil fail header.php dan kawalan-admin.php
-include("header.php");
-include("kawalan-admin.php");
-?>
-
-<!-- Tajuk laman -->
-<h3> Muat Naik Data Ahli <*.txt></h3>
-
-<!-- Borang untuk memuat naik fail -->
-<form action="" method="POST" enctype="multipart/form-data">
-    <h3><b>Sila Pilih Fail .txt yang ingin diupload</b></h3>
-    <input type="file" name="data_ahli">
-    <button type='submit' name='btn-upload'>Muat Naik</button>
-</form>
-
-<!-- Bahagian memproses data yang dimuat naik -->
-<?php
 # Data validation : menyemak kewujudan data dari borang
 if (isset($_POST["btn-upload"])){
     # Memanggil fail connection.php
@@ -48,7 +31,7 @@ if (isset($_POST["btn-upload"])){
             list($nokp, $nama, $IDkelas, $katalaluan, $tahap) = $pecahkan_baris;
 
             # Arahan SQL untuk menyimpan data
-            $arahan_sql_simpan = "insert into ahli (nokp, nama, IDkelas, katalaluan, tahap) values ('$nokp', '$nama', '$IDkelas', 'katalaluan', 'tahap')";
+            $arahan_sql_simpan = "insert into ahli (nokp, nama, IDkelas, katalaluan, tahap) values ('$nokp', '$nama', '$IDkelas', '$katalaluan', '$tahap')";
             # Laksana arahan simpan data ke dalam jadual ahli
             $laksana_arahan_simpan = mysqli_query($condb,$arahan_sql_simpan);
 

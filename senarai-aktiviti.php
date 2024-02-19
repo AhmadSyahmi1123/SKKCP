@@ -24,14 +24,16 @@ include("kawalan-admin.php");
     </div>
 
     <div class="upload-container">
-        <button id="open-dialog" class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
+        <button id="open-aktiviti" class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
             <i class='bx bx-list-plus'></i>
         </button>
 
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
-        <div class="modal-container" id="modal_container">
+        <div class="modal-container" id="modal_aktiviti_container">
             <div class="modal">
+
+            <button class="closeBtn"><i class='bx bx-x'></i></button>
                 <!-- Borang Daftar Masuk -->
                 <form action='aktiviti-daftar-proses.php' target="dummyframe" method="POST">
 
@@ -55,12 +57,9 @@ include("kawalan-admin.php");
                         <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required>
                     </div>
 
-                    <input id="close-dialog" class="addBtn" type='submit' value='Tambah'>
+                    <input id="close-aktiviti" class="addBtn" type='submit' value='Tambah'>
 
                 </form>
-
-                <button id="close-dialog" class="closeBtn"><i class='bx bx-x'></i></button>
-                
             </div>
         </div>
     </div>
@@ -133,4 +132,4 @@ include("kawalan-admin.php");
         </table>
     </div>
 </div>
-<script src="scripts\dialog-script.js" defer></script>
+<script src="scripts\dialog-script-aktiviti.js" defer></script>

@@ -24,17 +24,18 @@ include("kawalan-admin.php");
         </form>
     </div>
     <div class="upload-container">
-        <button id="open-dialog" class="uploadBtn" data-tooltip="Muat Naik Ahli">
+        <button id="open-upload" class="uploadBtn" data-tooltip="Muat Naik Ahli">
             <i class="fa fa-upload"></i>
         </button>
 
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
         <!-- Borang untuk memuat naik fail -->
-        <div class="modal-container" id="modal_container">
+        <div class="modal-container" id="modal_upload_container">
             <div class="modal">
+                <button class="closeBtn"><i class='bx bx-x'></i></button>
 
-                <form id="myForm" action="upload.php" target="dummyframe" method="POST" enctype="multipart/form-data">
+                <form action="upload.php" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
                     <div class="upload-box">
 
                         <h2>Upload Text File</h2>
@@ -43,7 +44,7 @@ include("kawalan-admin.php");
 
                         <input type="file" name="data_ahli" id="file" accept=".txt, .text">
 
-                        <button id="close-dialog" class="upload_fileBtn" type="submit" name="btn-upload">
+                        <button id="close-upload" class="upload_fileBtn" type="submit" name="btn-upload">
                             <i class="fa fa-upload"></i>
                             Upload File
                         </button>
@@ -51,8 +52,6 @@ include("kawalan-admin.php");
                     </div>
 
                 </form>
-
-                <button id="close-dialog" class="closeBtn"><i class='bx bx-x'></i></button>
             </div>
         </div>
 
@@ -134,4 +133,4 @@ include("kawalan-admin.php");
         </table>
     </div>
 </div>
-<script src="scripts\dialog-script.js" defer></script>
+<script src="scripts\dialog-script-upload.js" defer></script>

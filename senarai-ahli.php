@@ -43,7 +43,7 @@ include("kawalan-admin.php");
 
                         <input type="file" name="data_ahli" id="file" accept=".txt, .text">
 
-                        <button class="upload_fileBtn" type="submit" name="btn-upload">
+                        <button id="close-dialog" class="upload_fileBtn" type="submit" name="btn-upload">
                             <i class="fa fa-upload"></i>
                             Upload File
                         </button>
@@ -112,10 +112,20 @@ include("kawalan-admin.php");
 
                     # Memaparkan navigasi untuk kemaskini dan hapus data ahli
                     echo "<td>
-        |<a href='ahli-kemaskini-borang.php?" . http_build_query($data_get) . "'>Kemaskini</a>
-        |<a href='ahli-padam-proses.php?nokp=" . $m['nokp'] . "'
-        onClick=\"return confirm('Anda pasti anda ingin memadam data ini?')\">Hapus</a>|
-        
+                    <div class='action-container'>
+                        <div class='edit-container'>
+                            <button class='editBtn' data-tooltip='Kemaskini'>
+                                <a href='ahli-kemaskini-borang.php?" . http_build_query($data_get) . "'><i class='bx bx-edit'></i></a>
+                            </button>
+                        </div>
+
+                        <div class='delete-container'>
+                            <button class='deleteBtn' data-tooltip='Hapus'>
+                                <a href='ahli-padam-proses.php?nokp=" . $m['nokp'] . "' onClick=\" return confirm('Anda pasti anda ingin
+                                    memadam data ini?')\"><i class='bx bx-trash'></i></a>
+                            </button>
+                        </div>
+                    </div>
         </td>
         </tr>";
                 }

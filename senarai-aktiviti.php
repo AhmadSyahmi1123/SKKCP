@@ -55,7 +55,7 @@ include("kawalan-admin.php");
                         <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required>
                     </div>
 
-                    <input class="addBtn" type='submit' value='Tambah'>
+                    <input id="close-dialog" class="addBtn" type='submit' value='Tambah'>
 
                 </form>
 

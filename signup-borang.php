@@ -40,13 +40,14 @@ include("connection.php");
 
         <div class="input-box">
             <input type="password" name='katalaluan' placeholder="Katalaluan" required>
-            <i class='bx bxs-lock-alt'></i>
+            <i class="fas fa-lock password-toggle"></i>
         </div>
 
         <input class="btn" type='submit' value='Daftar'>
     </form>
 </div>
 
+<script src="scripts\password-visibility-toggle.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="scripts\select-box-signup.js" defer></script>

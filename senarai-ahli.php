@@ -29,32 +29,6 @@ include("kawalan-admin.php");
         </button>
 
         <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-
-        <!-- Borang untuk memuat naik fail -->
-        <div class="modal-container" id="modal_upload_container">
-            <div class="modal">
-                <button class="closeBtn"><i class='bx bx-x'></i></button>
-
-                <form action="upload.php" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
-                    <div class="upload-box">
-
-                        <h2>Upload Text File</h2>
-
-                        <p>Select a .txt file to upload:</p>
-
-                        <input type="file" name="data_ahli" id="file" accept=".txt, .text">
-
-                        <button id="close-upload" class="upload_fileBtn" type="submit" name="btn-upload">
-                            <i class="fa fa-upload"></i>
-                            Upload File
-                        </button>
-
-                    </div>
-
-                </form>
-            </div>
-        </div>
-
     </div>
 </div>
 
@@ -75,13 +49,13 @@ include("kawalan-admin.php");
             <tbody>
                 <?php
                 # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
-                $tambahan = "";
+                $cari_ahli = "";
                 if (!empty($_POST["nama"])) {
-                    $tambahan = " and ahli.nama like '%" . $_POST['nama'] . "%'";
+                    $cari_ahli = " and ahli.nama like '%" . $_POST['nama'] . "%'";
                 }
 
                 # Arahan query untuk mencari senarai nama ahli
-                $arahan_papar = "select * from ahli, kelas where ahli.IDkelas = kelas.IDkelas $tambahan ";
+                $arahan_papar = "select * from ahli, kelas where ahli.IDkelas = kelas.IDkelas $cari_ahli ";
 
                 # Laksana arahan mencari data ahli
                 $laksana = mysqli_query($condb, $arahan_papar);
@@ -133,4 +107,30 @@ include("kawalan-admin.php");
         </table>
     </div>
 </div>
+
+<!-- Borang untuk memuat naik fail -->
+<div class="modal-container" id="modal_upload_container">
+    <div class="modal">
+        <button class="closeBtn"><i class='bx bx-x'></i></button>
+
+        <form action="upload.php" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
+            <div class="upload-box">
+
+                <h2>Upload Text File</h2>
+
+                <p>Select a .txt file to upload:</p>
+
+                <input type="file" name="data_ahli" id="file" accept=".txt, .text">
+
+                <button id="close-upload" class="upload_fileBtn" type="submit" name="btn-upload">
+                    <i class="fa fa-upload"></i>
+                    Upload File
+                </button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
 <script src="scripts\dialog-script-upload.js" defer></script>

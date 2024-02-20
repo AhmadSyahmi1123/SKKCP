@@ -8,30 +8,40 @@ include("kawalan-admin.php");
 include("connection.php");
 
 # Menyemak jika data GET wujud. Jika tidak, buka fail senarai-aktiviti.php
-if(empty($_GET)){
+if (empty($_GET)) {
     die("<script>window.location.href='senarai-aktiviti.php';</script>");
 }
 
 # Mendapatkan maklumat aktiviti dari pangkalan data
-$arahan_sql_pilihan = "select * from aktiviti where IDaktiviti='".$_GET['IDaktiviti']."' ";
+$arahan_sql_pilihan = "select * from aktiviti where IDaktiviti='" . $_GET['IDaktiviti'] . "' ";
 
 # Laksana arahan mendapatkan maklumat
-$laksana_arahan = mysqli_query($condb,$arahan_sql_pilihan);
+$laksana_arahan = mysqli_query($condb, $arahan_sql_pilihan);
 $m = mysqli_fetch_array($laksana_arahan);
 ?>
 
-<h3>Kemaskini Borang Baru</h3>
+<div class="wrapper_kemaskini">
+    <h1>Kemaskini Aktiviti</h1>
 
-<form action="aktiviti-kemaskini-proses.php?IDaktiviti=<?= $m['IDaktiviti'] ?>" method="POST">
+    <form action="aktiviti-kemaskini-proses.php?IDaktiviti=<?= $m['IDaktiviti'] ?>" method="POST">
 
-Nama Aktiviti
-<input type='text' name='nama_aktiviti' value="<?= $m['nama_aktiviti'] ?>" required><br>
+        <div class="input-box">
+            <input type='text' name='nama_aktiviti' value="<?= $m['nama_aktiviti'] ?>" required><br>
+        </div>
 
-Tarikh Aktiviti
-<input type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>' value="<?= $m['tarikh_aktiviti'] ?>" required><br>
+        <div class="input-box">
+            <input type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>' value="<?= $m['tarikh_aktiviti'] ?>"
+                required><br>
+        </div>
 
-Masa Mula
-<input type='text' name='masa_mula' <?= $m['masa_mula'] ?> required><br>
+        <div class="input-box">
+            <input type='time' name='masa_mula' <?= $m['masa_mula'] ?> required><br>
+        </div>
 
-<input type='submit' value='Kemaskini'><br>
-</form>
+
+        <div class="kemaskini-container">
+            <button class="kemaskiniBtn" type="submit">Kemaskini</button>
+        </div>
+    </form>
+
+</div>

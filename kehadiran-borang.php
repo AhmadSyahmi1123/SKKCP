@@ -22,6 +22,20 @@ Tarikh | Masa :
 <?= $n['masa_mula'] ?> <br>
 <br><br>
 
+<div class="searchNupload-container">
+    <div class="input-carian-container">
+        <form action='' method="POST">
+            <div class="input-carian">
+                <input type='text' name='nama' placeholder='Carian Nama Ahli'>
+            </div>
+
+            <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
+                <i class='bx bx-search'></i>
+            </button>
+        </form>
+    </div>
+</div>
+
 <form action="kehadiran-proses.php?IDaktiviti=<?= $_GET['IDaktiviti'] ?>" method="POST">
     <div class="table-container">
         <div class="scrollable-table">
@@ -38,15 +52,19 @@ Tarikh | Masa :
 
                 <tbody>
                     <?php
+                    # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
+                    $cari_ahli = "";
+                    if (!empty($_POST["nama"])) {
+                        $cari_ahli = " and ahli.nama like '%" . $_POST['nama'] . "%'";
+                    }
+
                     # Arahan untuk mendapatkan data kehadiran setiap ahli
-                    $arahan_sql_kehadiran = "SELECT ahli.nokp, ahli.nama, kelas.ting, kelas.nama_kelas, kehadiran.IDaktiviti
-    FROM ahli
-    LEFT JOIN kelas
-    ON ahli.IDkelas = kelas.IDkelas
-    LEFT JOIN kehadiran
-    ON ahli.nokp = kehadiran.nokp
-    AND kehadiran.IDaktiviti = '" . $_GET['IDaktiviti'] . "'
-    ORDER BY ahli.nama";
+                    $arahan_sql_kehadiran = "SELECT *, ahli.nokp, ahli.nama, kelas.ting, kelas.nama_kelas, kehadiran.IDaktiviti 
+                                            FROM ahli
+                                            LEFT JOIN kelas ON ahli.IDkelas = kelas.IDkelas
+                                            LEFT JOIN kehadiran ON ahli.nokp = kehadiran.nokp AND kehadiran.IDaktiviti = '" . $_GET['IDaktiviti'] . "'
+                                            WHERE 1=1 $cari_ahli
+                                            ORDER BY ahli.nama";
 
                     # Laksana arahan untuk memproses data
                     $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
@@ -86,11 +104,10 @@ Tarikh | Masa :
                     ?>
                 </tbody>
 
-                <tr>
-                    <td colspan="4"></td>
-                    <td><input type="submit" value="Simpan"></td>
-                </tr>
             </table>
         </div>
+    </div>
+    <div class="save-container">
+        <button class="saveBtn" type="submit">Simpan</button>
     </div>
 </form>

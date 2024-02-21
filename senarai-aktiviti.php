@@ -57,6 +57,11 @@ include("kawalan-admin.php");
                         <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required>
                     </div>
 
+                    <label for="input-masa">Masa Tamat*</label>
+                    <div class="input-box">
+                        <input id="input-masa" type='time' name='masa_tamat' placeholder="Masa Tamat" required>
+                    </div>
+
                     <input id="close-aktiviti" class="addBtn" type='submit' value='Tambah'>
 
                 </form>
@@ -81,13 +86,13 @@ include("kawalan-admin.php");
             <tbody>
                 <?php
                 # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai aktiviti
-                $tambahan = "";
+                $cari_aktiviti = "";
                 if (!empty($_POST["nama_aktiviti"])) {
-                    $tambahan = "where nama_aktiviti like '%" . $_POST['nama_aktiviti'] . "%'";
+                    $tambahcari_aktivitian = "where nama_aktiviti like '%" . $_POST['nama_aktiviti'] . "%'";
                 }
 
                 # Araham query untuk mencari senarai aktiviti
-                $arahan_papar = "select * from aktiviti $tambahan";
+                $arahan_papar = "select * from aktiviti $cari_aktiviti";
 
                 # Laksana arahan mencari senarai aktiviti
                 $laksana = mysqli_query($condb, $arahan_papar);
@@ -99,7 +104,7 @@ include("kawalan-admin.php");
                     echo "<tr>
                         <td>" . $m['nama_aktiviti'] . "</td>
                         <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
-                        <td>" . $m['masa_mula'] . "</td>
+                        <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
         ";
 
                     # Memaparkan navigasi untuk kemaskini dan hapus data aktiviti
@@ -121,8 +126,8 @@ include("kawalan-admin.php");
                         <div class='hadir-container'>
                             <button class='hadirBtn' data-tooltip='Pengesahan Kehadiran'>
                                 <a href='kehadiran-borang.php?IDaktiviti=" . $m['IDaktiviti'] . "'><i class='bx bx-list-check'></i></a>
-                                </button>
-                            </div>
+                            </button>
+                        </div>
                     </div>
                 </td>
         </tr>";

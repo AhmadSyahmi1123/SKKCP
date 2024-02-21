@@ -48,7 +48,7 @@ if (empty($_SESSION["nokp"])) {
                         echo "<tr>
                         <td>" . $m['nama_aktiviti'] . "</td>
                         <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
-                        <td>" . $m['masa_mula'] . "</td>
+                        <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
                         <td align='center'>";
 
                         # Arahan mendapatkan data kehadiran ahli bagi setiap aktiviti

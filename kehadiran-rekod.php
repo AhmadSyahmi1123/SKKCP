@@ -87,7 +87,7 @@ if (!empty($_GET['IDaktiviti'])) {
             Tarikh:
             <?= $ma['tarikh_aktiviti'] ?> <br>
             Masa:
-            <?= $ma['masa_mula'] ?> <br>
+            <?= date('H:i', strtotime($ma['masa_mula'])) ?> <br>
         </div>
     </div>
 

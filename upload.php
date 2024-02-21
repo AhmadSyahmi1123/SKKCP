@@ -30,6 +30,8 @@ if (isset($_POST["btn-upload"])){
             # Pecahan tersebut akan diumpukkan kepada 5
             list($nokp, $nama, $IDkelas, $katalaluan, $tahap) = $pecahkan_baris;
 
+            $nama = strtoupper($nama);
+
             # Arahan SQL untuk menyimpan data
             $arahan_sql_simpan = "insert into ahli (nokp, nama, IDkelas, katalaluan, tahap) values ('$nokp', '$nama', '$IDkelas', '$katalaluan', '$tahap')";
             # Laksana arahan simpan data ke dalam jadual ahli
@@ -46,4 +48,3 @@ if (isset($_POST["btn-upload"])){
         echo "<script>alert('hanya fail berformat .txt sahaja dibenarkan');</script>";
     }
 }
-?>

@@ -7,21 +7,35 @@ include("header.php");
 ?>
 
 <div class="carousel-container">
-    <i id="prev" class="fa-solid fa-angle-left"></i>
-    <div class="carousel">
-        <div class="slider">
-            <section>
-                <a href="">
-                    <img src="img\btpmap.png" alt="">
-                </a>
-            </section>
-            <section>
-                <a href="signup-borang.php">
-                    <img src="img\register-ad.jpeg" alt="">
-                </a>
-            </section>
+    <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+                <li class="glide__slide">
+                    <a href="signup-borang.php"><img src="img\register-ad.jpeg" alt=""></a>
+                </li>
+                <li class="glide__slide"><img src="img\btpmap.png" alt=""></li>
+                <li class="glide__slide"><img src="img\btpmap.png" alt=""></li>
+                <li class="glide__slide"><img src="img\btpmap.png" alt=""></li>
+                <li class="glide__slide"><img src="img\btpmap.png" alt=""></li>
+            </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class='bx bx-chevron-left'></i></button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class='bx bx-chevron-right' ></i></button>
         </div>
     </div>
-    <i id="next" class="fa-solid fa-angle-right"></i>
 </div>
-<script src="scripts\carousel_script.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
+<script>
+    const config = {
+        type: 'carousel',
+        perView: 2,
+        focusAt: 'center',
+        gap: 10,
+        autoplay: 2000,
+        hoverPause: true,
+        dragThreshold: false,
+        animationTimingFunc: 'ease'
+    }
+    new Glide('.glide', config).mount()
+</script>

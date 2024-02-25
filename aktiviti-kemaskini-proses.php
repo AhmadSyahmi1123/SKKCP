@@ -15,7 +15,8 @@ if(!empty($_POST)){
     $arahan = "update aktiviti set
     nama_aktiviti = '".$_POST['nama_aktiviti']."',
     tarikh_aktiviti = '".$_POST['tarikh_aktiviti']."',
-    masa_mula = '".$_POST['masa_mula']."'
+    masa_mula = '".$_POST['masa_mula']."',
+    masa_tamat = '".$_POST['masa_tamat']."'
     where
     IDaktiviti = '".$_GET['IDaktiviti']."'
     ";

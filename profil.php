@@ -31,7 +31,8 @@ if (empty($_SESSION["nokp"])) {
                     <tr>
                         <th>Nama Aktiviti</th>
                         <th>Tarikh</th>
-                        <th>Masa</th>
+                        <th>Masa Mula</th>
+                        <th>Masa Tamat</th>
                         <th>Kehadiran</th>
                     </tr>
                 </thead>
@@ -49,6 +50,7 @@ if (empty($_SESSION["nokp"])) {
                         <td>" . $m['nama_aktiviti'] . "</td>
                         <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
                         <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
+                        <td>" . date('H:i', strtotime($m['masa_tamat'])) . "</td>
                         <td align='center'>";
 
                         # Arahan mendapatkan data kehadiran ahli bagi setiap aktiviti
@@ -56,30 +58,50 @@ if (empty($_SESSION["nokp"])) {
                         # Melaksanakan arahan mendapatkan data kehadiran ahli
                         $laksana_hadir = mysqli_query($condb, $arahan_sql_hadir);
 
-                        $today = date("Y-m-d");
+                        $today = date('d/m/Y');
+                        $masa = date("H:i:s");
 
                         if (mysqli_num_rows($laksana_hadir) == 1) {
                             echo "&#9989;";
                         } else {
                             // Semak jika tarikh_aktiviti sudah lepas, jika ya, papar ikon 'X'
-                            if ($m['tarikh_aktiviti'] < $today) {
+                            if ($m['tarikh_aktiviti'] < $today && $m['masa_tamat'] < $masa) {
                                 echo "&#10060; <br>";
                             } else {
-                                // Jika masih belum tarikh_aktiviti,
-                                // kira berapa hari lagi
-                                $now = new DateTime($today);
-                                $futureDate = new DateTime($m['tarikh_aktiviti']);
+                                if ($today == date('d/m/Y', strtotime($m['tarikh_aktiviti'])) && $masa != $m['tarikh_aktiviti']) {
+                                    // Display a real-time countdown
+                                    echo '<div id="countdown_' . $m['IDaktiviti'] . '"></div>';
+                                    echo '<script>
+                                        var countDownDate_' . $m['IDaktiviti'] . ' = new Date("' . $m['tarikh_aktiviti'] . 'T' . $m['masa_mula'] . '").getTime();
 
-                                $interval = $futureDate->diff($now);
-                                $daysLeft = $interval->days;
+                                        // Update the count down every 1 second
+                                        var x_' . $m['IDaktiviti'] . ' = setInterval(function() {
+                                            var now = new Date().getTime();
 
-                                // Jika hari yang tinggal = 0 (tarikh $today == tarikh_aktiviti), paparkan link pengesahan kehadiran kendiri
-                                if ($daysLeft == 0) {
-                                    // Pengesahan kehadiran kendiri
-                                    echo "<a href='profil-sahkendiri.php?IDaktiviti=" . $m['IDaktiviti'] . "'> [ PENGESAHAN KENDIRI ] </a>";
-                                } else {
-                                    echo $daysLeft . " hari lagi <br>";
+                                            // Find the distance between now and the count down date
+                                            var distance = countDownDate_' . $m['IDaktiviti'] . ' - now;
+
+                                            // Time calculations for days, hours, minutes and seconds
+                                            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                                            // Output the result in an element with id="countdown_' . $m['IDaktiviti'] . '"
+                                            document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = days + "d " + hours + "h "
+                                            + minutes + "m " + seconds + "s ";
+
+                                            // If the count down is over, display link for self-confirmation of attendance
+                                            if (distance <= 0) {
+                                                clearInterval(x_' . $m['IDaktiviti'] . ');
+                                                document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = \' <a href="profil-sahkendiri.php?IDaktiviti=' . $m['IDaktiviti'] . '">[ PENGESAHAN KEHADIRAN ]</a>\';
+                                            }
+                                        }, 1000);
+                                    </script>';
+
                                 }
+
+
                             }
                         }
                         echo "</td></tr>";

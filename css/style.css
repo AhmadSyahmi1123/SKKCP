@@ -5,6 +5,10 @@
     font-family: "Roboto Mono", monospace;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 body {
     background-color: #e8f0f7;
     height: 118vh;

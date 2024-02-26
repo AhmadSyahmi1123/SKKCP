@@ -30,6 +30,11 @@ include("kawalan-admin.php");
             <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required><br>
         </div>
 
+        <label for="input-masa">Masa Tamat*</label>
+        <div class="input-box">
+            <input id="input-masa" type='time' name='masa_tamat' placeholder="Masa Tamat" required><br>
+        </div>
+
         <input class="btn" type='submit' value='Tambah'>
 
     </form>

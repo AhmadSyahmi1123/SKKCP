@@ -33,7 +33,7 @@ include("kawalan-admin.php");
         <div class="modal-container" id="modal_aktiviti_container">
             <div class="modal">
 
-            <button class="closeBtn"><i class='bx bx-x'></i></button>
+            <button id="closeBtn" class="closeAddAktivitiBtn"><i class='bx bx-x'></i></button>
                 <!-- Borang Daftar Masuk -->
                 <form action='aktiviti-daftar-proses.php' target="dummyframe" method="POST">
 
@@ -79,7 +79,8 @@ include("kawalan-admin.php");
                 <tr>
                     <th>Nama Aktiviti</th>
                     <th>Tarikh</th>
-                    <th>Masa</th>
+                    <th>Masa Mula</th>
+                    <th>Masa Tamat</th>
                     <th>Tindakan</th>
                 </tr>
             </thead>
@@ -105,6 +106,7 @@ include("kawalan-admin.php");
                         <td>" . $m['nama_aktiviti'] . "</td>
                         <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
                         <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
+                        <td>" . date('H:i', strtotime($m['masa_tamat'])) . "</td>
         ";
 
                     # Memaparkan navigasi untuk kemaskini dan hapus data aktiviti

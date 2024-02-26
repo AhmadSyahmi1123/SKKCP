@@ -35,11 +35,12 @@ $m = mysqli_fetch_array($laksana_arahan);
         </div>
 
         <div class="input-box">
-            <input type='time' name='masa_mula' <?= $m['masa_mula'] ?> required><br>
+            <input type='time' name='masa_mula' value="<?php echo date('H:i', strtotime($m['masa_mula'])); ?>"
+                required><br>
         </div>
 
         <div class="input-box">
-            <input type='time' name='masa_tamat' <?= $m['masa_tamat'] ?> required><br>
+            <input type='time' name='masa_tamat' value="<?php echo date('H:i', strtotime($m['masa_tamat'])); ?>" required><br>
         </div>
 
         <div class="kemaskini-container">

@@ -33,7 +33,7 @@ include("kawalan-admin.php");
         <div class="modal-container" id="modal_aktiviti_container">
             <div class="modal">
 
-            <button id="closeBtn" class="closeAddAktivitiBtn"><i class='bx bx-x'></i></button>
+            <button id="closeAddAktivitiBtn" class="closeBtn"><i class='bx bx-x'></i></button>
                 <!-- Borang Daftar Masuk -->
                 <form action='aktiviti-daftar-proses.php' target="dummyframe" method="POST">
 

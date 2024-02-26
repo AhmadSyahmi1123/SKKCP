@@ -111,7 +111,7 @@ include("kawalan-admin.php");
 <!-- Borang untuk memuat naik fail -->
 <div class="modal-container" id="modal_upload_container">
     <div class="modal">
-        <button id="closeBtn" class="closeUploadFileBtn"><i class='bx bx-x'></i></button>
+        <button id="closeUploadFileBtn" class="closeBtn"><i class='bx bx-x'></i></button>
 
         <form action="upload.php" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
             <div class="upload-box">

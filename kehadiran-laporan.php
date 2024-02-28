@@ -89,6 +89,7 @@ if (!empty($_GET["IDaktiviti"])) {
                         <th>No Kad Pengenalan</th>
                         <th>Kelas</th>
                         <th>Kehadiran</th>
+                        <th>Tindakan</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -132,6 +133,16 @@ if (!empty($_GET["IDaktiviti"])) {
                         } else {
                             echo "&#10060;";
                         }
+
+                        echo "<td>
+                                <div class='action-container'>
+                                    <div class='edit-mata-container'>
+                                        <button class='editMataBtn' data-tooltip='Tambah/Tolak Mata'>
+                                            <a href='mata-kemaskini-borang.php?nokp=" . $m['nokp'] . "'><i class='bx bx-edit'></i></a>
+                                        </button>
+                                    </div>
+                                </div>
+                            </td>";
 
                         echo "</td></tr>";
                     }

@@ -30,20 +30,8 @@ if (empty($_GET)) {
 
         <div class="select-aktiviti-container">
             <select name='tahap' id="select-box-tahap" class="select-tahap">
-                <option value='<?= $_GET['tahap'] ?>'>
-                    <?= $_GET['tahap'] ?>
-                </option>
-
-                <?php
-                # Proses memaparkan senarai tahap dalam bentuk dropdown list
-                $arahan_sql_tahap = "select tahap from ahli group by tahap order by tahap";
-                $laksana_arahan_tahap = mysqli_query($condb, $arahan_sql_tahap);
-                while ($n = mysqli_fetch_array($laksana_arahan_tahap)) {
-                    if ($n["tahap"] != $_GET['tahap']) {
-                        echo "<option value='" . $n['tahap'] . "'></option>";
-                    }
-                }
-                ?>
+                <option value="ADMIN">ADMIN</option>
+                <option value="BIASA">BIASA</option>
             </select>
         </div>
 

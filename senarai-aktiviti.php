@@ -48,7 +48,7 @@ include("kawalan-admin.php");
 
                     <label for="input-tarikh">Tarikh Aktiviti*</label>
                     <div class="input-box">
-                        <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("d-m-Y") ?>'
+                        <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>'
                             required>
                     </div>
 

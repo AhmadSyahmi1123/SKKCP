@@ -58,49 +58,47 @@ if (empty($_SESSION["nokp"])) {
                         # Melaksanakan arahan mendapatkan data kehadiran ahli
                         $laksana_hadir = mysqli_query($condb, $arahan_sql_hadir);
 
-                        $today = date('d/m/Y');
-                        $masa = date("H:i:s");
+                        $startDate = new DateTime($m['tarikh_aktiviti'] . ' ' . $m['masa_mula']);
+                        $endDate = new DateTime($m['tarikh_aktiviti'] . ' ' . $m['masa_tamat']);
+                        $now = new DateTime();
 
                         if (mysqli_num_rows($laksana_hadir) == 1) {
                             echo "&#9989;";
                         } else {
                             // Semak jika tarikh_aktiviti sudah lepas, jika ya, papar ikon 'X'
-                            if ($m['tarikh_aktiviti'] < $today && $m['masa_tamat'] < $masa) {
+                            if ($endDate < $now) {
                                 echo "&#10060; <br>";
                             } else {
-                                if ($today == date('d/m/Y', strtotime($m['tarikh_aktiviti'])) && $masa != $m['tarikh_aktiviti']) {
-                                    // Display a real-time countdown
-                                    echo '<div id="countdown_' . $m['IDaktiviti'] . '"></div>';
-                                    echo '<script>
-                                        var countDownDate_' . $m['IDaktiviti'] . ' = new Date("' . $m['tarikh_aktiviti'] . 'T' . $m['masa_mula'] . '").getTime();
+                                $targetDate = $startDate->format('Y-m-d H:i:s');
+                                // Display a real-time countdown
+                                echo '<div id="countdown_' . $m['IDaktiviti'] . '"></div>';
+                                echo '<script>
+                                    var countDownDate_' . $m['IDaktiviti'] . ' = new Date("' . $targetDate . '").getTime();
 
-                                        // Update the count down every 1 second
-                                        var x_' . $m['IDaktiviti'] . ' = setInterval(function() {
-                                            var now = new Date().getTime();
+                                    // Update the count down every 1 second
+                                    var x_' . $m['IDaktiviti'] . ' = setInterval(function() {
+                                        var now = new Date().getTime();
 
-                                            // Find the distance between now and the count down date
-                                            var distance = countDownDate_' . $m['IDaktiviti'] . ' - now;
+                                        // Find the distance between now and the count down date
+                                        var distance = countDownDate_' . $m['IDaktiviti'] . ' - now;
 
-                                            // Time calculations for days, hours, minutes and seconds
-                                            var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                        // Time calculations for days, hours, minutes and seconds
+                                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                                            // Output the result in an element with id="countdown_' . $m['IDaktiviti'] . '"
-                                            document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = days + "d " + hours + "h "
-                                            + minutes + "m " + seconds + "s ";
+                                        // Output the result in an element with id="countdown_' . $m['IDaktiviti'] . '"
+                                        document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = days + "d " + hours + "h "
+                                        + minutes + "m " + seconds + "s ";
 
-                                            // If the count down is over, display link for self-confirmation of attendance
-                                            if (distance <= 0) {
-                                                clearInterval(x_' . $m['IDaktiviti'] . ');
-                                                document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = \' <a href="profil-sahkendiri.php?IDaktiviti=' . $m['IDaktiviti'] . '">[ PENGESAHAN KEHADIRAN ]</a>\';
-                                            }
-                                        }, 1000);
-                                    </script>';
-
-                                }
-
+                                        // If the count down is over, display link for self-confirmation of attendance
+                                        if (distance <= 0) {
+                                            clearInterval(x_' . $m['IDaktiviti'] . ');
+                                            document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = \' <button class="sahkendiriBtn" ><a href="profil-sahkendiri.php?IDaktiviti=' . $m['IDaktiviti'] . '"><i class="bx bx-user-check"></i>Rekod</a></button>\';
+                                        }
+                                    }, 1000);
+                                </script>';
 
                             }
                         }

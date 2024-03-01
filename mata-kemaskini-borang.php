@@ -20,18 +20,20 @@ $laksana_arahan = mysqli_query($condb, $arahan_sql_pilihan);
 $m = mysqli_fetch_array($laksana_arahan);
 ?>
 
-<div class="wrapper_mata">
-    <h1>Tambah Mata Ahli</h1>
+<main>
+    <div class="wrapper_mata">
+        <h1>Tambah Mata Ahli</h1>
 
-    <form action="mata-kemaskini-proses.php?nokp=<?= $m['nokp'] ?>" method="POST">
+        <form action="mata-kemaskini-proses.php?nokp=<?= $m['nokp'] ?>" method="POST">
 
-        <div class="input-box">
-            <input type='number' name='mata' value="0" required><br>
-        </div>
+            <div class="input-box">
+                <input type='number' name='mata' value="0" required><br>
+            </div>
 
-        <div class="tambah-mata-container">
-            <button class="tambahMataBtn" type="submit">Tambah</button>
-        </div>
-    </form>
+            <div class="tambah-mata-container">
+                <button class="tambahMataBtn" type="submit">Tambah</button>
+            </div>
+        </form>
 
-</div>
+    </div>
+</main>

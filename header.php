@@ -43,27 +43,27 @@
         <!-- Menu ADMIN : dipaparkan sekiranya admin telah log masuk -->
         <aside class="sidebar">
             <ul class='links'>
-                <li class='sidebar_link active'>
+                <li>
                     <i class='material-symbols-outlined'>dashboard</i>
                     <a href="index.php">Dashboard</a>
                 </li>
-                <li class='sidebar_link'>
+                <li>
                     <i class='material-symbols-outlined'>person</i>
                     <a href="profil.php">Profil</a>
                 </li>
-                <li class='sidebar_link'>
+                <li>
                     <i class='material-symbols-outlined'>support_agent</i>
                     <a href="kehadiran-rekod.php">Kaunter Kehadiran</a>
                 </li>
-                <li class='sidebar_link'>
+                <li>
                     <i class='material-symbols-outlined'>group</i>
                     <a href="senarai-ahli.php">Senarai Ahli</a>
                 </li>
-                <li class='sidebar_link'>
+                <li>
                     <i class='material-symbols-outlined'>assignment</i>
                     <a href="senarai-aktiviti.php">Senarai Aktiviti</a>
                 </li>
-                <li class='sidebar_link'>
+                <li>
                     <i class='material-symbols-outlined'>analytics</i>
                     <a href="kehadiran-laporan.php">Laporan Kehadiran</a>
                 </li>

@@ -19,33 +19,36 @@ $arahan_sql_pilihan = "select * from aktiviti where IDaktiviti='" . $_GET['IDakt
 $laksana_arahan = mysqli_query($condb, $arahan_sql_pilihan);
 $m = mysqli_fetch_array($laksana_arahan);
 ?>
+<main>
 
-<div class="wrapper_kemaskini">
-    <h1>Kemaskini Aktiviti</h1>
+    <div class="wrapper_kemaskini">
+        <h1>Kemaskini Aktiviti</h1>
 
-    <form action="aktiviti-kemaskini-proses.php?IDaktiviti=<?= $m['IDaktiviti'] ?>" method="POST">
+        <form action="aktiviti-kemaskini-proses.php?IDaktiviti=<?= $m['IDaktiviti'] ?>" method="POST">
 
-        <div class="input-box">
-            <input type='text' name='nama_aktiviti' value="<?= $m['nama_aktiviti'] ?>" required><br>
-        </div>
+            <div class="input-box">
+                <input type='text' name='nama_aktiviti' value="<?= $m['nama_aktiviti'] ?>" required><br>
+            </div>
 
-        <div class="input-box">
-            <input type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>' value="<?= $m['tarikh_aktiviti'] ?>"
-                required><br>
-        </div>
+            <div class="input-box">
+                <input type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>'
+                    value="<?= $m['tarikh_aktiviti'] ?>" required><br>
+            </div>
 
-        <div class="input-box">
-            <input type='time' name='masa_mula' value="<?php echo date('H:i', strtotime($m['masa_mula'])); ?>"
-                required><br>
-        </div>
+            <div class="input-box">
+                <input type='time' name='masa_mula' value="<?php echo date('H:i', strtotime($m['masa_mula'])); ?>"
+                    required><br>
+            </div>
 
-        <div class="input-box">
-            <input type='time' name='masa_tamat' value="<?php echo date('H:i', strtotime($m['masa_tamat'])); ?>" required><br>
-        </div>
+            <div class="input-box">
+                <input type='time' name='masa_tamat' value="<?php echo date('H:i', strtotime($m['masa_tamat'])); ?>"
+                    required><br>
+            </div>
 
-        <div class="kemaskini-container">
-            <button class="kemaskiniBtn" type="submit">Kemaskini</button>
-        </div>
-    </form>
+            <div class="kemaskini-container">
+                <button class="kemaskiniBtn" type="submit">Kemaskini</button>
+            </div>
+        </form>
 
-</div>
+    </div>
+</main>

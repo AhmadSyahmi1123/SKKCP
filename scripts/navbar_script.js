@@ -1,10 +1,15 @@
-const navLinkEls = document.querySelectorAll('.nav__link');
-const windowPathname = window.location.pathname;
+const navLinks = document.querySelectorAll('.links a'); 
 
-navLinkEls.forEach(navLinkEl => {
-    const navLinkPathname = new URL(navLinkEl.href).pathname;
+navLinks.forEach(link => {
 
-    if ((windowPathname === navLinkPathname) || (windowPathname === '/index.php' && navLinkPathname === '/')) {
-        navLinkEl.classList.add('active');
-    }
-})
+  let linkPath = new URL(link.href).pathname;
+  
+  if (linkPath === '/') {
+    linkPath = '/index.php';
+  }
+
+  if (linkPath === window.location.pathname) {
+    link.closest('li').classList.add('active');
+  }
+
+});

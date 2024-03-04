@@ -119,8 +119,34 @@ a {
     border-radius: 10px;
 }
 
-.links li i {
-    padding: 12px 10px;
+.links li a {
+    text-decoration: none;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    font-weight: 500;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+.links li a i {
+    margin-right: 10px;
+}
+
+.links li a::after {
+    content: attr(data-text);
+    font-size: 16px;
+    margin-left: 5px;
+    visibility: hidden;
+    /* hide the text */
+}
+
+.sidebar:hover .links li a::after {
+    visibility: visible;
+    /* show the text on sidebar hover */
 }
 
 .links li:last-child {
@@ -129,20 +155,11 @@ a {
     bottom: 20px;
 }
 
-.links li a {
-    text-decoration: none;
-    padding: 10px;
-    width: 100%;
-    height: 100%;
-    font-weight: 500;
-    white-space: nowrap;
-    display: none;
-    cursor: pointer;
+.sidebar:hover .links li a {
+    display: flex;
 }
 
-.sidebar:hover .links li a {
-    display: block;
-}
+
 
 /*------------------------------------------------------*/
 
@@ -353,18 +370,17 @@ ul {
 
 .carousel-container {
     width: 100%;
+    height: 100vh;
     display: flex;
+    align-items: center;
     justify-content: center;
     padding: 10px 15px;
-}
-
-.glide {
-    top: 0;
 }
 
 .glide__slide img {
     width: 100%;
     height: 100%;
+    object-fit: fill;
 }
 
 .glide__arrows .glide__arrow i {

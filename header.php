@@ -43,54 +43,66 @@
         <!-- Menu ADMIN : dipaparkan sekiranya admin telah log masuk -->
         <aside class="sidebar">
             <ul class='links'>
-                <li>
-                    <i class='material-symbols-outlined'>dashboard</i>
-                    <a href="index.php">Dashboard</a>
+                <li class="active">
+                    <a href="index-admin.php" data-text="Dashboard">
+                        <i class='material-symbols-outlined'>dashboard</i>
+                    </a>
                 </li>
                 <li>
-                    <i class='material-symbols-outlined'>person</i>
-                    <a href="profil.php">Profil</a>
+                    <a href="profil.php" data-text="Profil">
+                        <i class='material-symbols-outlined'>person</i>
+                    </a>
                 </li>
                 <li>
-                    <i class='material-symbols-outlined'>support_agent</i>
-                    <a href="kehadiran-rekod.php">Kaunter Kehadiran</a>
+                    <a href="kehadiran-rekod.php" data-text="Kaunter Kehadiran">
+                        <i class='material-symbols-outlined'>support_agent</i>
+                    </a>
                 </li>
                 <li>
-                    <i class='material-symbols-outlined'>group</i>
-                    <a href="senarai-ahli.php">Senarai Ahli</a>
+                    <a href="senarai-ahli.php" data-text="Senarai Ahli">
+                        <i class='material-symbols-outlined'>group</i>
+                    </a>
                 </li>
                 <li>
-                    <i class='material-symbols-outlined'>assignment</i>
-                    <a href="senarai-aktiviti.php">Senarai Aktiviti</a>
+                    <a href="senarai-aktiviti.php" data-text="Senarai Aktiviti">
+                        <i class='material-symbols-outlined'>assignment</i>
+                    </a>
                 </li>
                 <li>
-                    <i class='material-symbols-outlined'>analytics</i>
-                    <a href="kehadiran-laporan.php">Laporan Kehadiran</a>
+                    <a href="kehadiran-laporan.php" data-text="Laporan Kehadiran">
+                        <i class='material-symbols-outlined'>analytics</i>
+                    </a>
                 </li>
                 <li>
-                    <i class='material-symbols-outlined'>Logout</i>
-                    <a href="logout.php">Log Keluar</a>
+                    <a href="logout.php" data-text="Log Keluar">
+                        <i class='material-symbols-outlined'>Logout</i>
+                    </a>
                 </li>
             </ul>
         </aside>
+
     <?php } else if (!empty($_SESSION['tahap']) and $_SESSION['tahap'] == "BIASA") { ?>
             <!-- Menu BIASA : dipaparkan sekiranya ahli biasa telah log masuk -->
             <aside class="sidebar">
                 <ul class='links'>
                     <li>
-                        <i class='material-symbols-outlined'>dashboard</i>
-                        <a href="index.php">Dashboard</a>
+                        <a href="index-biasa.php" data-text="Dashboard">
+                            <i class='material-symbols-outlined'>dashboard</i>
+                        </a>
                     </li>
                     <li>
-                        <i class='material-symbols-outlined'>person</i>
-                        <a href="profil.php">Profil</a>
+                        <a href="profil.php" data-text="Profil">
+                            <i class='material-symbols-outlined'>person</i>
+                        </a>
                     </li>
                     <li>
-                        <i class='material-symbols-outlined'>Logout</i>
-                        <a href="logout.php">Log Keluar</a>
+                        <a href="logout.php" data-text="Log Keluar">
+                            <i class='material-symbols-outlined'>Logout</i>
+                        </a>
                     </li>
                 </ul>
             </aside>
+
 
     <?php } else { ?>
             <!-- Menu Laman Utama : dipaparkan sekiranya admin/ahli biasa tidak log masuk -->

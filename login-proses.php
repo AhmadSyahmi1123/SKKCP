@@ -28,7 +28,13 @@ if(!empty($_POST['nokp']) and !empty( $_POST['katalaluan'])){
         $_SESSION["nama"] = $m["nama"];
 
         # Buka laman index.php
-        echo "<script>window.location.href='index.php'; </script>";
+        if ($_SESSION["tahap"] == "ADMIN"){
+            echo "<script>window.location.href='index-admin.php'; </script>";
+        }
+        else {
+            echo "<script>window.location.href='index-biasa.php'; </script>";
+        }
+        
     }
     else{
         # Jika tidak, log masuk gagal. Kembali ke laman login-borang.php

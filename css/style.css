@@ -10,8 +10,8 @@
 }
 
 body {
-    background-color: #e8f0f7;
-    height: 118vh;
+    background-color: #18181b;
+    color: #fcfcfc;
     max-width: 100%;
     overflow: hidden;
     overflow-y: scroll;
@@ -19,11 +19,26 @@ body {
 
 main {
     padding-left: 70px;
+    padding-right: 30px;
+    height: 98vh;
 }
 
 a {
     text-decoration: none;
     color: inherit;
+}
+
+.page-header {
+    z-index: 19;
+    top: 0;
+    position: sticky;
+    background-color: #18181b;
+    border-bottom: 3px solid #2e2e32;
+    padding-left: 70px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 32px;
+    font-weight: 600;
 }
 
 /*------------------------------------------------------*/
@@ -75,15 +90,14 @@ a {
     flex-direction: column;
     position: fixed;
     z-index: 90;
-    top: 10px;
-    left: 10px;
+    top: 0;
+    left: 0;
     width: 50px;
-    height: 98vh;
-    border-radius: 10px;
-    background: #adadad;
+    height: 100%;
+    background: #18181b;
     backdrop-filter: blur(17px);
     --webkit-backdrop-filter: blur(17px);
-    border-right: 1px solid rgba(255, 255, 255, 0.6);
+    border-right: 3px solid #2e2f34;
     transition: all .3s ease;
 }
 
@@ -110,16 +124,33 @@ a {
 
 .links li:hover {
     padding-left: 20px;
-    background: white;
-    border-radius: 10px;
+    background: #26272b;
+    border-radius: 40px;
+}
+
+.links li:hover a i {
+    color: #fcfcfc;
+}
+
+.links li:hover a {
+    color: #fcfcfc;
 }
 
 .links li.active {
-    background: white;
-    border-radius: 10px;
+    background: #26272b;
+    border-radius: 40px;
+}
+
+.links li.active a i {
+    color: #fcfcfc;
+}
+
+.links li.active a {
+    color: #fcfcfc;
 }
 
 .links li a {
+    color: #9e9ea9;
     text-decoration: none;
     padding: 10px;
     width: 100%;
@@ -134,6 +165,7 @@ a {
 
 .links li a i {
     margin-right: 10px;
+    color: #9e9ea9;
 }
 
 .links li a::after {
@@ -158,8 +190,6 @@ a {
 .sidebar:hover .links li a {
     display: flex;
 }
-
-
 
 /*------------------------------------------------------*/
 
@@ -403,21 +433,81 @@ ul {
 
 /* Profil Page Styling */
 
+.countdownText {
+    color: #fcfcfc;
+}
+
 .user-details {
-    padding: 20px 10px;
+    position: relative;
+    padding: 20px;
+    margin: 10px 0;
+    height: 400px;
     font-size: 20px;
+    background: #26272b;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.edit_profile-container {
+    margin: 10px 0;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+}
+
+.edit_profile-container .edit_profileBtn {
+    padding: 10px 20px;
+    background: #2e2f34;
+    color: #fcfcfc;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.edit_profile-container .edit_profileBtn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.primary-text {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.secondary-text {
+    color: #9e9ea9;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+.status-hadir {
+    width: 100px;
+    padding: 3px 5px;
+    background: #00ad3a;
+    border-radius: 20px;
+    color: #ffffff;
+}
+
+.status-tidak-hadir {
+    width: 150px;
+    padding: 3px 5px;
+    background: #ea033f;
+    border-radius: 20px;
+    color: #ffffff;
 }
 
 .container-profil-table {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    padding: 10px;
+    margin: 10px 0;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .scrollable-profil-table {
-    flex: 70%;
     height: 450px;
+    width: 100%;
+    border-radius: 10px;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
 }
@@ -427,6 +517,27 @@ ul {
     border-collapse: collapse;
     font-size: 18px;
     width: 100%;
+    background-color: #26272b;
+}
+
+/* top-left border-radius */
+.profil-table tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+/* top-right border-radius */
+.profil-table tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+/* bottom-left border-radius */
+.profil-table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+/* bottom-right border-radius */
+.profil-table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
 }
 
 .profil-table th,
@@ -436,30 +547,31 @@ ul {
 }
 
 .profil-table th {
-    background-color: #009578;
+    color: #9e9ea9;
+    background: #3f3f46;
     text-align: left;
-    color: white;
     position: sticky;
     top: 0;
     z-index: 10;
 }
 
-.profil-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
 .profil-table tr {
     scroll-snap-align: start;
+    border-bottom: 3px solid #2e2f34;
 }
 
 .carta-mata {
-    display: flex;
-    flex: 30%;
-    justify-content: center;
+    position: absolute;
+    border-radius: 10px;
+    top: 0;
+    right: 0;
+    width: 400px;
+    padding: 15px;
 }
 
 .carta-mata .container {
-    display: grid;
+    position: relative;
+    display: flex;
     place-items: center;
 }
 
@@ -472,10 +584,10 @@ ul {
 
 .sahkendiriBtn {
     position: relative;
-    background: #009578;
+    background: #e5c236;
     border: none;
-    border-radius: 10px;
-    color: #fff;
+    border-radius: 20px;
+    color: #fcfcfc;
     padding: 3px 10px;
     margin-bottom: 0;
     cursor: pointer;
@@ -969,11 +1081,9 @@ input[type="date"] {
 /* Kemaskini Ahli/Aktiviti Styling */
 
 .wrapper_kemaskini {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px;
+    margin: 10px;
+    width: 100%;
+    height: 100%;
     background: white;
     border-radius: 10px;
     box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
@@ -984,34 +1094,52 @@ input[type="date"] {
     display: flex;
     align-items: center;
     position: relative;
-    width: 100%;
+    width: 50%;
     height: 30px;
     margin: 30px 0;
     margin-top: 10px
 }
 
 .wrapper_kemaskini h1 {
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     font-size: 36px;
-    text-align: center;
+}
+
+.wrapper_kemaskini label {
+    padding-left: 5px;
+    font-weight: 500;
 }
 
 .kemaskini-container {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
 .kemaskini-container .kemaskiniBtn {
     background: #007bff;
     border: none;
-    border-radius: 10px;
+    border-radius: 7px;
     color: #fff;
     padding: 10px 20px;
-    margin: 10px 25%;
-    margin-bottom: 0;
+    margin: 10px 0;
+    bottom: 0;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.wrapper_kemaskini .masa_mula,
+.wrapper_kemaskini .masa_tamat {
+    width: 200px;
+}
+
+.wrapper_kemaskini .masa-box {
+    display: inline-block;
+    width: 250px;
+    float: none;
+}
+
+.wrapper_kemaskini .tarikh_aktiviti {
+    width: 250px;
 }
 
 /*------------------------------------------------------*/

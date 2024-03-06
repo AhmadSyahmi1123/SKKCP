@@ -14,13 +14,32 @@ if (empty($_SESSION["nokp"])) {
 }
 ?>
 
+<div class="page-header">Profil</div>
 <main>
     <div class="user-details">
-        Nama:
-        <?= $_SESSION['nama'] ?>
-        <br>
-        No. Kad Pengenalan:
-        <?= $_SESSION['nokp'] ?>
+        <div class="primary-text">
+            <?= $_SESSION['nama'] ?>
+        </div>
+        <div class="secondary-text">
+            <?= $_SESSION['nokp'] ?>
+        </div>
+        <div class="secondary-text">
+            <?= $_SESSION['tahap'] ?>
+        </div>
+
+        <div class="edit_profile-container">
+            <button class="edit_profileBtn">
+                <a href='ahli-kemaskini-borang.php?'>Kemaskini Profil</i></a>
+            </button>
+        </div>
+
+        <div class="carta-mata">
+            <div class="container">
+                <div id="view-mata"></div>
+            </div>
+            <script src="scripts\progressbar.min.js"></script>
+            <script src="scripts\point-progress.js" defer></script>
+        </div>
     </div>
 
     <div class="container-profil-table">
@@ -64,16 +83,16 @@ if (empty($_SESSION["nokp"])) {
                             $now = new DateTime();
 
                             if (mysqli_num_rows($laksana_hadir) == 1) {
-                                echo "&#9989;";
+                                echo "<div class='status-hadir'>Hadir</div>";
                             } else {
                                 // Semak jika tarikh_aktiviti sudah lepas, jika ya, papar ikon 'X'
                                 if ($endDate < $now) {
-                                    echo "&#10060; <br>";
+                                    echo "<div class='status-tidak-hadir'>Tidak Hadir</div>";
                                 } else {
                                     $targetDate = $startDate->format('Y-m-d H:i:s');
                                     // Display a real-time countdown
-                                    echo '<div id="countdown_' . $m['IDaktiviti'] . '"></div>';
-                                    echo '<script>
+                                    echo '<div class="coundownText" id="countdown_' . $m['IDaktiviti'] . '"></div>';
+                                    echo '<script defer>
                                     var countDownDate_' . $m['IDaktiviti'] . ' = new Date("' . $targetDate . '").getTime();
 
                                     // Update the count down every 1 second
@@ -108,15 +127,6 @@ if (empty($_SESSION["nokp"])) {
                         ?>
                     </tbody>
                 </table>
-            </div>
-
-            <div class="carta-mata">
-
-                <div class="container">
-                    <div id="view-mata"></div>
-                </div>
-                <script src="scripts\progressbar.min.js"></script>
-                <script src="scripts\point-progress.js" defer></script>
             </div>
         </tr>
     </div>

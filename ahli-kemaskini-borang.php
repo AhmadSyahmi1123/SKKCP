@@ -13,29 +13,36 @@ if (empty($_GET)) {
 }
 ?>
 <main>
-    <div class="wrapper_kemaskini">
+    <div class="wrapper_kemaskini card">
         <h1>Kemaskini Ahli Baru</h1>
-        <form action="ahli-kemaskini-proses.php?nokp_lama=<?= $_GET['nokp'] ?>" method='POST'>
+        <form class="borang-kemaskini-ahli" action="ahli-kemaskini-proses.php?nokp_lama=<?= $_GET['nokp'] ?>"
+            method='POST'>
+
+            <label for="input-nama">Nama</label>
             <div class="input-box">
-                <input type='text' name='nama' value='<?= $_GET['nama'] ?>' required> <br>
+                <input id="input-nama" type='text' name='nama' value='<?= $_GET['nama'] ?>' required> <br>
             </div>
 
+            <label for="input-nokp">No. Kad Pengenalan</label>
             <div class="input-box">
-                <input type='text' name='nokp' value='<?= $_GET['nokp'] ?>' required> <br>
+                <input id="input-nokp" type='text' name='nokp' value='<?= $_GET['nokp'] ?>' required> <br>
             </div>
 
+            <label for="input-katalaluan">Katalaluan</label>
             <div class="input-box">
-                <input type='text' name='katalaluan' value='<?= $_GET['katalaluan'] ?>' required> <br>
+                <input id="input-katalaluan" type='text' name='katalaluan' value='<?= $_GET['katalaluan'] ?>' required> <br>
             </div>
 
-            <div class="select-aktiviti-container">
+            <label for="input-tahap">Tahap</label>
+            <div id="input-tahap" class="select-tahap-box select-aktiviti-container">
                 <select name='tahap' id="select-box-tahap" class="select-tahap">
                     <option value="ADMIN">ADMIN</option>
                     <option value="BIASA">BIASA</option>
                 </select>
             </div>
 
-            <div class="select-aktiviti-container">
+            <label for="input-kelas">Kelas</label>
+            <div id="input-kelas" class="select-kelas-box select-aktiviti-container">
                 <select name='IDkelas' id="select-box-kelas" class="select-kelas">
                     <option value='<?= $_GET['IDkelas'] ?>'>
                         <?= $_GET['ting'] ?>

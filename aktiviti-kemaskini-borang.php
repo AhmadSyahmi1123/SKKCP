@@ -21,28 +21,37 @@ $m = mysqli_fetch_array($laksana_arahan);
 ?>
 <main>
 
-    <div class="wrapper_kemaskini">
+    <div class="card wrapper_kemaskini">
         <h1>Kemaskini Aktiviti</h1>
 
         <form action="aktiviti-kemaskini-proses.php?IDaktiviti=<?= $m['IDaktiviti'] ?>" method="POST">
 
+            <label for="input-nama-aktiviti">Nama Aktiviti</label>
             <div class="input-box">
-                <input type='text' name='nama_aktiviti' value="<?= $m['nama_aktiviti'] ?>" required><br>
+                <input id="input-nama-aktiviti" type='text' name='nama_aktiviti' value="<?= $m['nama_aktiviti'] ?>"
+                    required><br>
             </div>
 
-            <div class="input-box">
-                <input type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>'
+            <label for="input-tarikh">Tarikh Aktiviti</label>
+            <div class="input-box tarikh_aktiviti">
+                <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>'
                     value="<?= $m['tarikh_aktiviti'] ?>" required><br>
             </div>
 
-            <div class="input-box">
-                <input type='time' name='masa_mula' value="<?php echo date('H:i', strtotime($m['masa_mula'])); ?>"
-                    required><br>
+            <div class="masa-box">
+                <label for="input-masa-mula">Masa Mula</label>
+                <div class="input-box masa_mula">
+                    <input id="input-masa-mula" type='time' name='masa_mula'
+                        value="<?php echo date('H:i', strtotime($m['masa_mula'])); ?>" required><br>
+                </div>
             </div>
 
-            <div class="input-box">
-                <input type='time' name='masa_tamat' value="<?php echo date('H:i', strtotime($m['masa_tamat'])); ?>"
-                    required><br>
+            <div class="masa-box">
+                <label for="input-masa-tamat">Masa Tamat</label>
+                <div class="input-box masa_tamat">
+                    <input id="input-masa-tamat" type='time' name='masa_tamat'
+                        value="<?php echo date('H:i', strtotime($m['masa_tamat'])); ?>" required><br>
+                </div>
             </div>
 
             <div class="kemaskini-container">

@@ -21,7 +21,7 @@ $m = mysqli_fetch_array($laksana_arahan);
 ?>
 
 <main>
-    <div class="wrapper_mata">
+    <div class="card wrapper_mata">
         <h1>Tambah Mata Ahli</h1>
 
         <form action="mata-kemaskini-proses.php?nokp=<?= $m['nokp'] ?>" method="POST">

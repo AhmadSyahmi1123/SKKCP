@@ -7,9 +7,9 @@ include("header.php");
 include("connection.php");
 include("kawalan-admin.php");
 ?>
-<main>
 
-    <h3>Laporan Kehadiran Aktiviti</h3>
+<div class="page-header">Laporan Kehadiran Aktiviti</div>
+<main>
     <!-- Borang Carian Aktiviti -->
     <div class="kaunter-info-container">
         <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
@@ -139,7 +139,7 @@ include("kawalan-admin.php");
                                 <div class='action-container'>
                                     <div class='edit-mata-container'>
                                         <button class='editMataBtn' data-tooltip='Tambah/Tolak Mata'>
-                                            <a href='mata-kemaskini-borang.php?nokp=" . $m['nokp'] . "'><i class='bx bx-edit'></i></a>
+                                            <a href='mata-kemaskini-borang.php?nokp=" . $m['nokp'] . "'><i class='material-symbols-outlined'>stars</i></a>
                                         </button>
                                     </div>
                                 </div>

@@ -16,7 +16,7 @@ if (empty($_SESSION["nokp"])) {
 
 <div class="page-header">Profil</div>
 <main>
-    <div class="user-details">
+    <div class="card user-details">
         <div class="primary-text">
             <?= $_SESSION['nama'] ?>
         </div>
@@ -35,7 +35,7 @@ if (empty($_SESSION["nokp"])) {
 
         <div class="carta-mata">
             <div class="container">
-                <div id="view-mata"></div>
+                <div class='view-mata' id="view-mata"></div>
             </div>
             <script src="scripts\progressbar.min.js"></script>
             <script src="scripts\point-progress.js" defer></script>

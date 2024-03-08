@@ -9,6 +9,10 @@
     display: none;
 }
 
+input {
+    color-scheme: dark;
+}
+
 body {
     background-color: #18181b;
     color: #fcfcfc;
@@ -20,7 +24,7 @@ body {
 main {
     padding-left: 70px;
     padding-right: 30px;
-    height: 98vh;
+    height: 90vh;
 }
 
 a {
@@ -39,6 +43,13 @@ a {
     padding-bottom: 10px;
     font-size: 32px;
     font-weight: 600;
+}
+
+.card {
+    color: #fcfcfc;
+    background: #26272b;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
 }
 
 /*------------------------------------------------------*/
@@ -303,13 +314,10 @@ ul {
 /* Borang Daftar Ahli Baru/ Daftar Masuk Ahli */
 .wrapper {
     position: absolute;
-    top: 70%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 420px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    width: 450px;
     padding: 30px 40px;
 }
 
@@ -324,15 +332,15 @@ ul {
     align-items: center;
     position: relative;
     width: 100%;
-    height: 30px;
-    margin: 30px 0;
+    height: 100%;
+    margin: 20px 0;
     margin-top: 10px;
 }
 
 .input-box input {
     flex: 1;
     width: 100%;
-    height: 100%;
+    height: 30px;
     background: transparent;
     border: none;
     outline: none;
@@ -381,7 +389,7 @@ ul {
 }
 
 .link-register a {
-    color: black;
+    color: #fcfcfc;
     text-decoration: none;
     font-weight: 600;
 }
@@ -392,6 +400,11 @@ ul {
 
 .select-kelas {
     width: 100%;
+}
+
+.select-container {
+    margin-top: 0;
+    margin-bottom: 20px;
 }
 
 /*------------------------------------------------------*/
@@ -443,9 +456,6 @@ ul {
     margin: 10px 0;
     height: 400px;
     font-size: 20px;
-    background: #26272b;
-    border-radius: 10px;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .edit_profile-container {
@@ -575,11 +585,13 @@ ul {
     place-items: center;
 }
 
-#view-mata {
+.view-mata {
     margin: auto;
     width: 350px;
     height: 350px;
     text-align: center;
+    border-radius: 50%;
+    box-shadow: 0 0 30px #009578;
 }
 
 .sahkendiriBtn {
@@ -616,11 +628,13 @@ ul {
     width: 100%;
     height: 500px;
     padding: 10px 20px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .scrollable-table {
     height: 100%;
     width: 100%;
+    border-radius: 10px;
     overflow-y: auto;
     overflow-x: hidden;
     scroll-snap-type: y mandatory;
@@ -631,6 +645,7 @@ ul {
     border-collapse: collapse;
     font-size: 18px;
     width: 100%;
+    background-color: #26272b;
 }
 
 .table th,
@@ -640,20 +655,37 @@ ul {
 }
 
 .table th {
-    background-color: #009578;
+    background-color: #26272b;
     text-align: left;
-    color: white;
+    color: #9e9ea9;
     position: sticky;
     top: 0;
     z-index: 49;
 }
 
-.table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-}
-
 .table tr {
     scroll-snap-align: start;
+    border-bottom: 3px solid #2e2f34;
+}
+
+/* top-left border-radius */
+.table tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+/* top-right border-radius */
+.table tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+/* bottom-left border-radius */
+.table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+/* bottom-right border-radius */
+.table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
 }
 
 /*------------------------------------------------------*/
@@ -677,6 +709,18 @@ ul {
 
 .select-aktiviti-container {
     position: relative;
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.select-tahap-box {
+    width: 100px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.select-kelas-box {
+    width: 150px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .select-aktiviti-container label {
@@ -756,6 +800,7 @@ ul {
 
 .searchNupload-container {
     display: flex;
+    padding-top: 40px;
 }
 
 .input-carian {
@@ -768,13 +813,14 @@ ul {
     position: relative;
     flex: 50%;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 20px;
 }
 
 .input-carian input {
     width: 300px;
     height: 20px;
-    background: #fff;
+    background: #26272b;
+    color: #fcfcfc;
     outline: none;
     border: 2px solid #adadad;
     border-radius: 7px;
@@ -795,7 +841,7 @@ ul {
     place-items: center;
     right: 0;
     top: 0;
-    left: 310px;
+    left: 320px;
     cursor: pointer;
 }
 
@@ -805,11 +851,12 @@ ul {
 }
 
 .upload-container .uploadBtn {
-    margin: 0 10px;
+    margin: 0 20px;
+    bottom: 0;
     position: absolute;
     background: #009578;
-    width: 50px;
-    height: 33px;
+    width: 40px;
+    height: 40px;
     border-radius: 40px;
     border: none;
     outline: none;
@@ -822,14 +869,14 @@ ul {
 .uploadBtn a {
     width: 100%;
     height: 100%;
-    border-radius: 40px;
+    border-radius: 50%;
     display: grid;
     place-items: center;
 }
 
 .uploadBtn i {
     color: #fff;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 [data-tooltip] {
@@ -890,10 +937,9 @@ ul {
 .edit-mata-container .editMataBtn,
 .delete-container .deleteBtn,
 .hadir-container .hadirBtn {
-    background: #009578;
-    width: 80px;
+    width: 50px;
     height: 33px;
-    border-radius: 40px;
+    border-radius: 10px;
     border: none;
     outline: none;
     display: grid;
@@ -901,8 +947,24 @@ ul {
     cursor: pointer;
 }
 
+.edit-mata-container .editMataBtn {
+    background: #808080;
+}
+
+.delete-container .deleteBtn {
+    background: #ea033f;
+}
+
+.edit-container .editBtn {
+    background: #0d66d0;
+}
+
+.hadir-container .hadirBtn {
+    background: #009578;
+}
+
 .editBtn a,
-.editMataBtn,
+.editMataBtn a,
 .deleteBtn a,
 .hadirBtn a {
     width: 100%;
@@ -937,11 +999,8 @@ ul {
 
 /* Tambah Aktiviti Dialog Styling */
 
+input[type="date"],
 input[type="time"] {
-    padding-right: 20px;
-}
-
-input[type="date"] {
     padding-right: 20px;
 }
 
@@ -966,12 +1025,15 @@ input[type="date"] {
     pointer-events: auto;
 }
 
-.modal {
+.modal_aktiviti {
     position: relative;
-    width: 420px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    width: 500px;
+    padding: 30px 40px;
+}
+
+.modal_upload {
+    position: relative;
+    width: 450px;
     padding: 30px 40px;
 }
 
@@ -983,6 +1045,10 @@ input[type="date"] {
     height: 30px;
     margin: 30px 0;
     margin-top: 10px;
+}
+
+.modal h1 {
+    margin-bottom: 20px;
 }
 
 .modal .addBtn {
@@ -1017,12 +1083,13 @@ input[type="date"] {
 }
 
 .closeBtn:hover {
-    background: #cccccc;
+    background: rgba(0, 0, 0, 0.5);
 }
 
 
 .closeBtn i {
     font-size: 30px;
+    color: #fcfcfc;
 }
 
 /*------------------------------------------------------*/
@@ -1032,21 +1099,33 @@ input[type="date"] {
 .upload-box {
     border-radius: 5px;
     width: 100%;
+    height: 100%;
 }
 
 .upload-box h2 {
     margin-top: 0;
 }
 
-.upload-box .upload_fileBtn {
+.uploadBtn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+}
+
+.uploadBtn-container .upload_fileBtn {
+    position: relative;
     background: #007bff;
     border: none;
-    border-radius: 10px;
-    color: #fff;
+    border-radius: 40px;
+    color: #fcfcfc;
     padding: 10px 20px;
-    margin: 10px 25%;
-    margin-bottom: 0;
     cursor: pointer;
+}
+
+.uploadBtn-container .upload_fileBtn i {
+    font-size: 20px;
+    transform: translateY(3px);
 }
 
 .upload-box .choose_fileBtn {
@@ -1083,10 +1162,6 @@ input[type="date"] {
 .wrapper_kemaskini {
     margin: 10px;
     width: 100%;
-    height: 100%;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
     padding: 30px 40px;
 }
 
@@ -1095,9 +1170,14 @@ input[type="date"] {
     align-items: center;
     position: relative;
     width: 50%;
+    height: 100%;
+    margin: 10px 0 30px 0;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+}
+
+.wrapper_kemaskini .input-box input {
+    color: #fcfcfc;
     height: 30px;
-    margin: 30px 0;
-    margin-top: 10px
 }
 
 .wrapper_kemaskini h1 {
@@ -1118,8 +1198,8 @@ input[type="date"] {
 .kemaskini-container .kemaskiniBtn {
     background: #007bff;
     border: none;
-    border-radius: 7px;
-    color: #fff;
+    border-radius: 40px;
+    color: #fcfcfc;
     padding: 10px 20px;
     margin: 10px 0;
     bottom: 0;
@@ -1147,14 +1227,7 @@ input[type="date"] {
 /* Borang Tambah Mata Styling */
 
 .wrapper_mata {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 700px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
     padding: 30px 40px;
 }
 

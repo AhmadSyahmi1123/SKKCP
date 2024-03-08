@@ -7,7 +7,7 @@ include("header.php");
 ?>
 
 <!-- Ruang kotak yang mengandungi komponen untuk pengguna mendaftar -->
-<div class="wrapper">
+<div class="card wrapper">
     <!-- Borang Daftar Masuk -->
     <form action="login-proses.php" method="POST">
 

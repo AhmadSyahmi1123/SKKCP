@@ -1,15 +1,16 @@
+<?php
+# Memulakan fungsi session
+session_start();
+
+# Memanggil fail header.php, connection.php dan kawalan-admin.php
+include("header.php");
+include("connection.php");
+include("kawalan-admin.php");
+
+?>
+
+<div class="page-header">Senarai Aktiviti</div>
 <main>
-    <?php
-    # Memulakan fungsi session
-    session_start();
-
-    # Memanggil fail header.php, connection.php dan kawalan-admin.php
-    include("header.php");
-    include("connection.php");
-    include("kawalan-admin.php");
-
-    ?>
-    <h3 align='center'> Senarai Aktiviti </h3>
 
     <div class="searchNupload-container">
         <div class="input-carian-container">
@@ -26,13 +27,13 @@
 
         <div class="upload-container">
             <button id="open-aktiviti" class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
-                <i class='bx bx-list-plus'></i>
+                <i class='material-symbols-outlined'>playlist_add</i>
             </button>
 
             <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
             <div class="modal-container" id="modal_aktiviti_container">
-                <div class="modal">
+                <div class="card modal_aktiviti modal">
 
                     <button id="closeAddAktivitiBtn" class="closeBtn"><i class='bx bx-x'></i></button>
                     <!-- Borang Daftar Masuk -->

@@ -1,16 +1,16 @@
+<?php
+# Memulakan fungsi session
+session_start();
+
+# Memanggil fail header.php, connection.php dan kawalan-admin.php
+include("header.php");
+include("connection.php");
+include("kawalan-admin.php");
+?>
+
+<!-- Header bagi jadual untuk memaparkan senarai ahli -->
+<div class="page-header">Senarai Ahli</div>
 <main>
-    <?php
-    # Memulakan fungsi session
-    session_start();
-
-    # Memanggil fail header.php, connection.php dan kawalan-admin.php
-    include("header.php");
-    include("connection.php");
-    include("kawalan-admin.php");
-    ?>
-
-    <!-- Header bagi jadual untuk memaparkan senarai ahli -->
-    <h3 align='center'>Senarai Ahli</h3>
 
     <div class="searchNupload-container">
         <div class="input-carian-container">
@@ -20,13 +20,13 @@
                 </div>
 
                 <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
-                    <i class='bx bx-search'></i>
+                    <i class='material-symbols-outlined'>search</i>
                 </button>
             </form>
         </div>
         <div class="upload-container">
             <button id="open-upload" class="uploadBtn" data-tooltip="Muat Naik Ahli">
-                <i class="fa fa-upload"></i>
+                <i class='material-symbols-outlined'>group_add</i>
             </button>
 
             <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
@@ -111,7 +111,7 @@
 
     <!-- Borang untuk memuat naik fail -->
     <div class="modal-container" id="modal_upload_container">
-        <div class="modal">
+        <div class="card modal_upload modal">
             <button id="closeUploadFileBtn" class="closeBtn"><i class='bx bx-x'></i></button>
 
             <form action="upload.php" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
@@ -123,10 +123,11 @@
 
                     <input type="file" name="data_ahli" id="file" accept=".txt, .text">
 
-                    <button id="close-upload" class="upload_fileBtn" type="submit" name="btn-upload">
-                        <i class="fa fa-upload"></i>
-                        Upload File
-                    </button>
+                    <div class="uploadBtn-container">
+                        <button id="close-upload" class="upload_fileBtn" type="submit" name="btn-upload">
+                            <i class='material-symbols-outlined'>upload</i> Muat Naik
+                        </button>
+                    </div>
 
                 </div>
 

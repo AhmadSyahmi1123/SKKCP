@@ -7,7 +7,7 @@ include("header.php");
 include("connection.php");
 ?>
 
-<div class="wrapper">
+<div class="card wrapper">
     <!-- Borang Pendaftaran Ahli Baru -->
     <form action="signup-proses.php" method="POST">
 

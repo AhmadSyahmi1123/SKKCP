@@ -364,6 +364,10 @@ ul {
     position: absolute;
     right: 20px;
     font-size: 20px;
+}
+
+.input-box .password-toggle {
+    font-size: 16px;
     cursor: pointer;
 }
 
@@ -448,6 +452,22 @@ ul {
 
 .countdownText {
     color: #fcfcfc;
+}
+
+.profile_pic_container {
+    margin: 10px;
+    margin-top: 0;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #fcfcfc;
+}
+
+.profile_pic_container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .user-details {

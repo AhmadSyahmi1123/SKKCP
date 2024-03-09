@@ -9,7 +9,7 @@ include("connection.php");
 
 <div class="card wrapper">
     <!-- Borang Pendaftaran Ahli Baru -->
-    <form action="signup-proses.php" method="POST">
+    <form action="signup-proses.php" method="POST" enctype="multipart/form-data">
 
         <!-- Tajuk antaramuka -->
         <h1>Pendaftaran Ahli Baru</h1>
@@ -40,7 +40,11 @@ include("connection.php");
 
         <div class="input-box">
             <input type="password" name='katalaluan' placeholder="Katalaluan" required>
-            <i class="fas fa-lock password-toggle"></i>
+            <i class="fas fa-eye-slash password-toggle"></i>
+        </div>
+
+        <div class="input-box">
+            <input type="file" name='profile_pic' accept=".png, .jpg, .jpeg">
         </div>
 
         <input class="btn" type='submit' value='Daftar'>

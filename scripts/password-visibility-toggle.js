@@ -19,11 +19,11 @@ icon.addEventListener('click', function() {
   }
 
   // Toggle icon
-  if(icon.classList.contains('fa-lock')) {
-    icon.classList.replace('fa-lock', 'fa-lock-open');
+  if(icon.classList.contains('fa-eye-slash')) {
+    icon.classList.replace('fa-eye-slash', 'fa-eye');
   }
   else { 
-     icon.classList.replace('fa-lock-open', 'fa-lock');
+     icon.classList.replace('fa-eye', 'fa-eye-slash');
   }
   
 });

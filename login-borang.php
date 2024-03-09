@@ -21,7 +21,7 @@ include("header.php");
 
         <div class="input-box">
             <input type="password" name='katalaluan' placeholder="Katalaluan" required>
-            <i class="fas fa-lock password-toggle"></i>
+            <i class="fas fa-eye-slash password-toggle"></i>
         </div>
 
         <input class="btn" type='submit' value='Log Masuk'>

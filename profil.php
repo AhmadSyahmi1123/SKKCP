@@ -17,6 +17,9 @@ if (empty($_SESSION["nokp"])) {
 <div class="page-header">Profil</div>
 <main>
     <div class="card user-details">
+        <div class="profile_pic_container">
+            <img src="uploads/<?= $_SESSION["profile_pic"] ?>">
+        </div>
         <div class="primary-text">
             <?= $_SESSION['nama'] ?>
         </div>

@@ -1,5 +1,5 @@
 $("#select-box-kelas").select2({
-    placeholder: "Sila Pilih Aktiviti",
+    placeholder: "Sila Pilih Kelas",
     containerCssClass: "select2-dark-container", // Change this line
     dropdownCssClass: "select2-dark-dropdown" // No change
 });
@@ -11,6 +11,8 @@ $('.select2-selection').css('padding-left', '10px');
 $('.select2-selection').css('background-color', '#26272b');
 $('.select2-selection').css('border', '2px solid #adadad');
 $('.select2-selection').css('border-radius', '6px');
+
+$('.select2-selection__rendered').css('color', '#fcfcfc');
 
 $('.select2-selection__arrow').css('margin-top', '5px');
 $('.select2-selection__arrow').css('margin-right', '15px');

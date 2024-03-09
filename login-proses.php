@@ -26,6 +26,7 @@ if(!empty($_POST['nokp']) and !empty( $_POST['katalaluan'])){
         $_SESSION["nokp"] = $m["nokp"];
         $_SESSION["tahap"] = $m["tahap"];
         $_SESSION["nama"] = $m["nama"];
+        $_SESSION["profile_pic"] = $m["profile_pic"];
 
         # Buka laman index.php
         if ($_SESSION["tahap"] == "ADMIN"){
@@ -47,4 +48,3 @@ else{
     die("<script>alert('Sila Masukkan No. Kad Pengenalan dan Katalaluan');
     window.location.href='login-borang.php'; </script>");
 }
-?>

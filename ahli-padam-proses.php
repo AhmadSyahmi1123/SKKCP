@@ -30,4 +30,3 @@ else{
     die("<script>alert('Ralat! Akses Secara Terus');
     window.location.href='senarai-ahli.php';</script>");
 }
-?>

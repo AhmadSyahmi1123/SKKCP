@@ -14,5 +14,4 @@ foreach($_POST['kehadiran'] as $nokp){
 }
 
 echo "<script>alert('Kemaskini Kehadiran Selesai');
-window.location.href='kehadiran-borang.php?IDaktiviti=".$_GET['IDaktiviti']."'; </script>"
-?>
+window.location.href='kehadiran-borang.php?IDaktiviti=".$_GET['IDaktiviti']."'; </script>";

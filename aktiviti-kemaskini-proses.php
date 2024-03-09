@@ -38,4 +38,3 @@ else{
     die("<script>alert('Sila lengkapkan maklumat');
     window.location.href='senarai-aktiviti.php';</script>");
 }
-?>

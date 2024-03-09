@@ -31,4 +31,3 @@ else{
     die("<script>alert('Ralat! Akses Secara Terus');
     window.location.href='senarai-aktiviti.php';</script>");
 }
-?>

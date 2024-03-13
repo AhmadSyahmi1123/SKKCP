@@ -3,7 +3,7 @@
 session_start();
 
 # Menyemak kewujudan data POST yang dihantar dari login-borang.php
-if(!empty($_POST['nokp']) and !empty( $_POST['katalaluan'])){
+if (!empty($_POST['nokp']) and !empty($_POST['katalaluan'])) {
 
     # Memanggil fail connection.php
     include('connection.php');
@@ -13,12 +13,17 @@ if(!empty($_POST['nokp']) and !empty( $_POST['katalaluan'])){
     $katalaluan = $_POST['katalaluan'];
 
     # Arahan SQL(query) untuk membandingkan data yang dimasukkan wujud dalam pangkalan data atau tidak
-    $query_login = "select * from ahli where nokp = '$nokp' and katalaluan = '$katalaluan' limit 1";
+    $query_login = "SELECT ahli.*, kelas.* 
+                FROM ahli 
+                INNER JOIN kelas ON ahli.IDkelas = kelas.IDkelas 
+                WHERE ahli.nokp = '$nokp' AND ahli.katalaluan = '$katalaluan' 
+                LIMIT 1";
+
     # Melaksanakan arahan membandingkan data
     $laksana_query = mysqli_query($condb, $query_login);
 
     # Jika terdapat 1 data yang padan, log masuk berjaya
-    if(mysqli_num_rows($laksana_query) == 1){
+    if (mysqli_num_rows($laksana_query) == 1) {
         # Mengambil data yang ditemui
         $m = mysqli_fetch_array($laksana_query);
 
@@ -26,24 +31,25 @@ if(!empty($_POST['nokp']) and !empty( $_POST['katalaluan'])){
         $_SESSION["nokp"] = $m["nokp"];
         $_SESSION["tahap"] = $m["tahap"];
         $_SESSION["nama"] = $m["nama"];
+        $_SESSION["katalaluan"] = $m["katalaluan"];
         $_SESSION["profile_pic"] = $m["profile_pic"];
+        $_SESSION["ting"] = $m["ting"];
+        $_SESSION["nama_kelas"] = $m["nama_kelas"];
+        $_SESSION["IDkelas"] = $m["IDkelas"];
 
         # Buka laman index.php
-        if ($_SESSION["tahap"] == "ADMIN"){
+        if ($_SESSION["tahap"] == "ADMIN") {
             echo "<script>window.location.href='index-admin.php'; </script>";
-        }
-        else {
+        } else {
             echo "<script>window.location.href='index-biasa.php'; </script>";
         }
-        
-    }
-    else{
+
+    } else {
         # Jika tidak, log masuk gagal. Kembali ke laman login-borang.php
         die("<script>alert('Log Masuk Gagal');
         window.location.href='login-borang.php'; </script>");
     }
-}
-else{
+} else {
     # Data yang dihantar dari laman login-borang.php kosong
     die("<script>alert('Sila Masukkan No. Kad Pengenalan dan Katalaluan');
     window.location.href='login-borang.php'; </script>");

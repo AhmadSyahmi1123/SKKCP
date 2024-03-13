@@ -32,7 +32,7 @@ if (empty($_SESSION["nokp"])) {
 
         <div class="edit_profile-container">
             <button class="edit_profileBtn">
-                <a href='ahli-kemaskini-borang.php?'>Kemaskini Profil</i></a>
+                <a href='profile-kemaskini-borang.php?'>Kemaskini Profil</i></a>
             </button>
         </div>
 

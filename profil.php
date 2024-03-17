@@ -3,13 +3,13 @@
 session_start();
 
 # Memanggil fail header.php dan connection.php
-include("header.php");
-include("connection.php");
+include ("header.php");
+include ("connection.php");
 
 # Menyemak kewujudan nilai pembolehubah session['nokp']
-if (empty($_SESSION["nokp"])) {
+if (empty ($_SESSION["nokp"])) {
     # Jika nilai session nokp tidak wujud/kosong, aturcara akan diberhentikan
-    die("<script>alert('Sila Log Masuk');
+    die ("<script>alert('Sila Log Masuk');
         window.location.href='logout.php'; </script>");
 }
 ?>
@@ -31,9 +31,9 @@ if (empty($_SESSION["nokp"])) {
         </div>
 
         <div class="edit_profile-container">
-            <button class="edit_profileBtn">
-                <a href='profile-kemaskini-borang.php?'>Kemaskini Profil</i></a>
-            </button>
+            <a href='profile-kemaskini-borang.php?'>
+                <button class="edit_profileBtn">Kemaskini Profil</button>
+            </a>
         </div>
 
         <div class="carta-mata">

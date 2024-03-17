@@ -488,7 +488,7 @@ ul {
 
 .edit_profile-container .edit_profileBtn {
     padding: 10px 20px;
-    background: #2e2f34;
+    background: transparent;
     color: #fcfcfc;
     border-radius: 20px;
     border: none;
@@ -496,7 +496,7 @@ ul {
 }
 
 .edit_profile-container .edit_profileBtn:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.5);
 }
 
 .primary-text {
@@ -1222,7 +1222,20 @@ input[type="time"] {
     border-radius: 40px;
     color: #fcfcfc;
     padding: 10px 20px;
-    margin: 10px 0;
+    margin: 10px 5px;
+    bottom: 0;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.kemaskini-container .cancelBtn {
+    background: #ea033f;
+    border: none;
+    border-radius: 40px;
+    color: #fcfcfc;
+    padding: 10px 20px;
+    margin: 10px 5px;
+    margin-left: 0;
     bottom: 0;
     cursor: pointer;
     font-size: 18px;
@@ -1292,6 +1305,7 @@ input[type="time"] {
 
 .kemaskini_profile_pic_container {
     position: absolute;
+    top: 80px;
     right: 50px;
     margin: 20px;
     height: 500px;
@@ -1299,7 +1313,6 @@ input[type="time"] {
 }
 
 #profile_picture {
-    top: 80px;
     right: 100px;
     margin: 20px;
     width: 400px;

@@ -9,36 +9,10 @@ include ("connection.php");
 ?>
 <main>
     <div class="wrapper_kemaskini card">
-        <div class="kemaskini_profile_pic_container">
-            <div class="edit_profile_pic">
-                <img id="profile_picture" src="uploads/<?= $_SESSION["profile_pic"] ?>">
-            </div>
-            <button data-tooltip="Kemaskini Gambar Profil" class="select_pic_btn">
-                <i class='material-symbols-outlined'>edit</i>
-                <input id="choose_img" type="file" name='profile_pic' accept=".png, .jpg, .jpeg">
-            </button>
-            <script>
-                document.getElementById("choose_img").addEventListener("change", function () {
-                    let profilePic = document.getElementById("profile_picture");
-                    let inputFile = this;
-
-                    if (inputFile.files && inputFile.files[0]) {
-                        let reader = new FileReader();
-
-                        reader.onload = function (e) {
-                            profilePic.src = e.target.result;
-                        };
-
-                        reader.readAsDataURL(inputFile.files[0]);
-                    }
-                });
-            </script>
-        </div>
-
 
         <h1>Kemaskini Ahli Baru</h1>
         <form class="borang-kemaskini-ahli" action="profile-kemaskini-proses.php?nokp_lama=<?= $_SESSION['nokp'] ?>"
-            method='POST'>
+            method='POST' enctype="multipart/form-data">
 
             <label for="input-nama">Nama</label>
             <div class="input-box">
@@ -78,11 +52,40 @@ include ("connection.php");
                 </select>
             </div>
 
+            <div class="kemaskini_profile_pic_container">
+                <div class="edit_profile_pic">
+                    <img id="profile_picture" src="uploads/<?= $_SESSION["profile_pic"] ?>">
+                </div>
+                <button data-tooltip="Kemaskini Gambar Profil" class="select_pic_btn">
+                    <i class='material-symbols-outlined'>edit</i>
+                    <input id="choose_img" type="file" name='profile_pic' accept=".png, .jpg, .jpeg">
+                </button>
+
+                <script>
+                    document.getElementById("choose_img").addEventListener("change", function () {
+                        let profilePic = document.getElementById("profile_picture");
+                        let inputFile = this;
+
+                        if (inputFile.files && inputFile.files[0]) {
+                            let reader = new FileReader();
+
+                            reader.onload = function (e) {
+                                profilePic.src = e.target.result;
+                            };
+
+                            reader.readAsDataURL(inputFile.files[0]);
+                        }
+                    });
+                </script>
+            </div>
+
             <div class="kemaskini-container">
-                <button class="kemaskiniBtn" type="submit">Kemaskini</button>
+                <button class="cancelBtn" type="button" onclick="window.history.back();">Batal</button>
+                <button class="kemaskiniBtn" name="submit" type="submit">Kemaskini</button>
             </div>
 
         </form>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

@@ -454,11 +454,18 @@ ul {
     color: #fcfcfc;
 }
 
+.user_and_point_container {
+    display: flex;
+}
+
+.profile_pic_wrapper {
+    flex: 1;
+}
+
 .profile_pic_container {
-    margin: 10px;
-    margin-top: 0;
-    width: 200px;
-    height: 200px;
+    margin-right: 10px;
+    width: 360px;
+    height: 360px;
     border-radius: 50%;
     overflow: hidden;
     border: 2px solid #fcfcfc;
@@ -475,23 +482,36 @@ ul {
     padding: 20px;
     margin: 10px 0;
     height: 400px;
+    flex: 3;
     font-size: 20px;
+}
+
+.user-details .container {
+    display: flex;
+}
+
+.user_info {
+    position: relative;
+    flex: 3;
+    margin: 10px;
+    padding-top: 50px;
 }
 
 .edit_profile-container {
     margin: 10px 0;
-    position: absolute;
     display: flex;
     align-items: center;
     bottom: 0;
 }
 
 .edit_profile-container .edit_profileBtn {
+    position: absolute;
+    bottom: 0;
     padding: 10px 20px;
     background: transparent;
     color: #fcfcfc;
     border-radius: 20px;
-    border: none;
+    border: 2px solid #9e9ea9;
     cursor: pointer;
 }
 
@@ -501,13 +521,39 @@ ul {
 
 .primary-text {
     font-weight: bold;
-    font-size: 24px;
+    font-size: 28px;
 }
 
 .secondary-text {
     color: #9e9ea9;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 22px;
+}
+
+.carta-mata {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    padding: 15px;
+    margin: 10px 0 0 10px;
+}
+
+.carta-mata .container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin: 0 20px;
+}
+
+.view-mata {
+    margin: auto;
+    width: 350px;
+    height: 350px;
+    text-align: center;
+    border-radius: 50%;
 }
 
 .status-hadir {
@@ -588,30 +634,6 @@ ul {
 .profil-table tr {
     scroll-snap-align: start;
     border-bottom: 3px solid #2e2f34;
-}
-
-.carta-mata {
-    position: absolute;
-    border-radius: 10px;
-    top: 0;
-    right: 0;
-    width: 400px;
-    padding: 15px;
-}
-
-.carta-mata .container {
-    position: relative;
-    display: flex;
-    place-items: center;
-}
-
-.view-mata {
-    margin: auto;
-    width: 350px;
-    height: 350px;
-    text-align: center;
-    border-radius: 50%;
-    box-shadow: 0 0 30px #009578;
 }
 
 .sahkendiriBtn {

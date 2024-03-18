@@ -16,27 +16,42 @@ if (empty ($_SESSION["nokp"])) {
 
 <div class="page-header">Profil</div>
 <main>
-    <div class="card user-details">
-        <div class="profile_pic_container">
-            <img src="uploads/<?= $_SESSION["profile_pic"] ?>">
-        </div>
-        <div class="primary-text">
-            <?= $_SESSION['nama'] ?>
-        </div>
-        <div class="secondary-text">
-            <?= $_SESSION['nokp'] ?>
-        </div>
-        <div class="secondary-text">
-            <?= $_SESSION['tahap'] ?>
+    <div class="user_and_point_container">
+        <div class="card user-details">
+
+            <div class="container">
+                <div class="profile_pic_wrapper">
+                    <div class="profile_pic_container">
+                        <img src="uploads/<?= $_SESSION["profile_pic"] ?>">
+                    </div>
+                </div>
+
+                <div class="user_info">
+                    <div class="primary-text">
+                        <?= $_SESSION['nama'] ?>
+                    </div>
+                    <div class="secondary-text">
+                        <?= $_SESSION['nokp'] ?>
+                    </div>
+                    <div class="secondary-text">
+                        <?= $_SESSION['ting'] ?>
+                        <?= $_SESSION['nama_kelas'] ?>
+                    </div>
+                    <div class="secondary-text">
+                        <?= $_SESSION['tahap'] ?>
+                    </div>
+
+                    <div class="edit_profile-container">
+                        <a href='profile-kemaskini-borang.php?'>
+                            <button class="edit_profileBtn">Kemaskini Profil</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="edit_profile-container">
-            <a href='profile-kemaskini-borang.php?'>
-                <button class="edit_profileBtn">Kemaskini Profil</button>
-            </a>
-        </div>
-
-        <div class="carta-mata">
+        <div class="card carta-mata">
             <div class="container">
                 <div class='view-mata' id="view-mata"></div>
             </div>

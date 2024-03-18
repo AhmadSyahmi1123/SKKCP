@@ -27,7 +27,7 @@ if (!empty ($_POST)) {
             $imageFileType = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
 
             // Generate a unique filename
-            $unique_filename = uniqid() . '.' . $imageFileType;
+            $unique_filename =  $_POST["nokp"] . '.' . $imageFileType;
             $target_file = $target_dir . $unique_filename;
 
             if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {

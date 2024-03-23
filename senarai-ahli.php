@@ -3,9 +3,9 @@
 session_start();
 
 # Memanggil fail header.php, connection.php dan kawalan-admin.php
-include("header.php");
-include("connection.php");
-include("kawalan-admin.php");
+include ("header.php");
+include ("connection.php");
+include ("kawalan-admin.php");
 ?>
 
 <!-- Header bagi jadual untuk memaparkan senarai ahli -->
@@ -51,7 +51,7 @@ include("kawalan-admin.php");
                     <?php
                     # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
                     $cari_ahli = "";
-                    if (!empty($_POST["nama"])) {
+                    if (!empty ($_POST["nama"])) {
                         $cari_ahli = " and ahli.nama like '%" . $_POST['nama'] . "%'";
                     }
 
@@ -67,6 +67,7 @@ include("kawalan-admin.php");
                         # Umpukkan data kepda tatasusunan bagi tujuan kemaskini ahli
                         $data_get = array(
                             'nama' => $m['nama'],
+                            'profile_pic' => $m['profile_pic'],
                             'nokp' => $m['nokp'],
                             'katalaluan' => $m['katalaluan'],
                             'tahap' => $m['tahap'],
@@ -77,12 +78,13 @@ include("kawalan-admin.php");
 
                         # Memaparkan senarai nama dalam jadual
                         echo "<tr>
-        <td>" . $m['nama'] . "</td>
-        <td>" . $m['nokp'] . "</td>
-        <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
-        <td>" . $m['katalaluan'] . "</td>
-        <td>" . $m['tahap'] . "</td>
-        ";
+    <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div>" . $m['nama'] . "</td>
+    <td>" . $m['nokp'] . "</td>
+    <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
+    <td>" . $m['katalaluan'] . "</td>
+    <td>" . $m['tahap'] . "</td>
+";
+
 
                         # Memaparkan navigasi untuk kemaskini dan hapus data ahli
                         echo "<td>

@@ -1,14 +1,16 @@
 $("#select-box-aktiviti").select2({
     placeholder: "Sila Pilih Aktiviti",
-    containerCssClass: "select2-dark-container", // Change this line
-    dropdownCssClass: "select2-dark-dropdown" // No change
+    containerCssClass: "select2-dark-container",
+    dropdownCssClass: "select2-dark-dropdown"
 });
 
 $('.select2-selection').css('font-size', '16px');
 $('.select2-selection').css('height', '30px');
 $('.select2-selection').css('background-color', '#26272b');
 
-// Add the custom styles for the dark theme
+$('.select2-selection__rendered').css('color', '#fcfcfc');
+
+// style tema gelap
 var darkThemeStyles = `
     .select2-dark-container {
         background-color: #26272b;
@@ -30,7 +32,7 @@ var darkThemeStyles = `
     }
 `;
 
-// Create a new style element and append it to the head
+// Tambah elemen style baru dan tambah ke head
 var styleElement = document.createElement('style');
 styleElement.innerHTML = darkThemeStyles;
 document.head.appendChild(styleElement);

@@ -483,6 +483,11 @@ ul {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: scale 0.5s ease;
+}
+
+.profile_pic_container img:hover {
+    scale: 1.05;
 }
 
 .user-details {
@@ -761,7 +766,7 @@ ul {
 
 .kaunter-info-container {
     font-size: 18px;
-    padding: 10px 10px;
+    padding: 10px 20px;
 }
 
 .select-aktiviti {
@@ -772,7 +777,7 @@ ul {
 .select-aktiviti-container {
     position: relative;
     margin-top: 5px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 }
 
 .select-tahap-box {
@@ -1066,7 +1071,7 @@ ul {
 /* Laporan Kehadiran Styling */
 
 .laporan-details {
-    padding: 5px 10px;
+    padding: 10px 20px;
     font-size: 18px;
 }
 
@@ -1319,14 +1324,19 @@ input[type="time"] {
 
 /* Borang Tambah Mata Styling */
 
-.wrapper_mata {
-    width: 100%;
+.modal_mata {
+    position: relative;
+    width: 500px;
     padding: 30px 40px;
 }
 
-.wrapper_mata .input-box {
+.modal_mata .input_container {
     display: flex;
     align-items: center;
+    justify-content: center;
+}
+
+.modal_mata .input-box {
     position: relative;
     width: 50%;
     height: 30px;
@@ -1334,7 +1344,7 @@ input[type="time"] {
     margin-top: 10px
 }
 
-.wrapper_mata h1 {
+.modal_mata h1 {
     margin-bottom: 20px;
     font-size: 36px;
     text-align: center;

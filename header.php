@@ -39,7 +39,7 @@
 <body>
 
     <?php
-    if (!empty($_SESSION['tahap']) and $_SESSION['tahap'] == "ADMIN") { ?>
+    if (!empty ($_SESSION['tahap']) and $_SESSION['tahap'] == "ADMIN") { ?>
         <!-- Menu ADMIN : dipaparkan sekiranya admin telah log masuk -->
         <aside class="sidebar">
             <ul class='links'>
@@ -81,7 +81,7 @@
             </ul>
         </aside>
 
-    <?php } else if (!empty($_SESSION['tahap']) and $_SESSION['tahap'] == "BIASA") { ?>
+    <?php } else if (!empty ($_SESSION['tahap']) and $_SESSION['tahap'] == "BIASA") { ?>
             <!-- Menu BIASA : dipaparkan sekiranya ahli biasa telah log masuk -->
             <aside class="sidebar">
                 <ul class='links'>

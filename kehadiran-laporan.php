@@ -138,8 +138,8 @@ include ("kawalan-admin.php");
                             echo "<td>
                                 <div class='action-container'>
                                     <div class='edit-mata-container'>
-                                        <button class='editMataBtn' data-tooltip='Tambah/Tolak Mata'>
-                                            <a href='mata-kemaskini-borang.php?nokp=" . $m['nokp'] . "'><i class='material-symbols-outlined'>stars</i></a>
+                                        <button class='editMataBtn open-update-point' data-tooltip='Tambah/Tolak Mata' data-nokp='" . $m['nokp'] . "'>
+                                            <i class='material-symbols-outlined'>stars</i>
                                         </button>
                                     </div>
                                 </div>
@@ -153,7 +153,31 @@ include ("kawalan-admin.php");
         </div>
     </div>
 
+    <!-- Borang untuk memuat naik fail -->
+    <div class="modal-container" id="modal_mata_container">
+        <div class="card modal_mata modal">
+            <button class="closeBtn closeMataBtn"><i class='bx bx-x'></i></button>
+
+            <h1>Tambah Mata Ahli</h1>
+
+            <form action="" method="POST">
+
+                <div class="input_container">
+                    <div class="input-box">
+                        <input type='number' name='mata' value="0" required><br>
+                    </div>
+                </div>
+
+                <div class="tambah-mata-container">
+                    <button class="tambahMataBtn close-update-point" type="submit">Tambah</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="scripts\select-box-aktiviti.js" defer></script>
+    <script src="scripts\dialog-update-mata.js" defer></script>
 </main>

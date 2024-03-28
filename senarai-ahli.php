@@ -78,7 +78,7 @@ include ("kawalan-admin.php");
 
                         # Memaparkan senarai nama dalam jadual
                         echo "<tr>
-    <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div>" . $m['nama'] . "</td>
+    <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
     <td>" . $m['nokp'] . "</td>
     <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
     <td>" . $m['katalaluan'] . "</td>

@@ -3,9 +3,9 @@
 session_start();
 
 # Memanggil fail header.php, connection.php dan kawalan-admin.php
-include("header.php");
-include("connection.php");
-include("kawalan-admin.php");
+include ("header.php");
+include ("connection.php");
+include ("kawalan-admin.php");
 ?>
 
 <div class="page-header">Laporan Kehadiran Aktiviti</div>
@@ -40,7 +40,7 @@ include("kawalan-admin.php");
     <?php
     # Syarat tambahan yang akan dimasukkan dalam arahan SQL (query) senarai aktiviti
     $tambahan = "";
-    if (!empty($_GET["IDaktiviti"])) {
+    if (!empty ($_GET["IDaktiviti"])) {
         # Mengambil nilai data GET di URL
         $IDaktiviti = $_GET["IDaktiviti"];
 
@@ -97,7 +97,7 @@ include("kawalan-admin.php");
                         <?php
                         # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
                         $tambahan = "";
-                        if (!empty($_POST["nama"])) {
+                        if (!empty ($_POST["nama"])) {
                             $tambahan = "where ahli.nama like '%" . $_POST['nama'] . "%'";
                         }
 
@@ -123,16 +123,16 @@ include("kawalan-admin.php");
                             # Memaparkan senarai nama dalam jadual
                             echo "<tr>
                                 <td>" . ++$bil . "</td>
-                                <td>" . $m['nama'] . "</td>
+                                <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
                                 <td>" . $m['nokp'] . "</td>
                                 <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
                                 <td align='center' >
                                 ";
 
                             if (strlen($m['IDaktiviti']) >= 1) {
-                                echo "&#9989;";
+                                echo "<div class='status-hadir'>Hadir</div>";
                             } else {
-                                echo "&#10060;";
+                                echo "<div class='status-tidak-hadir'>Tidak Hadir</div>";
                             }
 
                             echo "<td>

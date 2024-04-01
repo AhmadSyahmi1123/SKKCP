@@ -3,13 +3,11 @@
 session_start();
 
 # Memanggil fail header.php, kawalan-admin.php dan connection.php
-include("header.php");
-include("kawalan-admin.php");
-include("connection.php");
+include ("header.php");
+include ("kawalan-admin.php");
+include ("connection.php");
 
 $masa = date("H:i:s");
-$status = ""; # Digunakan untuk memaparkan status kehadiran
-$warna = ""; # Digunakan untuk warna latar belakang status
 
 # Menyemak kewujudan data POST
 if (!empty($_POST["nokp"])) {
@@ -19,16 +17,40 @@ if (!empty($_POST["nokp"])) {
     $laksana_arahan_semak = mysqli_query($condb, $arahan_sql_semak);
     if (mysqli_num_rows($laksana_arahan_semak) != 1) {
         # Jika nokp yang dimasukkan telah wujud
-        $status = "No. Kad Pengenalan yang dimasukkan/diimbas tiada dalam sistem";
-        $warna = "red";
+        $message = "No. Kad Pengenalan yang dimasukkan tiada dalam sistem";
+        echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
+        echo "<script>
+                // Create an instance of Notyf
+                let notyf = new Notyf();
+
+                // Display an error notification
+                notyf.error({
+                    message: '$message',
+                    duration: 3000,
+                    dismissible: true,
+                    position: {x: 'right', y: 'top'}
+                });
+            </script>";
     } else {
         # Menyemak jika nokp yang dimasukkan telah direkodkan dalam pangkalan data kehadiran
         $arahan_semak = "select * from kehadiran where nokp='" . $_POST['nokp'] . "' and IDaktiviti='" . $_GET['IDaktiviti'] . "' limit 1";
         $laksana_arahan = mysqli_query($condb, $arahan_semak);
 
         if (mysqli_num_rows($laksana_arahan) == 1) {
-            $status = "Anda telah mengesahkan kehadiran sebelum ini";
-            $warna = "red";
+            $message = "Anda telah mengesahkan kehadiran sebelum ini";
+            echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
+            echo "<script>
+                        // Create an instance of Notyf
+                        let notyf = new Notyf();
+
+                        // Display an error notification
+                        notyf.error({
+                            message: '$message',
+                            duration: 3000,
+                            dismissible: true,
+                            position: {x: 'right', y: 'top'}
+                        });
+                    </script>";
         } else {
             # Arahan beri mata kepada pengguna berdasarkan masa mereka hadir 
             $command_masa = "SELECT * FROM aktiviti WHERE IDaktiviti = " . $_GET['IDaktiviti'];
@@ -40,11 +62,11 @@ if (!empty($_POST["nokp"])) {
 
             $masa_hadir = strtotime($masa);
 
+            $points = 10;
+
             if ($masa_hadir >= $masa_mula && $masa_hadir <= $masa_tamat) {
 
                 $masa_lewat = round(($masa_hadir - $masa_mula) / 60);
-
-                $points = 10;
 
                 if ($masa_lewat <= 3) {
                     $points = 5;
@@ -65,13 +87,55 @@ if (!empty($_POST["nokp"])) {
                 # Laksana arahan kemaskini mata murid
                 $laksana_kemaskini_mata = mysqli_query($condb, $kemaskini_mata);
 
-                $status = "Kehadiran Telah Disahkan";
-                $warna = "green";
+                $message = "Kehadiran berjaya direkod!";
+                echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
+                echo "<script>
+                        // Create an instance of Notyf
+                        let notyf = new Notyf();
+
+                        // Display an error notification
+                        notyf.success({
+                            message: '$message',
+                            duration: 3000,
+                            dismissible: true,
+                            position: {x: 'right', y: 'top'}
+                        });
+                    </script>";
             } else {
-                $status = "Kehadiran Gagal Direkodkan";
-                $warna = "red";
+                $message = "Kehadiran Gagal Direkod!";
+                echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
+                echo "<script>
+                        // Create an instance of Notyf
+                        let notyf = new Notyf();
+
+                        // Display an error notification
+                        notyf.error({
+                            message: '$message',
+                            duration: 3000,
+                            dismissible: true,
+                            position: {x: 'right', y: 'top'}
+                        });
+                    </script>";
             }
         }
+    }
+} else {
+    // Check if the form is submitted
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $message = "Sila Isi No. Kad Pengenalan!";
+        echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
+        echo "<script>
+                // Create an instance of Notyf
+                let notyf = new Notyf();
+
+                // Display an error notification
+                notyf.error({
+                    message: '$message',
+                    duration: 3000,
+                    dismissible: true,
+                    position: {x: 'right', y: 'top'}
+                });
+            </script>";
     }
 }
 
@@ -101,8 +165,7 @@ if (!empty($_GET['IDaktiviti'])) {
                     $laksana_arahan_pilih = mysqli_query($condb, $arahan_sql_pilih);
 
                     while ($n = mysqli_fetch_array($laksana_arahan_pilih)) {
-                        echo "<option value='" . $n['IDaktiviti'] . "'>
-            " . $n['IDaktiviti'] . " | " . $n['nama_aktiviti'] . "</option>";
+                        echo "<option value='" . $n['IDaktiviti'] . "'>" . $n['IDaktiviti'] . " | " . $n['nama_aktiviti'] . "</option>";
                     }
                     ?>
                 </select>
@@ -126,23 +189,16 @@ if (!empty($_GET['IDaktiviti'])) {
         <div class="rekod-container">
             <form action='' method='POST' align='center'>
                 <div class="input-rekod">
-                    <input class="input-rekod" type='text' name='nokp' placeholder="No. Kad Pengenalan" autocomplete="off"
-                        required>
+                    <input class="input-rekod" type='text' name='nokp' placeholder="No. Kad Pengenalan" autocomplete="off">
                 </div>
 
-                <button type='submit'><i class='bx bx-user-check'></i>Rekod</button>
+                <button type='submit' class="rekodBtn"><i class='bx bx-user-check'></i>Rekod</button>
             </form>
         </div>
 
         <div class="table-container">
             <div class="scrollable-table">
                 <table class="table">
-                    <!-- alert box -->
-                    <caption style="background-color :<?= $warna ?>">
-                        <h3>
-                            <?= $status; ?>
-                        </h3>
-                    </caption>
                     <thead>
                         <tr>
                             <th>Bil.</th>

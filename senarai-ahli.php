@@ -3,9 +3,9 @@
 session_start();
 
 # Memanggil fail header.php, connection.php dan kawalan-admin.php
-include ("header.php");
-include ("connection.php");
-include ("kawalan-admin.php");
+include("header.php");
+include("connection.php");
+include("kawalan-admin.php");
 ?>
 
 <!-- Header bagi jadual untuk memaparkan senarai ahli -->
@@ -51,7 +51,7 @@ include ("kawalan-admin.php");
                     <?php
                     # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
                     $cari_ahli = "";
-                    if (!empty ($_POST["nama"])) {
+                    if (!empty($_POST["nama"])) {
                         $cari_ahli = " and ahli.nama like '%" . $_POST['nama'] . "%'";
                     }
 
@@ -97,8 +97,9 @@ include ("kawalan-admin.php");
 
                         <div class='delete-container'>
                             <button class='deleteBtn' data-tooltip='Hapus'>
-                                <a href='ahli-padam-proses.php?nokp=" . $m['nokp'] . "' onClick=\" return confirm('Anda pasti anda ingin
-                                    memadam data ini?')\"><i class='bx bx-trash'></i></a>
+                                <a href='ahli-padam-proses.php?nokp=" . $m['nokp'] . "' onclick=\"return confirm('Anda pasti anda ingin memadam data ini?')\">
+                                    <i class='bx bx-trash'></i>
+                                </a>                        
                             </button>
                         </div>
                     </div>

@@ -23,22 +23,25 @@ if (!empty($_POST)) {
 
     # Laksana & semak arahan SQL kemaskini data
     if (mysqli_query($condb, $arahan)) {
-        # If the data stored successfully
-        $_SESSION['notificationType'] = 'success';
-        $_SESSION['notificationMessage'] = "Maklumat aktiviti berjaya dikemaskini!";
+        $message = "Pendaftaran Aktiviti Berjaya!";
+        $notificationType = 'success';
+        $notificationMessage = $message;
     } else {
-        # If the data NOT stored successfully
-        $_SESSION['notificationType'] = 'error';
-        $_SESSION['notificationMessage'] = "Ralat: Gagal kemaskini maklumat aktiviti.";
+        $message = "Pendaftaran Aktiviti Gagal!";
+        $notificationType = 'error';
+        $notificationMessage = $message;
     }
 
-    # Redirect back to senarai-aktiviti.php
-    header("Location: senarai-aktiviti.php");
+    // Redirect with notification parameters
+    header("Location: senarai-aktiviti.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
     exit();
 } else {
     # Jika data GET tidak wujud/kosong, kembali ke fail senarai-aktiviti
-    $_SESSION['notificationType'] = 'error';
-    $_SESSION['notificationMessage'] = "Sila lengkapkan maklumat.";
-    header("Location: senarai-aktiviti.php");
+    $message = "Sila lengkapkan maklumat.";
+    $notificationType = 'error';
+    $notificationMessage = $message;
+
+    // Redirect with notification parameters
+    header("Location: senarai-aktiviti.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
     exit();
 }

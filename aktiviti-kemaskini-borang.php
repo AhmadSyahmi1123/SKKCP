@@ -64,17 +64,19 @@ $m = mysqli_fetch_array($laksana_arahan);
         xhr.open("POST", "aktiviti-kemaskini-proses.php?IDaktiviti=" + IDaktiviti, true);
         xhr.onload = function() {
             if (xhr.status === 200) {
-                // Set the success notification message in sessionStorage
-                sessionStorage.setItem('notificationType', '<?php echo isset($_SESSION['notificationType']) ? $_SESSION['notificationType'] : '' ?>');
-                sessionStorage.setItem('notificationMessage', '<?php echo isset($_SESSION['notificationMessage']) ? $_SESSION['notificationMessage'] : '' ?>');
-                // Redirect to the listing page
-                window.location.href = "senarai-aktiviti.php";
+                // Set the success notification message as URL parameters
+                var urlParams = new URLSearchParams(window.location.search);
+                urlParams.set('notificationType', 'success');
+                urlParams.set('notificationMessage', 'Aktiviti berjaya dikemaskini!');
+                // Redirect to the listing page with notification parameters
+                window.location.href = "senarai-aktiviti.php?" + urlParams.toString();
             } else {
-                // Set the error notification message in sessionStorage
-                sessionStorage.setItem('notificationType', '<?php echo isset($_SESSION['notificationType']) ? $_SESSION['notificationType'] : '' ?>');
-                sessionStorage.setItem('notificationMessage', '<?php echo isset($_SESSION['notificationMessage']) ? $_SESSION['notificationMessage'] : '' ?>');
-                // Redirect to the listing page
-                window.location.href = "senarai-aktiviti.php";
+                // Set the error notification message as URL parameters
+                var urlParams = new URLSearchParams(window.location.search);
+                urlParams.set('notificationType', 'error');
+                urlParams.set('notificationMessage', 'Ralat! Aktiviti gagal dikemaskini.');
+                // Redirect to the listing page with notification parameters
+                window.location.href = "senarai-aktiviti.php?" + urlParams.toString();
             }
         };
         xhr.onerror = function() {

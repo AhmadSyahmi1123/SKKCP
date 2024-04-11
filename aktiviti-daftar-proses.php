@@ -13,4 +13,19 @@ if (!empty($_POST)) {
 
     # Laksana arahan SQL menyimpan data aktiviti baru
     $laksana_arahan_simpan = mysqli_query($condb, $arahan_sql_simpan);
+
+    # Menguji jika proses menyimpan data berjaya atau tidak
+    if ($laksana_arahan_simpan) {
+        $message = "Pendaftaran Aktiviti Berjaya!";
+        $notificationType = 'success';
+        $notificationMessage = $message;
+    } else {
+        $message = "Pendaftaran Aktiviti Gagal!";
+        $notificationType = 'error';
+        $notificationMessage = $message;
+    }
+
+    // Redirect with notification parameters
+    header("Location: senarai-aktiviti.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+    exit();
 }

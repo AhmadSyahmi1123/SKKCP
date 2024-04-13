@@ -2,6 +2,9 @@
 # Memulakan fungsi session
 session_start();
 
+# Memanggil fail kawalan-admin.php
+include("kawalan-admin.php");
+
 # Menyemak jika data POST wujud
 if (!empty($_POST)) {
     # Memanggil fail connection.php

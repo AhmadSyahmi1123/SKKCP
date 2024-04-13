@@ -62,7 +62,7 @@ include("kawalan-admin.php");
                             <input id="input-masa" type='time' name='masa_tamat' placeholder="Masa Tamat" required>
                         </div>
 
-                        <input onclick="daftarAktiviti()" name="addBtn" class="addBtn" type='submit' value='Tambah'>
+                        <button onclick="daftarAktiviti()" class="addBtn" type='submit'>Tambah</button>
 
                     </form>
                 </div>
@@ -209,7 +209,6 @@ include("kawalan-admin.php");
             alert("An error occurred. Please try again."); // Show error message
         };
         xhr.send(formData); // Send the FormData object
-        return false; // Prevent default form submission
     }
 </script>
 

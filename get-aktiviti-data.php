@@ -1,10 +1,12 @@
 <?php
-include("connection.php");
+include ("connection.php");
 
 // Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai aktiviti
-$cari_aktiviti = "";
-if (!empty($_POST["nama_aktiviti"])) {
-    $tambahcari_aktivitian = "where nama_aktiviti like '%" . $_POST['nama_aktiviti'] . "%'";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aktiviti_carian'])) {
+    $aktiviti_carian = $_POST['aktiviti_carian'];
+    $cari_aktiviti = "WHERE nama_aktiviti LIKE '%" . $aktiviti_carian . "%'";
+} else {
+    $cari_aktiviti = "";
 }
 
 // Araham query untuk mencari senarai aktiviti
@@ -12,7 +14,6 @@ $arahan_papar = "SELECT * FROM aktiviti $cari_aktiviti";
 
 // Laksana arahan mencari senarai aktiviti
 $laksana = mysqli_query($condb, $arahan_papar);
-
 $aktiviti_data = array();
 
 // Mengambil data yang ditemui

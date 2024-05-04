@@ -3,9 +3,9 @@
 session_start();
 
 # Memanggil fail header.php, connection.php dan kawalan-admin.php
-include("header.php");
-include("connection.php");
-include("kawalan-admin.php");
+include ("header.php");
+include ("connection.php");
+include ("kawalan-admin.php");
 
 ?>
 
@@ -14,9 +14,9 @@ include("kawalan-admin.php");
 
     <div class="searchNupload-container">
         <div class="input-carian-container">
-            <form action='' method='POST'>
+            <form class="search_space" method='POST'>
                 <div class="input-carian">
-                    <input type="text" name='nama_aktiviti' placeholder='Carian Aktiviti'>
+                    <input type="text" name='aktiviti_carian' placeholder='Carian Aktiviti'>
                 </div>
 
                 <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
@@ -30,8 +30,6 @@ include("kawalan-admin.php");
                 <i class='material-symbols-outlined'>playlist_add</i>
             </button>
 
-            <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
-
             <div class="modal-container" id="modal_aktiviti_container">
                 <div class="card modal_aktiviti modal">
 
@@ -44,12 +42,14 @@ include("kawalan-admin.php");
 
                         <label for="input-aktiviti">Nama Aktiviti*</label>
                         <div class="input-box">
-                            <input id="input-aktiviti" type='text' name='nama_aktiviti' placeholder="Nama Aktiviti" required>
+                            <input id="input-aktiviti" type='text' name='nama_aktiviti' placeholder="Nama Aktiviti"
+                                required>
                         </div>
 
                         <label for="input-tarikh">Tarikh Aktiviti*</label>
                         <div class="input-box">
-                            <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>' required>
+                            <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>'
+                                required>
                         </div>
 
                         <label for="input-masa">Masa Mula*</label>
@@ -85,64 +85,83 @@ include("kawalan-admin.php");
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai aktiviti
-                    $cari_aktiviti = "";
-                    if (!empty($_POST["nama_aktiviti"])) {
-                        $cari_aktiviti = "where nama_aktiviti like '%" . $_POST['nama_aktiviti'] . "%'";
-                    }
+                    <!-- Dapatkan data aktiviti realtime -->
+                    <script>
+                        function loadAktivitiData() {
 
-                    # Araham query untuk mencari senarai aktiviti
-                    $arahan_papar = "select * from aktiviti $cari_aktiviti";
+                            // Create the AJAX request
+                            const xhr = new XMLHttpRequest();
 
-                    # Laksana arahan mencari senarai aktiviti
-                    $laksana = mysqli_query($condb, $arahan_papar);
+                            // Specify the request method, URL, and set it to asynchronous
+                            xhr.open('POST', 'get-aktiviti-data.php', true);
 
-                    # Mengambil data yang ditemui
-                    while ($m = mysqli_fetch_array($laksana)) {
+                            // Set the request header to indicate form data will be sent
+                            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-                        # Memaparkan senarai aktiviti dalam jadual
-                        echo "<tr>
-                        <td>" . $m['nama_aktiviti'] . "</td>
-                        <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
-                        <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
-                        <td>" . date('H:i', strtotime($m['masa_tamat'])) . "</td>
-                        ";
+                            // Define the function to execute when the response is received
+                            xhr.onload = function () {
+                                if (xhr.status === 200) {
+                                    // Parse the JSON response into JavaScript object
+                                    const aktivitiData = JSON.parse(xhr.responseText);
+                                    console.log(aktivitiData);
 
-                        # Memaparkan navigasi untuk kemaskini dan hapus data aktiviti
-                        echo "<td>
-                                <div class='action-container'>
-                                    <div class='edit-container'>
-                                        <button class='editBtn' data-tooltip='Kemaskini'>
-                                            <a href='aktiviti-kemaskini-borang.php?IDaktiviti=" . $m['IDaktiviti'] . "'><i class='bx bx-edit'></i></a>
-                                        </button>
+                                    // Display the retrieved data
+                                    displayAktivitiData(aktivitiData);
+                                }
+                            };
+
+                            // Send the AJAX request with the form data
+                            xhr.send();
+                        }
+
+                        // Function to display the activity data in the HTML table
+                        function displayAktivitiData(data) {
+                            const tableBody = document.querySelector('.table tbody');
+                            tableBody.innerHTML = '';
+
+                            // Iterate through the activity data and create table rows
+                            data.forEach(function (aktiviti) {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                <td>${aktiviti.nama_aktiviti}</td>
+                                <td>${aktiviti.tarikh_aktiviti}</td>
+                                <td>${aktiviti.masa_mula}</td>
+                                <td>${aktiviti.masa_tamat}</td>
+                                <td>
+                                    <div class='action-container'>
+                                        <div class='edit-container'>
+                                            <button class='editBtn' data-tooltip='Kemaskini'>
+                                                <a href='aktiviti-kemaskini-borang.php?IDaktiviti=${aktiviti.IDaktiviti}'><i class='bx bx-edit'></i></a>
+                                            </button>
+                                        </div>
+
+                                        <div class='delete-container'>
+                                            <button class='deleteBtn' data-tooltip='Hapus'>
+                                                <a href='aktiviti-padam-proses.php?IDaktiviti=${aktiviti.IDaktiviti}' onClick="return confirm('Anda pasti anda ingin memadam data ini?')"><i class='bx bx-trash'></i></a>
+                                            </button>
+                                        </div>
+
+                                        <div class='hadir-container'>
+                                            <button class='hadirBtn' data-tooltip='Pengesahan Kehadiran'>
+                                                <a href='kehadiran-borang.php?IDaktiviti=${aktiviti.IDaktiviti}'><i class='bx bx-list-check'></i></a>
+                                            </button>
+                                        </div>
                                     </div>
+                                </td>
+                            `;
+                                tableBody.appendChild(row);
+                            });
+                        }
 
-                                    <div class='delete-container'>
-                                        <button class='deleteBtn' data-tooltip='Hapus'>
-                                            <a href='aktiviti-padam-proses.php?IDaktiviti=" . $m['IDaktiviti'] . "' onClick=\" return
-                                                confirm('Anda pasti anda ingin memadam data ini?')\"><i class='bx bx-trash'></i></a>
-                                        </button>
-                                    </div>
+                        // Call the loadAktivitiData function on page load
+                        loadAktivitiData();
 
-                                    <div class='hadir-container'>
-                                        <button class='hadirBtn' data-tooltip='Pengesahan Kehadiran'>
-                                            <a href='kehadiran-borang.php?IDaktiviti=" . $m['IDaktiviti'] . "'><i class='bx bx-list-check'></i></a>
-                                        </button>
-                                    </div>
-                                </div>
-                            </td>
-                    </tr>";
-                    }
-                    ?>
+                    </script>
                 </tbody>
             </table>
         </div>
     </div>
     <script src="scripts\dialog-script-aktiviti.js" defer></script>
-
-    <!-- Dapatkan data aktiviti realtime -->
-    <script src="scripts\displayAktivitiRealtime.js" defer></script>
 </main>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
@@ -150,7 +169,7 @@ include("kawalan-admin.php");
 <script defer>
     let notyf = new Notyf();
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
         const urlParams = new URLSearchParams(window.location.search);
         const notificationType = urlParams.get('notificationType');
         const notificationMessage = urlParams.get('notificationMessage');
@@ -185,6 +204,7 @@ include("kawalan-admin.php");
     });
 </script>
 
+<!-- Proses daftar aktiviti -->
 <script>
     // Fungsi hantar data ke aktiviti-daftar-proses.php
     function daftarAktiviti() {
@@ -192,7 +212,7 @@ include("kawalan-admin.php");
         var formData = new FormData(form); // Create FormData object with form data
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "aktiviti-daftar-proses.php", true);
-        xhr.onload = function() {
+        xhr.onload = function () {
             if (xhr.status === 200) {
                 var urlParams = new URLSearchParams(window.location.search);
                 urlParams.set('notificationType', 'success');
@@ -205,13 +225,12 @@ include("kawalan-admin.php");
                 window.location.href = "senarai-aktiviti.php?" + urlParams.toString();
             }
         };
-        xhr.onerror = function() {
+        xhr.onerror = function () {
             alert("An error occurred. Please try again."); // Show error message
         };
         xhr.send(formData); // Send the FormData object
     }
 </script>
-
 
 <!-- Elak daripada resubmission borang apabila refresh -->
 <script>

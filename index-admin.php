@@ -5,6 +5,7 @@ session_start();
 # Memanggil fail header.php
 include("header.php");
 ?>
+<div class="page-header">Dashboard</div>
 <main>
 
     <div class="carousel-container">

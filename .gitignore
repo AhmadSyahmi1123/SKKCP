@@ -1,2 +1,8 @@
 uploads/
 img/
+
+/scripts
+.min.js
+
+/css
+.min.css

@@ -12,61 +12,11 @@ include ("kawalan-admin.php");
 <div class="page-header">Senarai Aktiviti</div>
 <main>
 
-    <div class="searchNupload-container">
-        <div class="input-carian-container">
-            <form class="search_space" method='POST'>
-                <div class="input-carian">
-                    <input type="text" name='aktiviti_carian' placeholder='Carian Aktiviti'>
-                </div>
-
-                <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
-                    <i class='bx bx-search'></i>
-                </button>
-            </form>
-        </div>
-
+    <div class="upload-aktiviti-container">
         <div class="upload-container">
             <button id="open-aktiviti" class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
                 <i class='material-symbols-outlined'>playlist_add</i>
             </button>
-
-            <div class="modal-container" id="modal_aktiviti_container">
-                <div class="card modal_aktiviti modal">
-
-                    <button id="closeAddAktivitiBtn" class="closeBtn"><i class='bx bx-x'></i></button>
-                    <!-- Borang Daftar Masuk -->
-                    <form class="daftar_aktiviti_borang" method="POST">
-
-                        <!-- Tajuk Antaramuka Log Masuk -->
-                        <h1>Daftar Aktiviti Baru</h1>
-
-                        <label for="input-aktiviti">Nama Aktiviti*</label>
-                        <div class="input-box">
-                            <input id="input-aktiviti" type='text' name='nama_aktiviti' placeholder="Nama Aktiviti"
-                                required>
-                        </div>
-
-                        <label for="input-tarikh">Tarikh Aktiviti*</label>
-                        <div class="input-box">
-                            <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>'
-                                required>
-                        </div>
-
-                        <label for="input-masa">Masa Mula*</label>
-                        <div class="input-box">
-                            <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required>
-                        </div>`
-
-                        <label for="input-masa">Masa Tamat*</label>
-                        <div class="input-box">
-                            <input id="input-masa" type='time' name='masa_tamat' placeholder="Masa Tamat" required>
-                        </div>
-
-                        <button onclick="daftarAktiviti()" class="addBtn" type='submit'>Tambah</button>
-
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -163,6 +113,42 @@ include ("kawalan-admin.php");
     </div>
     <script src="scripts\dialog-script-aktiviti.js" defer></script>
 </main>
+
+<div class="modal-container" id="modal_aktiviti_container">
+    <div class="card modal_aktiviti modal">
+
+        <button id="closeAddAktivitiBtn" class="closeBtn"><i class='bx bx-x'></i></button>
+        <!-- Borang Daftar Masuk -->
+        <form class="daftar_aktiviti_borang" method="POST">
+
+            <!-- Tajuk Antaramuka Log Masuk -->
+            <h1>Daftar Aktiviti Baru</h1>
+
+            <label for="input-aktiviti">Nama Aktiviti*</label>
+            <div class="input-box">
+                <input id="input-aktiviti" type='text' name='nama_aktiviti' placeholder="Nama Aktiviti" required>
+            </div>
+
+            <label for="input-tarikh">Tarikh Aktiviti*</label>
+            <div class="input-box">
+                <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>' required>
+            </div>
+
+            <label for="input-masa">Masa Mula*</label>
+            <div class="input-box">
+                <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required>
+            </div>`
+
+            <label for="input-masa">Masa Tamat*</label>
+            <div class="input-box">
+                <input id="input-masa" type='time' name='masa_tamat' placeholder="Masa Tamat" required>
+            </div>
+
+            <button onclick="daftarAktiviti()" class="addBtn" type='submit'>Tambah</button>
+
+        </form>
+    </div>
+</div>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

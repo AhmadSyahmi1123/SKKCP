@@ -3,9 +3,9 @@
 session_start();
 
 # Memanggil fail header.php, connection.php dan kawalan-admin.php
-include("header.php");
-include("connection.php");
-include("kawalan-admin.php");
+include ("header.php");
+include ("connection.php");
+include ("kawalan-admin.php");
 ?>
 
 <!-- Header bagi jadual untuk memaparkan senarai ahli -->
@@ -117,7 +117,7 @@ include("kawalan-admin.php");
         <div class="card modal_upload modal">
             <button id="closeUploadFileBtn" class="closeBtn"><i class='bx bx-x'></i></button>
 
-            <form action="upload.php" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
+            <form class="upload-form" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
                 <div class="upload-box">
 
                     <h2>Upload Text File</h2>
@@ -127,7 +127,7 @@ include("kawalan-admin.php");
                     <input type="file" name="data_ahli" id="file" accept=".txt, .text">
 
                     <div class="uploadBtn-container">
-                        <button id="close-upload" class="upload_fileBtn" type="submit" name="btn-upload">
+                        <button onclick="daftarAhli()" id="close-upload" class="upload_fileBtn" type="submit">
                             <i class='material-symbols-outlined'>upload</i> Muat Naik
                         </button>
                     </div>
@@ -140,3 +140,92 @@ include("kawalan-admin.php");
 
     <script src="scripts\dialog-script-upload.js" defer></script>
 </main>
+
+<!-- Proses papar notifikasi apabila kemaskini data -->
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script defer>
+    let notyf = new Notyf();
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const notificationType = urlParams.get('notificationType');
+        const notificationMessage = urlParams.get('notificationMessage');
+
+        // Display the notification using JavaScript
+        if (notificationType && notificationMessage) {
+            if (notificationType === 'success') {
+                notyf.success({
+                    message: notificationMessage,
+                    duration: 3000,
+                    dismissible: true,
+                    position: {
+                        x: 'right',
+                        y: 'top'
+                    }
+                });
+            } else if (notificationType === 'error') {
+                notyf.error({
+                    message: notificationMessage,
+                    duration: 3000,
+                    dismissible: true,
+                    position: {
+                        x: 'right',
+                        y: 'top'
+                    }
+                });
+            }
+
+            // Remove notification parameters from the URL
+            history.replaceState(null, null, window.location.pathname);
+        }
+    });
+</script>
+
+<!-- Proses daftar aktiviti -->
+<script>
+    // Fungsi hantar data ke aktiviti-daftar-proses.php
+    function daftarAhli() {
+        var form = document.querySelector('.upload-form'); // Get the form element
+        var formData = new FormData(form); // Create FormData object with form data
+
+        var fileInput = document.querySelector('input[type="file"]'); // Get the file input element
+        var file = fileInput.files[0]; // Get the first file
+
+        // Validate file type
+        if (!file || file.type !== "text/plain") {
+            var urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('notificationType', 'error');
+            urlParams.set('notificationMessage', 'Ralat! Sila Masukkan Fail Format .txt!');
+            window.location.href = "senarai-ahli.php?" + urlParams.toString();
+            return; // Stop the function if file type is not .txt
+        }
+
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "upload.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                var urlParams = new URLSearchParams(window.location.search);
+                urlParams.set('notificationType', 'success');
+                urlParams.set('notificationMessage', 'Ahli-ahli berjaya didaftar.');
+                window.location.href = "senarai-ahli.php?" + urlParams.toString();
+            } else {
+                var urlParams = new URLSearchParams(window.location.search);
+                urlParams.set('notificationType', 'error');
+                urlParams.set('notificationMessage', 'Ralat! Ahli-ahli gagal didaftar.');
+                window.location.href = "senarai-ahli.php?" + urlParams.toString();
+            }
+        };
+        xhr.onerror = function () {
+            alert("An error occurred. Please try again."); // Show error message
+        };
+        xhr.send(formData); // Send the FormData object
+    }
+</script>
+
+<!-- Elak daripada resubmission borang apabila refresh -->
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>

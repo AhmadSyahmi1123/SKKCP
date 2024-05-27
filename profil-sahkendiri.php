@@ -3,7 +3,7 @@
 session_start();
 
 # Memanggil fail connection.php
-include("connection.php");
+include ("connection.php");
 
 $masa = date("H:i:s");
 
@@ -50,9 +50,18 @@ if (!empty($_GET['IDaktiviti']) and !empty($_SESSION['nokp'])) {
 
     # Menguji proses simpan data kehadiran
     if ($simpan_data) {
-        echo "<script>alert('Kehadiran Telah Disahkan!');
-        window.location.href='profil.php'; </script>";
+        $message = "Kehadiran Berjaya Disahkan!";
+        $notificationType = 'success';
+        $notificationMessage = $message;
+    } else {
+        $message = "Ralat Kehadiran Gagal Disahkan!";
+        $notificationType = 'error';
+        $notificationMessage = $message;
     }
+
+    // Redirect with notification parameters
+    header("Location: profil.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+    exit();
 } else {
     echo "<script>alert('Akses secara terus');
         window.location.href='logout.php'; </script>";

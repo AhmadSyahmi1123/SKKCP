@@ -7,9 +7,9 @@ include ("header.php");
 include ("connection.php");
 
 # Menyemak kewujudan nilai pembolehubah session['nokp']
-if (empty ($_SESSION["nokp"])) {
+if (empty($_SESSION["nokp"])) {
     # Jika nilai session nokp tidak wujud/kosong, aturcara akan diberhentikan
-    die ("<script>alert('Sila Log Masuk');
+    die("<script>alert('Sila Log Masuk');
         window.location.href='logout.php'; </script>");
 }
 ?>
@@ -149,3 +149,43 @@ if (empty ($_SESSION["nokp"])) {
         </tr>
     </div>
 </main>
+
+<!-- Proses papar notifikasi apabila kemaskini data -->
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script defer>
+    let notyf = new Notyf();
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const notificationType = urlParams.get('notificationType');
+        const notificationMessage = urlParams.get('notificationMessage');
+
+        // Display the notification using JavaScript
+        if (notificationType && notificationMessage) {
+            if (notificationType === 'success') {
+                notyf.success({
+                    message: notificationMessage,
+                    duration: 3000,
+                    dismissible: true,
+                    position: {
+                        x: 'right',
+                        y: 'top'
+                    }
+                });
+            } else if (notificationType === 'error') {
+                notyf.error({
+                    message: notificationMessage,
+                    duration: 3000,
+                    dismissible: true,
+                    position: {
+                        x: 'right',
+                        y: 'top'
+                    }
+                });
+            }
+
+            // Remove notification parameters from the URL
+            history.replaceState(null, null, window.location.pathname);
+        }
+    });
+</script>

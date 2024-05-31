@@ -44,6 +44,7 @@ include ("kawalan-admin.php");
                         <th>Kelas</th>
                         <th>Katalaluan</th>
                         <th>Tahap</th>
+                        <th>Mata</th>
                         <th>Tindakan</th>
                     </tr>
                 </thead>
@@ -74,6 +75,7 @@ include ("kawalan-admin.php");
                             'IDkelas' => $m['IDkelas'],
                             'ting' => $m['ting'],
                             'nama_kelas' => $m['nama_kelas'],
+                            'mata' => $m['mata']
                         );
 
                         # Memaparkan senarai nama dalam jadual
@@ -83,6 +85,7 @@ include ("kawalan-admin.php");
     <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
     <td>" . $m['katalaluan'] . "</td>
     <td>" . $m['tahap'] . "</td>
+    <td>" . $m['mata'] . "</td>
 ";
 
 

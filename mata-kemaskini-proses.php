@@ -28,7 +28,7 @@ if (!empty($_POST["mata"])) {
         $notificationMessage = $message;
     } else {
         # Kemaskini gagal
-        $message = "Ralat! Kemaskini Mata Gagal!!";
+        $message = "Ralat! Kemaskini Mata Gagal!";
         $notificationType = 'error';
         $notificationMessage = $message;
     }

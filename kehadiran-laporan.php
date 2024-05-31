@@ -40,7 +40,7 @@ include ("kawalan-admin.php");
     <?php
     # Syarat tambahan yang akan dimasukkan dalam arahan SQL (query) senarai aktiviti
     $tambahan = "";
-    if (!empty ($_GET["IDaktiviti"])) {
+    if (!empty($_GET["IDaktiviti"])) {
         # Mengambil nilai data GET di URL
         $IDaktiviti = $_GET["IDaktiviti"];
 
@@ -97,7 +97,7 @@ include ("kawalan-admin.php");
                         <?php
                         # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
                         $tambahan = "";
-                        if (!empty ($_POST["nama"])) {
+                        if (!empty($_POST["nama"])) {
                             $tambahan = "where ahli.nama like '%" . $_POST['nama'] . "%'";
                         }
 
@@ -160,11 +160,14 @@ include ("kawalan-admin.php");
 
             <h1>Tambah Mata Ahli</h1>
 
-            <form action="" method="POST">
+            <form action="mata-kemaskini-proses.php?nokp=<?= $m["nokp"] ?>" method="POST">
 
                 <div class="input_container">
                     <div class="input-box">
                         <input type='number' name='mata' value="0" required><br>
+
+                        <!-- Hantar IDaktiviti supaya page tidak "reset" -->
+                        <input type='number' name='IDaktiviti' value="<?= $IDaktiviti ?>" hidden><br>
                     </div>
                 </div>
 
@@ -181,3 +184,43 @@ include ("kawalan-admin.php");
     <script src="scripts\select-box-aktiviti.js" defer></script>
     <script src="scripts\dialog-update-mata.js" defer></script>
 </main>
+
+<!-- Proses papar notifikasi apabila kemaskini data -->
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script defer>
+    let notyf = new Notyf();
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const notificationType = urlParams.get('notificationType');
+        const notificationMessage = urlParams.get('notificationMessage');
+
+        // Display the notification using JavaScript
+        if (notificationType && notificationMessage) {
+            if (notificationType === 'success') {
+                notyf.success({
+                    message: notificationMessage,
+                    duration: 3000,
+                    dismissible: true,
+                    position: {
+                        x: 'right',
+                        y: 'top'
+                    }
+                });
+            } else if (notificationType === 'error') {
+                notyf.error({
+                    message: notificationMessage,
+                    duration: 3000,
+                    dismissible: true,
+                    position: {
+                        x: 'right',
+                        y: 'top'
+                    }
+                });
+            }
+
+            // Remove notification parameters from the URL
+            history.replaceState(null, null, window.location.pathname);
+        }
+    });
+</script>

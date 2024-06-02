@@ -82,8 +82,7 @@ include ("kawalan-admin.php");
 
                         <div class='delete-container'>
                             <button class='deleteBtn' data-tooltip='Hapus'>
-                                <a href='aktiviti-padam-proses.php?IDaktiviti=" . $m['IDaktiviti'] . "' onClick=\" return
-                                    confirm('Anda pasti anda ingin memadam data ini?')\"><i class='bx bx-trash'></i></a>
+                                <a href='aktiviti-padam-proses.php?IDaktiviti=" . $m['IDaktiviti'] . "' onclick=\"return confirm('Anda pasti anda ingin memadam data ini?')\"><i class='bx bx-trash'></i></a>
                             </button>
                         </div>
 

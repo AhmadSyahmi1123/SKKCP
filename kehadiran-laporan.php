@@ -31,8 +31,10 @@ include ("kawalan-admin.php");
                     ?>
                 </select>
 
-                <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i
-                        class='bx bx-search'></i></button>
+                <div class="searchBtn-container">
+                    <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i
+                            class='bx bx-search'></i></button>
+                </div>
             </div>
         </form>
     </div>

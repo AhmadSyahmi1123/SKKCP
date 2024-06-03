@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto Mono", monospace;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
 }
 
 ::-webkit-scrollbar {
@@ -252,6 +253,7 @@ ul {
     transform: translateY(25%);
     color: rgba(255, 255, 255, 0.75);
     font-size: 25px;
+    margin-right: 10px;
 }
 
 .nav__item svg {
@@ -590,11 +592,12 @@ ul {
     flex-wrap: wrap;
     width: 100%;
     margin: 10px 0;
+    padding-bottom: 10px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .scrollable-profil-table {
-    height: 450px;
+    height: 380px;
     width: 100%;
     border-radius: 10px;
     overflow-y: auto;
@@ -768,6 +771,7 @@ ul {
 .kaunter-info-container {
     font-size: 18px;
     padding: 10px 20px;
+    width: 560px;
 }
 
 .select-aktiviti {
@@ -795,20 +799,27 @@ ul {
     font-size: 18px;
 }
 
-.select-aktiviti-container .searchBtn {
+.searchBtn-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 28px;
+    height: 28px;
+    float: right;
+}
+
+.searchBtn-container .searchBtn {
     margin: 0 10px;
     position: absolute;
     background: #009578;
-    width: 28px;
-    height: 28px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     border: none;
     outline: none;
     display: grid;
     place-items: center;
-    right: 0;
-    top: 0;
-    left: 505px;
     cursor: pointer;
 }
 

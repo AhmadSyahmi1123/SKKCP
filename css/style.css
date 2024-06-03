@@ -897,7 +897,7 @@ ul {
 
 .searchNupload-container {
     display: flex;
-    padding-top: 40px;
+    padding-top: 10px;
 }
 
 .input-carian {
@@ -1015,7 +1015,8 @@ ul {
 
 /* Senarai Aktiviti Styling */
 
-.upload-aktiviti-container {
+.upload-aktiviti-container,
+.upload-ahli-container {
     display: flex;
     padding-top: 40px;
 }
@@ -1241,10 +1242,22 @@ input[type="time"] {
 
 /* Kehadiran Borang Dialog Styling */
 
+.kehadiran-details {
+    padding: 10px 20px;
+    font-size: 18px;
+}
+
+.borang-container {
+    position: relative;
+}
+
 .save-container {
+    position: absolute;
     display: flex;
-    justify-content: end;
     align-items: center;
+    top: 0;
+    right: 0;
+    z-index: 10;
 }
 
 .save-container .saveBtn {
@@ -1253,7 +1266,7 @@ input[type="time"] {
     border-radius: 10px;
     color: var(--text-color);
     padding: 10px 20px;
-    margin: 10px 20px;
+    margin: 10px 0;
     cursor: pointer;
 }
 

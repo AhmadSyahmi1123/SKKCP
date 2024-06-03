@@ -12,7 +12,7 @@ include ("kawalan-admin.php");
 <div class="page-header">Senarai Ahli</div>
 <main>
 
-    <div class="searchNupload-container">
+    <div class="upload-ahli-container">
         <div class="input-carian-container">
             <form action='' method="POST">
                 <div class="input-carian">

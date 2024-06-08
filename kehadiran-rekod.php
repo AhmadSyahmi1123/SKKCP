@@ -151,7 +151,7 @@ if (!empty($_GET['IDaktiviti'])) {
 <div class="page-header">Laman Rekod Kehadiran Kaunter Urusetia</div>
 <main>
 
-    <div class="kaunter-info-container">
+    <div class="kaunter-info-container kaunter-kehadiran">
         <!-- Borang carian aktiviti -->
         <form action='' method='GET'>
             <div class="select-aktiviti-container">

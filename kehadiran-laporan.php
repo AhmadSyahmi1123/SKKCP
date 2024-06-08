@@ -11,7 +11,7 @@ include ("kawalan-admin.php");
 <div class="page-header">Laporan Kehadiran Aktiviti</div>
 <main>
     <!-- Borang Carian Aktiviti -->
-    <div class="kaunter-info-container">
+    <div class="kaunter-info-container kaunter-laporan">
         <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
         <form action="" method="GET">
             <div class="select-aktiviti-container">
@@ -31,10 +31,8 @@ include ("kawalan-admin.php");
                     ?>
                 </select>
 
-                <div class="searchBtn-container">
-                    <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i
-                            class='bx bx-search'></i></button>
-                </div>
+                <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari"><i
+                        class='bx bx-search'></i></button>
             </div>
         </form>
     </div>

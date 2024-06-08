@@ -1,8 +1,6 @@
 uploads/
 img/
 
-/scripts
-.min.js
+/scripts/*.min.js
 
-/css
-.min.css
+/css/*.min.css

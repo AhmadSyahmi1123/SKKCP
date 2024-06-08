@@ -20,7 +20,7 @@ include ("kawalan-admin.php");
                 </div>
 
                 <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
-                    <i class='material-symbols-outlined'>search</i>
+                    <i class='bx bx-search'></i>
                 </button>
             </form>
         </div>

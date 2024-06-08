@@ -7,138 +7,6 @@ include ("header.php");
 include ("kawalan-admin.php");
 include ("connection.php");
 
-$masa = date("H:i:s");
-
-# Menyemak kewujudan data POST
-if (!empty($_POST["nokp"])) {
-    # Menyemak jika nokp yang dimasukkan telah wujud dalam pangkalan data
-    $arahan_sql_semak = "select * from ahli where nokp = '" . $_POST['nokp'] . "' ";
-    # Laksana arahan semak
-    $laksana_arahan_semak = mysqli_query($condb, $arahan_sql_semak);
-    if (mysqli_num_rows($laksana_arahan_semak) != 1) {
-        # Jika nokp yang dimasukkan telah wujud
-        $message = "No. Kad Pengenalan yang dimasukkan tiada dalam sistem";
-        echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
-        echo "<script>
-                // Create an instance of Notyf
-                let notyf = new Notyf();
-
-                // Display an error notification
-                notyf.error({
-                    message: '$message',
-                    duration: 3000,
-                    dismissible: true,
-                    position: {x: 'right', y: 'top'}
-                });
-            </script>";
-    } else {
-        # Menyemak jika nokp yang dimasukkan telah direkodkan dalam pangkalan data kehadiran
-        $arahan_semak = "select * from kehadiran where nokp='" . $_POST['nokp'] . "' and IDaktiviti='" . $_GET['IDaktiviti'] . "' limit 1";
-        $laksana_arahan = mysqli_query($condb, $arahan_semak);
-
-        if (mysqli_num_rows($laksana_arahan) == 1) {
-            $message = "Anda telah mengesahkan kehadiran sebelum ini";
-            echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
-            echo "<script>
-                        // Create an instance of Notyf
-                        let notyf = new Notyf();
-
-                        // Display an error notification
-                        notyf.error({
-                            message: '$message',
-                            duration: 3000,
-                            dismissible: true,
-                            position: {x: 'right', y: 'top'}
-                        });
-                    </script>";
-        } else {
-            # Arahan beri mata kepada pengguna berdasarkan masa mereka hadir 
-            $command_masa = "SELECT * FROM aktiviti WHERE IDaktiviti = " . $_GET['IDaktiviti'];
-            $laksana_masa = mysqli_query($condb, $command_masa);
-            $get_aktiviti = mysqli_fetch_assoc($laksana_masa);
-
-            $masa_mula = strtotime($get_aktiviti['masa_mula']);
-            $masa_tamat = strtotime($get_aktiviti['masa_tamat']);
-
-            $masa_hadir = strtotime($masa);
-
-            $points = 10;
-
-            if ($masa_hadir >= $masa_mula && $masa_hadir <= $masa_tamat) {
-
-                $masa_lewat = round(($masa_hadir - $masa_mula) / 60);
-
-                if ($masa_lewat <= 3) {
-                    $points = 5;
-                } elseif ($masa_lewat <= 5) {
-                    $points = 3;
-                } else {
-                    $points = 1;
-                }
-            }
-
-            # Menyimpan data kehadiran
-            $simpan_data = mysqli_query($condb, "insert into kehadiran (IDaktiviti, nokp, masa_hadir) values ('" . $_GET['IDaktiviti'] . "', '" . $_POST['nokp'] . "', '$masa')");
-
-            # Menyemak jika proses penyimpanan data berjaya
-            if ($simpan_data) {
-                # Arahan kemaskini mata murid 
-                $kemaskini_mata = "UPDATE ahli SET mata = mata + $points WHERE nokp = '" . $_POST['nokp'] . "'";
-                # Laksana arahan kemaskini mata murid
-                $laksana_kemaskini_mata = mysqli_query($condb, $kemaskini_mata);
-
-                $message = "Kehadiran berjaya direkod!";
-                echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
-                echo "<script>
-                        // Create an instance of Notyf
-                        let notyf = new Notyf();
-
-                        // Display an error notification
-                        notyf.success({
-                            message: '$message',
-                            duration: 3000,
-                            dismissible: true,
-                            position: {x: 'right', y: 'top'}
-                        });
-                    </script>";
-            } else {
-                $message = "Kehadiran Gagal Direkod!";
-                echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
-                echo "<script>
-                        // Create an instance of Notyf
-                        let notyf = new Notyf();
-
-                        // Display an error notification
-                        notyf.error({
-                            message: '$message',
-                            duration: 3000,
-                            dismissible: true,
-                            position: {x: 'right', y: 'top'}
-                        });
-                    </script>";
-            }
-        }
-    }
-} else {
-    // Check if the form is submitted
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $message = "Sila Isi No. Kad Pengenalan!";
-        echo '<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>';
-        echo "<script>
-                // Create an instance of Notyf
-                let notyf = new Notyf();
-
-                // Display an error notification
-                notyf.error({
-                    message: '$message',
-                    duration: 3000,
-                    dismissible: true,
-                    position: {x: 'right', y: 'top'}
-                });
-            </script>";
-    }
-}
-
 # Menyemak kewujudan data GET['IDaktiviti']
 if (!empty($_GET['IDaktiviti'])) {
     # Proses mendapatkan data aktiviti
@@ -187,12 +55,16 @@ if (!empty($_GET['IDaktiviti'])) {
         </div>
 
         <div class="rekod-container">
-            <form action='' method='POST' align='center'>
+            <form action='kehadiran-rekod-proses.php' method='POST' align='center'>
                 <div class="input-rekod">
                     <input class="input-rekod" type='text' name='nokp' placeholder="No. Kad Pengenalan" autocomplete="off">
+
+                    <!-- Hantar IDaktiviti supaya page tidak "reset" -->
+                    <input type='number' name='IDaktiviti' value="<?= $_GET['IDaktiviti'] ?>" hidden><br>
                 </div>
 
-                <button type='submit' class="rekodBtn"><i class='bx bx-user-check'></i>Rekod</button>
+                <button onclick="rekodKehadiran();" type='submit' class="rekodBtn"><i
+                        class='bx bx-user-check'></i>Rekod</button>
             </form>
         </div>
 
@@ -236,3 +108,50 @@ if (!empty($_GET['IDaktiviti'])) {
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="scripts\select-box-aktiviti.js" defer></script>
 </main>
+
+<!-- Proses papar notifikasi apabila kemaskini data -->
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script defer>
+    let notyf = new Notyf();
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const notificationType = urlParams.get('notificationType');
+        const notificationMessage = urlParams.get('notificationMessage');
+
+        // Display the notification using JavaScript
+        if (notificationType && notificationMessage) {
+            if (notificationType === 'success') {
+                notyf.success({
+                    message: notificationMessage,
+                    duration: 3000,
+                    dismissible: true,
+                    position: {
+                        x: 'right',
+                        y: 'top'
+                    }
+                });
+            } else if (notificationType === 'error') {
+                notyf.error({
+                    message: notificationMessage,
+                    duration: 3000,
+                    dismissible: true,
+                    position: {
+                        x: 'right',
+                        y: 'top'
+                    }
+                });
+            }
+
+            // Remove notification parameters from the URL
+            history.replaceState(null, null, window.location.pathname);
+        }
+    });
+</script>
+
+<!-- Elak daripada resubmission borang apabila refresh -->
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>

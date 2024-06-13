@@ -25,6 +25,13 @@ include ("kawalan-admin.php");
             </form>
         </div>
 
+        <div class="font-size-button" style="position:relative; left: 0;">
+            <input name='reSize1' type='button' value='reset' onclick="ubahsaiz(2)" />
+            <input name='reSize' type='button' value='&nbsp;+&nbsp;' onclick="ubahsaiz(1)" />
+            <input name='reSize2' type='button' value='&nbsp;-&nbsp;' onclick="ubahsaiz(-1)" />
+            <button onclick="window.print()">Cetak</button>
+        </div>
+
         <div class="upload-container">
             <button id="open-aktiviti" class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
                 <i class='material-symbols-outlined'>playlist_add</i>
@@ -35,7 +42,7 @@ include ("kawalan-admin.php");
     <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
     <div class="table-container">
         <div class="scrollable-table">
-            <table class="table">
+            <table class="table" id="saiz">
 
                 <thead>
                     <tr>
@@ -138,6 +145,9 @@ include ("kawalan-admin.php");
         </form>
     </div>
 </div>
+
+<!-- fungsi mengubah saiz tulisan bagi kepelbagaian pengguna-->
+<script src="scripts\butang-saiz.js" defer></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

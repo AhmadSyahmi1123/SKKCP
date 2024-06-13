@@ -36,12 +36,19 @@ $n = mysqli_fetch_array($laksana_aktiviti);
                     </button>
                 </form>
             </div>
+
+            <div class="font-size-button">
+                <input name='reSize1' type='button' value='reset' onclick="ubahsaiz(2)" />
+                <input name='reSize' type='button' value='&nbsp;+&nbsp;' onclick="ubahsaiz(1)" />
+                <input name='reSize2' type='button' value='&nbsp;-&nbsp;' onclick="ubahsaiz(-1)" />
+                <button onclick="window.print()">Cetak</button>
+            </div>
         </div>
 
         <form action="kehadiran-proses.php?IDaktiviti=<?= $_GET['IDaktiviti'] ?>" method="POST">
             <div class="table-container">
                 <div class="scrollable-table">
-                    <table class="table">
+                    <table class="table" id="saiz">
                         <thead>
                             <tr>
                                 <th>Bil</th>
@@ -116,3 +123,6 @@ $n = mysqli_fetch_array($laksana_aktiviti);
     </div>
 
 </main>
+
+<!-- fungsi mengubah saiz tulisan bagi kepelbagaian pengguna-->
+<script src="scripts\butang-saiz.js" defer></script>

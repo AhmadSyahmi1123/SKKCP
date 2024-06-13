@@ -68,21 +68,30 @@ include ("kawalan-admin.php");
             ?>
         </div>
 
-        <div class="input-carian-container">
-            <form action="kehadiran-laporan.php?IDaktiviti=<?= $IDaktiviti ?>" method='POST'>
-                <div class="input-carian">
-                    <input type="text" name="nama" placeholder="Carian Nama Ahli">
-                </div>
+        <div class="laporan-aktiviti-container">
+            <div class="input-carian-container">
+                <form action="kehadiran-laporan.php?IDaktiviti=<?= $IDaktiviti ?>" method='POST'>
+                    <div class="input-carian">
+                        <input type="text" name="nama" placeholder="Carian Nama Ahli">
+                    </div>
 
-                <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
-                    <i class='bx bx-search'></i>
-                </button>
-            </form>
+                    <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
+                        <i class='bx bx-search'></i>
+                    </button>
+                </form>
+            </div>
+
+            <div class="font-size-button">
+                <input name='reSize1' type='button' value='reset' onclick="ubahsaiz(2)" />
+                <input name='reSize' type='button' value='&nbsp;+&nbsp;' onclick="ubahsaiz(1)" />
+                <input name='reSize2' type='button' value='&nbsp;-&nbsp;' onclick="ubahsaiz(-1)" />
+                <button onclick="window.print()">Cetak</button>
+            </div>
         </div>
 
         <div class="table-container">
             <div class="scrollable-table">
-                <table class="table">
+                <table id="saiz" class="table">
                     <thead>
                         <tr>
                             <th>Bil</th>
@@ -185,42 +194,16 @@ include ("kawalan-admin.php");
     <script src="scripts\dialog-update-mata.js" defer></script>
 </main>
 
+<!-- fungsi mengubah saiz tulisan bagi kepelbagaian pengguna-->
+<script src="scripts\butang-saiz.js" defer></script>
+
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-<script defer>
-    let notyf = new Notyf();
+<script src="scripts\toast.js"></script>
 
-    document.addEventListener('DOMContentLoaded', function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const notificationType = urlParams.get('notificationType');
-        const notificationMessage = urlParams.get('notificationMessage');
-
-        // Display the notification using JavaScript
-        if (notificationType && notificationMessage) {
-            if (notificationType === 'success') {
-                notyf.success({
-                    message: notificationMessage,
-                    duration: 3000,
-                    dismissible: true,
-                    position: {
-                        x: 'right',
-                        y: 'top'
-                    }
-                });
-            } else if (notificationType === 'error') {
-                notyf.error({
-                    message: notificationMessage,
-                    duration: 3000,
-                    dismissible: true,
-                    position: {
-                        x: 'right',
-                        y: 'top'
-                    }
-                });
-            }
-
-            // Remove notification parameters from the URL
-            history.replaceState(null, null, window.location.pathname);
-        }
-    });
+<!-- Elak daripada resubmission borang apabila refresh -->
+<script>
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
 </script>

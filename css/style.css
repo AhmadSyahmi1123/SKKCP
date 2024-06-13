@@ -1012,8 +1012,10 @@ ul {
 /* Senarai Aktiviti Styling */
 
 .upload-aktiviti-container,
-.upload-ahli-container {
+.upload-ahli-container,
+.laporan-aktiviti-container {
     display: flex;
+    align-items: center;
     padding-top: 40px;
 }
 
@@ -1267,7 +1269,6 @@ input[type="time"] {
     position: absolute;
     display: flex;
     align-items: center;
-    top: 0;
     right: 0;
     z-index: 10;
 }
@@ -1471,4 +1472,10 @@ input[type="time"] {
 
 .select_pic_btn input::-webkit-file-upload-button {
     visibility: hidden;
+}
+
+.font-size-button {
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
 }

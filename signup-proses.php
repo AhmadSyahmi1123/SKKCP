@@ -6,7 +6,7 @@ session_start();
 if (!empty($_POST)) {
 
     # Memanggil fail connection.php
-    include("connection.php");
+    include ("connection.php");
 
     # Mengambil data yang dihantar dari fail signup-borang.php
     $nama = strtoupper($_POST["nama"]);
@@ -44,8 +44,12 @@ if (!empty($_POST)) {
     # Data Validation
     # nokp yang dimasukkan hendaklah 12 digit dan tidak mempunyai huruf/simbol
     if (strlen($nokp) != 12 or !is_numeric($nokp)) {
-        die("<script>alert ('Ralat Pada No. Kad Pengenalan');
-        window.location.href='signup-borang.php'; </script>");
+        $message = "Sila Masukkan No. Kad Pengenalan Yang Sah!";
+        $notificationType = 'error';
+        $notificationMessage = $message;
+
+        header("Location: signup-borang.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+        exit();
     }
 
     # Menyemak jika nokp yang dimasukkan wujud dalam pangkalan data
@@ -53,8 +57,12 @@ if (!empty($_POST)) {
     $laksana_arahan_semak = mysqli_query($condb, $arahan_sql_semak);
     if (mysqli_num_rows($laksana_arahan_semak) == 1) {
         # Jika nokp tang dimasukkan telah wujud, aturcara akan berhenti
-        die("<script>alert ('RALAT NO. KAD PENGENALAN! No. Kad Pengenalan yang dimasukkan telah digunakan');
-        window.location.href='signup-borang.php'; </script>");
+        $message = "No. Kad Pengenalan telah wujud dalam sistem!";
+        $notificationType = 'error';
+        $notificationMessage = $message;
+
+        header("Location: signup-borang.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+        exit();
     }
 
     # Arahan SQL (query) untuk menyimpan data ahli baru
@@ -65,15 +73,27 @@ if (!empty($_POST)) {
     # Menguji jika proses menyimpan data berjaya atau tidak
     if ($laksana_arahan_simpan) {
         #Jika berjaya, papar popup dan buka fail ahli-login-borang
-        echo "<script>alert('Pendaftaran Berjaya. Sila Log Masuk');
-        window.location.href='login-borang.php'; </script>";
+        $message = "Data Berjaya Didaftar!";
+        $notificationType = 'success';
+        $notificationMessage = $message;
+
+        header("Location: login-borang.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+        exit();
     } else {
         # Jika tidak berjaya, papar popup dan buka fail signup-borang
-        echo "<script>alert('Pendaftaran Gagal');
-        window.location.href='signup-borang.php'; </script>";
+        $message = "Data Gagal Didaftar!";
+        $notificationType = 'error';
+        $notificationMessage = $message;
+
+        header("Location: signup-borang.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+        exit();
     }
 } else {
     # Jika pengguna buka fail ini tanpa mengisi data, papar popup dan buka fail signup-borang
-    echo "<script>alert('Sila lengkapkan maklumat');
-    window.location.href='signup-borang.php'; </script>";
+    $message = "Sila Lengkapkan Maklumat!";
+    $notificationType = 'error';
+    $notificationMessage = $message;
+
+    header("Location: signup-borang.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+    exit();
 }

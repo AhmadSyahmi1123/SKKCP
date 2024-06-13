@@ -3,7 +3,7 @@
 session_start();
 
 # Memanggil fail header.php
-include("header.php");
+include ("header.php");
 ?>
 <div class="page-header">Dashboard</div>
 <main>
@@ -44,3 +44,6 @@ include("header.php");
         new Glide('.glide', config).mount()
     </script>
 </main>
+
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script src="scripts\toast.js"></script>

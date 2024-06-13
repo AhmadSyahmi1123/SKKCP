@@ -3,7 +3,7 @@
 session_start();
 
 # Memanggil fail header.php
-include("header.php");
+include ("header.php");
 ?>
 
 <!-- Ruang kotak yang mengandungi komponen untuk pengguna mendaftar -->
@@ -33,3 +33,6 @@ include("header.php");
     </form>
 </div>
 <script src="scripts\password-visibility-toggle.js" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+<script src="scripts\toast.js"></script>

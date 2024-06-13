@@ -6,7 +6,7 @@ session_start();
 if (!empty($_POST['nokp']) and !empty($_POST['katalaluan'])) {
 
     # Memanggil fail connection.php
-    include('connection.php');
+    include ('connection.php');
 
     # Mengambil data yang di POST dari fail borang
     $nokp = $_POST['nokp'];
@@ -39,18 +39,36 @@ if (!empty($_POST['nokp']) and !empty($_POST['katalaluan'])) {
 
         # Buka laman index.php
         if ($_SESSION["tahap"] == "ADMIN") {
-            echo "<script>window.location.href='index-admin.php'; </script>";
+            $message = "Log Masuk Berjaya!";
+            $notificationType = 'success';
+            $notificationMessage = $message;
+
+            header("Location: index-admin.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+            exit();
         } else {
-            echo "<script>window.location.href='index-biasa.php'; </script>";
+            $message = "Log Masuk Berjaya!";
+            $notificationType = 'success';
+            $notificationMessage = $message;
+
+            header("Location: index-biasa.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+            exit();
         }
 
     } else {
         # Jika tidak, log masuk gagal. Kembali ke laman login-borang.php
-        die("<script>alert('Log Masuk Gagal');
-        window.location.href='login-borang.php'; </script>");
+        $message = "Log Masuk Gagal!";
+        $notificationType = 'error';
+        $notificationMessage = $message;
+
+        header("Location: login-borang.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+        exit();
     }
 } else {
     # Data yang dihantar dari laman login-borang.php kosong
-    die("<script>alert('Sila Masukkan No. Kad Pengenalan dan Katalaluan');
-    window.location.href='login-borang.php'; </script>");
+    $message = "Sila Masukkan No. Kad Pengenalan dan Katalaluan!";
+    $notificationType = 'error';
+    $notificationMessage = $message;
+
+    header("Location: login-borang.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+    exit();
 }

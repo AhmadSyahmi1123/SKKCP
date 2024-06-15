@@ -726,6 +726,10 @@ ul {
     max-width: 600px;
 }
 
+.table thead {
+    display: table-header-group;
+}
+
 .table th {
     background-color: var(--secondary-color);
     text-align: left;
@@ -1477,6 +1481,8 @@ input[type="time"] {
     visibility: hidden;
 }
 
+/*change font size button*/
+
 .font-size-button {
     display: flex;
     justify-content: space-evenly;
@@ -1527,4 +1533,86 @@ input[type="time"] {
     cursor: pointer;
     color: var(--text-color);
     font-size: 16px;
+}
+
+/*index (admin)*/
+.dashboard-container {
+    display: flex;
+    align-items: center;
+}
+
+.aktiviti-count-container,
+.ahli-count-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 400px;
+    height: 300px;
+    margin: 10px;
+    padding: 10px;
+    flex: 1;
+}
+
+.count-text-container {
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.icon-aktiviti-container,
+.icon-ahli-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    margin-top: 30px;
+    border-radius: 10px;
+    background: coral;
+    width: 150px;
+    height: 150px;
+}
+
+.icon-aktiviti-container span,
+.icon-ahli-container span {
+    font-size: 100px;
+}
+
+.count-label {
+    font-size: 48px;
+    margin-left: 10px;
+}
+
+.count-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.count-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height: 200px;
+    font-size: 200px;
+}
+
+.leaderboard-container {
+    margin: 10px;
+    padding: 10px;
+}
+
+.leaderboard {
+    width: 100%;
+    height: 100%;
+}
+
+.leaderboard .table thead {
+    width: 100%;
+}
+
+.card-header-container {
+    display: flex;
+    position: relative;
 }

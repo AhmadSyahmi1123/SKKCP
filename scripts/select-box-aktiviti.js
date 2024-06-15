@@ -4,7 +4,7 @@ $("#select-box-aktiviti").select2({
     dropdownCssClass: "select2-dark-dropdown"
 });
 
-$('.select2-selection').css('font-size', '16px');
+$('.select2-selection').css('font-size', '18px');
 $('.select2-selection').css('height', '30px');
 $('.select2-selection').css('background-color', '#26272b');
 

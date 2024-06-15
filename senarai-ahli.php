@@ -25,13 +25,6 @@ include ("kawalan-admin.php");
             </form>
         </div>
 
-        <div class="font-size-button" style="position:relative; left: 0;">
-            <input name='reSize1' type='button' value='reset' onclick="ubahsaiz(2)" />
-            <input name='reSize' type='button' value='&nbsp;+&nbsp;' onclick="ubahsaiz(1)" />
-            <input name='reSize2' type='button' value='&nbsp;-&nbsp;' onclick="ubahsaiz(-1)" />
-            <button onclick="window.print()">Cetak</button>
-        </div>
-
         <div class="upload-container">
             <button id="open-upload" class="uploadBtn" data-tooltip="Muat Naik Ahli">
                 <i class='material-symbols-outlined'>group_add</i>
@@ -39,10 +32,17 @@ include ("kawalan-admin.php");
 
             <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
         </div>
+
+        <div class="font-size-button">
+            <button class="resize-btn" onclick="ubahsaiz(1)" data-tooltip="Ubah Saiz Tulisan"><i
+                    class='bx bx-font-size'></i></button>
+            <button class="reset-font-size" onclick="ubahsaiz(2)">Reset Size</button>
+            <button class="print-btn" onclick="printPage()">Cetak</button>
+        </div>
     </div>
 
-    <div class="table-container">
-        <div class="scrollable-table">
+    <div class="table-container" id="body">
+        <div class="scrollable-table" id="print-area">
             <table class="table" id="saiz">
                 <thead>
 
@@ -152,8 +152,9 @@ include ("kawalan-admin.php");
     <script src="scripts\dialog-script-upload.js" defer></script>
 </main>
 
-<!-- fungsi mengubah saiz tulisan bagi kepelbagaian pengguna-->
+<!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>
+<script src="scripts\print-page.js" defer></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

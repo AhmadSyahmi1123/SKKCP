@@ -46,8 +46,13 @@ $count_ahli = mysqli_num_rows($exec_ahli);
     </div>
 
     <div class="card leaderboard-container">
+        <div class="count-label">Leaderboard</div>
         <div class="card-header-container">
-            <div class="count-label">Leaderboard</div>
+            <div class="input-carian-container">
+                <div class="input-carian">
+                    <input type='text' id="searchNama" name='nama' placeholder='Carian Nama Ahli'>
+                </div>
+            </div>
             <div class="font-size-button">
                 <button class="resize-btn" onclick="ubahsaiz(1)" data-tooltip="Ubah Saiz Tulisan"><i
                         class='bx bx-font-size'></i></button>
@@ -66,7 +71,7 @@ $count_ahli = mysqli_num_rows($exec_ahli);
                             <th>Mata</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="leaderboardBody">
                         <?php
                         # Arahan query untuk mencari senarai aktiviti
                         $arahan_papar = "SELECT ahli.nama, ahli.mata, ahli.profile_pic, kelas.ting, kelas.nama_kelas
@@ -105,3 +110,21 @@ $count_ahli = mysqli_num_rows($exec_ahli);
 <!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>
 <script src="scripts\print-page.js" defer></script>
+
+<script>
+    document.getElementById('searchNama').addEventListener('input', function () {
+        const searchValue = this.value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search-leaderboard.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                document.getElementById('leaderboardBody').innerHTML = this.responseText;
+            }
+        }
+
+        xhr.send('nama=' + encodeURIComponent(searchValue));
+    });
+</script>

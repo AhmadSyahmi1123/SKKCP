@@ -895,15 +895,16 @@ ul {
     position: relative;
     width: 100%;
     height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .input-carian-container {
     display: flex;
     position: relative;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 0 0 20px;
     height: 40px;
-    width: 26%;
 }
 
 .input-carian input {
@@ -944,7 +945,6 @@ ul {
 }
 
 .upload-container .uploadBtn {
-    margin: 0 10px;
     bottom: 0;
     background: #009578;
     width: 40px;
@@ -1579,7 +1579,7 @@ input[type="time"] {
 
 .count-label {
     font-size: 48px;
-    margin-left: 10px;
+    margin: 10px;
 }
 
 .count-container {
@@ -1590,6 +1590,7 @@ input[type="time"] {
 }
 
 .count-text {
+    font-family: "Poppins", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;

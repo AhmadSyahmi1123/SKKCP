@@ -70,15 +70,9 @@ include ("kawalan-admin.php");
 
         <div class="laporan-aktiviti-container">
             <div class="input-carian-container">
-                <form action="kehadiran-laporan.php?IDaktiviti=<?= $IDaktiviti ?>" method='POST'>
-                    <div class="input-carian">
-                        <input type="text" name="nama" placeholder="Carian Nama Ahli">
-                    </div>
-
-                    <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
-                        <i class='bx bx-search'></i>
-                    </button>
-                </form>
+                <div class="input-carian">
+                    <input type="text" id="searchAhli" name="nama" placeholder="Carian Nama Ahli">
+                </div>
             </div>
 
             <div class="font-size-button">
@@ -102,14 +96,8 @@ include ("kawalan-admin.php");
                             <th>Tindakan</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="laporanBody">
                         <?php
-                        # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
-                        $tambahan = "";
-                        if (!empty($_POST["nama"])) {
-                            $tambahan = "where ahli.nama like '%" . $_POST['nama'] . "%'";
-                        }
-
                         # Arahan query untuk mencari senarai aktiviti
                         $arahan_papar = "
                         SELECT *, ahli.nokp
@@ -119,7 +107,6 @@ include ("kawalan-admin.php");
                         LEFT JOIN kehadiran
                         ON ahli.nokp = kehadiran.nokp
                         and IDaktiviti like '%$IDaktiviti%'
-                        $tambahan
                         ORDER BY ahli.nama
                         ";
 
@@ -162,37 +149,37 @@ include ("kawalan-admin.php");
         </div>
     </div>
 
-    <!-- Borang untuk memuat naik fail -->
-    <div class="modal-container" id="modal_mata_container">
-        <div class="card modal_mata modal">
-            <button class="closeBtn closeMataBtn"><i class='bx bx-x'></i></button>
-
-            <h1>Tambah Mata Ahli</h1>
-
-            <form action="mata-kemaskini-proses.php?nokp=<?= $m["nokp"] ?>" method="POST">
-
-                <div class="input_container">
-                    <div class="input-box">
-                        <input type='number' name='mata' value="0" required><br>
-
-                        <!-- Hantar IDaktiviti supaya page tidak "reset" -->
-                        <input type='number' name='IDaktiviti' value="<?= $IDaktiviti ?>" hidden><br>
-                    </div>
-                </div>
-
-                <div class="tambah-mata-container">
-                    <button class="tambahMataBtn close-update-point" type="submit">Tambah</button>
-                </div>
-            </form>
-
-        </div>
-    </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="scripts\select-box-aktiviti.js" defer></script>
     <script src="scripts\dialog-update-mata.js" defer></script>
 </main>
+
+<!-- Borang untuk memuat naik fail -->
+<div class="modal-container" id="modal_mata_container">
+    <div class="card modal_mata modal">
+        <button class="closeBtn closeMataBtn"><i class='bx bx-x'></i></button>
+
+        <h1>Tambah Mata Ahli</h1>
+
+        <form action="mata-kemaskini-proses.php?nokp=<?= $m["nokp"] ?>" method="POST">
+
+            <div class="input_container">
+                <div class="input-box">
+                    <input type='number' name='mata' value="0" required><br>
+
+                    <!-- Hantar IDaktiviti supaya page tidak "reset" -->
+                    <input type='number' name='IDaktiviti' value="<?= $IDaktiviti ?>" hidden><br>
+                </div>
+            </div>
+
+            <div class="tambah-mata-container">
+                <button class="tambahMataBtn close-update-point" type="submit">Tambah</button>
+            </div>
+        </form>
+
+    </div>
+</div>
 
 <!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>
@@ -207,4 +194,65 @@ include ("kawalan-admin.php");
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+</script>
+
+<!-- Fungsi realtime-search -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('searchAhli').addEventListener('input', function () {
+            const searchValue = this.value;
+            const laporanBody = document.getElementById('laporanBody');
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'search-laporan.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    laporanBody.innerHTML = this.responseText;
+
+                    // Re-attach event listeners for dynamically loaded content
+                    attachEventListeners();
+                }
+            }
+
+            xhr.send('nama=' + encodeURIComponent(searchValue));
+        });
+
+        function attachEventListeners() {
+            // Attach event listener for editMataBtn using event delegation
+            document.getElementById('laporanBody').addEventListener('click', function (event) {
+                const editMataBtn = event.target.closest('.open-update-point');
+                if (editMataBtn) {
+                    const nokp = editMataBtn.dataset.nokp;
+                    console.log('editMataBtn clicked for nokp: ' + nokp);
+
+                    // Show modal or perform other actions here
+                    showModal(nokp);
+                }
+            });
+        }
+
+        // Initial attachment of event listeners
+        attachEventListeners();
+
+        function showModal(nokp) {
+            const modalContainer = document.getElementById('modal_mata_container');
+            const modalForm = modalContainer.querySelector('form');
+
+            // Set the nokp value in the form action or hidden input
+            const formAction = `mata-kemaskini-proses.php?nokp=${nokp}`;
+            modalForm.setAttribute('action', formAction);
+
+            // Show the modal
+            modalContainer.classList.add("show");
+
+            // Add event listener for close button inside the modal
+            const closeModalBtn = modalContainer.querySelector('.closeMataBtn');
+            closeModalBtn.addEventListener('click', function () {
+                modalContainer.classList.remove("show");
+            });
+        }
+    });
+
 </script>

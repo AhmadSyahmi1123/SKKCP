@@ -14,15 +14,9 @@ include ("kawalan-admin.php");
 
     <div class="upload-aktiviti-container">
         <div class="input-carian-container">
-            <form action='' method='POST'>
-                <div class="input-carian">
-                    <input type="text" name='nama_aktiviti' placeholder='Carian Aktiviti'>
-                </div>
-
-                <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
-                    <i class='bx bx-search'></i>
-                </button>
-            </form>
+            <div class="input-carian">
+                <input type="text" id="searchAktiviti" name='nama_aktiviti' placeholder='Carian Aktiviti'>
+            </div>
         </div>
 
         <div class="upload-container">
@@ -53,16 +47,10 @@ include ("kawalan-admin.php");
                         <th>Tindakan</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="aktivitiBody">
                     <?php
-                    # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai aktiviti
-                    $cari_aktiviti = "";
-                    if (!empty($_POST["nama_aktiviti"])) {
-                        $cari_aktiviti = "where nama_aktiviti like '%" . $_POST['nama_aktiviti'] . "%'";
-                    }
-
                     # Araham query untuk mencari senarai aktiviti
-                    $arahan_papar = "select * from aktiviti $cari_aktiviti";
+                    $arahan_papar = "SELECT * FROM aktiviti";
 
                     # Laksana arahan mencari senarai aktiviti
                     $laksana = mysqli_query($condb, $arahan_papar);
@@ -188,4 +176,22 @@ include ("kawalan-admin.php");
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+</script>
+
+<script>
+    document.getElementById('searchAktiviti').addEventListener('input', function () {
+        const searchValue = this.value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search-aktiviti.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                document.getElementById('aktivitiBody').innerHTML = this.responseText;
+            }
+        }
+
+        xhr.send('nama_aktiviti=' + encodeURIComponent(searchValue));
+    });
 </script>

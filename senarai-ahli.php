@@ -14,15 +14,9 @@ include ("kawalan-admin.php");
 
     <div class="upload-ahli-container">
         <div class="input-carian-container">
-            <form action='' method="POST">
-                <div class="input-carian">
-                    <input type='text' name='nama' placeholder='Carian Nama Ahli'>
-                </div>
-
-                <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
-                    <i class='bx bx-search'></i>
-                </button>
-            </form>
+            <div class="input-carian">
+                <input type='text' id="searchAhli" name='nama' placeholder='Carian Nama Ahli'>
+            </div>
         </div>
 
         <div class="upload-container">
@@ -56,16 +50,10 @@ include ("kawalan-admin.php");
                         <th>Tindakan</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="ahliBody">
                     <?php
-                    # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
-                    $cari_ahli = "";
-                    if (!empty($_POST["nama"])) {
-                        $cari_ahli = " and ahli.nama like '%" . $_POST['nama'] . "%'";
-                    }
-
                     # Arahan query untuk mencari senarai nama ahli
-                    $arahan_papar = "select * from ahli, kelas where ahli.IDkelas = kelas.IDkelas $cari_ahli ";
+                    $arahan_papar = "select * from ahli, kelas where ahli.IDkelas = kelas.IDkelas ORDER BY ahli.nama ASC";
 
                     # Laksana arahan mencari data ahli
                     $laksana = mysqli_query($condb, $arahan_papar);
@@ -88,13 +76,13 @@ include ("kawalan-admin.php");
 
                         # Memaparkan senarai nama dalam jadual
                         echo "<tr>
-    <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
-    <td>" . $m['nokp'] . "</td>
-    <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
-    <td>" . $m['katalaluan'] . "</td>
-    <td>" . $m['tahap'] . "</td>
-    <td>" . $m['mata'] . "</td>
-";
+                                <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
+                                <td>" . $m['nokp'] . "</td>
+                                <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
+                                <td>" . $m['katalaluan'] . "</td>
+                                <td>" . $m['tahap'] . "</td>
+                                <td>" . $m['mata'] . "</td>
+                            ";
 
 
                         # Memaparkan navigasi untuk kemaskini dan hapus data ahli
@@ -207,4 +195,22 @@ include ("kawalan-admin.php");
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
+</script>
+
+<script>
+    document.getElementById('searchAhli').addEventListener('input', function () {
+        const searchValue = this.value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search-ahli.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                document.getElementById('ahliBody').innerHTML = this.responseText;
+            }
+        }
+
+        xhr.send('nama=' + encodeURIComponent(searchValue));
+    });
 </script>

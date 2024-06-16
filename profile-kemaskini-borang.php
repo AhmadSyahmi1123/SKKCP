@@ -31,25 +31,29 @@ include ("connection.php");
                 <br>
             </div>
 
-            <label for="input-kelas">Kelas</label>
-            <div id="input-kelas" class="select-kelas-box select-aktiviti-container">
-                <select name='IDkelas' id="select-box-kelas" class="select-kelas">
-                    <option value='<?= $_SESSION['IDkelas'] ?>'>
-                        <?= $_SESSION['ting'] ?>
-                        <?= $_SESSION['nama_kelas'] ?>
-                    </option>
+            <div class="options-container">
+                <div class="select-kelas-box-container">
+                    <label for="input-kelas">Kelas</label>
+                    <div id="input-kelas" class="select-kelas-box select-aktiviti-container">
+                        <select name='IDkelas' id="select-box-kelas" class="select-kelas">
+                            <option value='<?= $_SESSION['IDkelas'] ?>'>
+                                <?= $_SESSION['ting'] ?>
+                                <?= $_SESSION['nama_kelas'] ?>
+                            </option>
 
-                    <?php
-                    # Proses memaparkan senarai kelas dalam bentuk dropdown list
-                    $arahan_sql_pilih = "select * from kelas";
-                    $laksana_arahan_pilih = mysqli_query($condb, $arahan_sql_pilih);
-                    while ($m = mysqli_fetch_array($laksana_arahan_pilih)) {
-                        if ($m["IDkelas"] != $_SESSION['IDkelas']) {
-                            echo "<option value='" . $m['IDkelas'] . "'> " . $m['ting'] . " " . $m['nama_kelas'] . " </option>";
-                        }
-                    }
-                    ?>
-                </select>
+                            <?php
+                            # Proses memaparkan senarai kelas dalam bentuk dropdown list
+                            $arahan_sql_pilih = "select * from kelas";
+                            $laksana_arahan_pilih = mysqli_query($condb, $arahan_sql_pilih);
+                            while ($m = mysqli_fetch_array($laksana_arahan_pilih)) {
+                                if ($m["IDkelas"] != $_SESSION['IDkelas']) {
+                                    echo "<option value='" . $m['IDkelas'] . "'> " . $m['ting'] . " " . $m['nama_kelas'] . " </option>";
+                                }
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
             </div>
 
             <div class="kemaskini_profile_pic_container">
@@ -80,8 +84,8 @@ include ("connection.php");
             </div>
 
             <div class="kemaskini-container">
-                <button class="cancelBtn" type="button" onclick="window.history.back();">Batal</button>
                 <button class="kemaskiniBtn" name="submit" type="submit">Kemaskini</button>
+                <button class="cancelBtn" type="button" onclick="window.history.back();">Batal</button>
             </div>
 
         </form>

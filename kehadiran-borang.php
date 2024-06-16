@@ -26,15 +26,9 @@ $n = mysqli_fetch_array($laksana_aktiviti);
     <div class="borang-container">
         <div class="searchNupload-container">
             <div class="input-carian-container">
-                <form action='' method="POST">
-                    <div class="input-carian">
-                        <input type='text' name='nama' placeholder='Carian Nama Ahli' autocomplete="off">
-                    </div>
-
-                    <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">
-                        <i class='bx bx-search'></i>
-                    </button>
-                </form>
+                <div class="input-carian">
+                    <input type='text' id="searchAhli" name='nama' placeholder='Carian Nama Ahli' autocomplete="off">
+                </div>
             </div>
 
             <div class="font-size-button">
@@ -59,7 +53,7 @@ $n = mysqli_fetch_array($laksana_aktiviti);
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="kehadiranBody">
                             <?php
                             # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
                             $cari_ahli = "";
@@ -127,3 +121,22 @@ $n = mysqli_fetch_array($laksana_aktiviti);
 <!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>
 <script src="scripts\print-page.js" defer></script>
+
+<script>
+    document.getElementById('searchAhli').addEventListener('input', function () {
+        const searchValue = this.value;
+        const IDaktiviti = <?= json_encode($_GET['IDaktiviti']) ?>;  // Get the IDaktiviti value from the PHP variable
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search-kehadiran-borang.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                document.getElementById('kehadiranBody').innerHTML = this.responseText;
+            }
+        }
+
+        xhr.send('nama=' + encodeURIComponent(searchValue) + '&IDaktiviti=' + encodeURIComponent(IDaktiviti));
+    });
+</script>

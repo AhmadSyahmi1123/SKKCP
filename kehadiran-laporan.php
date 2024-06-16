@@ -107,7 +107,7 @@ include ("kawalan-admin.php");
                         LEFT JOIN kehadiran
                         ON ahli.nokp = kehadiran.nokp
                         and IDaktiviti like '%$IDaktiviti%'
-                        ORDER BY ahli.nama
+                        ORDER BY ahli.nama ASC
                         ";
 
                         # Laksana arahan mencari data aktiviti
@@ -202,6 +202,7 @@ include ("kawalan-admin.php");
         document.getElementById('searchAhli').addEventListener('input', function () {
             const searchValue = this.value;
             const laporanBody = document.getElementById('laporanBody');
+            const IDaktiviti = <?= json_encode($_GET['IDaktiviti']) ?>;  // Get the IDaktiviti value from the PHP variable
 
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'search-laporan.php', true);
@@ -216,7 +217,7 @@ include ("kawalan-admin.php");
                 }
             }
 
-            xhr.send('nama=' + encodeURIComponent(searchValue));
+            xhr.send('nama=' + encodeURIComponent(searchValue) + '&IDaktiviti=' + encodeURIComponent(IDaktiviti));
         });
 
         function attachEventListeners() {

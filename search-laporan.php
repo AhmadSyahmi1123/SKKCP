@@ -2,6 +2,7 @@
 include ("connection.php");
 
 if (isset($_POST['nama'])) {
+    $IDaktiviti = $_POST['IDaktiviti'];
     $nama = mysqli_real_escape_string($condb, $_POST['nama']);
     $arahan_papar = "SELECT *, ahli.nokp
                         FROM ahli
@@ -9,8 +10,9 @@ if (isset($_POST['nama'])) {
                         ON ahli.IDkelas = kelas.IDkelas
                         LEFT JOIN kehadiran
                         ON ahli.nokp = kehadiran.nokp
+                        and IDaktiviti like '%$IDaktiviti%'
                         where ahli.nama like '%$nama%'
-                        ORDER BY ahli.nama";
+                        ORDER BY ahli.nama ASC";
 
     $laksana = mysqli_query($condb, $arahan_papar);
     $bil = 0;

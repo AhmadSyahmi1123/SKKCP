@@ -71,7 +71,7 @@ include ("kawalan-admin.php");
         <div class="laporan-aktiviti-container">
             <div class="input-carian-container">
                 <div class="input-carian">
-                    <input type="text" id="searchAhli" name="nama" placeholder="Carian Nama Ahli">
+                    <input type="text" id="searchAhli" name="nama" placeholder="Carian Nama Ahli" autocomplete="off">
                 </div>
             </div>
 

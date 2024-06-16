@@ -15,7 +15,7 @@ include ("kawalan-admin.php");
     <div class="upload-aktiviti-container">
         <div class="input-carian-container">
             <div class="input-carian">
-                <input type="text" id="searchAktiviti" name='nama_aktiviti' placeholder='Carian Aktiviti'>
+                <input type="text" id="searchAktiviti" name='nama_aktiviti' placeholder='Carian Aktiviti' autocomplete="off">
             </div>
         </div>
 

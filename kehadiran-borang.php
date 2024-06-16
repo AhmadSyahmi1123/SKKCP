@@ -28,7 +28,7 @@ $n = mysqli_fetch_array($laksana_aktiviti);
             <div class="input-carian-container">
                 <form action='' method="POST">
                     <div class="input-carian">
-                        <input type='text' name='nama' placeholder='Carian Nama Ahli'>
+                        <input type='text' name='nama' placeholder='Carian Nama Ahli' autocomplete="off">
                     </div>
 
                     <button class="searchBtn" type='submit' value='Cari' data-tooltip="Cari">

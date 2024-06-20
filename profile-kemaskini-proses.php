@@ -3,17 +3,17 @@
 session_start();
 
 # Semak kewujudan data POST
-if (!empty ($_POST)) {
+if (!empty($_POST)) {
     # Memanggil fail connection.php
     include ("connection.php");
 
     # Pengesahan data nokp ahli
     if (strlen($_POST["nokp"]) != 12 or !is_numeric($_POST["nokp"])) {
-        die ("<script>alert('Ralat No Kad Pengenalan');
+        die("<script>alert('Ralat No Kad Pengenalan');
         window.history.back();</script>");
     }
 
-    if (isset ($_POST['submit'])) {
+    if (isset($_POST['submit'])) {
         $profile_pic = $_FILES['profile_pic'];
 
         $img_name = $_FILES['profile_pic']['name'];
@@ -22,7 +22,7 @@ if (!empty ($_POST)) {
         $error = $_FILES['profile_pic']['error'];
 
         // Check if file was uploaded without errors
-        if (isset ($_FILES["profile_pic"]) && $error == 0) {
+        if (isset($_FILES["profile_pic"]) && $error == 0) {
             $target_dir = "uploads/";
             $imageFileType = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
 
@@ -51,15 +51,16 @@ if (!empty ($_POST)) {
             tahap = '" . $_SESSION['tahap'] . "'";
 
         // Add condition to update profile_pic only if it's changed
-        if (isset ($unique_filename)) {
+        if (isset($unique_filename)) {
             $arahan .= ", profile_pic = '" . $unique_filename . "'";
         }
 
-        $arahan .= " WHERE
-            nokp = '" . $_SESSION['nokp'] . "'";
+        $arahan .= " WHERE nokp = '" . $_SESSION['nokp'] . "'";
+
+        $laksana_arahan = mysqli_query($condb, $arahan);
 
         # Laksana dan semak proses kemaskini
-        if (mysqli_query($condb, $arahan)) {
+        if ($laksana_arahan) {
             # Kemaskini berjaya
 
             # Kemaskini info di profil.php
@@ -68,7 +69,7 @@ if (!empty ($_POST)) {
             $_SESSION['katalaluan'] = $_POST['katalaluan'];
             $_SESSION['IDkelas'] = $_POST['IDkelas'];
             // Update profile_pic only if it's changed
-            if (isset ($unique_filename)) {
+            if (isset($unique_filename)) {
                 $_SESSION['profile_pic'] = $unique_filename;
             }
 
@@ -80,16 +81,20 @@ if (!empty ($_POST)) {
             $_SESSION['ting'] = $row_kelas['ting'];
             $_SESSION['nama_kelas'] = $row_kelas['nama_kelas'];
 
-            echo "<script>alert('Kemaskini Berjaya!');
-        window.location.href='profil.php';</script>";
+            $message = "Kemaskini Berjaya!";
+            $notificationType = 'success';
+            $notificationMessage = $message;
         } else {
             # Kemaskini gagal
-            echo "<script>alert('Kemaskini Gagal');
-        window.history.back();</script>";
+            $message = "Ralat! Kemaskini Gagal!";
+            $notificationType = 'error';
+            $notificationMessage = $message;
         }
+        header("Location: profil.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+        exit();
     }
 } else {
     # Jika data GET tidak wujud, kembali ke fail profil.php
-    die ("<script>alert('Sila lengkapkan data');
+    die("<script>alert('Sila lengkapkan data');
     window.location.href='profil.php';</script>");
 }

@@ -13,31 +13,37 @@ if (!empty($_POST)) {
     $nokp = $_POST["nokp"];
     $IDkelas = $_POST["IDkelas"];
     $katalaluan = $_POST["katalaluan"];
-    $profile_pic = $_FILES['profile_pic'];
 
     $img_name = $_FILES['profile_pic']['name'];
     $img_size = $_FILES['profile_pic']['size'];
     $tmp_name = $_FILES['profile_pic']['tmp_name'];
     $error = $_FILES['profile_pic']['error'];
 
-    // Check if file was uploaded without errors
-    if (isset($_FILES["profile_pic"]) && $error == 0) {
-        $target_dir = "uploads/";
-        $imageFileType = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
+    $file_path = "";
 
-        // Generate a unique filename
-        $unique_filename = $nokp . '.' . $imageFileType;
-        $target_file = $target_dir . $unique_filename;
+    // Check if file was uploaded
+    if ($error == UPLOAD_ERR_NO_FILE) {
+        // No file was uploaded
+        $file_path = "default-avatar.png";
+    } else {
+        // Check if file was uploaded without errors
+        if (isset($_FILES["profile_pic"]) && $error == 0) {
+            $target_dir = "uploads/";
+            $imageFileType = strtolower(pathinfo($img_name, PATHINFO_EXTENSION));
 
-        if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
-            if (move_uploaded_file($tmp_name, $target_file)) {
-                $file_path = $target_file;
-                // Insert $file_path into your database along with other user information
+            // Generate a unique filename
+            $unique_filename = $nokp . '.' . $imageFileType;
+            $target_file = $target_dir . $unique_filename;
+
+            if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg") {
+                if (move_uploaded_file($tmp_name, $target_file)) {
+                    $file_path = $unique_filename;
+                } else {
+                    echo "Sorry, there was an error uploading your file.";
+                }
             } else {
-                echo "Sorry, there was an error uploading your file.";
+                echo "Sorry, only JPG, JPEG, PNG files are allowed.";
             }
-        } else {
-            echo "Sorry, only JPG, JPEG, PNG files are allowed.";
         }
     }
 
@@ -53,10 +59,10 @@ if (!empty($_POST)) {
     }
 
     # Menyemak jika nokp yang dimasukkan wujud dalam pangkalan data
-    $arahan_sql_semak = "select* from ahli where nokp='$nokp' limit 1";
+    $arahan_sql_semak = "SELECT * FROM ahli WHERE nokp='$nokp' LIMIT 1";
     $laksana_arahan_semak = mysqli_query($condb, $arahan_sql_semak);
     if (mysqli_num_rows($laksana_arahan_semak) == 1) {
-        # Jika nokp tang dimasukkan telah wujud, aturcara akan berhenti
+        # Jika nokp yang dimasukkan telah wujud, aturcara akan berhenti
         $message = "No. Kad Pengenalan telah wujud dalam sistem!";
         $notificationType = 'error';
         $notificationMessage = $message;
@@ -66,7 +72,8 @@ if (!empty($_POST)) {
     }
 
     # Arahan SQL (query) untuk menyimpan data ahli baru
-    $arahan_sql_simpan = "insert into ahli (nokp, nama, IDkelas, katalaluan, tahap, profile_pic) values ('$nokp', '$nama', '$IDkelas','$katalaluan', 'BIASA', '$unique_filename')";
+    $arahan_sql_simpan = "INSERT INTO ahli (nokp, nama, IDkelas, katalaluan, tahap, profile_pic) 
+                          VALUES ('$nokp', '$nama', '$IDkelas', '$katalaluan', 'BIASA', '$file_path')";
     # Melaksanakan arahan SQL menyimpan data ahli baru
     $laksana_arahan_simpan = mysqli_query($condb, $arahan_sql_simpan);
 

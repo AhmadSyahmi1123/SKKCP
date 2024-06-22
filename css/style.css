@@ -71,8 +71,8 @@ a {
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: 0 calc((100% - 1076px)/2);
-    min-height: 120px;
+    margin: 0 calc((100% - 1100px)/2);
+    min-height: 100px;
 }
 
 .text {
@@ -323,11 +323,16 @@ ul {
 /*------------------------------------------------------*/
 
 /* Borang Daftar Ahli Baru/ Daftar Masuk Ahli */
+.wrapper-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .wrapper {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     width: 450px;
     padding: 30px 40px;
 }
@@ -428,11 +433,12 @@ ul {
 
 .carousel-container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px 15px;
+    margin-top: 20px;
 }
 
 .glide__slide img {
@@ -1158,7 +1164,6 @@ input[type="time"] {
 
 .modal_upload {
     position: relative;
-    width: 450px;
     padding: 30px 40px;
 }
 
@@ -1239,25 +1244,42 @@ input[type="time"] {
 }
 
 .uploadBtn-container .upload_fileBtn {
+    display: flex;
+    align-items: center;
     position: relative;
     background: #007bff;
     border: none;
     border-radius: 40px;
     color: var(--text-color);
-    padding: 10px 20px;
+    padding: 10px 15px;
     cursor: pointer;
 }
 
 .uploadBtn-container .upload_fileBtn i {
     font-size: 20px;
-    transform: translateY(3px);
+    margin: 2px;
 }
 
-.upload-box .choose_fileBtn {
+.choose-file-btn {
+    margin: 20px 0;
+    position: relative;
+    width: 100%;
+    border: 1px solid;
+    border-radius: .25rem;
+}
+
+.choose-file-btn input[type="file"]::file-selector-button {
+    background-color: transparent;
+    height: 30px;
     border: none;
-    border-radius: 7px;
-    padding: 10px 20px;
+    border-right: 1px solid;
+    border-top-left-radius: .25rem;
+    border-bottom-left-radius: .25rem;
     cursor: pointer;
+}
+
+.choose-file-btn input[type="file"]::file-selector-button:hover {
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 /*------------------------------------------------------*/

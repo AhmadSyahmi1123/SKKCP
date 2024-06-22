@@ -39,8 +39,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
 
-<body>
+<div class="title-container">
+    <div class="text">KELAB COMPETITIVE PROGRAMMING SMK BANDAR TASIK PUTERI </div>
+</div>
 
+<body>
     <?php
     if (!empty($_SESSION['tahap']) and $_SESSION['tahap'] == "ADMIN") { ?>
         <!-- Menu ADMIN : dipaparkan sekiranya admin telah log masuk -->
@@ -131,7 +134,7 @@
                                             <path
                                                 d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z">
                                             </path>
-                                        </svg></i> Daftar Masuk Ahli</a>
+                                        </svg></i> Log Masuk Ahli</a>
                             </li>
                         </ul>
                     </nav>

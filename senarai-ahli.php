@@ -119,11 +119,13 @@ include ("kawalan-admin.php");
             <form class="upload-form" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
                 <div class="upload-box">
 
-                    <h2>Upload Text File</h2>
+                    <h2>Muat Naik Data Ahli</h2>
 
-                    <p>Select a .txt file to upload:</p>
+                    <p>Sila pilih fail berformat .txt untuk dimuatnaik:</p>
 
-                    <input type="file" name="data_ahli" id="file" accept=".txt, .text">
+                    <div class="choose-file-btn">
+                        <input type="file" name="data_ahli" id="file" accept=".txt, .text">
+                    </div>
 
                     <div class="uploadBtn-container">
                         <button onclick="daftarAhli()" id="close-upload" class="upload_fileBtn" type="submit">

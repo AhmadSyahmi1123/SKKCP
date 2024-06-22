@@ -75,6 +75,10 @@ a {
     min-height: 100px;
 }
 
+.hidden-title-container {
+    display: none;
+}
+
 .text {
     font-family: "Montserrat", sans-serif;
     position: relative;

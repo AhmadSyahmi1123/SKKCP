@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>SKKCP</title>
+    <title>SISTEM KEHADIRAN KELAB COMPETITIVE PROGRAMMING SMKBTP</title>
     <link rel="stylesheet" href="css\style.css">
 
     <!-- Import Google Icon -->
@@ -39,7 +39,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 </head>
 
-<div class="title-container">
+<?php
+// Determine the current page name
+$current_page = basename($_SERVER['PHP_SELF']);
+
+// Check if the current page is index-admin.php or index-biasa.php
+$hide_title_container = ($current_page != 'index.php');
+?>
+
+<div class="title-container <?php if ($hide_title_container)
+    echo 'hidden-title-container'; ?>">
     <div class="text">KELAB COMPETITIVE PROGRAMMING SMK BANDAR TASIK PUTERI </div>
 </div>
 

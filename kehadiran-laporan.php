@@ -64,8 +64,7 @@ include ("kawalan-admin.php");
             Kehadiran :
             <?= $da['bil_hadir'] . "/" . $da['bil_ahli'] ?> <br>
             Peratus :
-            <?php echo number_format(($da['bil_hadir'] / $da['bil_ahli'] * 100), 2);
-            ?>
+            <?php echo number_format(($da['bil_hadir'] / $da['bil_ahli'] * 100), 2);?>%
         </div>
 
         <div class="laporan-aktiviti-container">

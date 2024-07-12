@@ -34,7 +34,6 @@ include ("header.php");
         </form>
     </div>
 </div>
-<script src="scripts\autoscroll.js" defer></script>
 <script src="scripts\password-visibility-toggle.js" defer></script>
 
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

@@ -708,7 +708,7 @@ ul {
     position: relative;
     background: #e5c236;
     border: none;
-    border-radius: 20px;
+    border-radius: 30px;
     color: var(--text-color);
     padding: 3px 10px;
     margin-bottom: 0;
@@ -830,10 +830,6 @@ ul {
     width: 580px;
 }
 
-.kaunter-info-container form {
-    height: 40px;
-}
-
 .select-aktiviti {
     position: relative;
     width: 400px;
@@ -898,7 +894,7 @@ ul {
 .rekod-container button {
     background: var(--button-primary-color);
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     color: var(--text-color);
     padding: 3px 10px;
     cursor: pointer;
@@ -1109,7 +1105,7 @@ ul {
 .hadir-container .hadirBtn {
     width: 50px;
     height: 33px;
-    border-radius: 10px;
+    border-radius: 30px;
     border: none;
     outline: none;
     display: grid;
@@ -1389,7 +1385,7 @@ input[type="time"] {
 .save-container .saveBtn {
     background: var(--button-primary-color);
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     color: var(--text-color);
     padding: 10px 20px;
     margin: 10px 0;
@@ -1656,8 +1652,8 @@ input[type="time"] {
 .font-size-button .reset-font-size {
     margin: 0 10px 0 0;
     background: var(--button-primary-color);
-    padding: 5px;
-    border-radius: 10px;
+    padding: 10px 5px;
+    border-radius: 30px;
     border: none;
     outline: none;
     display: grid;
@@ -1670,8 +1666,8 @@ input[type="time"] {
 .font-size-button .print-btn {
     margin: 0 10px 0 0;
     background: var(--button-primary-color);
-    padding: 5px;
-    border-radius: 10px;
+    padding: 10px 5px;
+    border-radius: 30px;
     border: none;
     outline: none;
     display: grid;

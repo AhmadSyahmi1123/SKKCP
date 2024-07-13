@@ -17,11 +17,14 @@ input {
 :root {
     --primary-color: #18181b;
     --secondary-color: #26272b;
-    --accent-color: #00C6C2;
+    --accent-color: #7C3306;
+    --accent2-color: #b34b0c;
     --secondary-accent-color: #2e2f34;
     --text-color: #fcfcfc;
     --text-link: #fcfcfc;
     --secondary-text-color: #9e9ea9;
+    --button-primary-color: #7C3306;
+    --button-secondary-color: #b34b0c;
 }
 
 body {
@@ -36,6 +39,10 @@ main {
     padding-left: 70px;
     padding-right: 30px;
     height: 90vh;
+}
+
+button {
+    background: var(--accent-color);
 }
 
 a {
@@ -123,7 +130,7 @@ a {
     background: var(--primary-color);
     backdrop-filter: blur(17px);
     --webkit-backdrop-filter: blur(17px);
-    border-right: 3px solid var(--accent-color);
+    border-right: 2px solid var(--accent-color);
     transition: all .3s ease;
 }
 
@@ -162,7 +169,7 @@ a {
 }
 
 .links li.active {
-    background: var(--secondary-color);
+    background: var(--accent-color);
     border-radius: 40px;
 }
 
@@ -229,6 +236,8 @@ ul {
     background-color: rgb(19, 22, 26);
     position: sticky;
     top: 0;
+    border-top: 3px solid var(--accent2-color);
+    border-bottom: 3px solid var(--accent2-color);
 }
 
 .header__content {
@@ -400,7 +409,7 @@ ul {
 .wrapper .btn {
     width: 50%;
     height: 45px;
-    background: rgb(0, 183, 255);
+    background: var(--button-primary-color);
     border: none;
     outline: none;
     border-radius: 40px;
@@ -410,6 +419,10 @@ ul {
     color: var(--text-color);
     font-weight: 600;
     margin: auto 25%;
+}
+
+.wrapper .btn:hover {
+    background: var(--button-secondary-color);
 }
 
 .wrapper .link-register {
@@ -774,7 +787,7 @@ ul {
     color: var(--secondary-text-color);
     position: sticky;
     top: 0;
-    z-index: 49;
+    z-index: 20;
 }
 
 .table tr {
@@ -883,7 +896,7 @@ ul {
 }
 
 .rekod-container button {
-    background: #009578;
+    background: var(--button-primary-color);
     border: none;
     border-radius: 10px;
     color: var(--text-color);
@@ -891,6 +904,10 @@ ul {
     cursor: pointer;
     font-size: 16px;
     padding-bottom: 5px;
+}
+
+.rekod-container button:hover {
+    background: var(--button-secondary-color);
 }
 
 .rekod-container button i {
@@ -962,7 +979,7 @@ ul {
 .input-carian-container .searchBtn {
     position: absolute;
     margin-left: 10px;
-    background: #009578;
+    background: var(--button-primary-color);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -976,6 +993,10 @@ ul {
     cursor: pointer;
 }
 
+.input-carian-container .searchBtn:hover {
+    background: var(--button-secondary-color);
+}
+
 .upload-container {
     display: flex;
     flex: 50%;
@@ -984,7 +1005,7 @@ ul {
 
 .upload-container .uploadBtn {
     bottom: 0;
-    background: #009578;
+    background: var(--button-primary-color);
     width: 40px;
     height: 40px;
     border-radius: 40px;
@@ -994,6 +1015,10 @@ ul {
     place-items: center;
     cursor: pointer;
     left: 0;
+}
+
+.upload-container .uploadBtn:hover {
+    background: var(--button-secondary-color);
 }
 
 .uploadBtn a {
@@ -1012,6 +1037,7 @@ ul {
 [data-tooltip] {
     position: relative;
     cursor: default;
+    z-index: 100;
 }
 
 [data-tooltip]::after {
@@ -1029,7 +1055,6 @@ ul {
     border-radius: 10px;
     font-size: 14px;
     font-weight: bold;
-
     visibility: hidden;
     opacity: 0;
     transform: translateX(0);
@@ -1041,7 +1066,6 @@ ul {
     opacity: 1;
     visibility: visible;
     transform: translateX(-100%);
-    z-index: 99;
 }
 
 /*------------------------------------------------------*/
@@ -1094,19 +1118,35 @@ ul {
 }
 
 .edit-mata-container .editMataBtn {
-    background: #808080;
+    background: var(--button-primary-color);
+}
+
+.edit-mata-container .editMataBtn:hover {
+    background: var(--button-secondary-color);
 }
 
 .delete-container .deleteBtn {
     background: #ea033f;
 }
 
+.delete-container .deleteBtn:hover {
+    filter: brightness(150%);
+}
+
 .edit-container .editBtn {
     background: #0d66d0;
 }
 
+.edit-container .editBtn:hover {
+    filter: brightness(150%);
+}
+
 .hadir-container .hadirBtn {
     background: #009578;
+}
+
+.hadir-container .hadirBtn:hover {
+    filter: brightness(150%);
 }
 
 .editBtn a,
@@ -1144,7 +1184,7 @@ ul {
 .kaunter-info-container .searchBtn {
     margin: 0 10px;
     position: absolute;
-    background: #009578;
+    background: var(--button-primary-color);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -1155,6 +1195,10 @@ ul {
     cursor: pointer;
     flex-shrink: 0;
     right: 0;
+}
+
+.kaunter-info-container .searchBtn:hover {
+    background: var(--button-secondary-color);
 }
 
 /*------------------------------------------------------*/
@@ -1215,7 +1259,7 @@ input[type="time"] {
 .modal .addBtn {
     width: 50%;
     height: 45px;
-    background: rgb(0, 183, 255);
+    background: var(--button-primary-color);
     border: none;
     outline: none;
     border-radius: 40px;
@@ -1225,6 +1269,10 @@ input[type="time"] {
     color: var(--text-color);
     font-weight: 600;
     margin: auto 25%;
+}
+
+.modal .addBtn:hover {
+    background: var(--button-secondary-color);
 }
 
 .closeBtn {
@@ -1278,12 +1326,16 @@ input[type="time"] {
     display: flex;
     align-items: center;
     position: relative;
-    background: #007bff;
+    background: var(--button-primary-color);
     border: none;
     border-radius: 40px;
     color: var(--text-color);
     padding: 10px 15px;
     cursor: pointer;
+}
+
+.uploadBtn-container .upload_fileBtn:hover {
+    background: var(--button-secondary-color);
 }
 
 .uploadBtn-container .upload_fileBtn i {
@@ -1295,22 +1347,22 @@ input[type="time"] {
     margin: 20px 0;
     position: relative;
     width: 100%;
-    border: 1px solid;
+    border: 2px solid var(--accent-color);
     border-radius: .25rem;
 }
 
 .choose-file-btn input[type="file"]::file-selector-button {
-    background-color: transparent;
+    background-color: var(--button-primary-color);
     height: 30px;
     border: none;
-    border-right: 1px solid;
+    border-right: 2px solid var(--accent-color);
     border-top-left-radius: .25rem;
     border-bottom-left-radius: .25rem;
     cursor: pointer;
 }
 
 .choose-file-btn input[type="file"]::file-selector-button:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--button-secondary-color);
 }
 
 /*------------------------------------------------------*/
@@ -1335,13 +1387,17 @@ input[type="time"] {
 }
 
 .save-container .saveBtn {
-    background: #009578;
+    background: var(--button-primary-color);
     border: none;
     border-radius: 10px;
     color: var(--text-color);
     padding: 10px 20px;
     margin: 10px 0;
     cursor: pointer;
+}
+
+.save-container .saveBtn:hover {
+    background: var(--button-secondary-color);
 }
 
 /*------------------------------------------------------*/
@@ -1398,7 +1454,7 @@ input[type="time"] {
 }
 
 .kemaskini-container .kemaskiniBtn {
-    background: #007bff;
+    background: var(--button-primary-color);
     border: none;
     border-radius: 40px;
     color: var(--text-color);
@@ -1408,8 +1464,12 @@ input[type="time"] {
     font-size: 18px;
 }
 
+.kemaskini-container .kemaskiniBtn:hover {
+    background: var(--button-secondary-color);
+}
+
 .kemaskini-container .cancelBtn {
-    background: #ea033f;
+    background: transparent;
     border: none;
     border-radius: 40px;
     color: var(--text-color);
@@ -1418,6 +1478,10 @@ input[type="time"] {
     bottom: 0;
     cursor: pointer;
     font-size: 18px;
+}
+
+.kemaskini-container .cancelBtn:hover {
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .wrapper_kemaskini .masa_mula,
@@ -1481,7 +1545,7 @@ input[type="time"] {
 }
 
 .tambah-mata-container .tambahMataBtn {
-    background: #007bff;
+    background: var(--button-primary-color);
     border: none;
     border-radius: 10px;
     color: var(--text-color);
@@ -1490,6 +1554,10 @@ input[type="time"] {
     margin-bottom: 0;
     cursor: pointer;
     font-size: 20px;
+}
+
+.tambah-mata-container .tambahMataBtn:hover {
+    background: var(--button-secondary-color);
 }
 
 /*------------------------------------------------------*/
@@ -1524,12 +1592,16 @@ input[type="time"] {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: #007bff;
+    background: var(--button-primary-color);
     border-radius: 50%;
     border: none;
     outline: none;
     right: 130px;
     bottom: 100px;
+}
+
+.select_pic_btn:hover {
+    background: var(--button-secondary-color);
 }
 
 .select_pic_btn i {
@@ -1566,7 +1638,7 @@ input[type="time"] {
 
 .font-size-button .resize-btn {
     margin: 0 10px 0 0;
-    background: #009578;
+    background: var(--button-primary-color);
     width: 40px;
     height: 40px;
     border-radius: 50%;
@@ -1582,7 +1654,7 @@ input[type="time"] {
 
 .font-size-button .reset-font-size {
     margin: 0 10px 0 0;
-    background: #009578;
+    background: var(--button-primary-color);
     padding: 5px;
     border-radius: 10px;
     border: none;
@@ -1596,7 +1668,7 @@ input[type="time"] {
 
 .font-size-button .print-btn {
     margin: 0 10px 0 0;
-    background: #009578;
+    background: var(--button-primary-color);
     padding: 5px;
     border-radius: 10px;
     border: none;
@@ -1607,6 +1679,13 @@ input[type="time"] {
     color: var(--text-color);
     font-size: 16px;
 }
+
+.font-size-button .resize-btn:hover,
+.font-size-button .reset-font-size:hover,
+.font-size-button .print-btn:hover {
+    background: var(--button-secondary-color);
+}
+
 
 /*index (admin)*/
 .dashboard-container {
@@ -1641,7 +1720,7 @@ input[type="time"] {
     margin: 10px;
     margin-top: 30px;
     border-radius: 10px;
-    background: coral;
+    background: var(--accent2-color);
     width: 150px;
     height: 150px;
 }

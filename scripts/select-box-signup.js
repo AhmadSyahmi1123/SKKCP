@@ -9,7 +9,7 @@ $('.select2-selection').css('height', '40px');
 $('.select2-selection').css('padding-top', '5px');
 $('.select2-selection').css('padding-left', '10px');
 $('.select2-selection').css('background-color', '#26272b');
-$('.select2-selection').css('border', '2px solid #adadad');
+$('.select2-selection').css('border', '2px solid var(--accent-color)');
 $('.select2-selection').css('border-radius', '6px');
 
 $('.select2-selection__rendered').css('color', '#fcfcfc');

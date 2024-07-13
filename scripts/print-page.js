@@ -21,4 +21,28 @@ function printPage() {
     // Restore the original body content and styles
     document.body.innerHTML = originalBody;
     document.getElementById("print-area").style.cssText = originalStyles;
+
+    // Reattach the event listeners and reinitialize necessary scripts
+    reinitializeSearchFeature();
 }
+
+function reinitializeSearchFeature() {
+    document.getElementById('searchNama').addEventListener('input', function () {
+        const searchValue = this.value;
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'search-leaderboard.php', true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (this.status === 200) {
+                document.getElementById('leaderboardBody').innerHTML = this.responseText;
+            }
+        }
+
+        xhr.send('nama=' + encodeURIComponent(searchValue));
+    });
+}
+
+// Call the reinitialize function on page load to ensure the search feature is initialized
+document.addEventListener('DOMContentLoaded', reinitializeSearchFeature);

@@ -60,8 +60,8 @@ $count_ahli = mysqli_num_rows($exec_ahli);
                 <button class="print-btn" onclick="printPage()">Cetak</button>
             </div>
         </div>
-        <div class="leaderboard">
-            <div class="scrollable-table">
+        <div class="leaderboard" >
+            <div class="scrollable-table" id="print-area">
                 <table class="table" id="saiz">
                     <thead>
                         <tr>

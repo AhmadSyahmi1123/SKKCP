@@ -17,7 +17,7 @@ function updateProgressBar(points) {
         strokeWidth: 6,
         easing: 'easeInOut',
         duration: 1000,
-        color: '#009578',
+        color: 'var(--button-secondary-color)',
         trailColor: '#adadad',
         trailWidth: 6,
         svgStyle: null,

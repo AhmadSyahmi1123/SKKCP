@@ -8,18 +8,20 @@ include ("header.php");
 
 <!-- Ruang kotak yang mengandungi komponen untuk pengguna mendaftar -->
 <div class="wrapper-container">
-    <div class="card wrapper">
+    <div class="card wrapper login">
         <!-- Borang Daftar Masuk -->
         <form action="login-proses.php" method="POST">
 
             <!-- Tajuk Antaramuka Log Masuk -->
             <h1>Log Masuk</h1>
 
+            <label for="input-nama">Nombor Kad Pengenalan</label>
             <div class="input-box">
                 <input type="text" name="nokp" placeholder="No. Kad Pengenalan" required>
                 <i class='bx bx-hash'></i>
             </div>
 
+            <label for="input-nama">Katalaluan</label>
             <div class="input-box">
                 <input type="password" name='katalaluan' placeholder="Katalaluan" required>
                 <i class="fas fa-eye password-toggle"></i>

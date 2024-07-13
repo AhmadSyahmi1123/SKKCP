@@ -5,6 +5,7 @@ $("#select-box-kelas").select2({
 });
 
 $('.select2-selection').css('font-size', '16px');
+$('.select2-selection').css('margin-top', '5px');
 $('.select2-selection').css('height', '40px');
 $('.select2-selection').css('padding-top', '5px');
 $('.select2-selection').css('padding-left', '10px');
@@ -14,7 +15,7 @@ $('.select2-selection').css('border-radius', '6px');
 
 $('.select2-selection__rendered').css('color', '#fcfcfc');
 
-$('.select2-selection__arrow').css('margin-top', '5px');
+$('.select2-selection__arrow').css('margin-top', '10px');
 $('.select2-selection__arrow').css('margin-right', '15px');
 
 // Add the custom styles for the dark theme

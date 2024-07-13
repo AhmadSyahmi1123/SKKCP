@@ -349,6 +349,14 @@ ul {
     padding: 30px 40px;
 }
 
+.login {
+    width: 500px;
+}
+
+.signup {
+    width: 1000px;
+}
+
 .borang-signup {
     display: flex;
 }
@@ -369,7 +377,7 @@ ul {
     width: 100%;
     height: 100%;
     margin: 20px 0;
-    margin-top: 10px;
+    margin-top: 5px;
 }
 
 .input-box input {
@@ -454,8 +462,8 @@ ul {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
-    width: 300px;
+    height: 400px;
+    width: 400px;
 }
 
 .signup_profile_pic_container .edit_profile_pic {
@@ -465,10 +473,13 @@ ul {
 }
 
 .signup_pp {
-    right: 100px;
     margin: 0 20px 20px 20px;
     border: 2px solid var(--accent-color);
     border-radius: 50%;
+}
+
+.wrapper label {
+    padding: 5px;
 }
 
 /*------------------------------------------------------*/
@@ -1340,7 +1351,7 @@ input[type="time"] {
 }
 
 .choose-file-btn {
-    margin: 20px 0;
+    margin: 5px 0 20px 0;
     position: relative;
     width: 100%;
     border: 2px solid var(--accent-color);

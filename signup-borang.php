@@ -8,7 +8,7 @@ include ("connection.php");
 ?>
 
 <div class="wrapper-container">
-    <div class="card wrapper">
+    <div class="card wrapper signup">
         <!-- Tajuk antaramuka -->
         <h1>Pendaftaran Ahli Baru</h1>
         <div class="borang-signup">
@@ -16,16 +16,19 @@ include ("connection.php");
             <form action="signup-proses.php" method="POST" enctype="multipart/form-data">
 
                 <div class="borang-input">
+                    <label for="input-nama">Nama Ahli</label>
                     <div class="input-box">
                         <input type="text" name="nama" placeholder="Nama Ahli" required>
                         <i class='bx bxs-user'></i>
                     </div>
 
+                    <label for="input-nama">Nombor Kad Pengenalan</label>
                     <div class="input-box">
                         <input type="text" name="nokp" placeholder="No. Kad Pengenalan" required>
                         <i class='bx bx-hash'></i>
                     </div>
 
+                    <label for="input-nama">Kelas</label>
                     <div class="select-container">
                         <select name="IDkelas" id="select-box-kelas" class="select-kelas">
                             <option selected disabled value>Sila Pilih Kelas</option>
@@ -40,11 +43,13 @@ include ("connection.php");
                         </select>
                     </div>
 
+                    <label for="input-nama">Katalaluan</label>
                     <div class="input-box">
                         <input type="password" name='katalaluan' placeholder="Katalaluan" required>
-                        <i class="fas fa-eye-slash password-toggle"></i>
+                        <i class="fas fa-eye password-toggle"></i>
                     </div>
 
+                    <label for="input-nama">Gambar Profil</label>
                     <div class="choose-file-btn">
                         <input type="file" id="choose_img" name='profile_pic' accept=".png, .jpg, .jpeg">
                     </div>

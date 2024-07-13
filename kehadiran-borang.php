@@ -32,8 +32,10 @@ $n = mysqli_fetch_array($laksana_aktiviti);
             </div>
 
             <div class="font-size-button">
-                <button class="resize-btn" onclick="ubahsaiz(1)" data-tooltip="Ubah Saiz Tulisan"><i
-                        class='bx bx-font-size'></i></button>
+                <button class="increase-size-btn" onclick="ubahsaiz(1)" data-tooltip="Tambah Saiz Tulisan"><span
+                        class="material-symbols-outlined">text_increase</span></button>
+                <button class="decrease-size-btn" onclick="ubahsaiz(-1)" data-tooltip="Tolak Saiz Tulisan"><span
+                        class="material-symbols-outlined">text_decrease</span></button>
                 <button class="reset-font-size" onclick="ubahsaiz(2)">Reset Size</button>
                 <button class="print-btn" onclick="printPage()">Cetak</button>
             </div>

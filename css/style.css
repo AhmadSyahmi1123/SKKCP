@@ -1636,7 +1636,8 @@ input[type="time"] {
     margin-right: 20px;
 }
 
-.font-size-button .resize-btn {
+.font-size-button .increase-size-btn,
+.font-size-button .decrease-size-btn {
     margin: 0 10px 0 0;
     background: var(--button-primary-color);
     width: 40px;
@@ -1680,7 +1681,8 @@ input[type="time"] {
     font-size: 16px;
 }
 
-.font-size-button .resize-btn:hover,
+.font-size-button .increase-size-btn:hover,
+.font-size-button .decrease-size-btn:hover,
 .font-size-button .reset-font-size:hover,
 .font-size-button .print-btn:hover {
     background: var(--button-secondary-color);

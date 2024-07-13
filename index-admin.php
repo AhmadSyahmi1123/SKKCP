@@ -54,13 +54,15 @@ $count_ahli = mysqli_num_rows($exec_ahli);
                 </div>
             </div>
             <div class="font-size-button">
-                <button class="resize-btn" onclick="ubahsaiz(1)" data-tooltip="Ubah Saiz Tulisan"><i
-                        class='bx bx-font-size'></i></button>
+                <button class="increase-size-btn" onclick="ubahsaiz(1)" data-tooltip="Tambah Saiz Tulisan"><span
+                        class="material-symbols-outlined">text_increase</span></button>
+                <button class="decrease-size-btn" onclick="ubahsaiz(-1)" data-tooltip="Tolak Saiz Tulisan"><span
+                        class="material-symbols-outlined">text_decrease</span></button>
                 <button class="reset-font-size" onclick="ubahsaiz(2)">Reset Size</button>
                 <button class="print-btn" onclick="printPage()">Cetak</button>
             </div>
         </div>
-        <div class="leaderboard" >
+        <div class="leaderboard">
             <div class="scrollable-table" id="print-area">
                 <table class="table" id="saiz">
                     <thead>

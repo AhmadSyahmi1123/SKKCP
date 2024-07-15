@@ -6,20 +6,39 @@ session_start();
 include ("header.php");
 include ("connection.php");
 
+$nokp = $_SESSION['nokp'];
+
+# Kira bilangan ahli
+$sql_ahli = "SELECT * FROM ahli";
+$exec_ahli = mysqli_query($condb, $sql_ahli);
+$count_ahli = mysqli_num_rows($exec_ahli);
+
+# Kira bilangan aktiviti
 $sql_aktiviti = "SELECT * FROM aktiviti";
 $exec_aktiviti = mysqli_query($condb, $sql_aktiviti);
 $count_aktiviti = mysqli_num_rows($exec_aktiviti);
 
-$sql_ahli = "SELECT * FROM ahli";
-$exec_ahli = mysqli_query($condb, $sql_ahli);
-$count_ahli = mysqli_num_rows($exec_ahli);
+# Kira bilangan kehadiran ahli
+$sql_count = "SELECT COUNT(*) as count FROM kehadiran WHERE nokp = '$nokp'";
+$exec_count = mysqli_query($condb, $sql_count);
+$row_hadir = mysqli_fetch_assoc($exec_count);
+$count_hadir = $row_hadir['count'];
+
+# Kira bilangan tidak hadir
+$sql_aktiviti = "SELECT COUNT(*) as count FROM aktiviti";
+$exec_aktiviti = mysqli_query($condb, $sql_aktiviti);
+$row_aktiviti = mysqli_fetch_assoc($exec_aktiviti);
+$count_aktiviti = $row_aktiviti['count'];
+
+$count_tidak_hadir = $count_aktiviti - $count_hadir;
+
 ?>
 <div class="page-header">Dashboard</div>
 <main>
     <div class="dashboard-container">
         <div class="card ahli-count-container">
             <div class="count-text-container">
-                <div class="count-label">Bil. Ahli</div>
+                <div class="count-label">Bilangan Ahli</div>
                 <div class="icon-ahli-container">
                     <span class="material-symbols-outlined">groups</span>
                 </div>
@@ -32,7 +51,7 @@ $count_ahli = mysqli_num_rows($exec_ahli);
         </div>
         <div class="card aktiviti-count-container">
             <div class="count-text-container">
-                <div class="count-label">Bil. Aktiviti</div>
+                <div class="count-label">Bilangan Aktiviti</div>
                 <div class="icon-ahli-container">
                     <span class="material-symbols-outlined">assignment</span>
                 </div>
@@ -43,10 +62,41 @@ $count_ahli = mysqli_num_rows($exec_ahli);
                 </div>
             </div>
         </div>
+        <div class="card ahli-count-container">
+            <div class="count-text-container">
+                <div class="count-label">Hadir</div>
+                <div class="icon-ahli-container">
+                    <span class="material-symbols-outlined">check </span>
+                </div>
+            </div>
+            <div class="count-container">
+                <div class="count-text">
+                    <?php echo $count_hadir ?>
+                </div>
+            </div>
+        </div>
+        <div class="card aktiviti-count-container">
+            <div class="count-text-container">
+                <div class="count-label">Tidak Hadir</div>
+                <div class="icon-ahli-container">
+                    <span class="material-symbols-outlined">close</span>
+                </div>
+            </div>
+            <div class="count-container">
+                <div class="count-text">
+                    <?php echo $count_tidak_hadir ?>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="card leaderboard-container">
-        <div class="count-label">Leaderboard</div>
+        <div class="leaderboard-title count-label">
+            <div class="leaderboard-icon">
+                <span class="material-symbols-outlined">leaderboard</span>
+            </div>
+            Carta Pendahulu
+        </div>
         <div class="card-header-container">
             <div class="input-carian-container">
                 <div class="input-carian">
@@ -113,6 +163,7 @@ $count_ahli = mysqli_num_rows($exec_ahli);
 <script src="scripts\butang-saiz.js" defer></script>
 <script src="scripts\print-page.js" defer></script>
 
+<!-- fungsi untuk mencari nama ahli dalam carta pendahulu  -->
 <script>
     document.getElementById('searchNama').addEventListener('input', function () {
         const searchValue = this.value;

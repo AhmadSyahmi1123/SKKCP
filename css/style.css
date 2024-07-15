@@ -1698,27 +1698,30 @@ input[type="time"] {
 
 /*index (admin)*/
 .dashboard-container {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+    align-items: start;
+    /* Align items to the start to allow growth */
+    gap: 20px;
+    margin: 20px 0;
 }
 
 .aktiviti-count-container,
 .ahli-count-container {
     display: flex;
+    flex: 1;
     align-items: center;
     position: relative;
-    width: 400px;
+    width: auto;
     height: 300px;
-    margin: 10px;
-    margin-top: 20px;
-    padding: 10px;
-    flex: 1;
+    padding: 10px;;
 }
 
 .count-text-container {
     align-items: center;
     justify-content: center;
     height: 100%;
+    flex: 0.6;
 }
 
 .icon-aktiviti-container,
@@ -1740,7 +1743,7 @@ input[type="time"] {
 }
 
 .count-label {
-    font-size: 48px;
+    font-size: 45px;
     margin: 10px;
 }
 
@@ -1748,7 +1751,7 @@ input[type="time"] {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    flex: 0.4;
 }
 
 .count-text {
@@ -1769,6 +1772,26 @@ input[type="time"] {
 .leaderboard {
     width: 100%;
     height: 100%;
+}
+
+.leaderboard-title {
+    display: flex;
+    align-items: center;
+}
+
+.leaderboard-title .leaderboard-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--accent2-color);
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.leaderboard-title .leaderboard-icon span {
+    font-size: 30px;
 }
 
 .leaderboard .table thead {

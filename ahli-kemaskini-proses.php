@@ -42,7 +42,7 @@ if (!empty($_POST)) {
     }
 
     // Redirect with notification parameters
-    header("Location: senarai-aktiviti.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
+    header("Location: senarai-ahli.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
     exit();
 } else {
     # Jika data GET tidak wujud, kembali ke fail senarai-ahli.php

@@ -1,48 +1,38 @@
 function printPage() {
-    // Get the content of the print-area
-    var printArea = document.getElementById("print-area");
+    // Get the content of the scrollable table
+    var tableContent = document.querySelector('.scrollable-table table').outerHTML;
 
-    // Save the original body content
-    var originalBody = document.body.innerHTML;
+    // Create a new window for printing
+    var printWindow = window.open('', '_blank');
 
-    // Save the original styles of the print area
-    var originalStyles = printArea.style.cssText;
+    // Write the table content to the new window
+    printWindow.document.write('<html><head><title>Print</title>');
+    printWindow.document.write('<style>');
+    printWindow.document.write('body { font-family: Arial, sans-serif; }');
+    printWindow.document.write('table { border-collapse: collapse; width: 100%; }');
+    printWindow.document.write('th, td { border: 1px solid black; padding: 8px; text-align: left; }');
+    printWindow.document.write('th { background-color: #f2f2f2; }');
+    printWindow.document.write('.profile_img_list { display:none; }');
+    printWindow.document.write('.td-name { display: inline-block; vertical-align: middle; }');
+    printWindow.document.write('.action-container, .editBtn, .deleteBtn { display: none; }'); // Hide action buttons in print
+    printWindow.document.write('</style>');
+    printWindow.document.write('</head><body>');
+    printWindow.document.write(tableContent);
+    printWindow.document.write('</body></html>');
 
-    // Remove the scrollable properties to display the entire table
-    printArea.style.height = 'auto';
-    printArea.style.overflow = 'visible';
+    printWindow.document.close();
 
-    // Replace the body content with the print-area content
-    document.body.innerHTML = printArea.innerHTML;
+    // Focus on the new window
+    printWindow.focus();
 
-    // Print the page
-    window.print();
+    // Function to handle printing
+    function handlePrint() {
+        printWindow.print();
 
-    // Restore the original body content and styles
-    document.body.innerHTML = originalBody;
-    document.getElementById("print-area").style.cssText = originalStyles;
+        // Close the window after a short delay
+        printWindow.close();
+    }
 
-    // Reattach the event listeners and reinitialize necessary scripts
-    reinitializeSearchFeature();
+    // Call handlePrint after a short delay to ensure the content is loaded
+    setTimeout(handlePrint, 100);
 }
-
-function reinitializeSearchFeature() {
-    document.getElementById('searchNama').addEventListener('input', function () {
-        const searchValue = this.value;
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'search-leaderboard.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function () {
-            if (this.status === 200) {
-                document.getElementById('leaderboardBody').innerHTML = this.responseText;
-            }
-        }
-
-        xhr.send('nama=' + encodeURIComponent(searchValue));
-    });
-}
-
-// Call the reinitialize function on page load to ensure the search feature is initialized
-document.addEventListener('DOMContentLoaded', reinitializeSearchFeature);

@@ -49,6 +49,7 @@ include ("kawalan-admin.php");
                         <th>Katalaluan</th>
                         <th>Tahap</th>
                         <th>Mata</th>
+                        <th>Kehadiran</th>
                         <th>Tindakan</th>
                     </tr>
                 </thead>
@@ -76,6 +77,17 @@ include ("kawalan-admin.php");
                             'mata' => $m['mata']
                         );
 
+                        $nokp = $m['nokp'];
+                        $sql_count = "SELECT COUNT(*) as count FROM kehadiran WHERE nokp = '$nokp'";
+                        $exec_count = mysqli_query($condb, $sql_count);
+                        $row_hadir = mysqli_fetch_assoc($exec_count);
+                        $count_hadir = $row_hadir['count'];
+
+                        $sql_aktiviti = "SELECT COUNT(*) as count FROM aktiviti";
+                        $exec_aktiviti = mysqli_query($condb, $sql_aktiviti);
+                        $row_aktiviti = mysqli_fetch_assoc($exec_aktiviti);
+                        $count_aktiviti = $row_aktiviti['count'];
+
                         # Memaparkan senarai nama dalam jadual
                         echo "<tr>
                                 <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
@@ -84,6 +96,7 @@ include ("kawalan-admin.php");
                                 <td>" . $m['katalaluan'] . "</td>
                                 <td>" . $m['tahap'] . "</td>
                                 <td>" . $m['mata'] . "</td>
+                                <td>$count_hadir/$count_aktiviti</td>
                             ";
 
 

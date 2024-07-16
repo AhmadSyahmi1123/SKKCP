@@ -37,8 +37,38 @@
 
     <!-- Library Toast Notification -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+        <defs>
+            <!-- Protanopia Filter -->
+            <filter id="protanopia">
+                <feColorMatrix type="matrix"
+                    values="0.567, 0.433, 0, 0, 0, 0.558, 0.442, 0, 0, 0, 0, 0.242, 0.758, 0, 0, 0, 0, 0, 1, 0" />
+            </filter>
+
+            <!-- Deuteranopia Filter -->
+            <filter id="deuteranopia">
+                <feColorMatrix type="matrix"
+                    values="0.625, 0.375, 0, 0, 0, 0.7, 0.3, 0, 0, 0, 0, 0.3, 0.7, 0, 0, 0, 0, 0, 1, 0" />
+            </filter>
+
+            <!-- Tritanopia Filter -->
+            <filter id="tritanopia">
+                <feColorMatrix type="matrix"
+                    values="0.95, 0.05, 0, 0, 0, 0, 0.433, 0.567, 0, 0, 0, 0.475, 0.525, 0, 0, 0, 0, 0, 1, 0" />
+            </filter>
+
+            <!-- Achromatopsia Filter -->
+            <filter id="achromatopsia">
+                <feColorMatrix type="matrix"
+                    values="0.299, 0.587, 0.114, 0, 0, 0.299, 0.587, 0.114, 0, 0, 0.299, 0.587, 0.114, 0, 0, 0, 0, 0, 1, 0" />
+            </filter>
+        </defs>
+    </svg>
+
 </head>
 
+<div id="filter-overlay"></div>
 <?php
 // Determine the current page name
 $current_page = basename($_SERVER['PHP_SELF']);
@@ -151,5 +181,8 @@ $hide_title_container = ($current_page != 'index.php');
             </header>
     <?php } ?>
 </body>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
 
 </html>

@@ -28,6 +28,34 @@ input {
     --button-secondary-color: #b34b0c;
 }
 
+#filter-overlay.protanopia {
+    backdrop-filter: url(#protanopia);
+}
+
+#filter-overlay.deuteranopia {
+    backdrop-filter: url(#deuteranopia);
+}
+
+#filter-overlay.tritanopia {
+    backdrop-filter: url(#tritanopia);
+}
+
+#filter-overlay.achromatopsia {
+    backdrop-filter: url(#achromatopsia);
+}
+
+#filter-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    /* Allows interaction with elements beneath */
+    z-index: 9999;
+    /* Higher than sidebar */
+}
+
 body {
     background-color: var(--primary-color);
     color: var(--text-color);
@@ -51,10 +79,11 @@ a {
     color: inherit;
 }
 
-.page-header {
-    z-index: 19;
-    top: 0;
+.header-container {
     position: sticky;
+    display: flex;
+    align-items: center;
+    top: 0;
     background-color: var(--primary-color);
     border-bottom: 3px solid var(--accent-color);
     padding-left: 70px;
@@ -62,6 +91,7 @@ a {
     padding-bottom: 10px;
     font-size: 32px;
     font-weight: 600;
+    z-index: 19;
 }
 
 .card {
@@ -69,6 +99,31 @@ a {
     background: var(--secondary-color);
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
+}
+
+/*------------------------------------------------------*/
+
+/* Butang Buta Warna */
+.header-container .colorblind-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent-color);
+}
+
+.header-container .colorblind-btn:hover {
+    filter: brightness(150%);
+}
+
+.header-container .colorblind-btn span {
+    color: var(--text-color);
 }
 
 /*------------------------------------------------------*/
@@ -130,9 +185,13 @@ a {
     height: 100%;
     background: var(--primary-color);
     backdrop-filter: blur(17px);
-    --webkit-backdrop-filter: blur(17px);
+    -webkit-backdrop-filter: blur(17px);
     border-right: 2px solid var(--accent-color);
     transition: all .3s ease;
+    z-index: 1000;
+    /* Increased z-index */
+    will-change: transform;
+    transform: translateZ(0);
 }
 
 .sidebar:hover {

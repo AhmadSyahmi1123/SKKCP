@@ -13,7 +13,10 @@ $laksana_aktiviti = mysqli_query($condb, $arahan_sql_aktiviti);
 $n = mysqli_fetch_array($laksana_aktiviti);
 ?>
 
-<div class="page-header">Pengesahan Kehadiran Ahli</div>
+<div id="filter-overlay"></div>
+<div class="header-container">
+    <div class="page-header">Pengesahan Kehadiran Ahli</div>
+</div>
 <main>
     <div class="kehadiran-details">
         Nama Aktiviti :
@@ -122,6 +125,9 @@ $n = mysqli_fetch_array($laksana_aktiviti);
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts\datatooltip.js" defer></script>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
 
 <!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>

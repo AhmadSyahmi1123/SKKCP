@@ -14,7 +14,10 @@ if (empty($_SESSION["nokp"])) {
 }
 ?>
 
-<div class="page-header">Profil</div>
+<div id="filter-overlay"></div>
+<div class="header-container">
+    <div class="page-header">Profil</div>
+</div>
 <main>
     <div class="user_and_point_container">
         <div class="card user-details">
@@ -149,6 +152,9 @@ if (empty($_SESSION["nokp"])) {
         </tr>
     </div>
 </main>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

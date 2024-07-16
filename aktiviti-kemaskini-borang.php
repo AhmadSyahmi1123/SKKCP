@@ -19,8 +19,9 @@ $arahan_sql_pilihan = "select * from aktiviti where IDaktiviti='" . $_GET['IDakt
 $laksana_arahan = mysqli_query($condb, $arahan_sql_pilihan);
 $m = mysqli_fetch_array($laksana_arahan);
 ?>
-<main>
 
+<div id="filter-overlay"></div>
+<main>
     <div class="card wrapper_kemaskini">
         <div class="kemaskini-borang">
             <h1>Kemaskini Aktiviti</h1>
@@ -64,6 +65,10 @@ $m = mysqli_fetch_array($laksana_arahan);
 
     </div>
 </main>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
+
 <script>
     // Fungsi hantar data ke aktiviti-kemaskini-proses.php
     function sendForm(IDaktiviti) {

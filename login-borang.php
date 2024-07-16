@@ -6,6 +6,7 @@ session_start();
 include ("header.php");
 ?>
 
+<div id="filter-overlay"></div>
 <!-- Ruang kotak yang mengandungi komponen untuk pengguna mendaftar -->
 <div class="wrapper-container">
     <div class="card wrapper login">
@@ -37,6 +38,9 @@ include ("header.php");
     </div>
 </div>
 <script src="scripts\password-visibility-toggle.js" defer></script>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
 
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="scripts\toast.js"></script>

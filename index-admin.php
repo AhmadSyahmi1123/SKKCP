@@ -33,7 +33,12 @@ $count_aktiviti = $row_aktiviti['count'];
 $count_tidak_hadir = $count_aktiviti - $count_hadir;
 
 ?>
-<div class="page-header">Dashboard</div>
+<div id="filter-overlay"></div>
+<div class="header-container">
+    <div class="page-header">Dashboard</div>
+    <button class="colorblind-btn" onclick="toggleFilter()" data-tooltip="Buta Warna"><span
+            class="material-symbols-outlined">symptoms</span></button>
+</div>
 <main>
     <div class="dashboard-container">
         <div class="card ahli-count-container">
@@ -157,6 +162,9 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts\datatooltip.js" defer></script>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

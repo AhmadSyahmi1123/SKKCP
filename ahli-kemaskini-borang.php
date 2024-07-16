@@ -12,6 +12,8 @@ if (empty($_GET)) {
     die("<script>window.location.href='senarai-ahli.php';</script>");
 }
 ?>
+
+<div id="filter-overlay"></div>
 <main>
     <div class="wrapper_kemaskini card">
         <div class="kemaskini-borang">
@@ -78,6 +80,9 @@ if (empty($_GET)) {
 
         </form>
     </div>
+
+    <!-- fungsi mesra pengguna buta warna -->
+    <script src="scripts\colorblind.js" defer></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>

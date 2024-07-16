@@ -3,11 +3,12 @@
 session_start();
 
 # Memanggil fail header.php dan kawalan-admin.php
-include("header.php");
-include("kawalan-admin.php");
+include ("header.php");
+include ("kawalan-admin.php");
 ?>
-<main>
 
+<div id="filter-overlay"></div>
+<main>
     <!-- Borang untuk menerima data aktiviti baharu daripada pengguna -->
     <div class="wrapper">
         <!-- Borang Daftar Masuk -->
@@ -41,3 +42,6 @@ include("kawalan-admin.php");
         </form>
     </div>
 </main>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>

@@ -7,6 +7,7 @@ include ("header.php");
 include ("connection.php");
 ?>
 
+<div id="filter-overlay"></div>
 <div class="wrapper-container">
     <div class="card wrapper signup">
         <!-- Tajuk antaramuka -->
@@ -82,6 +83,9 @@ include ("connection.php");
         </div>
     </div>
 </div>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
 
 <script src="scripts\password-visibility-toggle.js" defer></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

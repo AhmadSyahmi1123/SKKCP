@@ -16,9 +16,11 @@ if (!empty($_GET['IDaktiviti'])) {
 }
 ?>
 
-<div class="page-header">Laman Rekod Kehadiran Kaunter Urusetia</div>
+<div id="filter-overlay"></div>
+<div class="header-container">
+    <div class="page-header">Laman Rekod Kehadiran Kaunter Urusetia</div>
+</div>
 <main>
-
     <div class="kaunter-info-container">
         <!-- Borang carian aktiviti -->
         <form action='' method='GET'>
@@ -111,6 +113,9 @@ if (!empty($_GET['IDaktiviti'])) {
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts\datatooltip.js" defer></script>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

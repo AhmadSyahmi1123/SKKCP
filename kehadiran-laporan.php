@@ -8,7 +8,10 @@ include ("connection.php");
 include ("kawalan-admin.php");
 ?>
 
-<div class="page-header">Laporan Kehadiran Aktiviti</div>
+<div id="filter-overlay"></div>
+<div class="header-container">
+    <div class="page-header">Laporanyy Kehadiran Aktiviti</div>
+</div>
 <main>
     <!-- Borang Carian Aktiviti -->
     <div class="kaunter-info-container kaunter-laporan">
@@ -184,6 +187,9 @@ include ("kawalan-admin.php");
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts\datatooltip.js" defer></script>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
 
 <!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>

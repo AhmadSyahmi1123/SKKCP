@@ -177,6 +177,8 @@ $hide_title_container = ($current_page != 'index.php');
                             </li>
                         </ul>
                     </nav>
+                    <button class="colorblind-btn" onclick="toggleFilter()" data-tooltip="Buta Warna"><span
+                            class="material-symbols-outlined">symptoms</span></button>
                 </div>
             </header>
     <?php } ?>

@@ -104,7 +104,8 @@ a {
 /*------------------------------------------------------*/
 
 /* Butang Buta Warna */
-.header-container .colorblind-btn {
+.header-container .colorblind-btn,
+.header__content .colorblind-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -118,11 +119,13 @@ a {
     background: var(--accent-color);
 }
 
-.header-container .colorblind-btn:hover {
+.header-container .colorblind-btn:hover,
+.header__content .colorblind-btn:hover {
     filter: brightness(150%);
 }
 
-.header-container .colorblind-btn span {
+.header-container .colorblind-btn span,
+.header__content .colorblind-btn span {
     color: var(--text-color);
 }
 

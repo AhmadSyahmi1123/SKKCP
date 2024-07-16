@@ -157,7 +157,10 @@ include ("kawalan-admin.php");
     <script src="scripts\dialog-script-upload.js" defer></script>
 </main>
 
-<!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
+<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
+<script src="scripts\datatooltip.js" defer></script>
+
+<!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual -->
 <script src="scripts\butang-saiz.js" defer></script>
 <script src="scripts\print-page.js" defer></script>
 

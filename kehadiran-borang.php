@@ -120,6 +120,9 @@ $n = mysqli_fetch_array($laksana_aktiviti);
 
 </main>
 
+<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
+<script src="scripts\datatooltip.js" defer></script>
+
 <!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>
 <script src="scripts\print-page.js" defer></script>

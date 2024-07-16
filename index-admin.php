@@ -155,6 +155,9 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
     </div>
 </main>
 
+<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
+<script src="scripts\datatooltip.js" defer></script>
+
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="scripts\toast.js"></script>

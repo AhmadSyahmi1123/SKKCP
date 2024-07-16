@@ -720,6 +720,10 @@ ul {
     border-bottom: 3px solid var(--secondary-accent-color);
 }
 
+.profil-table tr:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
 .sahkendiriBtn {
     position: relative;
     background: #e5c236;
@@ -749,12 +753,14 @@ ul {
 /* Default Table Styling */
 
 .table-container {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
     max-height: 500px;
     margin: 10px 20px;
     box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 
 .scrollable-table {
@@ -803,12 +809,16 @@ ul {
     color: var(--secondary-text-color);
     position: sticky;
     top: 0;
-    z-index: 20;
+    z-index: 10;
 }
 
 .table tr {
     scroll-snap-align: start;
     border-bottom: 3px solid var(--secondary-accent-color);
+}
+
+.table tr:hover {
+    background: rgba(0, 0, 0, 0.3);
 }
 
 /* top-left border-radius */
@@ -1054,35 +1064,18 @@ ul {
 [data-tooltip] {
     position: relative;
     cursor: default;
-    z-index: 100;
 }
 
-[data-tooltip]::after {
-    font-family: "Roboto Mono", monospace;
-    position: absolute;
-    white-space: nowrap;
-    left: 0;
-    bottom: 100%;
-    content: attr(data-tooltip);
-    text-align: center;
-    box-sizing: border-box;
-    color: var(--text-color);
+.tooltip {
+    position: fixed;
+    z-index: 10000;
     background: rgba(0, 0, 0, 0.8);
+    color: #fff;
     padding: 8px;
-    border-radius: 10px;
+    border-radius: 4px;
     font-size: 14px;
-    font-weight: bold;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateX(0);
-    transition: opacity 0.3s, transform 0.2s;
-    transition-delay: 0.5s;
-}
-
-[data-tooltip]:hover::after {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-100%);
+    pointer-events: none;
+    transform: translateX(-50%);
 }
 
 /*------------------------------------------------------*/
@@ -1724,7 +1717,8 @@ input[type="time"] {
     position: relative;
     width: auto;
     height: 300px;
-    padding: 10px;;
+    padding: 10px;
+    ;
 }
 
 .count-text-container {
@@ -1772,11 +1766,6 @@ input[type="time"] {
     width: 200px;
     height: 200px;
     font-size: 200px;
-}
-
-.leaderboard-container {
-    margin: 10px;
-    padding: 10px;
 }
 
 .leaderboard {

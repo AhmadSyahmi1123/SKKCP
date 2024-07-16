@@ -115,6 +115,9 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
     </div>
 </main>
 
+<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
+<script src="scripts\datatooltip.js" defer></script>
+
 <!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna-->
 <script src="scripts\butang-saiz.js" defer></script>
 

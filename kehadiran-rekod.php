@@ -109,6 +109,9 @@ if (!empty($_GET['IDaktiviti'])) {
     <script src="scripts\select-box-aktiviti.js" defer></script>
 </main>
 
+<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
+<script src="scripts\datatooltip.js" defer></script>
+
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="scripts\toast.js"></script>

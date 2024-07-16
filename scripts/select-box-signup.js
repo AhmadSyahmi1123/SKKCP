@@ -4,14 +4,17 @@ $("#select-box-kelas").select2({
     dropdownCssClass: "select2-dark-dropdown" // No change
 });
 
-$('.select2-selection').css('font-size', '16px');
-$('.select2-selection').css('margin-top', '5px');
-$('.select2-selection').css('height', '40px');
-$('.select2-selection').css('padding-top', '5px');
-$('.select2-selection').css('padding-left', '10px');
-$('.select2-selection').css('background-color', '#26272b');
-$('.select2-selection').css('border', '2px solid var(--accent-color)');
-$('.select2-selection').css('border-radius', '6px');
+$('.select2-selection').css({
+    'font-size': '16px',
+    'height': '40px',
+    'margin-top': '5px',
+    'padding-top': '5px',
+    'padding-left': '10px',
+    'background-color': '#26272b',
+    'border': '2px solid var(--accent-color)',
+    'border-radius': '6px',
+    'transition': 'border .2s ease-in-out'
+});
 
 $('.select2-selection__rendered').css('color', '#fcfcfc');
 
@@ -45,3 +48,12 @@ var darkThemeStyles = `
 var styleElement = document.createElement('style');
 styleElement.innerHTML = darkThemeStyles;
 document.head.appendChild(styleElement);
+
+// Change border color on focus and blur for each select box
+$('#select-box-kelas').on('select2:open', function (e) {
+    $('#select-box-kelas').next('.select2-container').find('.select2-selection').css('border-color', 'var(--accent3-color)'); // Change to your desired focus border color
+});
+
+$('#select-box-kelas').on('select2:close', function (e) {
+    $('#select-box-kelas').next('.select2-container').find('.select2-selection').css('border-color', 'var(--accent-color)'); // Change back to the original border color
+});

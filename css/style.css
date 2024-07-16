@@ -19,6 +19,7 @@ input {
     --secondary-color: #26272b;
     --accent-color: #7C3306;
     --accent2-color: #b34b0c;
+    --accent3-color: #ff7600;
     --secondary-accent-color: #2e2f34;
     --text-color: #fcfcfc;
     --text-link: #fcfcfc;
@@ -385,12 +386,16 @@ ul {
     width: 100%;
     height: 30px;
     background: transparent;
-    border: none;
     outline: none;
     border: 2px solid var(--accent-color);
     border-radius: 7px;
     font-size: 16px;
     padding: 20px 45px 20px 20px;
+    transition: border .2s ease-in-out;
+}
+
+.input-box input:focus {
+    border: 2px solid var(--accent3-color);
 }
 
 .input-box input::placeholder {
@@ -981,6 +986,11 @@ ul {
     font-size: 16px;
     padding: 15px 20px 15px 20px;
     margin: 0 20px 0 0;
+    transition: border .2s ease-in-out;
+}
+
+.input-carian input:focus {
+    border: 2px solid var(--accent3-color);
 }
 
 .input-carian-container .searchBtn {

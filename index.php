@@ -3,16 +3,16 @@
 session_start();
 
 # Memanggil fail header.php
-include("header.php");
+include ("header.php");
 ?>
 
-
+<div id="filter-overlay"></div>
 <div class="carousel-container">
     <div class="glide">
         <div class="glide__track" data-glide-el="track">
             <ul class="glide__slides">
                 <li class="glide__slide">
-                    <a href="signup-borang.php"><img src="img\register-ad.jpeg" alt=""></a>
+                    <a href="signup-borang.php"><img src="img\daftar.png" alt=""></a>
                 </li>
                 <li class="glide__slide"><img src="img\btpmap.png" alt=""></li>
                 <li class="glide__slide"><img src="img\btpmap.png" alt=""></li>
@@ -28,6 +28,10 @@ include("header.php");
         </div>
     </div>
 </div>
+
+<!-- fungsi mesra pengguna buta warna -->
+<script src="scripts\colorblind.js" defer></script>
+
 <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 <script>
     const config = {

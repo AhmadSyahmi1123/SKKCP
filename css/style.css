@@ -6,9 +6,7 @@
     font-weight: 600;
 }
 
-::-webkit-scrollbar {
-    display: none;
-}
+
 
 input {
     color-scheme: dark;
@@ -137,7 +135,7 @@ a {
     align-items: center;
     justify-content: center;
     position: relative;
-    margin: 0 calc((100% - 1100px)/2);
+    margin: 0 calc((100% - 1140px)/2);
     min-height: 100px;
 }
 
@@ -1137,7 +1135,7 @@ ul {
     border-radius: 4px;
     font-size: 14px;
     pointer-events: none;
-    transform: translateX(-50%);
+    transform: translate(-50%, 50%);
 }
 
 /*------------------------------------------------------*/

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>SISTEM KEHADIRAN KELAB COMPETITIVE PROGRAMMING SMKBTP</title>
+    <title>SISTEM KEHADIRAN KELAB PENGATURCARAAN KOMPETITIF SMKBTP</title>
     <link rel="stylesheet" href="css\style.css">
 
     <!-- Import Google Icon -->
@@ -38,7 +38,7 @@
     <!-- Library Toast Notification -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display: none;">
+    <svg version="1.1" style="display: none;">
         <defs>
             <!-- Protanopia Filter -->
             <filter id="protanopia">
@@ -79,7 +79,7 @@ $hide_title_container = ($current_page != 'index.php');
 
 <div class="title-container <?php if ($hide_title_container)
     echo 'hidden-title-container'; ?>">
-    <div class="text">KELAB COMPETITIVE PROGRAMMING SMK BANDAR TASIK PUTERI </div>
+    <div class="text">KELAB PENGATURCARAAN KOMPETITIF SMK BANDAR TASIK PUTERI </div>
 </div>
 
 <body>
@@ -186,5 +186,8 @@ $hide_title_container = ($current_page != 'index.php');
 
 <!-- fungsi mesra pengguna buta warna -->
 <script src="scripts\colorblind.js" defer></script>
+
+<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
+<script src="scripts\datatooltip.js" defer></script>
 
 </html>

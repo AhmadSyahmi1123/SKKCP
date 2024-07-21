@@ -561,10 +561,15 @@ ul {
     margin-top: 20px;
 }
 
+.glide__slides {
+    display: flex;
+    align-items: center;
+}
+
 .glide__slide img {
     width: 100%;
     height: 100%;
-    object-fit: fill;
+    object-fit: cover;
 }
 
 .glide__arrows .glide__arrow i {

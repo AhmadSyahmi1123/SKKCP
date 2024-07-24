@@ -153,8 +153,17 @@ if (empty($_SESSION["nokp"])) {
     </div>
 </main>
 
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
+            Puteri</p>
+    </div>
+</footer>
+
 <!-- fungsi mesra pengguna buta warna -->
 <script src="scripts\colorblind.js" defer></script>
+
+<script src="scripts\footer-script.js"></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>

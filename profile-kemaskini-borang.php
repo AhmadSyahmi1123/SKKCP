@@ -101,3 +101,10 @@ include ("connection.php");
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="scripts\select-box-update-ahli.js" defer></script>
 </main>
+
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
+            Puteri</p>
+    </div>
+</footer>

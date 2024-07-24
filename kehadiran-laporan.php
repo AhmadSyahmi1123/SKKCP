@@ -159,6 +159,13 @@ include ("kawalan-admin.php");
     <script src="scripts\dialog-update-mata.js" defer></script>
 </main>
 
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
+            Puteri</p>
+    </div>
+</footer>
+
 <!-- Borang untuk memuat naik fail -->
 <div class="modal-container" id="modal_mata_container">
     <div class="card modal_mata modal">

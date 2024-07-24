@@ -160,6 +160,13 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
     </div>
 </main>
 
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
+            Puteri</p>
+    </div>
+</footer>
+
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts\datatooltip.js" defer></script>
 

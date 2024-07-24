@@ -65,7 +65,7 @@ body {
 main {
     padding-left: 70px;
     padding-right: 30px;
-    height: 90vh;
+    height: auto;
 }
 
 button {
@@ -75,6 +75,19 @@ button {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.footer-container {
+    text-align: center;
+    border-top: 2px solid var(--accent-color);
+    padding: 10px 0;
+    margin-top: 10px;
 }
 
 .header-container {
@@ -299,6 +312,7 @@ ul {
     top: 0;
     border-top: 3px solid var(--accent2-color);
     border-bottom: 3px solid var(--accent2-color);
+    z-index: 999;
 }
 
 .header__content {
@@ -1424,6 +1438,7 @@ input[type="time"] {
     width: 100%;
     border: 2px solid var(--accent-color);
     border-radius: .25rem;
+    color: #adadad;
 }
 
 .choose-file-btn input[type="file"]::file-selector-button {

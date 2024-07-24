@@ -43,5 +43,12 @@ include ("kawalan-admin.php");
     </div>
 </main>
 
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
+            Puteri</p>
+    </div>
+</footer>
+
 <!-- fungsi mesra pengguna buta warna -->
 <script src="scripts\colorblind.js" defer></script>

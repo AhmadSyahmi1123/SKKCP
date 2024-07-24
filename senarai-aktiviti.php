@@ -103,6 +103,13 @@ include ("kawalan-admin.php");
     <script src="scripts\dialog-script-aktiviti.js" defer></script>
 </main>
 
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
+            Puteri</p>
+    </div>
+</footer>
+
 <div class="modal-container" id="modal_aktiviti_container">
     <div class="card modal_aktiviti modal">
 

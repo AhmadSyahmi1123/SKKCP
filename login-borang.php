@@ -37,6 +37,14 @@ include ("header.php");
         </form>
     </div>
 </div>
+
+<footer>
+    <div class="footer-container">
+        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
+            Puteri</p>
+    </div>
+</footer>
+
 <script src="scripts\password-visibility-toggle.js" defer></script>
 
 <!-- fungsi mesra pengguna buta warna -->

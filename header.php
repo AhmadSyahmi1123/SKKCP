@@ -66,7 +66,7 @@
         </defs>
     </svg>
 
-    <!-- Preload External JavaScript -->
+    <!-- fungsi mesra pengguna buta warna -->
     <link rel="preload" href="scripts/colorblind.js" as="script">
 
 </head>
@@ -186,9 +186,6 @@ $hide_title_container = ($current_page != 'index.php');
             </header>
     <?php } ?>
 </body>
-
-<!-- fungsi mesra pengguna buta warna -->
-
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts\datatooltip.js" defer></script>

@@ -1,6 +1,7 @@
+const filters = ['protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia', ''];
+const filterOverlay = document.getElementById('filter-overlay');
+
 document.addEventListener('DOMContentLoaded', () => {
-    const filterOverlay = document.getElementById('filter-overlay');
-    const filters = ['protanopia', 'deuteranopia', 'tritanopia', 'achromatopsia', ''];
     let currentFilterIndex = 0;
 
     function applyFilter() {
@@ -26,8 +27,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function resetFilter() {
+        currentFilterIndex = filters.length - 1; // Set to the index of the empty string
+        applyFilter();
+    }
+
     loadFilter();
 
-    // Export toggleFilter to be used in HTML
+    // Export functions to be used in HTML
     window.toggleFilter = toggleFilter;
+    window.resetFilter = resetFilter;
 });

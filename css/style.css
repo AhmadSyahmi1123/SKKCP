@@ -115,16 +115,38 @@ footer {
 /*------------------------------------------------------*/
 
 /* Butang Buta Warna */
+.colorblind-container {
+    position: absolute;
+    display: flex;
+    height: 100%;
+    width: 100px;
+    justify-content: space-around;
+    align-items: center;
+    top: 0;
+    right: 0;
+}
+
 .header-container .colorblind-btn,
 .header__content .colorblind-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     right: 0;
     width: 40px;
     height: 40px;
-    margin: 10px;
+    border: none;
+    border-radius: 50%;
+    background: var(--accent-color);
+}
+
+.header-container .reset-colorblind-btn,
+.header__content .reset-colorblind-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    right: 0;
+    width: 40px;
+    height: 40px;
     border: none;
     border-radius: 50%;
     background: var(--accent-color);
@@ -135,9 +157,20 @@ footer {
     filter: brightness(150%);
 }
 
+.header-container .reset-colorblind-btn:hover,
+.header__content .reset-colorblind-btn:hover {
+    filter: brightness(150%);
+}
+
 .header-container .colorblind-btn span,
 .header__content .colorblind-btn span {
     color: var(--text-color);
+}
+
+.header-container .reset-colorblind-btn i,
+.header__content .reset-colorblind-btn i {
+    color: var(--text-color);
+    font-size: 24px;
 }
 
 /*------------------------------------------------------*/

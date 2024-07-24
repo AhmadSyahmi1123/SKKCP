@@ -180,8 +180,12 @@ $hide_title_container = ($current_page != 'index.php');
                             </li>
                         </ul>
                     </nav>
-                    <button class="colorblind-btn" onclick="toggleFilter()" data-tooltip="Buta Warna"><span
-                            class="material-symbols-outlined">symptoms</span></button>
+                    <div class="colorblind-container">
+                        <button class="reset-colorblind-btn" onclick="resetFilter()" data-tooltip="Reset Warna"><i
+                                class='bx bx-reset'></i></button>
+                        <button class="colorblind-btn" onclick="toggleFilter()" data-tooltip="Buta Warna"><span
+                                class="material-symbols-outlined">symptoms</span></button>
+                    </div>
                 </div>
             </header>
     <?php } ?>

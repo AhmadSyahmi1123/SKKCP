@@ -23,8 +23,12 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
 <div id="filter-overlay"></div>
 <div class="header-container">
     <div class="page-header">Dashboard</div>
-    <button class="colorblind-btn" onclick="toggleFilter()" data-tooltip="Buta Warna"><span
-            class="material-symbols-outlined">symptoms</span></button>
+    <div class="colorblind-container">
+        <button class="reset-colorblind-btn" onclick="resetFilter()" data-tooltip="Reset Warna"><i
+                class='bx bx-reset'></i></button>
+        <button class="colorblind-btn" onclick="toggleFilter()" data-tooltip="Buta Warna"><span
+                class="material-symbols-outlined">symptoms</span></button>
+    </div>
 </div>
 <main>
     <div class="dashboard-container">

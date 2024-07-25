@@ -159,7 +159,7 @@ include ("kawalan-admin.php");
     <script src="scripts\dialog-script-upload.js" defer></script>
 </main>
 
-<footer>
+<footer class="default-footer">
     <div class="footer-container">
         <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
             Puteri</p>

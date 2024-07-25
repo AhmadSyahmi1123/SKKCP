@@ -7,10 +7,17 @@ include ("header.php");
 include ("kawalan-admin.php");
 include ("connection.php");
 
+# Set a default IDaktiviti
+$defaultIDaktiviti = '1';  // Change this to your default IDaktiviti
+
 # Menyemak kewujudan data GET['IDaktiviti']
+if (empty($_GET['IDaktiviti'])) {
+    $_GET['IDaktiviti'] = $defaultIDaktiviti;
+}
+
 if (!empty($_GET['IDaktiviti'])) {
     # Proses mendapatkan data aktiviti
-    $sql_aktiviti = "select * from aktiviti where IDaktiviti = '" . $_GET['IDaktiviti'] . "'";
+    $sql_aktiviti = "SELECT * FROM aktiviti WHERE IDaktiviti = '" . $_GET['IDaktiviti'] . "'";
     $laksana_aktiviti = mysqli_query($condb, $sql_aktiviti);
     $ma = mysqli_fetch_array($laksana_aktiviti);
 }
@@ -31,11 +38,12 @@ if (!empty($_GET['IDaktiviti'])) {
 
                     <?php
                     # Proses memaparkan senarai aktiviti dalam bentuk dropdown list
-                    $arahan_sql_pilih = "select * from aktiviti";
+                    $arahan_sql_pilih = "SELECT * FROM aktiviti";
                     $laksana_arahan_pilih = mysqli_query($condb, $arahan_sql_pilih);
 
                     while ($n = mysqli_fetch_array($laksana_arahan_pilih)) {
-                        echo "<option value='" . $n['IDaktiviti'] . "'>" . $n['IDaktiviti'] . " | " . $n['nama_aktiviti'] . "</option>";
+                        $selected = ($n['IDaktiviti'] == $_GET['IDaktiviti']) ? 'selected' : '';
+                        echo "<option value='" . $n['IDaktiviti'] . "' $selected>" . $n['IDaktiviti'] . " | " . $n['nama_aktiviti'] . "</option>";
                     }
                     ?>
                 </select>
@@ -47,12 +55,9 @@ if (!empty($_GET['IDaktiviti'])) {
         <?php if (!empty($_GET["IDaktiviti"])) { ?>
             <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
             <div class="aktiviti-details">
-                Aktiviti:
-                <?= $ma['nama_aktiviti'] ?><br>
-                Tarikh:
-                <?= $ma['tarikh_aktiviti'] ?> <br>
-                Masa:
-                <?= date('H:i', strtotime($ma['masa_mula'])) ?> <br>
+                Aktiviti: <?= $ma['nama_aktiviti'] ?><br>
+                Tarikh: <?= $ma['tarikh_aktiviti'] ?> <br>
+                Masa: <?= date('H:i', strtotime($ma['masa_mula'])) ?> <br>
             </div>
         </div>
 
@@ -60,7 +65,6 @@ if (!empty($_GET['IDaktiviti'])) {
             <form action='kehadiran-rekod-proses.php' method='POST' align='center'>
                 <div class="input-rekod">
                     <input class="input-rekod" type='text' name='nokp' placeholder="No. Kad Pengenalan" autocomplete="off">
-
                     <!-- Hantar IDaktiviti supaya page tidak "reset" -->
                     <input type='number' name='IDaktiviti' value="<?= $_GET['IDaktiviti'] ?>" hidden><br>
                 </div>
@@ -70,7 +74,7 @@ if (!empty($_GET['IDaktiviti'])) {
             </form>
         </div>
 
-        <div class="table-container">
+        <div class="table-container table-rekod">
             <div class="scrollable-table">
                 <table class="table">
                     <thead>
@@ -87,7 +91,7 @@ if (!empty($_GET['IDaktiviti'])) {
                         $bil = 0;
 
                         # Memaparkan data kehadiran dalam bentuk jadual
-                        $arahan_sql_kehadiran = "select * from ahli, aktiviti, kehadiran, kelas where ahli.nokp=kehadiran.nokp and ahli.IDkelas=kelas.IDkelas and aktiviti.IDaktiviti=kehadiran.IDaktiviti and kehadiran.IDaktiviti='" . $_GET['IDaktiviti'] . "' order by kehadiran.masa_hadir DESC";
+                        $arahan_sql_kehadiran = "SELECT * FROM ahli, aktiviti, kehadiran, kelas WHERE ahli.nokp=kehadiran.nokp AND ahli.IDkelas=kelas.IDkelas AND aktiviti.IDaktiviti=kehadiran.IDaktiviti AND kehadiran.IDaktiviti='" . $_GET['IDaktiviti'] . "' ORDER BY kehadiran.masa_hadir DESC";
                         $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
 
                         while ($m = mysqli_fetch_array($laksana_kehadiran)) {
@@ -108,27 +112,26 @@ if (!empty($_GET['IDaktiviti'])) {
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="scripts\select-box-aktiviti.js" defer></script>
+    <script src="scripts/select-box-aktiviti.js" defer></script>
 </main>
 
-<footer>
+<footer class="bottomed-footer">
     <div class="footer-container">
-        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
-            Puteri</p>
+        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik Puteri</p>
     </div>
 </footer>
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
-<script src="scripts\datatooltip.js" defer></script>
+<script src="scripts/datatooltip.js" defer></script>
 
 <!-- fungsi mesra pengguna buta warna -->
-<script src="scripts\colorblind.js" defer></script>
+<script src="scripts/colorblind.js" defer></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-<script src="scripts\toast.js"></script>
+<script src="scripts/toast.js"></script>
 
-<script src="scripts\fo0ter-script.js"></script>
+<script src="scripts/fo0ter-script.js"></script>
 
 <!-- Elak daripada resubmission borang apabila refresh -->
 <script>

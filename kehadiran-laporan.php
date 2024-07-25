@@ -6,6 +6,15 @@ session_start();
 include ("header.php");
 include ("connection.php");
 include ("kawalan-admin.php");
+
+# Set a default IDaktiviti
+$defaultIDaktiviti = '1';  // Change this to your default IDaktiviti
+
+# Menyemak kewujudan data GET['IDaktiviti']
+if (empty($_GET['IDaktiviti'])) {
+    $_GET['IDaktiviti'] = $defaultIDaktiviti;
+}
+
 ?>
 
 <div id="filter-overlay"></div>
@@ -27,9 +36,8 @@ include ("kawalan-admin.php");
                     $arahan_sql_pilih = "select * from aktiviti";
                     $laksana_arahan_pilih = mysqli_query($condb, $arahan_sql_pilih);
                     while ($n = mysqli_fetch_array($laksana_arahan_pilih)) {
-                        echo "<option value='" . $n['IDaktiviti'] . "'>
-            " . $n['IDaktiviti'] . " | " . $n['nama_aktiviti'] . "
-            </option>";
+                        $selected = ($n['IDaktiviti'] == $_GET['IDaktiviti']) ? 'selected' : '';
+                        echo "<option value='" . $n['IDaktiviti'] . "' $selected>" . $n['IDaktiviti'] . " | " . $n['nama_aktiviti'] . "</option>";
                     }
                     ?>
                 </select>
@@ -159,7 +167,7 @@ include ("kawalan-admin.php");
     <script src="scripts\dialog-update-mata.js" defer></script>
 </main>
 
-<footer>
+<footer class="default-footer">
     <div class="footer-container">
         <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
             Puteri</p>

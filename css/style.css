@@ -78,16 +78,23 @@ a {
 }
 
 footer {
-    position: relative;
     bottom: 0;
     width: 100%;
+}
+
+.default-footer {
+    position: relative;
+}
+
+.bottomed-footer {
+    position: fixed;
 }
 
 .footer-container {
     text-align: center;
     border-top: 2px solid var(--accent-color);
     padding: 10px 0;
-    margin-top: 10px;
+    margin-top: auto;
 }
 
 .header-container {

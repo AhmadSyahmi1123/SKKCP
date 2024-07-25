@@ -123,7 +123,7 @@ $n = mysqli_fetch_array($laksana_aktiviti);
 
 </main>
 
-<footer>
+<footer class="default-footer">
     <div class="footer-container">
         <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
             Puteri</p>

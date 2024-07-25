@@ -15,7 +15,7 @@ include ("header.php");
                     <a href="signup-borang.php"><img src="img\daftar.png" alt=""></a>
                 </li>
                 <li class="glide__slide">
-                    <a href="https://www.ppkomp.com.my/2023-pertandingan.htm"><img src="img\poster2.jpg" alt=""></a>
+                    <a href="https://www.ppkomp.com.my/2023-pertandingan.htm"><img src="img\poster2.png" alt=""></a>
                 </li>
                 <li class="glide__slide">
                     <a href="https://www.hackerrank.com/"><img src="img\hackerrank.png" alt=""></a>
@@ -24,7 +24,7 @@ include ("header.php");
                     <a href="https://www.codewars.com/dashboard"><img src="img\codewars.png" alt=""></a>
                 </li>
                 <li class="glide__slide">
-                    <a href="https://codeforces.com/"><img src="img\codeforces.jpg" alt=""></a>
+                    <a href="https://codeforces.com/"><img src="img\codeforces.png" alt=""></a>
                 </li>
             </ul>
         </div>

@@ -84,10 +84,12 @@ footer {
 
 .default-footer {
     position: relative;
+    left: 0;
 }
 
 .bottomed-footer {
     position: fixed;
+    left: 0;
 }
 
 .footer-container {
@@ -1508,9 +1510,11 @@ input[type="time"] {
 }
 
 .save-container {
-    position: absolute;
+    position: relative;
     display: flex;
     align-items: center;
+    justify-content: end;
+    width: 100%;
     right: 0;
     z-index: 10;
 }
@@ -1575,7 +1579,7 @@ input[type="time"] {
 }
 
 .kemaskini-container {
-    position: absolute;
+    position: relative;
     display: flex;
     align-items: center;
     bottom: 10px;

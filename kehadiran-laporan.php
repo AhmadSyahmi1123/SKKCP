@@ -19,7 +19,7 @@ if (empty($_GET['IDaktiviti'])) {
 
 <div id="filter-overlay"></div>
 <div class="header-container">
-    <div class="page-header">Laporanyy Kehadiran Aktiviti</div>
+    <div class="page-header">Laporan Kehadiran Aktiviti</div>
 </div>
 <main>
     <!-- Borang Carian Aktiviti -->
@@ -60,58 +60,70 @@ if (empty($_GET['IDaktiviti'])) {
         $laksana_aktiviti = mysqli_query($condb, $sql_aktiviti);
         $ma = mysqli_fetch_array($laksana_aktiviti);
 
+        # Mendapatkan tarikh semasa
+        $current_date = date('Y-m-d');
+
         # Mendapatkan analisis kehadiran (bil_hadir & bil_ahli)
         $arahan_SQL = "SELECT 
-    (SELECT COUNT(*) FROM kehadiran where IDaktiviti = '" . $ma['IDaktiviti'] . "') AS bil_hadir,
-    (SELECT COUNT(*) FROM ahli) AS bil_ahli ";
+        (SELECT COUNT(*) FROM kehadiran where IDaktiviti = '" . $ma['IDaktiviti'] . "') AS bil_hadir,
+        (SELECT COUNT(*) FROM ahli) AS bil_ahli";
         $laksana_SQL = mysqli_query($condb, $arahan_SQL);
         $da = mysqli_fetch_array($laksana_SQL);
-        ?>
 
-        <div class="laporan-details">
-            <?= $ma['nama_aktiviti'] ?> <br>
-            <?= date('d/m/Y', strtotime($ma['tarikh_aktiviti'])) ?> |
-            <?= date('H:i', strtotime($ma['masa_mula'])) ?> <br>
-            Kehadiran :
-            <?= $da['bil_hadir'] . "/" . $da['bil_ahli'] ?> <br>
-            Peratus :
-            <?php echo number_format(($da['bil_hadir'] / $da['bil_ahli'] * 100), 2); ?>%
-        </div>
+        if ($ma['tarikh_aktiviti'] > $current_date) {
+            echo "<div class='laporan-details'>Aktiviti masih belum dijalankan</div>";
+            echo "<footer class='bottomed-footer'>
+                    <div class='footer-container'>
+                        <p class='copyright'>Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
+                    </div>
+                </footer>";
+        } else {
+            ?>
 
-        <div class="laporan-aktiviti-container">
-            <div class="input-carian-container">
-                <div class="input-carian">
-                    <input type="text" id="searchAhli" name="nama" placeholder="Carian Nama Ahli" autocomplete="off">
+            <div class="laporan-details">
+                <?= $ma['nama_aktiviti'] ?> <br>
+                <?= date('d/m/Y', strtotime($ma['tarikh_aktiviti'])) ?> |
+                <?= date('H:i', strtotime($ma['masa_mula'])) ?> <br>
+                Kehadiran :
+                <?= $da['bil_hadir'] . "/" . $da['bil_ahli'] ?> <br>
+                Peratus :
+                <?php echo number_format(($da['bil_hadir'] / $da['bil_ahli'] * 100), 2); ?>%
+            </div>
+
+            <div class="laporan-aktiviti-container">
+                <div class="input-carian-container">
+                    <div class="input-carian">
+                        <input type="text" id="searchAhli" name="nama" placeholder="Carian Nama Ahli" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="font-size-button">
+                    <button class="increase-size-btn" onclick="ubahsaiz(1)" data-tooltip="Tambah Saiz Tulisan"><span
+                            class="material-symbols-outlined">text_increase</span></button>
+                    <button class="decrease-size-btn" onclick="ubahsaiz(-1)" data-tooltip="Tolak Saiz Tulisan"><span
+                            class="material-symbols-outlined">text_decrease</span></button>
+                    <button class="reset-font-size" onclick="ubahsaiz(2)">Reset Size</button>
+                    <button class="print-btn" onclick="printPage()">Cetak</button>
                 </div>
             </div>
 
-            <div class="font-size-button">
-                <button class="increase-size-btn" onclick="ubahsaiz(1)" data-tooltip="Tambah Saiz Tulisan"><span
-                        class="material-symbols-outlined">text_increase</span></button>
-                <button class="decrease-size-btn" onclick="ubahsaiz(-1)" data-tooltip="Tolak Saiz Tulisan"><span
-                        class="material-symbols-outlined">text_decrease</span></button>
-                <button class="reset-font-size" onclick="ubahsaiz(2)">Reset Size</button>
-                <button class="print-btn" onclick="printPage()">Cetak</button>
-            </div>
-        </div>
-
-        <div class="table-container" id="body">
-            <div class="scrollable-table" id="print-area">
-                <table id="saiz" class="table">
-                    <thead>
-                        <tr>
-                            <th>Bil</th>
-                            <th>Nama</th>
-                            <th>No Kad Pengenalan</th>
-                            <th>Kelas</th>
-                            <th>Kehadiran</th>
-                            <th>Tindakan</th>
-                        </tr>
-                    </thead>
-                    <tbody id="laporanBody">
-                        <?php
-                        # Arahan query untuk mencari senarai aktiviti
-                        $arahan_papar = "
+            <div class="table-container" id="body">
+                <div class="scrollable-table" id="print-area">
+                    <table id="saiz" class="table">
+                        <thead>
+                            <tr>
+                                <th>Bil</th>
+                                <th>Nama</th>
+                                <th>No Kad Pengenalan</th>
+                                <th>Kelas</th>
+                                <th>Kehadiran</th>
+                                <th>Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="laporanBody">
+                            <?php
+                            # Arahan query untuk mencari senarai aktiviti
+                            $arahan_papar = "
                         SELECT *, ahli.nokp
                         FROM ahli
                         LEFT JOIN kelas
@@ -122,14 +134,14 @@ if (empty($_GET['IDaktiviti'])) {
                         ORDER BY ahli.nama ASC
                         ";
 
-                        # Laksana arahan mencari data aktiviti
-                        $laksana = mysqli_query($condb, $arahan_papar);
-                        $hadir = $tak_hadir = $bil = 0;
+                            # Laksana arahan mencari data aktiviti
+                            $laksana = mysqli_query($condb, $arahan_papar);
+                            $hadir = $tak_hadir = $bil = 0;
 
-                        # Mengambil data yang ditemui
-                        while ($m = mysqli_fetch_array($laksana)) {
-                            # Memaparkan senarai nama dalam jadual
-                            echo "<tr>
+                            # Mengambil data yang ditemui
+                            while ($m = mysqli_fetch_array($laksana)) {
+                                # Memaparkan senarai nama dalam jadual
+                                echo "<tr>
                                 <td>" . ++$bil . "</td>
                                 <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
                                 <td>" . $m['nokp'] . "</td>
@@ -137,13 +149,13 @@ if (empty($_GET['IDaktiviti'])) {
                                 <td align='center' >
                                 ";
 
-                            if (strlen($m['IDaktiviti']) >= 1) {
-                                echo "<div class='status-hadir'>Hadir</div>";
-                            } else {
-                                echo "<div class='status-tidak-hadir'>Tidak Hadir</div>";
-                            }
+                                if (strlen($m['IDaktiviti']) >= 1) {
+                                    echo "<div class='status-hadir'>Hadir</div>";
+                                } else {
+                                    echo "<div class='status-tidak-hadir'>Tidak Hadir</div>";
+                                }
 
-                            echo "<td>
+                                echo "<td>
                                 <div class='action-container'>
                                     <div class='edit-mata-container'>
                                         <button class='editMataBtn open-update-point' data-tooltip='Tambah/Tolak Mata' data-nokp='" . $m['nokp'] . "'>
@@ -153,26 +165,30 @@ if (empty($_GET['IDaktiviti'])) {
                                 </div>
                             </td>";
 
-                            echo "</td></tr>";
-                        }
-                        echo "</table>";
-    } ?>
-                </tbody>
-        </div>
-    </div>
+                                echo "</td></tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <footer class="default-footer">
+                <div class="footer-container">
+                    <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
+                </div>
+            </footer>
+
+            <?php
+        }
+    }
+    ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="scripts\select-box-aktiviti.js" defer></script>
     <script src="scripts\dialog-update-mata.js" defer></script>
 </main>
-
-<footer class="default-footer">
-    <div class="footer-container">
-        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
-            Puteri</p>
-    </div>
-</footer>
 
 <!-- Borang untuk memuat naik fail -->
 <div class="modal-container" id="modal_mata_container">
@@ -201,18 +217,18 @@ if (empty($_GET['IDaktiviti'])) {
 </div>
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
-<script src="scripts\datatooltip.js" defer></script>
+<script src="scripts/datatooltip.js" defer></script>
 
 <!-- fungsi mesra pengguna buta warna -->
-<script src="scripts\colorblind.js" defer></script>
+<script src="scripts/colorblind.js" defer></script>
 
 <!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
-<script src="scripts\butang-saiz.js" defer></script>
-<script src="scripts\print-page.js" defer></script>
+<script src="scripts/butang-saiz.js" defer></script>
+<script src="scripts/print-page.js" defer></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-<script src="scripts\toast.js"></script>
+<script src="scripts/toast.js"></script>
 
 <!-- Elak daripada resubmission borang apabila refresh -->
 <script>
@@ -280,5 +296,4 @@ if (empty($_GET['IDaktiviti'])) {
             });
         }
     });
-
 </script>

@@ -21,6 +21,8 @@ if (!empty($_GET['IDaktiviti'])) {
     $laksana_aktiviti = mysqli_query($condb, $sql_aktiviti);
     $ma = mysqli_fetch_array($laksana_aktiviti);
 }
+
+$currentDate = date('Y-m-d');
 ?>
 
 <div id="filter-overlay"></div>
@@ -52,62 +54,66 @@ if (!empty($_GET['IDaktiviti'])) {
             </div>
         </form>
 
-        <?php if (!empty($_GET["IDaktiviti"])) { ?>
-            <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
-            <div class="aktiviti-details">
-                Aktiviti: <?= $ma['nama_aktiviti'] ?><br>
-                Tarikh: <?= $ma['tarikh_aktiviti'] ?> <br>
-                Masa: <?= date('H:i', strtotime($ma['masa_mula'])) ?> <br>
-            </div>
-        </div>
-
-        <div class="rekod-container">
-            <form action='kehadiran-rekod-proses.php' method='POST' align='center'>
-                <div class="input-rekod">
-                    <input class="input-rekod" type='text' name='nokp' placeholder="No. Kad Pengenalan" autocomplete="off">
-                    <!-- Hantar IDaktiviti supaya page tidak "reset" -->
-                    <input type='number' name='IDaktiviti' value="<?= $_GET['IDaktiviti'] ?>" hidden><br>
+        <?php if ($currentDate < $ma['tarikh_aktiviti']) { ?>
+            <div class='aktiviti-details'>Aktiviti masih belum dijalankan</div>
+        <?php } else { ?>
+            <?php if (!empty($_GET["IDaktiviti"])) { ?>
+                <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
+                <div class="aktiviti-details">
+                    Aktiviti: <?= $ma['nama_aktiviti'] ?><br>
+                    Tarikh: <?= $ma['tarikh_aktiviti'] ?><br>
+                    Masa: <?= date('H:i', strtotime($ma['masa_mula'])) ?><br>
                 </div>
-
-                <button onclick="rekodKehadiran();" type='submit' class="rekodBtn"><i
-                        class='bx bx-user-check'></i>Rekod</button>
-            </form>
-        </div>
-
-        <div class="table-container table-rekod">
-            <div class="scrollable-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Bil.</th>
-                            <th>Nama</th>
-                            <th>No. Kad Pengenalan</th>
-                            <th>Kelas</th>
-                            <th>Masa Hadir</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $bil = 0;
-
-                        # Memaparkan data kehadiran dalam bentuk jadual
-                        $arahan_sql_kehadiran = "SELECT * FROM ahli, aktiviti, kehadiran, kelas WHERE ahli.nokp=kehadiran.nokp AND ahli.IDkelas=kelas.IDkelas AND aktiviti.IDaktiviti=kehadiran.IDaktiviti AND kehadiran.IDaktiviti='" . $_GET['IDaktiviti'] . "' ORDER BY kehadiran.masa_hadir DESC";
-                        $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
-
-                        while ($m = mysqli_fetch_array($laksana_kehadiran)) {
-                            echo "<tr>
-                <td>" . ++$bil . "</td>
-                <td>" . $m['nama'] . "</td>
-                <td>" . $m['nokp'] . "</td>
-                <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
-                <td>" . $m['masa_hadir'] . "</td>
-              </tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
             </div>
-        </div>
+
+            <div class="rekod-container">
+                <form action='kehadiran-rekod-proses.php' method='POST' align='center'>
+                    <div class="input-rekod">
+                        <input class="input-rekod" type='text' name='nokp' placeholder="No. Kad Pengenalan" autocomplete="off">
+                        <!-- Hantar IDaktiviti supaya page tidak "reset" -->
+                        <input type='number' name='IDaktiviti' value="<?= $_GET['IDaktiviti'] ?>" hidden><br>
+                    </div>
+
+                    <button onclick="rekodKehadiran();" type='submit' class="rekodBtn"><i
+                            class='bx bx-user-check'></i>Rekod</button>
+                </form>
+            </div>
+
+            <div class="table-container table-rekod">
+                <div class="scrollable-table">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Bil.</th>
+                                <th>Nama</th>
+                                <th>No. Kad Pengenalan</th>
+                                <th>Kelas</th>
+                                <th>Masa Hadir</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $bil = 0;
+
+                            # Memaparkan data kehadiran dalam bentuk jadual
+                            $arahan_sql_kehadiran = "SELECT * FROM ahli, aktiviti, kehadiran, kelas WHERE ahli.nokp=kehadiran.nokp AND ahli.IDkelas=kelas.IDkelas AND aktiviti.IDaktiviti=kehadiran.IDaktiviti AND kehadiran.IDaktiviti='" . $_GET['IDaktiviti'] . "' ORDER BY kehadiran.masa_hadir DESC";
+                            $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
+
+                            while ($m = mysqli_fetch_array($laksana_kehadiran)) {
+                                echo "<tr>
+                                    <td>" . ++$bil . "</td>
+                                    <td>" . $m['nama'] . "</td>
+                                    <td>" . $m['nokp'] . "</td>
+                                    <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
+                                    <td>" . $m['masa_hadir'] . "</td>
+                                </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <?php } ?>
     <?php } ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -117,7 +123,7 @@ if (!empty($_GET['IDaktiviti'])) {
 
 <footer class="bottomed-footer">
     <div class="footer-container">
-        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik Puteri</p>
+        <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
     </div>
 </footer>
 

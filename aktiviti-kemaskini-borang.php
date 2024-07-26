@@ -66,10 +66,9 @@ $m = mysqli_fetch_array($laksana_arahan);
     </div>
 </main>
 
-<footer class="default-footer">
+<footer class="bottomed-footer">
     <div class="footer-container">
-        <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik
-            Puteri</p>
+        <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
     </div>
 </footer>
 

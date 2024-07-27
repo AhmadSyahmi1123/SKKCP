@@ -74,7 +74,7 @@ $currentDate = date('Y-m-d');
                         <input type='number' name='IDaktiviti' value="<?= $_GET['IDaktiviti'] ?>" hidden><br>
                     </div>
 
-                    <button onclick="rekodKehadiran();" type='submit' class="rekodBtn"><i
+                    <button type='submit' class="rekodBtn"><i
                             class='bx bx-user-check'></i>Rekod</button>
                 </form>
             </div>

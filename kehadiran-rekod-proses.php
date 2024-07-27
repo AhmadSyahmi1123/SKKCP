@@ -54,7 +54,7 @@ if (!empty($_POST["nokp"])) {
             }
 
             # Menyimpan data kehadiran
-            $simpan_data = mysqli_query($condb, "insert into kehadiran (IDaktiviti, nokp, masa_hadir) values ('" . $_GET['IDaktiviti'] . "', '" . $_POST['nokp'] . "', '$masa')");
+            $simpan_data = mysqli_query($condb, "insert into kehadiran (IDaktiviti, nokp, masa_hadir) values ('" . $IDaktiviti . "', '" . $_POST['nokp'] . "', '$masa')");
 
             # Menyemak jika proses penyimpanan data berjaya
             if ($simpan_data) {

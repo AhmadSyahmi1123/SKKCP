@@ -82,7 +82,15 @@ $hide_title_container = ($current_page != 'index.php');
 
 <div class="title-container <?php if ($hide_title_container)
     echo 'hidden-title-container'; ?>">
-    <div class="text">KELAB PENGATURCARAAN KOMPETITIF SMK BANDAR TASIK PUTERI </div>
+    <div class="logo">
+        <img src="img\logosekolah.png" alt="">
+    </div>
+    <div class="text-container">
+        <div class="text">KELAB PENGATURCARAAN KOMPETITIF SMK BANDAR TASIK PUTERI </div>
+    </div>
+    <div class="logo">
+        <img src="img\logokelab.png" alt="">
+    </div>
 </div>
 
 <body>

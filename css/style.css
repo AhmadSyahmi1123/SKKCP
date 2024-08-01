@@ -188,10 +188,10 @@ footer {
 .title-container {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
-    margin: 0 calc((100% - 1140px)/2);
     min-height: 100px;
+    width: 100%;
 }
 
 .hidden-title-container {
@@ -222,6 +222,11 @@ footer {
     from {
         width: 0;
     }
+}
+
+.logo img {
+    width: 100px;
+    height: 100px;
 }
 
 /*------------------------------------------------------*/

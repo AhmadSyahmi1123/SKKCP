@@ -1,29 +1,27 @@
-// Elements 
+// Elemen
 const icon = document.querySelector('.password-toggle');
 const input = document.querySelector('input[type="password"]');
 
-// State variable         
+// Pembolehubah keadaan
 let showPassword = false;
 
-icon.addEventListener('click', function() {
+icon.addEventListener('click', function () {
 
-  // Toggle password visibility
-  // Based on current state
+  // Tukar paparan kata laluan
+  // Berdasarkan keadaan semasa
   if (showPassword) {
-    input.type = 'password';
-    showPassword = false;
-  }
-  else {
-    input.type = 'text';
-    showPassword = true;  
+    input.type = 'password'; // Tukar input kepada jenis kata laluan
+    showPassword = false;    // Kemas kini keadaan kepada tidak menunjukkan kata laluan
+  } else {
+    input.type = 'text';     // Tukar input kepada jenis teks
+    showPassword = true;     // Kemas kini keadaan kepada menunjukkan kata laluan
   }
 
-  // Toggle icon
-  if(icon.classList.contains('fa-eye')) {
-    icon.classList.replace('fa-eye', 'fa-eye-slash');
+  // Tukar ikon
+  if (icon.classList.contains('fa-eye')) {
+    icon.classList.replace('fa-eye', 'fa-eye-slash'); // Tukar ikon kepada 'fa-eye-slash'
+  } else {
+    icon.classList.replace('fa-eye-slash', 'fa-eye'); // Tukar ikon kepada 'fa-eye'
   }
-  else { 
-     icon.classList.replace('fa-eye-slash', 'fa-eye');
-  }
-  
+
 });

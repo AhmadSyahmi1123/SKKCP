@@ -8,7 +8,7 @@ include ("connection.php");
 include ("kawalan-admin.php");
 
 # Mendapatkan maklumat aktiviti dari pangkalan data
-$arahan_sql_aktiviti = "select * from aktiviti where IDaktiviti='" . $_GET['IDaktiviti'] . "' ";
+$arahan_sql_aktiviti = "SELECT * FROM aktiviti WHERE IDaktiviti='" . $_GET['IDaktiviti'] . "' ";
 $laksana_aktiviti = mysqli_query($condb, $arahan_sql_aktiviti);
 $n = mysqli_fetch_array($laksana_aktiviti);
 ?>
@@ -19,11 +19,8 @@ $n = mysqli_fetch_array($laksana_aktiviti);
 </div>
 <main>
     <div class="kehadiran-details">
-        Nama Aktiviti :
-        <?= $n['nama_aktiviti'] ?> <br>
-        Tarikh | Masa :
-        <?= $n['tarikh_aktiviti'] ?> |
-        <?= date('H:i', strtotime($n['masa_mula'])) ?> <br>
+        Nama Aktiviti : <?= $n['nama_aktiviti'] ?> <br>
+        Tarikh | Masa : <?= $n['tarikh_aktiviti'] ?> | <?= date('H:i', strtotime($n['masa_mula'])) ?> <br>
     </div>
 
     <div class="borang-container">
@@ -35,10 +32,12 @@ $n = mysqli_fetch_array($laksana_aktiviti);
             </div>
 
             <div class="font-size-button">
-                <button class="increase-size-btn" onclick="ubahsaiz(1)" data-tooltip="Tambah Saiz Tulisan"><span
-                        class="material-symbols-outlined">text_increase</span></button>
-                <button class="decrease-size-btn" onclick="ubahsaiz(-1)" data-tooltip="Tolak Saiz Tulisan"><span
-                        class="material-symbols-outlined">text_decrease</span></button>
+                <button class="increase-size-btn" onclick="ubahsaiz(1)" data-tooltip="Tambah Saiz Tulisan">
+                    <span class="material-symbols-outlined">text_increase</span>
+                </button>
+                <button class="decrease-size-btn" onclick="ubahsaiz(-1)" data-tooltip="Tolak Saiz Tulisan">
+                    <span class="material-symbols-outlined">text_decrease</span>
+                </button>
                 <button class="reset-font-size" onclick="ubahsaiz(2)">Reset Size</button>
                 <button class="print-btn" onclick="printPage()">Cetak</button>
             </div>
@@ -57,22 +56,21 @@ $n = mysqli_fetch_array($laksana_aktiviti);
                                 <th>Kehadiran</th>
                             </tr>
                         </thead>
-
                         <tbody id="kehadiranBody">
                             <?php
                             # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
                             $cari_ahli = "";
                             if (!empty($_POST["nama"])) {
-                                $cari_ahli = " and ahli.nama like '%" . $_POST['nama'] . "%'";
+                                $cari_ahli = " AND ahli.nama LIKE '%" . $_POST['nama'] . "%'";
                             }
 
                             # Arahan untuk mendapatkan data kehadiran setiap ahli
                             $arahan_sql_kehadiran = "SELECT *, ahli.nokp, ahli.nama, kelas.ting, kelas.nama_kelas, kehadiran.IDaktiviti 
-                                            FROM ahli
-                                            LEFT JOIN kelas ON ahli.IDkelas = kelas.IDkelas
-                                            LEFT JOIN kehadiran ON ahli.nokp = kehadiran.nokp AND kehadiran.IDaktiviti = '" . $_GET['IDaktiviti'] . "'
-                                            WHERE 1=1 $cari_ahli
-                                            ORDER BY ahli.nama";
+                                FROM ahli
+                                LEFT JOIN kelas ON ahli.IDkelas = kelas.IDkelas
+                                LEFT JOIN kehadiran ON ahli.nokp = kehadiran.nokp AND kehadiran.IDaktiviti = '" . $_GET['IDaktiviti'] . "'
+                                WHERE 1=1 $cari_ahli
+                                ORDER BY ahli.nama";
 
                             # Laksana arahan untuk memproses data
                             $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
@@ -81,28 +79,14 @@ $n = mysqli_fetch_array($laksana_aktiviti);
                             # Mengambil dan memaparkan semua data kehadiran yang ditemui
                             while ($m = mysqli_fetch_array($laksana_kehadiran)) { ?>
                                 <tr>
-                                    <td>
-                                        <?= ++$bil; ?>
-                                    </td>
-                                    <td>
-                                        <?= $m['nama'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $m['nokp'] ?>
-                                    </td>
-                                    <td>
-                                        <?= $m['ting'] . " " . $m['nama_kelas'] ?>
-                                    </td>
+                                    <td><?= ++$bil; ?></td>
+                                    <td><?= $m['nama'] ?></td>
+                                    <td><?= $m['nokp'] ?></td>
+                                    <td><?= $m['ting'] . " " . $m['nama_kelas'] ?></td>
                                     <td>
                                         <?php
-
-                                        if ($m['IDaktiviti'] != null) {
-                                            $tanda = "checked";
-                                        } else {
-                                            $tanda = "";
-                                        }
+                                        $tanda = $m['IDaktiviti'] != null ? "checked" : "";
                                         ?>
-
                                         <input <?= $tanda ?> type="checkbox" name="kehadiran[]" value="<?= $m['nokp'] ?>"
                                             style="width:30px; height:30px;">
                                     </td>
@@ -111,7 +95,6 @@ $n = mysqli_fetch_array($laksana_aktiviti);
                             }
                             ?>
                         </tbody>
-
                     </table>
                 </div>
             </div>
@@ -120,7 +103,6 @@ $n = mysqli_fetch_array($laksana_aktiviti);
             </div>
         </form>
     </div>
-
 </main>
 
 <footer class="default-footer">
@@ -129,13 +111,13 @@ $n = mysqli_fetch_array($laksana_aktiviti);
     </div>
 </footer>
 
-<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
+<!-- Fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts\datatooltip.js" defer></script>
 
-<!-- fungsi mesra pengguna buta warna -->
+<!-- Fungsi mesra pengguna buta warna -->
 <script src="scripts\colorblind.js" defer></script>
 
-<!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
+<!-- Fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>
 <script src="scripts\print-page.js" defer></script>
 

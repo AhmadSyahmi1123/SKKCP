@@ -1,15 +1,18 @@
-// Variables to store the current font size and the range for the cycle
+// Pemboleh ubah untuk menyimpan saiz fon semasa
 var currentSize = 18;
 
+// Fungsi untuk mengubah saiz fon
 function ubahsaiz(gandaan) {
-    // Get the element whose font size we want to change
+    // Dapatkan elemen yang saiz fon nya ingin diubah
     var saiz = document.getElementById("saiz");
 
-    // Check if the reset button was pressed
+    // Semak jika butang reset ditekan
     if (gandaan == 2) {
+        // Tetapkan saiz fon kepada saiz asal (18px) jika reset
         saiz.style.fontSize = "18px";
     }
     else {
+        // Tambah gandaan kepada saiz fon semasa dan kemas kini
         currentSize += gandaan;
         saiz.style.fontSize = currentSize + "px";
     }

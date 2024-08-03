@@ -3,62 +3,65 @@
 
 <head>
     <title>SISTEM KEHADIRAN KELAB PENGATURCARAAN KOMPETITIF SMKBTP</title>
-    <link rel="stylesheet" href="css\style.css">
+    <!-- Memanggil fail CSS untuk gaya umum -->
+    <link rel="stylesheet" href="css/style.css">
 
-    <!-- Import Google Icon -->
+    <!-- Import Google Icon untuk ikon material -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined">
 
-    <!-- Import Primary Font -->
+    <!-- Import Font Utama (Roboto Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
 
-    <!-- Import Secondary Font -->
+    <!-- Import Font Sekunder (Montserrat dan Roboto Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
         rel="stylesheet">
 
-    <!-- Library Icon -->
+    <!-- Import Library Ikon (Boxicons dan Font Awesome) -->
     <link rel='stylesheet' href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
-    <!-- Library Carousel -->
-    <link rel="stylesheet" href="css\glide.core.min.css">
-    <link rel="stylesheet" href="css\glide.theme.min.css">
+    <!-- Import Library Carousel untuk slaid gambar -->
+    <link rel="stylesheet" href="css/glide.core.min.css">
+    <link rel="stylesheet" href="css/glide.theme.min.css">
 
-    <!-- Library Select Box -->
+    <!-- Import Library Select Box untuk dropdown dengan fungsi tambahan -->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <script src="scripts\navbar_script.js" defer></script>
+    <!-- Memanggil skrip JavaScript untuk fungsi navbar -->
+    <script src="scripts/navbar_script.js" defer></script>
 
-    <!-- Library Toast Notification -->
+    <!-- Import Library Toast Notification untuk pemberitahuan -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
 
+    <!-- SVG untuk penapis warna mesra buta warna -->
     <svg version="1.1" style="display: none;">
         <defs>
-            <!-- Protanopia Filter -->
+            <!-- Penapis untuk Protanopia (buta warna merah-hijau) -->
             <filter id="protanopia">
                 <feColorMatrix type="matrix"
                     values="0.567, 0.433, 0, 0, 0, 0.558, 0.442, 0, 0, 0, 0, 0.242, 0.758, 0, 0, 0, 0, 0, 1, 0" />
             </filter>
 
-            <!-- Deuteranopia Filter -->
+            <!-- Penapis untuk Deuteranopia (buta warna hijau-merah) -->
             <filter id="deuteranopia">
                 <feColorMatrix type="matrix"
                     values="0.625, 0.375, 0, 0, 0, 0.7, 0.3, 0, 0, 0, 0, 0.3, 0.7, 0, 0, 0, 0, 0, 1, 0" />
             </filter>
 
-            <!-- Tritanopia Filter -->
+            <!-- Penapis untuk Tritanopia (buta warna biru-kuning) -->
             <filter id="tritanopia">
                 <feColorMatrix type="matrix"
                     values="0.95, 0.05, 0, 0, 0, 0, 0.433, 0.567, 0, 0, 0, 0.475, 0.525, 0, 0, 0, 0, 0, 1, 0" />
             </filter>
 
-            <!-- Achromatopsia Filter -->
+            <!-- Penapis untuk Achromatopsia (buta warna total) -->
             <filter id="achromatopsia">
                 <feColorMatrix type="matrix"
                     values="0.299, 0.587, 0.114, 0, 0, 0.299, 0.587, 0.114, 0, 0, 0.299, 0.587, 0.114, 0, 0, 0, 0, 0, 1, 0" />
@@ -66,35 +69,39 @@
         </defs>
     </svg>
 
-    <!-- fungsi mesra pengguna buta warna -->
+    <!-- Fungsi JavaScript untuk menyokong pengguna buta warna -->
     <link rel="preload" href="scripts/colorblind.js" as="script">
 
 </head>
 
-<div id="filter-overlay"></div>
-<?php
-// Determine the current page name
-$current_page = basename($_SERVER['PHP_SELF']);
-
-// Check if the current page is index-admin.php or index-biasa.php
-$hide_title_container = ($current_page != 'index.php');
-?>
-
-<div class="title-container <?php if ($hide_title_container)
-    echo 'hidden-title-container'; ?>">
-    <div class="logo">
-        <img src="img\logosekolah.png" alt="">
-    </div>
-    <div class="text-container">
-        <div class="text">KELAB PENGATURCARAAN KOMPETITIF SMK BANDAR TASIK PUTERI </div>
-    </div>
-    <div class="logo">
-        <img src="img\logokelab.png" alt="">
-    </div>
-</div>
-
 <body>
+    <div id="filter-overlay"></div>
+
     <?php
+    // Menentukan nama halaman semasa
+    $current_page = basename($_SERVER['PHP_SELF']);
+
+    // Menyembunyikan kontainer tajuk jika halaman bukan index.php
+    $hide_title_container = ($current_page != 'index.php');
+    ?>
+
+    <div class="title-container <?php if ($hide_title_container)
+        echo 'hidden-title-container'; ?>">
+        <div class="logo">
+            <!-- Logo Sekolah -->
+            <img src="img/logosekolah.png" alt="">
+        </div>
+        <div class="text-container">
+            <div class="text">KELAB PENGATURCARAAN KOMPETITIF SMK BANDAR TASIK PUTERI</div>
+        </div>
+        <div class="logo">
+            <!-- Logo Kelab -->
+            <img src="img/logokelab.png" alt="">
+        </div>
+    </div>
+
+    <?php
+    // Menentukan menu berdasarkan tahap pengguna
     if (!empty($_SESSION['tahap']) and $_SESSION['tahap'] == "ADMIN") { ?>
         <!-- Menu ADMIN : dipaparkan sekiranya admin telah log masuk -->
         <aside class="sidebar">
@@ -159,7 +166,6 @@ $hide_title_container = ($current_page != 'index.php');
                 </ul>
             </aside>
 
-
     <?php } else { ?>
             <!-- Menu Laman Utama : dipaparkan sekiranya admin/ahli biasa tidak log masuk -->
             <header class="header">
@@ -184,7 +190,8 @@ $hide_title_container = ($current_page != 'index.php');
                                             <path
                                                 d="M20 3h-9c-1.103 0-2 .897-2 2v4h2V5h9v14h-9v-4H9v4c0 1.103.897 2 2 2h9c1.103 0 2-.897 2-2V5c0-1.103-.897-2-2-2z">
                                             </path>
-                                        </svg></i> Log Masuk Ahli</a>
+                                        </svg></i> Log Masuk Ahli
+                                </a>
                             </li>
                         </ul>
                     </nav>
@@ -199,7 +206,7 @@ $hide_title_container = ($current_page != 'index.php');
     <?php } ?>
 </body>
 
-<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
-<script src="scripts\datatooltip.js" defer></script>
+<!-- Memanggil skrip JavaScript untuk data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai ikon) -->
+<script src="scripts/datatooltip.js" defer></script>
 
 </html>

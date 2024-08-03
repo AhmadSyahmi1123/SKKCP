@@ -1,22 +1,22 @@
 <?php
-# Memulakan fungsi session
+# Memulakan fungsi session untuk menyimpan maklumat pengguna
 session_start();
 
-# Memanggil fail kawalan-admin.php
+# Memanggil fail kawalan-admin.php yang mungkin mengandungi fungsi kawalan akses
 include ("kawalan-admin.php");
 
-# Semak kewujudan data POST
+# Semak jika terdapat data POST yang dihantar
 if (!empty($_POST)) {
-    # Memanggil fail connection.php
+    # Memanggil fail connection.php untuk sambungan ke pangkalan data
     include ("connection.php");
 
-    # Pengesahan data nokp ahli
+    # Pengesahan untuk No Kad Pengenalan (nokp) - mesti mempunyai 12 digit dan merupakan nombor
     if (strlen($_POST["nokp"]) != 12 or !is_numeric($_POST["nokp"])) {
         die("<script>alert('Ralat No Kad Pengenalan');
         window.history.back();</script>");
     }
 
-    # Arahan SQL (query) untuk kemaskini maklumat ahli
+    # Arahan SQL untuk mengemaskini maklumat ahli dalam pangkalan data
     $arahan = "update ahli set
     nama = '" . strtoupper($_POST['nama']) . "',
     nokp = '" . $_POST['nokp'] . "',
@@ -27,25 +27,24 @@ if (!empty($_POST)) {
     nokp = '" . $_GET['nokp_lama'] . "'
     ";
 
-    # Laksana dan semak proses kemaskini
+    # Laksana arahan SQL dan semak jika kemaskini berjaya
     if (mysqli_query($condb, $arahan)) {
-        # Kemaskini berjaya
-        # Kemaskini berjaya
+        # Jika berjaya, sediakan mesej kejayaan
         $message = "Maklumat Ahli Berjaya Dikemaskini!";
         $notificationType = 'success';
         $notificationMessage = $message;
     } else {
-        # Kemaskini gagal
+        # Jika gagal, sediakan mesej ralat
         $message = "Ralat! Maklumat Ahli Gagal Dikemaskini!";
         $notificationType = 'error';
         $notificationMessage = $message;
     }
 
-    // Redirect with notification parameters
+    # Redirect ke senarai-ahli.php dengan parameter notifikasi
     header("Location: senarai-ahli.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
     exit();
 } else {
-    # Jika data GET tidak wujud, kembali ke fail senarai-ahli.php
+    # Jika tiada data POST, tunjukkan amaran dan kembali ke senarai-ahli.php
     die("<script>alert('Sila lengkapkan data');
     window.location.href='senarai-ahli.php';</script>");
 }

@@ -1,11 +1,11 @@
 function printPage() {
-    // Get the content of the scrollable table
+    // Dapatkan kandungan jadual yang boleh tatal
     var tableContent = document.querySelector('.scrollable-table table').outerHTML;
 
-    // Create a new window for printing
+    // Buka tetingkap baru untuk pencetakan
     var printWindow = window.open('', '_blank');
 
-    // Write the table content to the new window
+    // Tulis kandungan jadual ke dalam tetingkap baru
     printWindow.document.write('<html><head><title>Print</title>');
     printWindow.document.write('<style>');
     printWindow.document.write('body { font-family: Arial, sans-serif; }');
@@ -14,7 +14,7 @@ function printPage() {
     printWindow.document.write('th { background-color: #f2f2f2; }');
     printWindow.document.write('.profile_img_list { display:none; }');
     printWindow.document.write('.td-name { display: inline-block; vertical-align: middle; }');
-    printWindow.document.write('.action-container, .editBtn, .deleteBtn { display: none; }'); // Hide action buttons in print
+    printWindow.document.write('.action-container, .editBtn, .deleteBtn { display: none; }'); // Sembunyikan butang tindakan semasa cetak
     printWindow.document.write('</style>');
     printWindow.document.write('</head><body>');
     printWindow.document.write(tableContent);
@@ -22,17 +22,17 @@ function printPage() {
 
     printWindow.document.close();
 
-    // Focus on the new window
+    // Fokus pada tetingkap baru
     printWindow.focus();
 
-    // Function to handle printing
+    // Fungsi untuk mengendalikan cetakan
     function handlePrint() {
         printWindow.print();
 
-        // Close the window after a short delay
+        // Tutup tetingkap selepas sedikit masa
         printWindow.close();
     }
 
-    // Call handlePrint after a short delay to ensure the content is loaded
+    // Panggil handlePrint selepas sedikit masa untuk memastikan kandungan dimuatkan
     setTimeout(handlePrint, 100);
 }

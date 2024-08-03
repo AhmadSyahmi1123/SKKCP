@@ -1,20 +1,20 @@
 <?php
-# Memulakan fungsi session
+# Memulakan sesi PHP untuk menyimpan maklumat pengguna
 session_start();
 
-# Memanggil fail kawalan-admin.php
-include("kawalan-admin.php");
+# Memanggil fail kawalan-admin.php yang mungkin mengandungi fungsi kawalan akses
+include ("kawalan-admin.php");
 
-# Menyemak jika data POST wujud
+# Menyemak jika terdapat data POST yang dihantar
 if (!empty($_POST)) {
-    # Memanggil fail connection.php
-    include("connection.php");
+    # Memanggil fail connection.php untuk sambungan ke pangkalan data
+    include ("connection.php");
 
-    # Arahan SQL (query) untuk menyimpan data aktiviti baru
+    # Arahan SQL untuk menyimpan data aktiviti baru ke dalam pangkalan data
     $arahan_sql_simpan = "insert into aktiviti ( nama_aktiviti, tarikh_aktiviti, masa_mula, masa_tamat ) 
     values ('" . strtoupper($_POST['nama_aktiviti']) . "', '" . $_POST['tarikh_aktiviti'] . "', '" . $_POST['masa_mula'] . "', '" . $_POST['masa_tamat'] . "')";
 
-    # Laksana arahan SQL menyimpan data aktiviti baru
+    # Melaksanakan arahan SQL untuk menyimpan data aktiviti baru
     $laksana_arahan_simpan = mysqli_query($condb, $arahan_sql_simpan);
 
     # Menguji jika proses menyimpan data berjaya atau tidak
@@ -28,7 +28,7 @@ if (!empty($_POST)) {
         $notificationMessage = $message;
     }
 
-    // Redirect with notification parameters
+    # Redirect ke senarai-aktiviti.php dengan parameter notifikasi
     header("Location: senarai-aktiviti.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
     exit();
 }

@@ -1,17 +1,17 @@
 <?php
-# Memulakan fungsi session
+# Memulakan sesi PHP untuk menyimpan maklumat pengguna
 session_start();
 
-# Memanggil fail kawalan-admin.php
-include("kawalan-admin.php");
+# Memanggil fail kawalan-admin.php yang mungkin mengandungi fungsi kawalan akses
+include ("kawalan-admin.php");
 
-# Menyemak jika data POST wujud
+# Menyemak jika terdapat data POST yang dihantar
 if (!empty($_POST)) {
 
-    # Memanggil fail connection.php
-    include("connection.php");
+    # Memanggil fail connection.php untuk sambungan ke pangkalan data
+    include ("connection.php");
 
-    # Arahan SQL (query) untuk kemaskini maklumat aktiviti
+    # Arahan SQL untuk mengemaskini maklumat aktiviti berdasarkan IDaktiviti yang dihantar melalui GET
     $arahan = "update aktiviti set
     nama_aktiviti = '" . strtoupper($_POST['nama_aktiviti']) . "',
     tarikh_aktiviti = '" . $_POST['tarikh_aktiviti'] . "',
@@ -21,7 +21,7 @@ if (!empty($_POST)) {
     IDaktiviti = '" . $_GET['IDaktiviti'] . "'
     ";
 
-    # Laksana & semak arahan SQL kemaskini data
+    # Melaksanakan arahan SQL untuk kemaskini data aktiviti dan semak hasilnya
     if (mysqli_query($condb, $arahan)) {
         $message = "Pendaftaran Aktiviti Berjaya!";
         $notificationType = 'success';
@@ -32,16 +32,16 @@ if (!empty($_POST)) {
         $notificationMessage = $message;
     }
 
-    // Redirect with notification parameters
+    # Redirect ke senarai-aktiviti.php dengan parameter notifikasi kejayaan atau kegagalan
     header("Location: senarai-aktiviti.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
     exit();
 } else {
-    # Jika data GET tidak wujud/kosong, kembali ke fail senarai-aktiviti
+    # Jika tiada data POST, alihkan ke senarai-aktiviti.php dengan mesej notifikasi ralat
     $message = "Sila lengkapkan maklumat.";
     $notificationType = 'error';
     $notificationMessage = $message;
 
-    // Redirect with notification parameters
+    # Redirect ke senarai-aktiviti.php dengan parameter notifikasi ralat
     header("Location: senarai-aktiviti.php?notificationType=$notificationType&notificationMessage=$notificationMessage");
     exit();
 }

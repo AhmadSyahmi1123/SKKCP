@@ -6,7 +6,6 @@ session_start();
 include ("header.php");
 include ("connection.php");
 include ("kawalan-admin.php");
-
 ?>
 
 <div id="filter-overlay"></div>
@@ -87,7 +86,7 @@ include ("kawalan-admin.php");
                         </div>
 
                         <div class='hadir-container'>
-                            <button class='hadirBtn' data-tooltip='Pengesahan Kehadiran'>
+                            <button class='hadirBtn' data-tooltip='Pengesahan Kehadiran' data-tarikh-aktiviti='" . $m['tarikh_aktiviti'] . "'>
                                 <a href='kehadiran-borang.php?IDaktiviti=" . $m['IDaktiviti'] . "'><i class='bx bx-list-check'></i></a>
                             </button>
                         </div>
@@ -109,11 +108,11 @@ include ("kawalan-admin.php");
     </div>
 </footer>
 
+<!-- Borang daftar aktiviti -->
 <div class="modal-container" id="modal_aktiviti_container">
     <div class="card modal_aktiviti modal">
 
         <button id="closeAddAktivitiBtn" class="closeBtn"><i class='bx bx-x'></i></button>
-        <!-- Borang Daftar Masuk -->
         <form class="daftar_aktiviti_borang" method="POST" onsubmit="daftarAktiviti(event)">
 
             <!-- Tajuk Antaramuka Log Masuk -->
@@ -163,9 +162,9 @@ include ("kawalan-admin.php");
 <script>
     // Fungsi hantar data ke aktiviti-daftar-proses.php
     function daftarAktiviti(event) {
-        event.preventDefault(); // Prevent form from submitting the default way
-        var form = document.querySelector('.daftar_aktiviti_borang'); // Get the form element
-        var formData = new FormData(form); // Create FormData object with form data
+        event.preventDefault(); // Mengelakkan borang dihantar secara lalai
+        var form = document.querySelector('.daftar_aktiviti_borang'); // Dapatkan elemen borang
+        var formData = new FormData(form); // Membuat objek FormData dengan data borang
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "aktiviti-daftar-proses.php", true);
         xhr.onload = function () {
@@ -182,9 +181,9 @@ include ("kawalan-admin.php");
             }
         };
         xhr.onerror = function () {
-            alert("An error occurred. Please try again."); // Show error message
+            alert("An error occurred. Please try again."); // Papar mesej ralat
         };
-        xhr.send(formData); // Send the FormData object
+        xhr.send(formData); // Hantar objek FormData
     }
 </script>
 
@@ -195,6 +194,7 @@ include ("kawalan-admin.php");
     }
 </script>
 
+<!-- Skrip untuk fungsi carian aktiviti -->
 <script>
     document.getElementById('searchAktiviti').addEventListener('input', function () {
         const searchValue = this.value;
@@ -210,5 +210,29 @@ include ("kawalan-admin.php");
         }
 
         xhr.send('nama_aktiviti=' + encodeURIComponent(searchValue));
+    });
+</script>
+
+<!-- Skrip untuk semak tarikh aktiviti sebelum pengesahan kehadiran -->
+<script>
+    document.querySelectorAll('.hadirBtn').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default action
+
+            const tarikhAktiviti = this.getAttribute('data-tarikh-aktiviti');
+            const activityDate = new Date(tarikhAktiviti);
+            const currentDate = new Date();
+
+            // Semak jika tarikh aktiviti sudah tiba
+            if (activityDate > currentDate) {
+                var urlParams = new URLSearchParams(window.location.search);
+                urlParams.set('notificationType', 'error');
+                urlParams.set('notificationMessage', 'Tarikh aktiviti belum tiba!');
+                window.location.href = "senarai-aktiviti.php?" + urlParams.toString();
+            } else {
+                // Jika tarikh sudah tiba, benarkan proses ini berlaku
+                window.location.href = this.querySelector('a').href;
+            }
+        });
     });
 </script>

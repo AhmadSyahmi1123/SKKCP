@@ -7,6 +7,8 @@ include ("header.php");
 ?>
 
 <div id="filter-overlay"></div>
+
+<!-- Konten untuk carousel -->
 <div class="carousel-container">
     <div class="glide">
         <div class="glide__track" data-glide-el="track">
@@ -28,35 +30,41 @@ include ("header.php");
                 </li>
             </ul>
         </div>
+
+        <!-- Butang navigasi carousel -->
         <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i
-                    class='bx bx-chevron-left'></i></button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i
-                    class='bx bx-chevron-right'></i></button>
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">
+                <i class='bx bx-chevron-left'></i>
+            </button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">
+                <i class='bx bx-chevron-right'></i>
+            </button>
         </div>
     </div>
 </div>
 
+<!-- Footer -->
 <footer class="default-footer">
     <div class="footer-container">
         <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
     </div>
 </footer>
 
-<!-- fungsi mesra pengguna buta warna -->
+<!-- Skrip untuk fungsi mesra pengguna buta warna -->
 <script src="scripts\colorblind.js" defer></script>
 
+<!-- Skrip Glide.js untuk carousel -->
 <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
 <script>
     const config = {
-        type: 'carousel',
-        perView: 2,
-        focusAt: 'center',
-        gap: 10,
-        autoplay: 2000,
-        hoverPause: true,
-        dragThreshold: false,
-        animationTimingFunc: 'ease'
+        type: 'carousel',          // Jenis carousel
+        perView: 2,                // Bilangan slide yang dipaparkan dalam satu masa
+        focusAt: 'center',         // Fokus pada slide tengah
+        gap: 10,                   // Jarak antara slide
+        autoplay: 2000,            // Auto main setiap 2000ms (2 saat)
+        hoverPause: true,          // Jeda auto main apabila hover pada carousel
+        dragThreshold: false,      // Disable drag
+        animationTimingFunc: 'ease'// Fungsi masa untuk animasi
     }
     new Glide('.glide', config).mount()
 </script>

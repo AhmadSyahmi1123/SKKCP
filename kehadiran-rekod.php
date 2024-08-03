@@ -7,8 +7,8 @@ include ("header.php");
 include ("kawalan-admin.php");
 include ("connection.php");
 
-# Set a default IDaktiviti
-$defaultIDaktiviti = '1';  // Change this to your default IDaktiviti
+# Set IDaktiviti default jika tidak diberikan
+$defaultIDaktiviti = '1';  // Tukar ini kepada IDaktiviti default anda
 
 # Menyemak kewujudan data GET['IDaktiviti']
 if (empty($_GET['IDaktiviti'])) {
@@ -16,7 +16,7 @@ if (empty($_GET['IDaktiviti'])) {
 }
 
 if (!empty($_GET['IDaktiviti'])) {
-    # Proses mendapatkan data aktiviti
+    # Proses mendapatkan data aktiviti berdasarkan IDaktiviti yang diterima
     $sql_aktiviti = "SELECT * FROM aktiviti WHERE IDaktiviti = '" . $_GET['IDaktiviti'] . "'";
     $laksana_aktiviti = mysqli_query($condb, $sql_aktiviti);
     $ma = mysqli_fetch_array($laksana_aktiviti);
@@ -55,6 +55,7 @@ $currentDate = date('Y-m-d');
         </form>
 
         <?php if ($currentDate < $ma['tarikh_aktiviti']) { ?>
+            <!-- Mesej jika aktiviti belum dijalankan -->
             <div class='aktiviti-details'>Aktiviti masih belum dijalankan</div>
         <?php } else { ?>
             <?php if (!empty($_GET["IDaktiviti"])) { ?>
@@ -67,6 +68,7 @@ $currentDate = date('Y-m-d');
             </div>
 
             <div class="rekod-container">
+                <!-- Borang untuk merekod kehadiran -->
                 <form action='kehadiran-rekod-proses.php' method='POST' align='center'>
                     <div class="input-rekod">
                         <input class="input-rekod" type='text' name='nokp' placeholder="No. Kad Pengenalan" autocomplete="off">
@@ -74,8 +76,7 @@ $currentDate = date('Y-m-d');
                         <input type='number' name='IDaktiviti' value="<?= $_GET['IDaktiviti'] ?>" hidden><br>
                     </div>
 
-                    <button type='submit' class="rekodBtn"><i
-                            class='bx bx-user-check'></i>Rekod</button>
+                    <button type='submit' class="rekodBtn"><i class='bx bx-user-check'></i>Rekod</button>
                 </form>
             </div>
 
@@ -96,7 +97,12 @@ $currentDate = date('Y-m-d');
                             $bil = 0;
 
                             # Memaparkan data kehadiran dalam bentuk jadual
-                            $arahan_sql_kehadiran = "SELECT * FROM ahli, aktiviti, kehadiran, kelas WHERE ahli.nokp=kehadiran.nokp AND ahli.IDkelas=kelas.IDkelas AND aktiviti.IDaktiviti=kehadiran.IDaktiviti AND kehadiran.IDaktiviti='" . $_GET['IDaktiviti'] . "' ORDER BY kehadiran.masa_hadir DESC";
+                            $arahan_sql_kehadiran = "SELECT * FROM ahli, aktiviti, kehadiran, kelas 
+                                                     WHERE ahli.nokp=kehadiran.nokp 
+                                                     AND ahli.IDkelas=kelas.IDkelas 
+                                                     AND aktiviti.IDaktiviti=kehadiran.IDaktiviti 
+                                                     AND kehadiran.IDaktiviti='" . $_GET['IDaktiviti'] . "' 
+                                                     ORDER BY kehadiran.masa_hadir DESC";
                             $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
 
                             while ($m = mysqli_fetch_array($laksana_kehadiran)) {

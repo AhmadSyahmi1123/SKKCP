@@ -1,18 +1,25 @@
 <?php
+# Memanggil fail connection.php untuk sambungan ke pangkalan data
 include ("connection.php");
 
+# Memeriksa jika borang dihantar dan nama tidak kosong
 if (isset($_POST['nama'])) {
+    # Melarikan input nama untuk mengelakkan serangan SQL injection
     $nama = mysqli_real_escape_string($condb, $_POST['nama']);
+
+    # Arahan SQL untuk mendapatkan maklumat ahli yang namanya sepadan dengan input nama
     $arahan_papar = "SELECT *
                      FROM ahli, kelas
                      WHERE ahli.IDkelas = kelas.IDkelas
                      AND ahli.nama LIKE '%$nama%'";
 
+    # Melaksanakan arahan SQL
     $laksana = mysqli_query($condb, $arahan_papar);
     $bil = 0;
 
+    # Mengambil data dari hasil query
     while ($m = mysqli_fetch_array($laksana)) {
-        # Umpukkan data kepda tatasusunan bagi tujuan kemaskini ahli
+        # Menyusun data dalam array untuk tujuan kemaskini
         $data_get = array(
             'nama' => $m['nama'],
             'profile_pic' => $m['profile_pic'],
@@ -26,19 +33,27 @@ if (isset($_POST['nama'])) {
         );
 
         $nokp = $m['nokp'];
+
+        # Mengira jumlah kehadiran ahli
         $sql_count = "SELECT COUNT(*) as count FROM kehadiran WHERE nokp = '$nokp'";
         $exec_count = mysqli_query($condb, $sql_count);
         $row_hadir = mysqli_fetch_assoc($exec_count);
         $count_hadir = $row_hadir['count'];
 
+        # Mengira jumlah aktiviti
         $sql_aktiviti = "SELECT COUNT(*) as count FROM aktiviti";
         $exec_aktiviti = mysqli_query($condb, $sql_aktiviti);
         $row_aktiviti = mysqli_fetch_assoc($exec_aktiviti);
         $count_aktiviti = $row_aktiviti['count'];
 
-        # Memaparkan senarai nama dalam jadual
+        # Memaparkan data ahli dalam jadual
         echo "<tr>
-        <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
+        <td>
+            <div class='profile_img_list_container'>
+                <img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'>
+            </div>
+            <div class='td-name'>" . $m['nama'] . "</div>
+        </td>
         <td>" . $m['nokp'] . "</td>
         <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
         <td>" . $m['katalaluan'] . "</td>
@@ -47,8 +62,7 @@ if (isset($_POST['nama'])) {
         <td>$count_hadir/$count_aktiviti</td>
     ";
 
-
-        # Memaparkan navigasi untuk kemaskini dan hapus data ahli
+        # Memaparkan butang untuk kemaskini dan hapus data ahli
         echo "<td>
                 <div class='action-container'>
                 <div class='edit-container'>

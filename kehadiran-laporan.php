@@ -7,8 +7,8 @@ include ("header.php");
 include ("connection.php");
 include ("kawalan-admin.php");
 
-# Set a default IDaktiviti
-$defaultIDaktiviti = '1';  // Change this to your default IDaktiviti
+# Tetapkan IDaktiviti lalai
+$defaultIDaktiviti = '1';  // Tukar ini kepada IDaktiviti lalai anda
 
 # Menyemak kewujudan data GET['IDaktiviti']
 if (empty($_GET['IDaktiviti'])) {
@@ -172,30 +172,24 @@ if (empty($_GET['IDaktiviti'])) {
                     </table>
                 </div>
             </div>
+        </main>
 
-            <footer class="default-footer">
-                <div class="footer-container">
-                    <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
-                </div>
-            </footer>
-
-            <?php
+        <footer class="default-footer">
+            <div class="footer-container">
+                <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
+            </div>
+        </footer>
+        <?php
         }
     }
     ?>
-
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="scripts\select-box-aktiviti.js" defer></script>
-    <script src="scripts\dialog-update-mata.js" defer></script>
-</main>
 
 <!-- Borang untuk memuat naik fail -->
 <div class="modal-container" id="modal_mata_container">
     <div class="card modal_mata modal">
         <button class="closeBtn closeMataBtn"><i class='bx bx-x'></i></button>
 
-        <h1>Tambah Mata Ahli</h1>
+        <h1>Tambah/Tolak Mata Ahli</h1>
 
         <form action="mata-kemaskini-proses.php?nokp=<?= $m["nokp"] ?>" method="POST">
 
@@ -209,12 +203,17 @@ if (empty($_GET['IDaktiviti'])) {
             </div>
 
             <div class="tambah-mata-container">
-                <button class="tambahMataBtn close-update-point" type="submit">Tambah</button>
+                <button class="tambahMataBtn close-update-point" type="submit">Kemaskini</button>
             </div>
         </form>
 
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="scripts\select-box-aktiviti.js" defer></script>
+<script src="scripts\dialog-update-mata.js" defer></script>
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts/datatooltip.js" defer></script>
@@ -243,7 +242,7 @@ if (empty($_GET['IDaktiviti'])) {
         document.getElementById('searchAhli').addEventListener('input', function () {
             const searchValue = this.value;
             const laporanBody = document.getElementById('laporanBody');
-            const IDaktiviti = <?= json_encode($_GET['IDaktiviti']) ?>;  // Get the IDaktiviti value from the PHP variable
+            const IDaktiviti = <?= json_encode($_GET['IDaktiviti']) ?>;  // Ambil nilai IDaktiviti dari pembolehubah PHP
 
             const xhr = new XMLHttpRequest();
             xhr.open('POST', 'search-laporan.php', true);
@@ -253,7 +252,7 @@ if (empty($_GET['IDaktiviti'])) {
                 if (this.status === 200) {
                     laporanBody.innerHTML = this.responseText;
 
-                    // Re-attach event listeners for dynamically loaded content
+                    // Pasang semula event listeners untuk kandungan yang dimuat secara dinamik
                     attachEventListeners();
                 }
             }
@@ -262,34 +261,34 @@ if (empty($_GET['IDaktiviti'])) {
         });
 
         function attachEventListeners() {
-            // Attach event listener for editMataBtn using event delegation
+            // Pasang event listener untuk editMataBtn menggunakan event delegation
             document.getElementById('laporanBody').addEventListener('click', function (event) {
                 const editMataBtn = event.target.closest('.open-update-point');
                 if (editMataBtn) {
                     const nokp = editMataBtn.dataset.nokp;
                     console.log('editMataBtn clicked for nokp: ' + nokp);
 
-                    // Show modal or perform other actions here
+                    // Papar modal atau lakukan tindakan lain di sini
                     showModal(nokp);
                 }
             });
         }
 
-        // Initial attachment of event listeners
+        // Pemasangan awal event listeners
         attachEventListeners();
 
         function showModal(nokp) {
             const modalContainer = document.getElementById('modal_mata_container');
             const modalForm = modalContainer.querySelector('form');
 
-            // Set the nokp value in the form action or hidden input
+            // Tetapkan nilai nokp dalam action form atau input tersembunyi
             const formAction = `mata-kemaskini-proses.php?nokp=${nokp}`;
             modalForm.setAttribute('action', formAction);
 
-            // Show the modal
+            // Papar modal
             modalContainer.classList.add("show");
 
-            // Add event listener for close button inside the modal
+            // Tambah event listener untuk butang tutup dalam modal
             const closeModalBtn = modalContainer.querySelector('.closeMataBtn');
             closeModalBtn.addEventListener('click', function () {
                 modalContainer.classList.remove("show");

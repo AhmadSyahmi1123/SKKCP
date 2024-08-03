@@ -1,8 +1,8 @@
 <?php
-# Memulakan fungsi session
+# Memulakan sesi PHP untuk menyimpan maklumat pengguna
 session_start();
 
-# Memanggil fail header.php dan kawalan-admin.php
+# Memanggil fail header.php untuk antaramuka pengguna dan kawalan-admin.php untuk fungsi kawalan
 include ("header.php");
 include ("kawalan-admin.php");
 ?>
@@ -11,32 +11,37 @@ include ("kawalan-admin.php");
 <main>
     <!-- Borang untuk menerima data aktiviti baharu daripada pengguna -->
     <div class="wrapper">
-        <!-- Borang Daftar Masuk -->
+        <!-- Borang Daftar Aktiviti -->
         <form action='aktiviti-daftar-proses.php' method="POST">
 
-            <!-- Tajuk Antaramuka Log Masuk -->
+            <!-- Tajuk Antaramuka Borang Daftar Aktiviti -->
             <h1>Daftar Aktiviti Baru</h1>
 
+            <!-- Input untuk Nama Aktiviti -->
             <label for="input-aktiviti">Nama Aktiviti*</label>
             <div class="input-box">
                 <input id="input-aktiviti" type='text' name='nama_aktiviti' placeholder="Nama Aktiviti" required><br>
             </div>
 
+            <!-- Input untuk Tarikh Aktiviti -->
             <label for="input-tarikh">Tarikh Aktiviti*</label>
             <div class="input-box">
                 <input id="input-tarikh" type='date' name='tarikh_aktiviti' min='<?= date("Y-m-d") ?>' required><br>
             </div>
 
+            <!-- Input untuk Masa Mula Aktiviti -->
             <label for="input-masa">Masa Mula*</label>
             <div class="input-box">
                 <input id="input-masa" type='time' name='masa_mula' placeholder="Masa Mula" required><br>
             </div>
 
+            <!-- Input untuk Masa Tamat Aktiviti -->
             <label for="input-masa">Masa Tamat*</label>
             <div class="input-box">
                 <input id="input-masa" type='time' name='masa_tamat' placeholder="Masa Tamat" required><br>
             </div>
 
+            <!-- Butang untuk menghantar borang -->
             <input class="btn" type='submit' value='Tambah'>
 
         </form>
@@ -49,5 +54,5 @@ include ("kawalan-admin.php");
     </div>
 </footer>
 
-<!-- fungsi mesra pengguna buta warna -->
+<!-- Skrip untuk fungsi mesra pengguna buta warna -->
 <script src="scripts\colorblind.js" defer></script>

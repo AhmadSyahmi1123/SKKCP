@@ -1,30 +1,31 @@
 <?php
-# Memulakan fungsi session
+# Memulakan sesi untuk menyimpan data pengguna
 session_start();
 
-# Memanggil fail header.php dan connection.php
+# Memanggil fail header.php dan connection.php untuk penyambungan dan header
 include ("header.php");
 include ("connection.php");
 
+# Mendapatkan nombor kad pengenalan dari sesi
 $nokp = $_SESSION['nokp'];
 
-# Kira bilangan ahli
+# Kira bilangan ahli dalam pangkalan data
 $sql_ahli = "SELECT * FROM ahli";
 $exec_ahli = mysqli_query($condb, $sql_ahli);
 $count_ahli = mysqli_num_rows($exec_ahli);
 
-# Kira bilangan aktiviti
+# Kira bilangan aktiviti dalam pangkalan data
 $sql_aktiviti = "SELECT * FROM aktiviti";
 $exec_aktiviti = mysqli_query($condb, $sql_aktiviti);
 $count_aktiviti = mysqli_num_rows($exec_aktiviti);
 
-# Kira bilangan kehadiran ahli
+# Kira bilangan kehadiran untuk pengguna semasa
 $sql_count = "SELECT COUNT(*) as count FROM kehadiran WHERE nokp = '$nokp'";
 $exec_count = mysqli_query($condb, $sql_count);
 $row_hadir = mysqli_fetch_assoc($exec_count);
 $count_hadir = $row_hadir['count'];
 
-# Kira bilangan tidak hadir
+# Kira bilangan aktiviti yang belum dihadiri
 $sql_aktiviti = "SELECT COUNT(*) as count FROM aktiviti";
 $exec_aktiviti = mysqli_query($condb, $sql_aktiviti);
 $row_aktiviti = mysqli_fetch_assoc($exec_aktiviti);
@@ -134,20 +135,19 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
                     </thead>
                     <tbody id="leaderboardBody">
                         <?php
-                        # Arahan query untuk mencari senarai aktiviti
+                        # Arahan query untuk mendapatkan senarai ahli
                         $arahan_papar = "SELECT ahli.nama, ahli.mata, ahli.profile_pic, kelas.ting, kelas.nama_kelas
                                     FROM ahli
                                     JOIN kelas ON ahli.IDkelas = kelas.IDkelas
                                     ORDER BY mata DESC
                                     ";
 
-                        # Laksana arahan mencari data aktiviti
+                        # Laksanakan arahan untuk mendapatkan data
                         $laksana = mysqli_query($condb, $arahan_papar);
                         $bil = 0;
 
-                        # Mengambil data yang ditemui
+                        # Mengambil dan memaparkan data ahli dalam jadual
                         while ($m = mysqli_fetch_array($laksana)) {
-                            # Memaparkan senarai nama dalam jadual
                             echo "<tr>
                                 <td>" . ++$bil . "</td>
                                 <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
@@ -170,21 +170,21 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
     </div>
 </footer>
 
-<!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
-<script src="scripts\datatooltip.js" defer></script>
+<!-- Fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai ikon) -->
+<script src="scripts/datatooltip.js" defer></script>
 
-<!-- fungsi mesra pengguna buta warna -->
-<script src="scripts\colorblind.js" defer></script>
+<!-- Fungsi mesra pengguna buta warna -->
+<script src="scripts/colorblind.js" defer></script>
 
 <!-- Proses papar notifikasi apabila kemaskini data -->
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-<script src="scripts\toast.js"></script>
+<script src="scripts/toast.js"></script>
 
-<!-- fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
-<script src="scripts\butang-saiz.js" defer></script>
-<script src="scripts\print-page.js" defer></script>
+<!-- Fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual -->
+<script src="scripts/butang-saiz.js" defer></script>
+<script src="scripts/print-page.js" defer></script>
 
-<!-- fungsi untuk mencari nama ahli dalam carta pendahulu  -->
+<!-- Fungsi untuk mencari nama ahli dalam carta pendahulu -->
 <script>
     document.getElementById('searchNama').addEventListener('input', function () {
         const searchValue = this.value;

@@ -1,22 +1,24 @@
 <?php
+# Memanggil fail sambungan ke pangkalan data
 include ("connection.php");
 
-// Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai aktiviti
+// Memeriksa jika data POST wujud dan mengandungi carian aktiviti
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['aktiviti_carian'])) {
     $aktiviti_carian = $_POST['aktiviti_carian'];
-    $cari_aktiviti = "WHERE nama_aktiviti LIKE '%" . $aktiviti_carian . "%'";
+    # Menyediakan syarat tambahan dalam arahan SQL untuk carian aktiviti
+    $cari_aktiviti = "WHERE nama_aktiviti LIKE '%" . mysqli_real_escape_string($condb, $aktiviti_carian) . "%'";
 } else {
     $cari_aktiviti = "";
 }
 
-// Araham query untuk mencari senarai aktiviti
+// Arahan SQL untuk mendapatkan senarai aktiviti berdasarkan syarat carian
 $arahan_papar = "SELECT * FROM aktiviti $cari_aktiviti";
 
-// Laksana arahan mencari senarai aktiviti
+// Melaksanakan arahan SQL untuk mendapatkan senarai aktiviti
 $laksana = mysqli_query($condb, $arahan_papar);
 $aktiviti_data = array();
 
-// Mengambil data yang ditemui
+// Mengambil data yang ditemui dan menyusunnya dalam array
 while ($m = mysqli_fetch_assoc($laksana)) {
     $aktiviti_data[] = array(
         'nama_aktiviti' => $m['nama_aktiviti'],
@@ -27,5 +29,6 @@ while ($m = mysqli_fetch_assoc($laksana)) {
     );
 }
 
-// Return the data in JSON format
+// Memulangkan data dalam format JSON
 echo json_encode($aktiviti_data);
+?>

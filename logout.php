@@ -8,5 +8,4 @@ session_unset();
 # Menghentikan fungsi session
 session_destroy();
 
-echo"<script>window.location.href='index.php';</script>";
-?>
+echo "<script>window.location.href='index.php';</script>";

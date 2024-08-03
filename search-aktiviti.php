@@ -1,16 +1,23 @@
 <?php
+# Memanggil fail connection.php untuk sambungan ke pangkalan data
 include ("connection.php");
 
+# Memeriksa jika borang dihantar dan nama_aktiviti tidak kosong
 if (isset($_POST['nama_aktiviti'])) {
+    # Melarikan input nama_aktiviti untuk mengelakkan serangan SQL injection
     $nama_aktiviti = mysqli_real_escape_string($condb, $_POST['nama_aktiviti']);
+
+    # Arahan SQL untuk mendapatkan maklumat aktiviti yang namanya sepadan dengan input nama_aktiviti
     $arahan_papar = "SELECT *
                      FROM aktiviti
                      WHERE nama_aktiviti LIKE '%$nama_aktiviti%'";
 
+    # Melaksanakan arahan SQL
     $laksana = mysqli_query($condb, $arahan_papar);
-    $bil = 0;
 
+    # Mengambil data dari hasil query
     while ($m = mysqli_fetch_array($laksana)) {
+        # Memaparkan maklumat aktiviti dalam jadual
         echo "<tr>
             <td>" . $m['nama_aktiviti'] . "</td>
             <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
@@ -18,7 +25,7 @@ if (isset($_POST['nama_aktiviti'])) {
             <td>" . date('H:i', strtotime($m['masa_tamat'])) . "</td>
         ";
 
-        # Memaparkan navigasi untuk kemaskini dan hapus data aktiviti
+        # Memaparkan butang navigasi untuk kemaskini, hapus, dan pengesahan kehadiran aktiviti
         echo "<td>
                 <div class='action-container'>
                     <div class='edit-container'>

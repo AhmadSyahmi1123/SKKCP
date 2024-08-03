@@ -1,8 +1,8 @@
 <?php
-# Memulakan fungsi session
+# Memulakan sesi pengguna
 session_start();
 
-# Memanggil fail header.php, connection.php dan kawalan-admin.php
+# Memanggil fail-fail yang diperlukan untuk header, sambungan ke pangkalan data dan kawalan admin
 include ("header.php");
 include ("connection.php");
 include ("kawalan-admin.php");
@@ -15,12 +15,14 @@ include ("kawalan-admin.php");
 </div>
 <main>
     <div class="upload-ahli-container">
+        <!-- Input untuk carian nama ahli -->
         <div class="input-carian-container">
             <div class="input-carian">
                 <input type='text' id="searchAhli" name='nama' placeholder='Carian Nama Ahli' autocomplete="off">
             </div>
         </div>
 
+        <!-- Butang untuk memuat naik ahli baru -->
         <div class="upload-container">
             <button id="open-upload" class="uploadBtn" data-tooltip="Muat Naik Ahli">
                 <i class='material-symbols-outlined'>group_add</i>
@@ -29,6 +31,7 @@ include ("kawalan-admin.php");
             <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
         </div>
 
+        <!-- Butang untuk mengubah saiz font dan mencetak halaman -->
         <div class="font-size-button">
             <button class="increase-size-btn" onclick="ubahsaiz(1)" data-tooltip="Tambah Saiz Tulisan"><span
                     class="material-symbols-outlined">text_increase</span></button>
@@ -39,11 +42,11 @@ include ("kawalan-admin.php");
         </div>
     </div>
 
+    <!-- Jadual untuk memaparkan senarai ahli -->
     <div class="table-container" id="body">
         <div class="scrollable-table" id="print-area">
             <table class="table" id="saiz">
                 <thead>
-
                     <tr>
                         <th>Nama</th>
                         <th>No. Kad Pengenalan</th>
@@ -57,16 +60,16 @@ include ("kawalan-admin.php");
                 </thead>
                 <tbody id="ahliBody">
                     <?php
-                    # Arahan query untuk mencari senarai nama ahli
+                    # Arahan SQL untuk mendapatkan senarai ahli beserta kelas mereka
                     $arahan_papar = "select * from ahli, kelas where ahli.IDkelas = kelas.IDkelas ORDER BY ahli.nama ASC";
 
-                    # Laksana arahan mencari data ahli
+                    # Melaksanakan arahan SQL
                     $laksana = mysqli_query($condb, $arahan_papar);
 
-                    # Mengambil data yang ditemui
+                    # Mengambil setiap baris data yang ditemui
                     while ($m = mysqli_fetch_array($laksana)) {
 
-                        # Umpukkan data kepda tatasusunan bagi tujuan kemaskini ahli
+                        # Menyimpan data dalam tatasusunan untuk tujuan kemaskini ahli
                         $data_get = array(
                             'nama' => $m['nama'],
                             'profile_pic' => $m['profile_pic'],
@@ -79,18 +82,20 @@ include ("kawalan-admin.php");
                             'mata' => $m['mata']
                         );
 
+                        # Mengira jumlah kehadiran ahli
                         $nokp = $m['nokp'];
                         $sql_count = "SELECT COUNT(*) as count FROM kehadiran WHERE nokp = '$nokp'";
                         $exec_count = mysqli_query($condb, $sql_count);
                         $row_hadir = mysqli_fetch_assoc($exec_count);
                         $count_hadir = $row_hadir['count'];
 
+                        # Mengira jumlah aktiviti
                         $sql_aktiviti = "SELECT COUNT(*) as count FROM aktiviti";
                         $exec_aktiviti = mysqli_query($condb, $sql_aktiviti);
                         $row_aktiviti = mysqli_fetch_assoc($exec_aktiviti);
                         $count_aktiviti = $row_aktiviti['count'];
 
-                        # Memaparkan senarai nama dalam jadual
+                        # Memaparkan data dalam jadual
                         echo "<tr>
                                 <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
                                 <td>" . $m['nokp'] . "</td>
@@ -101,8 +106,7 @@ include ("kawalan-admin.php");
                                 <td>$count_hadir/$count_aktiviti</td>
                             ";
 
-
-                        # Memaparkan navigasi untuk kemaskini dan hapus data ahli
+                        # Memaparkan butang kemaskini dan hapus data ahli
                         echo "<td>
                     <div class='action-container'>
                         <div class='edit-container'>
@@ -135,27 +139,22 @@ include ("kawalan-admin.php");
 
             <form class="upload-form" target="dummyframe" method="POST" enctype="multipart/form-data" accept=".txt">
                 <div class="upload-box">
-
                     <h2>Muat Naik Data Ahli</h2>
-
                     <p>Sila pilih fail berformat .txt untuk dimuatnaik:</p>
-
                     <div class="choose-file-btn">
                         <input type="file" name="data_ahli" id="file" accept=".txt, .text">
                     </div>
-
                     <div class="uploadBtn-container">
                         <button onclick="daftarAhli()" id="close-upload" class="upload_fileBtn" type="submit">
                             <i class='material-symbols-outlined'>upload</i> Muat Naik
                         </button>
                     </div>
-
                 </div>
-
             </form>
         </div>
     </div>
 
+    <!-- Skrip untuk fungsi dialog muat naik -->
     <script src="scripts\dialog-script-upload.js" defer></script>
 </main>
 
@@ -183,21 +182,21 @@ include ("kawalan-admin.php");
 <script>
     // Fungsi hantar data ke aktiviti-daftar-proses.php
     function daftarAhli() {
-        var form = document.querySelector('.upload-form'); // Get the form element
-        var formData = new FormData(form); // Create FormData object with form data
+        // Dapatkan elemen borang muatnaik
+        var form = document.querySelector('.upload-form');
+        var formData = new FormData(form);
 
-        var fileInput = document.querySelector('input[type="file"]'); // Get the file input element
-        var file = fileInput.files[0]; // Get the first file
+        var fileInput = document.querySelector('input[type="file"]'); // Dapatkan elemen input fail
+        var file = fileInput.files[0]; // Dapatkan fail pertama
 
-        // Validate file type
+        // Semak jika fail kosong atau format fail yang salah
         if (!file || file.type !== "text/plain") {
             var urlParams = new URLSearchParams(window.location.search);
             urlParams.set('notificationType', 'error');
             urlParams.set('notificationMessage', 'Ralat! Sila Masukkan Fail Format .txt!');
             window.location.href = "senarai-ahli.php?" + urlParams.toString();
-            return; // Stop the function if file type is not .txt
+            return;
         }
-
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", "upload.php", true);
@@ -215,9 +214,9 @@ include ("kawalan-admin.php");
             }
         };
         xhr.onerror = function () {
-            alert("An error occurred. Please try again."); // Show error message
+            alert("An error occurred. Please try again."); // Papar mesej ralat
         };
-        xhr.send(formData); // Send the FormData object
+        xhr.send(formData); // Hantar data borang
     }
 </script>
 
@@ -228,6 +227,7 @@ include ("kawalan-admin.php");
     }
 </script>
 
+<!-- Skrip untuk mencari ahli berdasarkan input carian -->
 <script>
     document.getElementById('searchAhli').addEventListener('input', function () {
         const searchValue = this.value;

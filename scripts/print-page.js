@@ -13,6 +13,7 @@ function printPage() {
     printWindow.document.write('th, td { border: 1px solid black; padding: 8px; text-align: left; }');
     printWindow.document.write('th { background-color: #f2f2f2; }');
     printWindow.document.write('.profile_img_list { display:none; }');
+    printWindow.document.write('.medal-icon { width:24px; height:24px; }');
     printWindow.document.write('.td-name { display: inline-block; vertical-align: middle; }');
     printWindow.document.write('.action-container, .editBtn, .deleteBtn { display: none; }'); // Sembunyikan butang tindakan semasa cetak
     printWindow.document.write('</style>');

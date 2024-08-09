@@ -109,8 +109,15 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
         </div>
         <div class="card-header-container">
             <div class="input-carian-container">
-                <div class="input-carian">
-                    <input type='text' id="searchNama" name='nama' placeholder='Carian Nama Ahli'>
+                <div class="carian-laporan">
+                    <form id="cari_ahli" action="" method='POST'>
+                        <div class="input-carian">
+                            <input type="text" name="nama" placeholder="Carian Nama Ahli">
+                        </div>
+                    </form>
+                    <button class="searchBtn" onclick="scrollToElement();" type='submit' form="cari_ahli" value='Cari' data-tooltip="Cari">
+                        <i class='bx bx-search'></i>
+                    </button>
                 </div>
             </div>
             <div class="font-size-button">
@@ -135,10 +142,17 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
                     </thead>
                     <tbody id="leaderboardBody">
                         <?php
+                        # Syarat tambahan yang akan dimasukkan dalam arahan(query) leaderboard
+                        $cari_ahli = "";
+                        if (!empty($_POST["nama"])) {
+                            $cari_ahli = " and ahli.nama like '%" . $_POST['nama'] . "%'";
+                        }
+
                         # Arahan query untuk mendapatkan senarai ahli
                         $arahan_papar = "SELECT ahli.nama, ahli.mata, ahli.profile_pic, kelas.ting, kelas.nama_kelas
                                     FROM ahli
                                     JOIN kelas ON ahli.IDkelas = kelas.IDkelas
+                                    $cari_ahli
                                     ORDER BY mata DESC
                                     ";
 
@@ -172,6 +186,7 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
 
 <!-- Fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai ikon) -->
 <script src="scripts/datatooltip.js" defer></script>
+<script src="scripts/autoscroll.js" defer></script>
 
 <!-- Fungsi mesra pengguna buta warna -->
 <script src="scripts/colorblind.js" defer></script>

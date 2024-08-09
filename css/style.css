@@ -1109,6 +1109,24 @@ ul {
     height: 40px;
 }
 
+.carian-aktiviti,
+.carian-ahli,
+.carian-laporan {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.carian-laporan {
+    width: 400px;
+}
+
+.carian-ahli,
+.carian-aktiviti {
+    width: 400px;
+}
+
 .input-carian input {
     flex: 1;
     width: 300px;
@@ -1139,10 +1157,11 @@ ul {
     outline: none;
     display: grid;
     place-items: center;
-    right: 0;
+    right: 45px;
     top: 0;
     flex-shrink: 0;
     cursor: pointer;
+    z-index: 100;
 }
 
 .input-carian-container .searchBtn:hover {
@@ -1151,8 +1170,8 @@ ul {
 
 .upload-container {
     display: flex;
-    flex: 50%;
-    position: relative;
+    position: absolute;
+    right: 0;
 }
 
 .upload-container .uploadBtn {

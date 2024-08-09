@@ -15,18 +15,23 @@ include ("kawalan-admin.php");
 <main>
     <div class="upload-aktiviti-container">
         <div class="input-carian-container">
-            <div class="input-carian">
-                <input type="text" id="searchAktiviti" name='nama_aktiviti' placeholder='Carian Aktiviti'
-                    autocomplete="off">
+            <div class="carian-aktiviti">
+                <form id="cari_aktiviti" action='' method='POST'>
+                    <div class="input-carian">
+                        <input type="text" name='nama_aktiviti' placeholder='Carian Aktiviti'>
+                    </div>
+                </form>
+
+                <button class="searchBtn" type='submit' form="cari_aktiviti" value='Cari' data-tooltip="Cari">
+                    <i class='material-symbols-outlined'>search</i>
+                </button>
+                <div class="upload-container">
+                    <button id="open-aktiviti" class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
+                        <i class='material-symbols-outlined'>playlist_add</i>
+                    </button>
+                </div>
             </div>
         </div>
-
-        <div class="upload-container">
-            <button id="open-aktiviti" class="uploadBtn" data-tooltip="Tambah Aktiviti/Perjumpaan">
-                <i class='material-symbols-outlined'>playlist_add</i>
-            </button>
-        </div>
-
         <div class="font-size-button">
             <button class="increase-size-btn" onclick="ubahsaiz(1)" data-tooltip="Tambah Saiz Tulisan"><span
                     class="material-symbols-outlined">text_increase</span></button>
@@ -53,8 +58,14 @@ include ("kawalan-admin.php");
                 </thead>
                 <tbody id="aktivitiBody">
                     <?php
-                    # Araham query untuk mencari senarai aktiviti
-                    $arahan_papar = "SELECT * FROM aktiviti";
+                    # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai aktiviti
+                    $cari_aktiviti = "";
+                    if (!empty($_POST["nama_aktiviti"])) {
+                        $cari_aktiviti = "where nama_aktiviti like '%" . $_POST['nama_aktiviti'] . "%'";
+                    }
+
+                    # Arahan query untuk mencari senarai aktiviti
+                    $arahan_papar = "SELECT * FROM aktiviti $cari_aktiviti";
 
                     # Laksana arahan mencari senarai aktiviti
                     $laksana = mysqli_query($condb, $arahan_papar);

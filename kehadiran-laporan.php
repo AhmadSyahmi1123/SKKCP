@@ -92,8 +92,15 @@ if (empty($_GET['IDaktiviti'])) {
 
             <div class="laporan-aktiviti-container">
                 <div class="input-carian-container">
-                    <div class="input-carian">
-                        <input type="text" id="searchAhli" name="nama" placeholder="Carian Nama Ahli" autocomplete="off">
+                    <div class="carian-laporan">
+                        <form id="cari_ahli" action="kehadiran-laporan.php?IDaktiviti=<?= $IDaktiviti ?>" method='POST'>
+                            <div class="input-carian">
+                                <input type="text" name="nama" placeholder="Carian Nama Ahli">
+                            </div>
+                        </form>
+                        <button class="searchBtn" type='submit' form="cari_ahli" value='Cari' data-tooltip="Cari">
+                            <i class='bx bx-search'></i>
+                        </button>
                     </div>
                 </div>
 

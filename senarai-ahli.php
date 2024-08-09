@@ -17,18 +17,24 @@ include ("kawalan-admin.php");
     <div class="upload-ahli-container">
         <!-- Input untuk carian nama ahli -->
         <div class="input-carian-container">
-            <div class="input-carian">
-                <input type='text' id="searchAhli" name='nama' placeholder='Carian Nama Ahli' autocomplete="off">
+            <div class="carian-ahli">
+                <form id="cari_ahli" action='' method='POST'>
+                    <div class="input-carian">
+                        <input type="text" name='nama' placeholder='Carian Nama Ahli'>
+                    </div>
+                </form>
+
+                <button class="searchBtn" type='submit' form="cari_ahli" value='Cari' data-tooltip="Cari">
+                    <i class='material-symbols-outlined'>search</i>
+                </button>
+
+                <!-- Butang untuk memuat naik ahli baru -->
+                <div class="upload-container">
+                    <button id="open-upload" class="uploadBtn" data-tooltip="Muat Naik Ahli">
+                        <i class='material-symbols-outlined'>group_add</i>
+                    </button>
+                </div>
             </div>
-        </div>
-
-        <!-- Butang untuk memuat naik ahli baru -->
-        <div class="upload-container">
-            <button id="open-upload" class="uploadBtn" data-tooltip="Muat Naik Ahli">
-                <i class='material-symbols-outlined'>group_add</i>
-            </button>
-
-            <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
         </div>
 
         <!-- Butang untuk mengubah saiz font dan mencetak halaman -->
@@ -60,8 +66,14 @@ include ("kawalan-admin.php");
                 </thead>
                 <tbody id="ahliBody">
                     <?php
+                    # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai ahli
+                    $cari_ahli = "";
+                    if (!empty($_POST["nama"])) {
+                        $cari_ahli = " and ahli.nama like '%" . $_POST['nama'] . "%'";
+                    }
+
                     # Arahan SQL untuk mendapatkan senarai ahli beserta kelas mereka
-                    $arahan_papar = "select * from ahli, kelas where ahli.IDkelas = kelas.IDkelas ORDER BY ahli.nama ASC";
+                    $arahan_papar = "select * from ahli, kelas where ahli.IDkelas = kelas.IDkelas $cari_ahli ORDER BY ahli.nama ASC";
 
                     # Melaksanakan arahan SQL
                     $laksana = mysqli_query($condb, $arahan_papar);

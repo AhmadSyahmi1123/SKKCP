@@ -115,7 +115,8 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
                             <input type="text" name="nama" placeholder="Carian Nama Ahli">
                         </div>
                     </form>
-                    <button class="searchBtn" onclick="scrollToElement();" type='submit' form="cari_ahli" value='Cari' data-tooltip="Cari">
+                    <button class="searchBtn" onclick="scrollToElement();" type='submit' form="cari_ahli" value='Cari'
+                        data-tooltip="Cari">
                         <i class='bx bx-search'></i>
                     </button>
                 </div>
@@ -134,7 +135,7 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
                 <table class="table" id="saiz">
                     <thead>
                         <tr>
-                            <th>Bil</th>
+                            <th>Rank</th>
                             <th>Nama</th>
                             <th>Kelas</th>
                             <th>Mata</th>
@@ -158,12 +159,27 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
 
                         # Laksanakan arahan untuk mendapatkan data
                         $laksana = mysqli_query($condb, $arahan_papar);
-                        $bil = 0;
+                        $bil = 1;
 
                         # Mengambil dan memaparkan data ahli dalam jadual
                         while ($m = mysqli_fetch_array($laksana)) {
+                            # Warna teks bagi kedudukan 1st, 2nd dan 3rd
+                            $image = '';
+                            if ($bil == 1) {
+                                $image = '<img src="img/gold_medal.png" alt="Gold Medal" class="medal-icon">';
+                                $bil++;
+                            } elseif ($bil == 2) {
+                                $image = '<img src="img/silver_medal.png" alt="Silver Medal" class="medal-icon">';
+                                $bil++;
+                            } elseif ($bil == 3) {
+                                $image = '<img src="img/bronze_medal.png" alt="Bronze Medal" class="medal-icon">';
+                                $bil++;
+                            } else {
+                                $image = $bil++;
+                            }
+
                             echo "<tr>
-                                <td>" . ++$bil . "</td>
+                                <td align='center'>" . $image . "</td>
                                 <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
                                 <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
                                 <td>" . $m['mata'] . "</td>
@@ -186,6 +202,8 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
 
 <!-- Fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai ikon) -->
 <script src="scripts/datatooltip.js" defer></script>
+
+<!-- Fungsi scroll laman web ke bawah apabila membuat carian -->
 <script src="scripts/autoscroll.js" defer></script>
 
 <!-- Fungsi mesra pengguna buta warna -->

@@ -24,7 +24,28 @@ input {
     --secondary-text-color: #9e9ea9;
     --button-primary-color: #7C3306;
     --button-secondary-color: #b34b0c;
+    --rank-1-color: gold;
+    --rank-2-color: silver;
+    --rank-3-color: #cd7f32;
 }
+
+.gold {
+    color: var(--rank-1-color);
+}
+
+.silver {
+    color: var(--rank-2-color);
+}
+
+.bronze {
+    color: var(--rank-3-color);
+}
+
+.medal-icon {
+    width: 32px;
+    height: 32px;
+}
+
 
 #filter-overlay.protanopia {
     backdrop-filter: url(#protanopia);

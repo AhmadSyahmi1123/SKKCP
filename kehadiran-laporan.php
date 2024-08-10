@@ -93,10 +93,11 @@ if (empty($_GET['IDaktiviti'])) {
             <div class="laporan-aktiviti-container">
                 <div class="input-carian-container">
                     <div class="carian-laporan">
-                        <form id="cari_ahli" action="kehadiran-laporan.php?IDaktiviti=<?= $IDaktiviti ?>" method='POST'>
+                        <form id="cari_ahli" action="" method='POST'>
                             <div class="input-carian">
                                 <input type="text" name="nama" placeholder="Carian Nama Ahli">
                             </div>
+                            <input type="text" name="IDaktiviti" value="<?= $IDaktiviti ?>" hidden>
                         </form>
                         <button class="searchBtn" type='submit' form="cari_ahli" value='Cari' data-tooltip="Cari">
                             <i class='bx bx-search'></i>
@@ -236,70 +237,74 @@ if (empty($_GET['IDaktiviti'])) {
 <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 <script src="scripts/toast.js"></script>
 
+<!-- Fungsi realtime-search -->
+<script>
+    // Proses data daripada kotak teks carian ahli secara manual
+    document.getElementById('cari_ahli').addEventListener('submit', function (event) {
+        event.preventDefault(); // Elak daripada refresh halaman selepas submit
+
+        const searchValue = this.value;
+        const laporanBody = document.getElementById('laporanBody');
+        const IDaktiviti = <?= json_encode($_GET['IDaktiviti']) ?>;  // Ambil nilai IDaktiviti dari pembolehubah PHP
+
+        // Lakukan carian menggunakan AJAX (atau penghantaran borang)
+        var xhr = new XMLHttpRequest();
+        var formData = new FormData(this); // Ambil data daripada borang carian
+
+        // Hantar permintaan POST ke server untuk mencari data ahli
+        xhr.open('POST', "search-laporan.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Jika permintaan berjaya, kemaskini jadual  dengan data yang baru
+                laporanBody.innerHTML = xhr.responseText;
+
+                // Pasang semula event listeners untuk kandungan yang dimuat secara dinamik
+                attachEventListeners();
+            }
+        };
+        // Hantar data borang ke server
+        xhr.send(formData);
+    });
+
+    function attachEventListeners() {
+        // Pasang event listener untuk editMataBtn menggunakan event delegation
+        document.getElementById('laporanBody').addEventListener('click', function (event) {
+            const editMataBtn = event.target.closest('.open-update-point');
+            if (editMataBtn) {
+                const nokp = editMataBtn.dataset.nokp;
+                console.log('editMataBtn clicked for nokp: ' + nokp);
+
+                // Papar modal atau lakukan tindakan lain di sini
+                showModal(nokp);
+            }
+        });
+    }
+
+    // Pemasangan awal event listeners
+    attachEventListeners();
+
+    function showModal(nokp) {
+        const modalContainer = document.getElementById('modal_mata_container');
+        const modalForm = modalContainer.querySelector('form');
+
+        // Tetapkan nilai nokp dalam action form atau input tersembunyi
+        const formAction = `mata-kemaskini-proses.php?nokp=${nokp}`;
+        modalForm.setAttribute('action', formAction);
+
+        // Papar modal
+        modalContainer.classList.add("show");
+
+        // Tambah event listener untuk butang tutup dalam modal
+        const closeModalBtn = modalContainer.querySelector('.closeMataBtn');
+        closeModalBtn.addEventListener('click', function () {
+            modalContainer.classList.remove("show");
+        });
+    }
+</script>
+
 <!-- Elak daripada resubmission borang apabila refresh -->
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
-</script>
-
-<!-- Fungsi realtime-search -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('searchAhli').addEventListener('input', function () {
-            const searchValue = this.value;
-            const laporanBody = document.getElementById('laporanBody');
-            const IDaktiviti = <?= json_encode($_GET['IDaktiviti']) ?>;  // Ambil nilai IDaktiviti dari pembolehubah PHP
-
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'search-laporan.php', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-            xhr.onload = function () {
-                if (this.status === 200) {
-                    laporanBody.innerHTML = this.responseText;
-
-                    // Pasang semula event listeners untuk kandungan yang dimuat secara dinamik
-                    attachEventListeners();
-                }
-            }
-
-            xhr.send('nama=' + encodeURIComponent(searchValue) + '&IDaktiviti=' + encodeURIComponent(IDaktiviti));
-        });
-
-        function attachEventListeners() {
-            // Pasang event listener untuk editMataBtn menggunakan event delegation
-            document.getElementById('laporanBody').addEventListener('click', function (event) {
-                const editMataBtn = event.target.closest('.open-update-point');
-                if (editMataBtn) {
-                    const nokp = editMataBtn.dataset.nokp;
-                    console.log('editMataBtn clicked for nokp: ' + nokp);
-
-                    // Papar modal atau lakukan tindakan lain di sini
-                    showModal(nokp);
-                }
-            });
-        }
-
-        // Pemasangan awal event listeners
-        attachEventListeners();
-
-        function showModal(nokp) {
-            const modalContainer = document.getElementById('modal_mata_container');
-            const modalForm = modalContainer.querySelector('form');
-
-            // Tetapkan nilai nokp dalam action form atau input tersembunyi
-            const formAction = `mata-kemaskini-proses.php?nokp=${nokp}`;
-            modalForm.setAttribute('action', formAction);
-
-            // Papar modal
-            modalContainer.classList.add("show");
-
-            // Tambah event listener untuk butang tutup dalam modal
-            const closeModalBtn = modalContainer.querySelector('.closeMataBtn');
-            closeModalBtn.addEventListener('click', function () {
-                modalContainer.classList.remove("show");
-            });
-        }
-    });
 </script>

@@ -115,7 +115,7 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
                             <input type="text" name="nama" placeholder="Carian Nama Ahli">
                         </div>
                     </form>
-                    <button class="searchBtn" onclick="scrollToElement();" type='submit' form="cari_ahli" value='Cari'
+                    <button class="searchBtn" onclick="" type='submit' form="cari_ahli" value='Cari'
                         data-tooltip="Cari">
                         <i class='bx bx-search'></i>
                     </button>
@@ -163,7 +163,7 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
 
                         # Mengambil dan memaparkan data ahli dalam jadual
                         while ($m = mysqli_fetch_array($laksana)) {
-                            # Warna teks bagi kedudukan 1st, 2nd dan 3rd
+                            # Papar imej medal bagi kedudukan 1st, 2nd dan 3rd
                             $image = '';
                             if ($bil == 1) {
                                 $image = '<img src="img/gold_medal.png" alt="Gold Medal" class="medal-icon">';
@@ -203,9 +203,6 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
 <!-- Fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai ikon) -->
 <script src="scripts/datatooltip.js" defer></script>
 
-<!-- Fungsi scroll laman web ke bawah apabila membuat carian -->
-<script src="scripts/autoscroll.js" defer></script>
-
 <!-- Fungsi mesra pengguna buta warna -->
 <script src="scripts/colorblind.js" defer></script>
 
@@ -219,19 +216,22 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
 
 <!-- Fungsi untuk mencari nama ahli dalam carta pendahulu -->
 <script>
-    document.getElementById('searchNama').addEventListener('input', function () {
-        const searchValue = this.value;
+    // Proses data daripada kotak teks carian ahli secara manual
+    document.getElementById('cari_ahli').addEventListener('submit', function (event) {
+        event.preventDefault(); // Elak daripada refresh halaman selepas submit
 
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'search-leaderboard.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        // Lakukan carian menggunakan AJAX (atau penghantaran borang)
+        var xhr = new XMLHttpRequest();
+        var formData = new FormData(this); // Ambil data daripada borang carian
 
+        // Hantar permintaan POST ke server untuk mencari data ahli
+        xhr.open('POST', "search-leaderboard.php", true);
         xhr.onload = function () {
-            if (this.status === 200) {
-                document.getElementById('leaderboardBody').innerHTML = this.responseText;
+            if (xhr.status === 200) {
+                // Jika permintaan berjaya, kemaskini carta pendahulu dengan data yang baru
+                document.getElementById('leaderboardBody').innerHTML = xhr.responseText;
             }
-        }
-
-        xhr.send('nama=' + encodeURIComponent(searchValue));
+        };
+        xhr.send(formData); // Hantar data borang ke server
     });
 </script>

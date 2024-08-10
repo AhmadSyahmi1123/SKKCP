@@ -232,28 +232,31 @@ include ("kawalan-admin.php");
     }
 </script>
 
+<!-- Proses untuk mencari ahli -->
+<script>
+    // Proses data daripada kotak teks carian ahli secara manual
+    document.getElementById('cari_ahli').addEventListener('submit', function (event) {
+        event.preventDefault(); // Elak daripada refresh halaman selepas submit
+
+        // Lakukan carian menggunakan AJAX (atau penghantaran borang)
+        var xhr = new XMLHttpRequest();
+        var formData = new FormData(this); // Ambil data daripada borang carian
+
+        // Hantar permintaan POST ke server untuk mencari data ahli
+        xhr.open('POST', "search-ahli.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Jika permintaan berjaya, kemaskini carta pendahulu dengan data yang baru
+                document.getElementById('ahliBody').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send(formData); // Hantar data borang ke server
+    });
+</script>
+
 <!-- Elak daripada resubmission borang apabila refresh -->
 <script>
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
-</script>
-
-<!-- Skrip untuk mencari ahli berdasarkan input carian -->
-<script>
-    document.getElementById('searchAhli').addEventListener('input', function () {
-        const searchValue = this.value;
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'search-ahli.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function () {
-            if (this.status === 200) {
-                document.getElementById('ahliBody').innerHTML = this.responseText;
-            }
-        }
-
-        xhr.send('nama=' + encodeURIComponent(searchValue));
-    });
 </script>

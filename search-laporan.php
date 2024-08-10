@@ -56,4 +56,3 @@ if (isset($_POST['nama'])) {
     }
     echo "</table>";
 }
-?>

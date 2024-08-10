@@ -58,31 +58,26 @@ include ("kawalan-admin.php");
                 </thead>
                 <tbody id="aktivitiBody">
                     <?php
-                    # Syarat tambahan yang akan dimasukkan dalam arahan(query) senarai aktiviti
-                    $cari_aktiviti = "";
-                    if (!empty($_POST["nama_aktiviti"])) {
-                        $cari_aktiviti = "where nama_aktiviti like '%" . $_POST['nama_aktiviti'] . "%'";
-                    }
-
                     # Arahan query untuk mencari senarai aktiviti
-                    $arahan_papar = "SELECT * FROM aktiviti $cari_aktiviti";
+                    $arahan_papar = "SELECT * FROM aktiviti";
 
                     # Laksana arahan mencari senarai aktiviti
                     $laksana = mysqli_query($condb, $arahan_papar);
 
-                    # Mengambil data yang ditemui
-                    while ($m = mysqli_fetch_array($laksana)) {
+                    if (mysqli_num_rows($laksana) > 0) {
+                        # Mengambil data yang ditemui
+                        while ($m = mysqli_fetch_array($laksana)) {
 
-                        # Memaparkan senarai aktiviti dalam jadual
-                        echo "<tr>
+                            # Memaparkan senarai aktiviti dalam jadual
+                            echo "<tr>
                         <td>" . $m['nama_aktiviti'] . "</td>
                         <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
                         <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
                         <td>" . date('H:i', strtotime($m['masa_tamat'])) . "</td>
         ";
 
-                        # Memaparkan navigasi untuk kemaskini dan hapus data aktiviti
-                        echo "<td>
+                            # Memaparkan navigasi untuk kemaskini dan hapus data aktiviti
+                            echo "<td>
                     <div class='action-container'>
                         <div class='edit-container'>
                             <button class='editBtn' data-tooltip='Kemaskini'>
@@ -104,7 +99,14 @@ include ("kawalan-admin.php");
                     </div>
                 </td>
         </tr>";
+                        }
+                    } else {
+                        # Jika tiada data ditemui, papar mesej "Sorry, no data available"
+                        echo "<div class='no-data-text-container'>
+                                <div class='text-area'>Maaf, tiada data untuk dipaparkan...</div>
+                            </div>";
                     }
+
                     ?>
                 </tbody>
             </table>

@@ -26,9 +26,14 @@ $n = mysqli_fetch_array($laksana_aktiviti);
     <div class="borang-container">
         <div class="searchNupload-container">
             <div class="input-carian-container">
-                <div class="input-carian">
-                    <input type='text' id="searchAhli" name='nama' placeholder='Carian Nama Ahli' autocomplete="off">
-                </div>
+                <form id="cari_ahli" action="" method='POST'>
+                    <div class="input-carian">
+                        <input type="text" name="nama" placeholder="Carian Nama Ahli">
+                    </div>
+                </form>
+                <button class="searchBtn" type='submit' form="cari_ahli" value='Cari' data-tooltip="Cari">
+                    <i class='bx bx-search'></i>
+                </button>
             </div>
 
             <div class="font-size-button">
@@ -76,23 +81,29 @@ $n = mysqli_fetch_array($laksana_aktiviti);
                             $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
                             $bil = 0;
 
-                            # Mengambil dan memaparkan semua data kehadiran yang ditemui
-                            while ($m = mysqli_fetch_array($laksana_kehadiran)) { ?>
-                                <tr>
-                                    <td><?= ++$bil; ?></td>
-                                    <td><?= $m['nama'] ?></td>
-                                    <td><?= $m['nokp'] ?></td>
-                                    <td><?= $m['ting'] . " " . $m['nama_kelas'] ?></td>
-                                    <td>
-                                        <?php
-                                        $tanda = $m['IDaktiviti'] != null ? "checked" : "";
-                                        ?>
-                                        <input <?= $tanda ?> type="checkbox" name="kehadiran[]" value="<?= $m['nokp'] ?>"
-                                            style="width:30px; height:30px;">
-                                    </td>
-                                </tr>
-                                <?php
-                            }
+                            if (mysqli_num_rows($laksana_kehadiran) > 0) {
+                                # Mengambil dan memaparkan semua data kehadiran yang ditemui
+                                while ($m = mysqli_fetch_array($laksana_kehadiran)) { ?>
+                                    <tr>
+                                        <td><?= ++$bil; ?></td>
+                                        <td><?= $m['nama'] ?></td>
+                                        <td><?= $m['nokp'] ?></td>
+                                        <td><?= $m['ting'] . " " . $m['nama_kelas'] ?></td>
+                                        <td>
+                                            <?php
+                                            $tanda = $m['IDaktiviti'] != null ? "checked" : "";
+                                            ?>
+                                            <input <?= $tanda ?> type="checkbox" name="kehadiran[]" value="<?= $m['nokp'] ?>"
+                                                style="width:30px; height:30px;">
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            } else { ?>
+                                <div class='no-data-text-container'>
+                                    <div class='text-area'>Maaf, tiada data untuk dipaparkan</div>
+                                </div>
+                            <?php }
                             ?>
                         </tbody>
                     </table>
@@ -120,22 +131,3 @@ $n = mysqli_fetch_array($laksana_aktiviti);
 <!-- Fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>
 <script src="scripts\print-page.js" defer></script>
-
-<script>
-    document.getElementById('searchAhli').addEventListener('input', function () {
-        const searchValue = this.value;
-        const IDaktiviti = <?= json_encode($_GET['IDaktiviti']) ?>;  // Get the IDaktiviti value from the PHP variable
-
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'search-kehadiran-borang.php', true);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-        xhr.onload = function () {
-            if (this.status === 200) {
-                document.getElementById('kehadiranBody').innerHTML = this.responseText;
-            }
-        }
-
-        xhr.send('nama=' + encodeURIComponent(searchValue) + '&IDaktiviti=' + encodeURIComponent(IDaktiviti));
-    });
-</script>

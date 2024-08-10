@@ -105,15 +105,22 @@ $currentDate = date('Y-m-d');
                                                      ORDER BY kehadiran.masa_hadir DESC";
                             $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
 
-                            while ($m = mysqli_fetch_array($laksana_kehadiran)) {
-                                echo "<tr>
-                                    <td>" . ++$bil . "</td>
-                                    <td>" . $m['nama'] . "</td>
-                                    <td>" . $m['nokp'] . "</td>
-                                    <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
-                                    <td>" . $m['masa_hadir'] . "</td>
-                                </tr>";
+                            if (mysqli_num_rows($laksana_kehadiran) > 0) {
+                                while ($m = mysqli_fetch_array($laksana_kehadiran)) {
+                                    echo "<tr>
+                                        <td>" . ++$bil . "</td>
+                                        <td>" . $m['nama'] . "</td>
+                                        <td>" . $m['nokp'] . "</td>
+                                        <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
+                                        <td>" . $m['masa_hadir'] . "</td>
+                                    </tr>";
+                                }
+                            } else {
+                                echo "<div class='no-data-text-container'>
+                                    <div class='text-area'>Maaf, data tidak wujud...</div>
+                                </div>";
                             }
+
                             ?>
                         </tbody>
                     </table>
@@ -127,7 +134,7 @@ $currentDate = date('Y-m-d');
     <script src="scripts/select-box-aktiviti.js" defer></script>
 </main>
 
-<footer class="bottomed-footer">
+<footer class="default-footer">
     <div class="footer-container">
         <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
     </div>

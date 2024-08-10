@@ -89,66 +89,72 @@ if (empty($_SESSION["nokp"])) {
                         # Melaksanakan arahan untuk mendapatkan data aktiviti
                         $laksana = mysqli_query($condb, $arahan_papar);
 
-                        # Mengambil dan memaparkan setiap aktiviti dalam jadual
-                        while ($m = mysqli_fetch_array($laksana)) {
-                            echo "<tr>
-                        <td>" . $m['nama_aktiviti'] . "</td>
-                        <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
-                        <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
-                        <td>" . date('H:i', strtotime($m['masa_tamat'])) . "</td>
-                        <td align='center'>";
+                        if (mysqli_num_rows($laksana) > 0) {
+                            # Mengambil dan memaparkan setiap aktiviti dalam jadual
+                            while ($m = mysqli_fetch_array($laksana)) {
+                                echo "<tr>
+                                    <td>" . $m['nama_aktiviti'] . "</td>
+                                    <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
+                                    <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
+                                    <td>" . date('H:i', strtotime($m['masa_tamat'])) . "</td>
+                                    <td align='center'>";
 
-                            # Arahan untuk memeriksa kehadiran pengguna bagi setiap aktiviti
-                            $arahan_sql_hadir = "SELECT * FROM kehadiran WHERE nokp = '" . $_SESSION['nokp'] . "' AND IDaktiviti = '" . $m['IDaktiviti'] . "'";
-                            # Melaksanakan arahan untuk memeriksa kehadiran
-                            $laksana_hadir = mysqli_query($condb, $arahan_sql_hadir);
+                                # Arahan untuk memeriksa kehadiran pengguna bagi setiap aktiviti
+                                $arahan_sql_hadir = "SELECT * FROM kehadiran WHERE nokp = '" . $_SESSION['nokp'] . "' AND IDaktiviti = '" . $m['IDaktiviti'] . "'";
+                                # Melaksanakan arahan untuk memeriksa kehadiran
+                                $laksana_hadir = mysqli_query($condb, $arahan_sql_hadir);
 
-                            # Menyediakan objek DateTime untuk masa aktiviti dan masa semasa
-                            $startDate = new DateTime($m['tarikh_aktiviti'] . ' ' . $m['masa_mula']);
-                            $endDate = new DateTime($m['tarikh_aktiviti'] . ' ' . $m['masa_tamat']);
-                            $now = new DateTime();
+                                # Menyediakan objek DateTime untuk masa aktiviti dan masa semasa
+                                $startDate = new DateTime($m['tarikh_aktiviti'] . ' ' . $m['masa_mula']);
+                                $endDate = new DateTime($m['tarikh_aktiviti'] . ' ' . $m['masa_tamat']);
+                                $now = new DateTime();
 
-                            if (mysqli_num_rows($laksana_hadir) == 1) {
-                                # Jika pengguna hadir, paparkan status 'Hadir'
-                                echo "<div class='status-hadir'>Hadir</div>";
-                            } else {
-                                # Jika aktiviti sudah tamat, paparkan status 'Tidak Hadir'
-                                if ($endDate < $now) {
-                                    echo "<div class='status-tidak-hadir'>Tidak Hadir</div>";
+                                if (mysqli_num_rows($laksana_hadir) == 1) {
+                                    # Jika pengguna hadir, paparkan status 'Hadir'
+                                    echo "<div class='status-hadir'>Hadir</div>";
                                 } else {
-                                    $targetDate = $startDate->format('Y-m-d H:i:s');
-                                    # Paparkan kiraan masa secara langsung sehingga aktiviti bermula
-                                    echo '<div class="coundownText" id="countdown_' . $m['IDaktiviti'] . '"></div>';
-                                    echo '<script defer>
-                                    var countDownDate_' . $m['IDaktiviti'] . ' = new Date("' . $targetDate . '").getTime();
+                                    # Jika aktiviti sudah tamat, paparkan status 'Tidak Hadir'
+                                    if ($endDate < $now) {
+                                        echo "<div class='status-tidak-hadir'>Tidak Hadir</div>";
+                                    } else {
+                                        $targetDate = $startDate->format('Y-m-d H:i:s');
+                                        # Paparkan kiraan masa secara langsung sehingga aktiviti bermula
+                                        echo '<div class="coundownText" id="countdown_' . $m['IDaktiviti'] . '"></div>';
+                                        echo '<script defer>
+                                            var countDownDate_' . $m['IDaktiviti'] . ' = new Date("' . $targetDate . '").getTime();
 
-                                    // Kemas kini kiraan masa setiap 1 saat
-                                    var x_' . $m['IDaktiviti'] . ' = setInterval(function() {
-                                        var now = new Date().getTime();
+                                            // Kemas kini kiraan masa setiap 1 saat
+                                            var x_' . $m['IDaktiviti'] . ' = setInterval(function() {
+                                                var now = new Date().getTime();
 
-                                        // Kira jarak masa antara sekarang dan tarikh kiraan
-                                        var distance = countDownDate_' . $m['IDaktiviti'] . ' - now;
+                                                // Kira jarak masa antara sekarang dan tarikh kiraan
+                                                var distance = countDownDate_' . $m['IDaktiviti'] . ' - now;
 
-                                        // Kira hari, jam, minit dan saat
-                                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                                                // Kira hari, jam, minit dan saat
+                                                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                                                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                                                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                                        // Paparkan keputusan dalam elemen dengan id "countdown_' . $m['IDaktiviti'] . '"
-                                        document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = days + "d " + hours + "h "
-                                        + minutes + "m " + seconds + "s ";
+                                                // Paparkan keputusan dalam elemen dengan id "countdown_' . $m['IDaktiviti'] . '"
+                                                document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = days + "d " + hours + "h "
+                                                + minutes + "m " + seconds + "s ";
 
-                                        // Jika kiraan masa tamat, paparkan butang untuk pengesahan kehadiran
-                                        if (distance <= 0) {
-                                            clearInterval(x_' . $m['IDaktiviti'] . ');
-                                            document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = \' <button class="sahkendiriBtn" ><a href="profil-sahkendiri.php?IDaktiviti=' . $m['IDaktiviti'] . '"><i class="bx bx-user-check"></i>Rekod</a></button>\';
-                                        }
-                                    }, 1000);
-                                    </script>';
+                                                // Jika kiraan masa tamat, paparkan butang untuk pengesahan kehadiran
+                                                if (distance <= 0) {
+                                                    clearInterval(x_' . $m['IDaktiviti'] . ');
+                                                    document.getElementById("countdown_' . $m['IDaktiviti'] . '").innerHTML = \' <button class="sahkendiriBtn" ><a href="profil-sahkendiri.php?IDaktiviti=' . $m['IDaktiviti'] . '"><i class="bx bx-user-check"></i>Rekod</a></button>\';
+                                                }
+                                            }, 1000);
+                                            </script>';
+                                    }
                                 }
+                                echo "</td></tr>";
                             }
-                            echo "</td></tr>";
+                        } else {
+                            echo "<div class='no-data-text-container'>
+                                <div class='text-area'>Maaf, tiada data untuk dipaparkan...</div>
+                            </div>";
                         }
                         ?>
                     </tbody>

@@ -19,29 +19,36 @@ if (isset($_POST['nama'])) {
     $laksana = mysqli_query($condb, $arahan_papar);
     $bil = 1;
 
-    # Mengambil dan memaparkan data ahli dalam jadual
-    while ($m = mysqli_fetch_array($laksana)) {
-        # Papar imej medal bagi kedudukan 1st, 2nd dan 3rd
-        $image = '';
-        if ($bil == 1) {
-            $image = '<img src="img/gold_medal.png" alt="Gold Medal" class="medal-icon">';
-            $bil++;
-        } elseif ($bil == 2) {
-            $image = '<img src="img/silver_medal.png" alt="Silver Medal" class="medal-icon">';
-            $bil++;
-        } elseif ($bil == 3) {
-            $image = '<img src="img/bronze_medal.png" alt="Bronze Medal" class="medal-icon">';
-            $bil++;
-        } else {
-            $image = $bil++;
-        }
+    if (mysqli_num_rows($laksana) > 0) {
+        # Mengambil dan memaparkan data ahli dalam jadual
+        while ($m = mysqli_fetch_array($laksana)) {
+            # Papar imej medal bagi kedudukan 1st, 2nd dan 3rd
+            $image = '';
+            if ($bil == 1) {
+                $image = '<img src="img/gold_medal.png" alt="Gold Medal" class="medal-icon">';
+                $bil++;
+            } elseif ($bil == 2) {
+                $image = '<img src="img/silver_medal.png" alt="Silver Medal" class="medal-icon">';
+                $bil++;
+            } elseif ($bil == 3) {
+                $image = '<img src="img/bronze_medal.png" alt="Bronze Medal" class="medal-icon">';
+                $bil++;
+            } else {
+                $image = $bil++;
+            }
 
-        echo "<tr>
-                <td align='center'>" . $image . "</td>
-                <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
-                <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
-                <td>" . $m['mata'] . "</td>
-                ";
-        echo "</td></tr>";
+            echo "<tr>
+            <td align='center'>" . $image . "</td>
+            <td><div class='profile_img_list_container'><img class='profile_img_list' src='uploads/" . $m['profile_pic'] . "'></div><div class='td-name'>" . $m['nama'] . "</div></td>
+            <td>" . $m['ting'] . " " . $m['nama_kelas'] . "</td>
+            <td>" . $m['mata'] . "</td>
+            ";
+            echo "</td></tr>";
+        }
+        echo "</table>";
+    } else {
+        echo "<div class='no-data-text-container'>
+            <div class='text-area'>Maaf, tiada data untuk dipaparkan...</div>
+        </div>";
     }
 }

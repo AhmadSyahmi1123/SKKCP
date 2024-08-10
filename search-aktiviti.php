@@ -15,18 +15,19 @@ if (isset($_POST['nama_aktiviti'])) {
     # Melaksanakan arahan SQL
     $laksana = mysqli_query($condb, $arahan_papar);
 
-    # Mengambil data dari hasil query
-    while ($m = mysqli_fetch_array($laksana)) {
-        # Memaparkan maklumat aktiviti dalam jadual
-        echo "<tr>
+    if (mysqli_num_rows($laksana) > 0) {
+        # Mengambil data dari hasil query
+        while ($m = mysqli_fetch_array($laksana)) {
+            # Memaparkan maklumat aktiviti dalam jadual
+            echo "<tr>
             <td>" . $m['nama_aktiviti'] . "</td>
             <td>" . date('d/m/Y', strtotime($m['tarikh_aktiviti'])) . "</td>
             <td>" . date('H:i', strtotime($m['masa_mula'])) . "</td>
             <td>" . date('H:i', strtotime($m['masa_tamat'])) . "</td>
         ";
 
-        # Memaparkan butang navigasi untuk kemaskini, hapus, dan pengesahan kehadiran aktiviti
-        echo "<td>
+            # Memaparkan butang navigasi untuk kemaskini, hapus, dan pengesahan kehadiran aktiviti
+            echo "<td>
                 <div class='action-container'>
                     <div class='edit-container'>
                         <button class='editBtn' data-tooltip='Kemaskini'>
@@ -48,5 +49,10 @@ if (isset($_POST['nama_aktiviti'])) {
                 </div>
             </td>
         </tr>";
+        }
+    } else {
+        echo "<div class='no-data-text-container'>
+        <div class='text-area'>Maaf, data tidak wujud...</div>
+    </div>";
     }
 }

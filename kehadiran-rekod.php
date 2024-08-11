@@ -57,6 +57,11 @@ $currentDate = date('Y-m-d');
         <?php if ($currentDate < $ma['tarikh_aktiviti']) { ?>
             <!-- Mesej jika aktiviti belum dijalankan -->
             <div class='aktiviti-details'>Aktiviti masih belum dijalankan</div>
+            <footer class='bottomed-footer'>
+                <div class='footer-container'>
+                    <p class='copyright'>Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik Puteri</p>
+                </div>
+            </footer>
         <?php } else { ?>
             <?php if (!empty($_GET["IDaktiviti"])) { ?>
                 <!-- Header bagi jadual untuk memaparkan senarai aktiviti -->
@@ -126,19 +131,20 @@ $currentDate = date('Y-m-d');
                     </table>
                 </div>
             </div>
-        <?php } ?>
+        </main>
+
+        <footer class="default-footer">
+            <div class="footer-container">
+                <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik Puteri</p>
+            </div>
+        </footer>
     <?php } ?>
+<?php } ?>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script src="scripts/select-box-aktiviti.js" defer></script>
-</main>
-
-<footer class="default-footer">
-    <div class="footer-container">
-        <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
-    </div>
-</footer>
+<!-- fungsi jquery dropdown -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="scripts/select-box-aktiviti.js" defer></script>
 
 <!-- fungsi data tooltip (petunjuk bagi pengguna bagi butang yang hanya mempunyai icon) -->
 <script src="scripts/datatooltip.js" defer></script>

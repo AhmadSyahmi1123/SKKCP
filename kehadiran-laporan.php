@@ -74,7 +74,7 @@ if (empty($_GET['IDaktiviti'])) {
             echo "<div class='laporan-details'>Aktiviti masih belum dijalankan</div>";
             echo "<footer class='bottomed-footer'>
                     <div class='footer-container'>
-                        <p class='copyright'>Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
+                        <p class='copyright'>Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik Puteri</p>
                     </div>
                 </footer>";
         } else {
@@ -190,7 +190,7 @@ if (empty($_GET['IDaktiviti'])) {
 
         <footer class="default-footer">
             <div class="footer-container">
-                <p class="copyright">Hakcipta &copy; 2024-2025: SKKPK SMK Bandar Tasik Puteri</p>
+                <p class="copyright">Hakcipta &copy; 2023-2024: SKKPK SMK Bandar Tasik Puteri</p>
             </div>
         </footer>
         <?php

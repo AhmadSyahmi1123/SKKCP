@@ -26,14 +26,17 @@ $n = mysqli_fetch_array($laksana_aktiviti);
     <div class="borang-container">
         <div class="searchNupload-container">
             <div class="input-carian-container">
-                <form id="cari_ahli" action="" method='POST'>
-                    <div class="input-carian">
-                        <input type="text" name="nama" placeholder="Carian Nama Ahli">
-                    </div>
-                </form>
-                <button class="searchBtn" type='submit' form="cari_ahli" value='Cari' data-tooltip="Cari">
-                    <i class='bx bx-search'></i>
-                </button>
+                <div class="carian-ahli">
+                    <form id="cari_ahli" action="" method='POST'>
+                        <div class="input-carian">
+                            <input type="text" name="nama" placeholder="Carian Nama Ahli">
+                        </div>
+                        <input type="text" name="IDaktiviti" value="<?= $_GET['IDaktiviti'] ?>" hidden>
+                    </form>
+                    <button class="searchBtn" type='submit' form="cari_ahli" value='Cari' data-tooltip="Cari">
+                        <i class='bx bx-search'></i>
+                    </button>
+                </div>
             </div>
 
             <div class="font-size-button">
@@ -71,11 +74,11 @@ $n = mysqli_fetch_array($laksana_aktiviti);
 
                             # Arahan untuk mendapatkan data kehadiran setiap ahli
                             $arahan_sql_kehadiran = "SELECT *, ahli.nokp, ahli.nama, kelas.ting, kelas.nama_kelas, kehadiran.IDaktiviti 
-                                FROM ahli
-                                LEFT JOIN kelas ON ahli.IDkelas = kelas.IDkelas
-                                LEFT JOIN kehadiran ON ahli.nokp = kehadiran.nokp AND kehadiran.IDaktiviti = '" . $_GET['IDaktiviti'] . "'
-                                WHERE 1=1 $cari_ahli
-                                ORDER BY ahli.nama";
+                                                    FROM ahli
+                                                    LEFT JOIN kelas ON ahli.IDkelas = kelas.IDkelas
+                                                    LEFT JOIN kehadiran ON ahli.nokp = kehadiran.nokp AND kehadiran.IDaktiviti = '" . $_GET["IDaktiviti"] . "'
+                                                    WHERE 1=1
+                                                    ORDER BY ahli.nama ASC";
 
                             # Laksana arahan untuk memproses data
                             $laksana_kehadiran = mysqli_query($condb, $arahan_sql_kehadiran);
@@ -131,3 +134,25 @@ $n = mysqli_fetch_array($laksana_aktiviti);
 <!-- Fungsi mengubah saiz tulisan bagi kemudahan pengguna dan mencetak jadual-->
 <script src="scripts\butang-saiz.js" defer></script>
 <script src="scripts\print-page.js" defer></script>
+
+<!-- Proses untuk mencari ahli -->
+<script>
+    // Proses data daripada kotak teks carian ahli secara manual
+    document.getElementById('cari_ahli').addEventListener('submit', function (event) {
+        event.preventDefault(); // Elak daripada refresh halaman selepas submit
+
+        // Lakukan carian menggunakan AJAX (atau penghantaran borang)
+        var xhr = new XMLHttpRequest();
+        var formData = new FormData(this); // Ambil data daripada borang carian
+
+        // Hantar permintaan POST ke server untuk mencari data ahli
+        xhr.open('POST', "search-kehadiran-borang.php", true);
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                // Jika permintaan berjaya, kemaskini carta pendahulu dengan data yang baru
+                document.getElementById('kehadiranBody').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send(formData); // Hantar data borang ke server
+    });
+</script>

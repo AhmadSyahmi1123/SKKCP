@@ -9,11 +9,21 @@ if (isset($_POST['nama'])) {
 
     # Arahan query untuk mendapatkan senarai ahli
     # Arahan SQL untuk mendapatkan maklumat ahli berdasarkan nama dan menyusun mengikut mata secara menurun
-    $arahan_papar = "SELECT ahli.nama, ahli.mata, ahli.profile_pic, kelas.ting, kelas.nama_kelas
-                     FROM ahli
-                     JOIN kelas ON ahli.IDkelas = kelas.IDkelas
-                     WHERE ahli.nama LIKE '%$nama%'
-                     ORDER BY mata DESC";
+    $arahan_papar = "SELECT 
+                        ahli.nama, 
+                        ahli.mata, 
+                        ahli.profile_pic, 
+                        ahli.rank, 
+                        kelas.ting, 
+                        kelas.nama_kelas
+                    FROM 
+                        ahli
+                    JOIN 
+                        kelas ON ahli.IDkelas = kelas.IDkelas
+                    WHERE 
+                        ahli.nama LIKE '%$nama%'
+                    ORDER BY 
+                        ahli.rank ASC";
 
     # Laksanakan arahan untuk mendapatkan data
     $laksana = mysqli_query($condb, $arahan_papar);
@@ -24,17 +34,14 @@ if (isset($_POST['nama'])) {
         while ($m = mysqli_fetch_array($laksana)) {
             # Papar imej medal bagi kedudukan 1st, 2nd dan 3rd
             $image = '';
-            if ($bil == 1) {
+            if ($m['rank'] == 1) {
                 $image = '<img src="img/gold_medal.png" alt="Gold Medal" class="medal-icon">';
-                $bil++;
-            } elseif ($bil == 2) {
+            } elseif ($m['rank'] == 2) {
                 $image = '<img src="img/silver_medal.png" alt="Silver Medal" class="medal-icon">';
-                $bil++;
-            } elseif ($bil == 3) {
+            } elseif ($m['rank'] == 3) {
                 $image = '<img src="img/bronze_medal.png" alt="Bronze Medal" class="medal-icon">';
-                $bil++;
             } else {
-                $image = $bil++;
+                $image = $m['rank'];
             }
 
             echo "<tr>

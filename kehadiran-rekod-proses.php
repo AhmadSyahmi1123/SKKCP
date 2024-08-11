@@ -59,16 +59,43 @@ if (!empty($_POST["nokp"])) {
             # Menyimpan data kehadiran
             $simpan_data = mysqli_query($condb, "INSERT INTO kehadiran (IDaktiviti, nokp, masa_hadir) VALUES ('$IDaktiviti', '$nokp', '$masa')");
 
+            # Laksana dan semak proses kemaskini mata
             if ($simpan_data) {
+                # Kemaskini berjaya
+
                 # Kemaskini mata ahli dalam pangkalan data
                 $kemaskini_mata = "UPDATE ahli SET mata = mata + $points WHERE nokp = '$nokp'";
                 mysqli_query($condb, $kemaskini_mata);
 
-                $notificationType = 'success';
-                $notificationMessage = "Kehadiran berjaya direkod!";
+                # Query kemaskini kedudukan ahli berdasarkan mata
+                $rankUpdateQuery = "
+            SET @rank := 0;
+            UPDATE ahli
+            JOIN (
+                SELECT 
+                    nokp, 
+                    @rank := @rank + 1 AS rank
+                FROM ahli 
+                ORDER BY mata DESC
+            ) ranked ON ahli.nokp = ranked.nokp
+            SET ahli.rank = ranked.rank;
+        ";
+
+                # Laksana dan semak proses kemaskini kedudukan
+                if (mysqli_multi_query($condb, $rankUpdateQuery)) {
+                    $message = "Kemaskini Mata dan Kedudukan Berjaya!";
+                    $notificationType = 'success';
+                    $notificationMessage = $message;
+                } else {
+                    $message = "Ralat! Kemaskini Ranking Gagal!";
+                    $notificationType = 'error';
+                    $notificationMessage = $message;
+                }
             } else {
+                # Kemaskini gagal
+                $message = "Ralat! Kemaskini Mata Gagal!";
                 $notificationType = 'error';
-                $notificationMessage = "Kehadiran Gagal Direkod!";
+                $notificationMessage = $message;
             }
         }
     }

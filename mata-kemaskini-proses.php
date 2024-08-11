@@ -20,12 +20,34 @@ if (!empty($_POST["mata"])) {
                 WHERE nokp = '" . $_GET['nokp'] . "'
                 ";
 
-    # Laksana dan semak proses kemaskini
+    # Laksana dan semak proses kemaskini mata
     if (mysqli_query($condb, $arahan)) {
         # Kemaskini berjaya
-        $message = "Kemaskini Mata Berjaya!";
-        $notificationType = 'success';
-        $notificationMessage = $message;
+
+        # Query kemaskini kedudukan ahli berdasarkan mata
+        $rankUpdateQuery = "
+            SET @rank := 0;
+            UPDATE ahli
+            JOIN (
+                SELECT 
+                    nokp, 
+                    @rank := @rank + 1 AS rank 
+                FROM ahli 
+                ORDER BY mata DESC
+            ) ranked ON ahli.nokp = ranked.nokp
+            SET ahli.rank = ranked.rank;
+        ";
+
+        # Laksana dan semak proses kemaskini kedudukan
+        if (mysqli_multi_query($condb, $rankUpdateQuery)) {
+            $message = "Kemaskini Mata dan Kedudukan Berjaya!";
+            $notificationType = 'success';
+            $notificationMessage = $message;
+        } else {
+            $message = "Ralat! Kemaskini Ranking Gagal!";
+            $notificationType = 'error';
+            $notificationMessage = $message;
+        }
     } else {
         # Kemaskini gagal
         $message = "Ralat! Kemaskini Mata Gagal!";

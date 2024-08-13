@@ -27,15 +27,15 @@ if (!empty($_POST["mata"])) {
         # Query kemaskini kedudukan ahli berdasarkan mata
         $rankUpdateQuery = "
             SET @rank := 0;
-            UPDATE carta
+            UPDATE kedudukan
             JOIN (
                 SELECT 
                     nokp, 
                     @rank := @rank + 1 AS rank 
                 FROM ahli 
                 ORDER BY mata DESC
-            ) ranked ON carta.nokp = ranked.nokp
-            SET carta.rank = ranked.rank;
+            ) ranked ON kedudukan.nokp = ranked.nokp
+            SET kedudukan.rank = ranked.rank;
         ";
 
         # Laksana dan semak proses kemaskini kedudukan

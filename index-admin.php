@@ -149,7 +149,7 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
                                                 ahli.nama, 
                                                 ahli.mata, 
                                                 ahli.profile_pic, 
-                                                carta.rank, 
+                                                kedudukan.rank, 
                                                 kelas.ting, 
                                                 kelas.nama_kelas
                                             FROM 
@@ -157,9 +157,9 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
                                             JOIN 
                                                 kelas ON ahli.IDkelas = kelas.IDkelas
                                             JOIN
-                                                carta ON ahli.nokp = carta.nokp
+                                                kedudukan ON ahli.nokp = kedudukan.nokp
                                             ORDER BY 
-                                                carta.rank ASC
+                                                kedudukan.rank ASC
                                             ";
 
                             # Laksanakan arahan untuk mendapatkan data

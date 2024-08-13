@@ -32,15 +32,15 @@ if ($simpan_data) {
     # Query kemaskini kedudukan ahli berdasarkan mata
     $rankUpdateQuery = "
         SET @rank := 0;
-        UPDATE ahli
+        UPDATE carta
         JOIN (
             SELECT 
                 nokp, 
                 @rank := @rank + 1 AS rank 
             FROM ahli 
             ORDER BY mata DESC
-        ) ranked ON ahli.nokp = ranked.nokp
-        SET ahli.rank = ranked.rank;
+        ) ranked ON carta.nokp = ranked.nokp
+        SET carta.rank = ranked.rank;
     ";
 
     # Laksana dan semak proses kemaskini kedudukan

@@ -149,16 +149,18 @@ $count_tidak_hadir = $count_aktiviti - $count_hadir;
                                                 ahli.nama, 
                                                 ahli.mata, 
                                                 ahli.profile_pic, 
-                                                ahli.rank, 
+                                                carta.rank, 
                                                 kelas.ting, 
                                                 kelas.nama_kelas
                                             FROM 
                                                 ahli
                                             JOIN 
                                                 kelas ON ahli.IDkelas = kelas.IDkelas
+                                            JOIN
+                                                carta ON ahli.nokp = carta.nokp
                                             ORDER BY 
-                                                ahli.rank ASC
-                                    ";
+                                                carta.rank ASC
+                                            ";
 
                             # Laksanakan arahan untuk mendapatkan data
                             $laksana = mysqli_query($condb, $arahan_papar);
